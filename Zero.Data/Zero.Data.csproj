@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>零代数据层</AssemblyTitle>
+    <Description>Web应用、微服务、应用服务器、大数据计算等共用数据层，主要包括数据层实体类</Description>
+    <Company>新生命开发团队</Company>
+    <Copyright>©2002-2020 NewLife</Copyright>
+    <Version>1.0.2020.0801</Version>
+    <FileVersion>1.0.2020.0801</FileVersion>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+    <OutputPath>..\Bin</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__CORE__;STD20</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Projects\Config\**" />
+    <Compile Remove="Projects\Log\**" />
+    <EmbeddedResource Remove="Projects\Config\**" />
+    <EmbeddedResource Remove="Projects\Log\**" />
+    <None Remove="Projects\Config\**" />
+    <None Remove="Projects\Log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NewLife.Core" Version="8.8.2020.701" />
+    <PackageReference Include="NewLife.XCode" Version="9.18.2020.701" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Projects\Build.log">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Build.tt</DependentUpon>
+    </None>
+    <None Update="Projects\Build.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Build.log</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

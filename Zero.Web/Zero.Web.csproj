@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NewLife.Core" Version="8.8.2020.701" />
+    <PackageReference Include="NewLife.Cube.Core" Version="3.6.2020.709" />
+    <PackageReference Include="NewLife.XCode" Version="9.18.2020.701" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
+    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
+  </ItemGroup>
+
+</Project>
