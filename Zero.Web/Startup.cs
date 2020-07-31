@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NewLife;
+using NewLife.Cube;
+using NewLife.Cube.WebMiddleware;
+using NewLife.Log;
+using NewLife.Remoting;
+using Stardust.Monitors;
+using XCode.DataAccessLayer;
 
-namespace OA.Web
+namespace Zero.Web
 {
     public class Startup
     {
@@ -23,35 +25,63 @@ namespace OA.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var set = Setting.Current;
+            if (!set.TracerServer.IsNullOrEmpty())
+            {
+                // APM跟踪器
+                var tracer = new StarTracer(set.TracerServer) { Log = XTrace.Log };
+                DefaultTracer.Instance = tracer;
+                ApiHelper.Tracer = tracer;
+                DAL.GlobalTracer = tracer;
+                TracerMiddleware.Tracer = tracer;
+
+                services.AddSingleton<ITracer>(tracer);
+            }
+
+            // 引入魔方
+            services.AddCube();
+
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var set = Setting.Current;
+
+            // 使用Cube前添加自己的管道
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+                app.UseExceptionHandler("/CubeHome/Error");
 
-            app.UseRouting();
+            if (!set.TracerServer.IsNullOrEmpty()) app.UseMiddleware<TracerMiddleware>();
 
-            app.UseAuthorization();
+            app.UseCube();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+
+            //app.UseRouting();
+
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }

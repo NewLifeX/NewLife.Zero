@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -167,16 +167,21 @@ namespace Zero.Data.Projects
 
         #region 高级查询
         /// <summary>高级查询</summary>
-        /// <param name="name">名称</param>
+        /// <param name="teamId">名称</param>
+        /// <param name="kind">名称</param>
+        /// <param name="start">名称</param>
+        /// <param name="end">名称</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
-        public static IList<Product> Search(String name, String key, PageParameter page)
+        public static IList<Product> Search(Int32 teamId, String kind, DateTime start, DateTime end, String key, PageParameter page)
         {
             var exp = new WhereExpression();
 
-            if (!name.IsNullOrEmpty()) exp &= _.Name == name;
-            if (!key.IsNullOrEmpty()) exp &= _.Kind.Contains(key) | _.CreateUser.Contains(key) | _.CreateIP.Contains(key) | _.UpdateUser.Contains(key) | _.UpdateIP.Contains(key) | _.Remark.Contains(key);
+            if (teamId == 0) exp &= _.TeamId == teamId;
+            if (!kind.IsNullOrEmpty()) exp &= _.Kind == kind;
+            exp &= _.UpdateTime.Between(start, end);
+            if (!key.IsNullOrEmpty()) exp &= _.Name.Contains(key) | _.Kind.Contains(key) | _.Remark.Contains(key);
 
             return FindAll(exp, page);
         }

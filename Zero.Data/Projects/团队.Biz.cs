@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -73,49 +73,6 @@ namespace Zero.Data.Projects
             // CheckExist(isNew, nameof(Name));
             // CheckExist(isNew, nameof(Code));
         }
-
-        ///// <summary>首次连接数据库时初始化数据，仅用于实体类重载，用户不应该调用该方法</summary>
-        //[EditorBrowsable(EditorBrowsableState.Never)]
-        //protected override void InitData()
-        //{
-        //    // InitData一般用于当数据表没有数据时添加一些默认数据，该实体类的任何第一次数据库操作都会触发该方法，默认异步调用
-        //    if (Meta.Session.Count > 0) return;
-
-        //    if (XTrace.Debug) XTrace.WriteLine("开始初始化Team[团队]数据……");
-
-        //    var entity = new Team();
-        //    entity.ID = 0;
-        //    entity.Name = "abc";
-        //    entity.Code = "abc";
-        //    entity.LeaderId = 0;
-        //    entity.Enable = true;
-        //    entity.CreateUser = "abc";
-        //    entity.CreateUserID = 0;
-        //    entity.CreateIP = "abc";
-        //    entity.CreateTime = DateTime.Now;
-        //    entity.UpdateUser = "abc";
-        //    entity.UpdateUserID = 0;
-        //    entity.UpdateIP = "abc";
-        //    entity.UpdateTime = DateTime.Now;
-        //    entity.Remark = "abc";
-        //    entity.Insert();
-
-        //    if (XTrace.Debug) XTrace.WriteLine("完成初始化Team[团队]数据！");
-        //}
-
-        ///// <summary>已重载。基类先调用Valid(true)验证数据，然后在事务保护内调用OnInsert</summary>
-        ///// <returns></returns>
-        //public override Int32 Insert()
-        //{
-        //    return base.Insert();
-        //}
-
-        ///// <summary>已重载。在事务保护范围内处理业务，位于Valid之后</summary>
-        ///// <returns></returns>
-        //protected override Int32 OnDelete()
-        //{
-        //    return base.OnDelete();
-        //}
         #endregion
 
         #region 扩展属性
@@ -165,32 +122,6 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 高级查询
-        /// <summary>高级查询</summary>
-        /// <param name="name">名称</param>
-        /// <param name="code">编码</param>
-        /// <param name="key">关键字</param>
-        /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
-        /// <returns>实体列表</returns>
-        public static IList<Team> Search(String name, String code, String key, PageParameter page)
-        {
-            var exp = new WhereExpression();
-
-            if (!name.IsNullOrEmpty()) exp &= _.Name == name;
-            if (!code.IsNullOrEmpty()) exp &= _.Code == code;
-            if (!key.IsNullOrEmpty()) exp &= _.CreateUser.Contains(key) | _.CreateIP.Contains(key) | _.UpdateUser.Contains(key) | _.UpdateIP.Contains(key) | _.Remark.Contains(key);
-
-            return FindAll(exp, page);
-        }
-
-        // Select Count(ID) as ID,Category From Team Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
-        //static readonly FieldCache<Team> _CategoryCache = new FieldCache<Team>(nameof(Category))
-        //{
-        //Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
-        //};
-
-        ///// <summary>获取类别列表，字段缓存10分钟，分组统计数据最多的前20种，用于魔方前台下拉选择</summary>
-        ///// <returns></returns>
-        //public static IDictionary<String, String> GetCategoryList() => _CategoryCache.FindAllName();
         #endregion
 
         #region 业务操作

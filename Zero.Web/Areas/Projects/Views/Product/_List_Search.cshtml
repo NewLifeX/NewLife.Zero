@@ -1,0 +1,16 @@
+﻿@using NewLife;
+@using NewLife.Web;
+@using NewLife.Cube;
+@using XCode;
+@using Zero.Data.Projects;
+@{
+    var fact = ViewBag.Factory as IEntityFactory;
+    var page = ViewBag.Page as Pager;
+
+    var dic = Team.FindAllWithCache().ToDictionary(e => e.ID, e => e + "");
+}
+<div class="form-group">
+    <label for="teamId" class="control-label">团队：</label>
+    @Html.ForDropDownList("teamId", dic, page["teamId"], "全部", true)
+</div>
+@await Html.PartialAsync("_DateRange")
