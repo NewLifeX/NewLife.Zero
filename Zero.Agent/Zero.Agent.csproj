@@ -2,13 +2,31 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net45</TargetFrameworks>
+    <AssemblyTitle>系统守护服务</AssemblyTitle>
+    <Description>数据处理，定时任务，MQ生产消费，系统监控</Description>
+    <Company>新生命开发团队</Company>
+    <Copyright>©2002-2020 NewLife</Copyright>
+    <Version>1.0.2020.0803</Version>
+    <FileVersion>1.0.2020.0803</FileVersion>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+    <OutputPath>..\Bin\Agent</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NewLife.Agent" Version="8.7.2020.802" />
     <PackageReference Include="NewLife.Core" Version="8.9.2020.802" />
-    <PackageReference Include="NewLife.Stardust" Version="1.1.2020.802" />
-    <PackageReference Include="NewLife.XCode" Version="9.19.2020.802" />
   </ItemGroup>
 
 </Project>
