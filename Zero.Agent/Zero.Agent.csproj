@@ -27,6 +27,8 @@
   <ItemGroup>
     <PackageReference Include="NewLife.Agent" Version="8.7.2020.802" />
     <PackageReference Include="NewLife.Core" Version="8.9.2020.802" />
+    <PackageReference Include="NewLife.Stardust" Version="1.1.2020.802" />
+    <PackageReference Include="NewLife.XCode" Version="9.19.2020.802" />
   </ItemGroup>
 
 </Project>
