@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <AssemblyTitle>零代数据层</AssemblyTitle>
     <Description>Web应用、微服务、应用服务器、大数据计算等共用数据层，主要包括数据层实体类</Description>
     <Company>新生命开发团队</Company>
