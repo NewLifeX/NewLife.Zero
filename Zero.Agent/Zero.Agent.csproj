@@ -31,4 +31,8 @@
     <PackageReference Include="NewLife.XCode" Version="9.19.2020.802" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
+  </ItemGroup>
+
 </Project>

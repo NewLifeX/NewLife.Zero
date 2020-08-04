@@ -5,7 +5,9 @@ using NewLife.Log;
 using NewLife.Remoting;
 using NewLife.Threading;
 using Stardust.Monitors;
+using XCode;
 using XCode.DataAccessLayer;
+using Zero.Data.Projects;
 
 namespace Zero.Agent
 {
@@ -79,11 +81,20 @@ namespace Zero.Agent
             // 完整型埋点，增加测量错误次数和明细
             using var span = Tracer?.NewSpan("work2");
 
-            var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var time = DateTime.Now;
             try
             {
-                // 日志会输出到当前目录的Log子目录中
-                XTrace.WriteLine($"代码执行时间：{time}");
+                // 业务处理，清理已经停用的项目成员关系
+                var list = Member.FindAll(Member._.Enable == false);
+                foreach (var item in list)
+                {
+                    var tms = TeamMember.FindAllByMemberId(item.ID);
+                    foreach (var elm in tms)
+                    {
+                        elm.Enable = false;
+                    }
+                    tms.Save();
+                }
             }
             catch (Exception ex)
             {
