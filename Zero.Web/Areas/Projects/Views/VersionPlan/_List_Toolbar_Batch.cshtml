@@ -1,0 +1,16 @@
+﻿@using NewLife.Common;
+@using NewLife
+@using NewLife.Cube
+@using NewLife.Reflection
+@using NewLife.Web
+@using XCode
+@using XCode.Membership
+@{
+    var set = ViewBag.PageSetting as PageSetting;
+}
+@if (set.EnableSelect)
+{
+    <button type="button" class="btn btn-purple btn-sm" data-action="action" data-url="@Url.Action("Refresh")" data-fields="keys" disabled>
+        批量刷新
+    </button>
+}

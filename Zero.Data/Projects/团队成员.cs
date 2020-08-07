@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("团队成员。每个团队拥有哪些成员，每个成员有一个主力团队")]
     [BindIndex("IX_TeamMember_TeamId", false, "TeamId")]
     [BindIndex("IX_TeamMember_MemberId", false, "MemberId")]
-    [BindTable("TeamMember", Description = "团队成员。每个团队拥有哪些成员，每个成员有一个主力团队", ConnName = "Zero", DbType = DatabaseType.None)]
+    [BindTable("TeamMember", Description = "团队成员。每个团队拥有哪些成员，每个成员有一个主力团队", ConnName = "OA", DbType = DatabaseType.None)]
     public partial class TeamMember : ITeamMember
     {
         #region 属性
@@ -51,6 +51,14 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("Major", "主要。是否该成员的主要团队", "")]
         public Boolean Major { get => _Major; set { if (OnPropertyChanging("Major", value)) { _Major = value; OnPropertyChanged("Major"); } } }
+
+        private Boolean _Leader;
+        /// <summary>组长。该团队组长</summary>
+        [DisplayName("组长")]
+        [Description("组长。该团队组长")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Leader", "组长。该团队组长", "")]
+        public Boolean Leader { get => _Leader; set { if (OnPropertyChanging("Leader", value)) { _Leader = value; OnPropertyChanged("Leader"); } } }
 
         private Boolean _Enable;
         /// <summary>启用</summary>
@@ -147,6 +155,7 @@ namespace Zero.Data.Projects
                     case "TeamId": return _TeamId;
                     case "MemberId": return _MemberId;
                     case "Major": return _Major;
+                    case "Leader": return _Leader;
                     case "Enable": return _Enable;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
@@ -168,6 +177,7 @@ namespace Zero.Data.Projects
                     case "TeamId": _TeamId = value.ToInt(); break;
                     case "MemberId": _MemberId = value.ToInt(); break;
                     case "Major": _Major = value.ToBoolean(); break;
+                    case "Leader": _Leader = value.ToBoolean(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
@@ -199,6 +209,9 @@ namespace Zero.Data.Projects
 
             /// <summary>主要。是否该成员的主要团队</summary>
             public static readonly Field Major = FindByName("Major");
+
+            /// <summary>组长。该团队组长</summary>
+            public static readonly Field Leader = FindByName("Leader");
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
@@ -248,6 +261,9 @@ namespace Zero.Data.Projects
             /// <summary>主要。是否该成员的主要团队</summary>
             public const String Major = "Major";
 
+            /// <summary>组长。该团队组长</summary>
+            public const String Leader = "Leader";
+
             /// <summary>启用</summary>
             public const String Enable = "Enable";
 
@@ -296,6 +312,9 @@ namespace Zero.Data.Projects
 
         /// <summary>主要。是否该成员的主要团队</summary>
         Boolean Major { get; set; }
+
+        /// <summary>组长。该团队组长</summary>
+        Boolean Leader { get; set; }
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }

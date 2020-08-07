@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("版本计划")]
     [BindIndex("IX_VersionPlan_TeamId", false, "TeamId")]
     [BindIndex("IX_VersionPlan_ProductId", false, "ProductId")]
-    [BindTable("VersionPlan", Description = "版本计划", ConnName = "Zero", DbType = DatabaseType.None)]
+    [BindTable("VersionPlan", Description = "版本计划", ConnName = "OA", DbType = DatabaseType.None)]
     public partial class VersionPlan : IVersionPlan
     {
         #region 属性
@@ -91,6 +91,22 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("Enable", "启用", "")]
         public Boolean Enable { get => _Enable; set { if (OnPropertyChanging("Enable", value)) { _Enable = value; OnPropertyChanged("Enable"); } } }
+
+        private Boolean _Completed;
+        /// <summary>完成</summary>
+        [DisplayName("完成")]
+        [Description("完成")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Completed", "完成", "")]
+        public Boolean Completed { get => _Completed; set { if (OnPropertyChanging("Completed", value)) { _Completed = value; OnPropertyChanged("Completed"); } } }
+
+        private Int32 _Stories;
+        /// <summary>故事数</summary>
+        [DisplayName("故事数")]
+        [Description("故事数")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Stories", "故事数", "")]
+        public Int32 Stories { get => _Stories; set { if (OnPropertyChanging("Stories", value)) { _Stories = value; OnPropertyChanged("Stories"); } } }
 
         private String _CreateUser;
         /// <summary>创建者</summary>
@@ -184,6 +200,8 @@ namespace Zero.Data.Projects
                     case "EndDate": return _EndDate;
                     case "ManHours": return _ManHours;
                     case "Enable": return _Enable;
+                    case "Completed": return _Completed;
+                    case "Stories": return _Stories;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
                     case "CreateIP": return _CreateIP;
@@ -209,6 +227,8 @@ namespace Zero.Data.Projects
                     case "EndDate": _EndDate = value.ToDateTime(); break;
                     case "ManHours": _ManHours = value.ToInt(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
+                    case "Completed": _Completed = value.ToBoolean(); break;
+                    case "Stories": _Stories = value.ToInt(); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
                     case "CreateIP": _CreateIP = Convert.ToString(value); break;
@@ -254,6 +274,12 @@ namespace Zero.Data.Projects
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
+
+            /// <summary>完成</summary>
+            public static readonly Field Completed = FindByName("Completed");
+
+            /// <summary>故事数</summary>
+            public static readonly Field Stories = FindByName("Stories");
 
             /// <summary>创建者</summary>
             public static readonly Field CreateUser = FindByName("CreateUser");
@@ -315,6 +341,12 @@ namespace Zero.Data.Projects
             /// <summary>启用</summary>
             public const String Enable = "Enable";
 
+            /// <summary>完成</summary>
+            public const String Completed = "Completed";
+
+            /// <summary>故事数</summary>
+            public const String Stories = "Stories";
+
             /// <summary>创建者</summary>
             public const String CreateUser = "CreateUser";
 
@@ -375,6 +407,12 @@ namespace Zero.Data.Projects
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }
+
+        /// <summary>完成</summary>
+        Boolean Completed { get; set; }
+
+        /// <summary>故事数</summary>
+        Int32 Stories { get; set; }
 
         /// <summary>创建者</summary>
         String CreateUser { get; set; }

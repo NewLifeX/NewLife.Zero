@@ -1,0 +1,74 @@
+﻿@model IList<Member>
+@using Zero.Data.Projects
+@using NewLife;
+@using NewLife.Web;
+@using XCode;
+@using XCode.Configuration;
+@using XCode.Membership;
+@using NewLife.Cube;
+@{
+    var fact = ViewBag.Factory as IEntityFactory;
+    var page = ViewBag.Page as Pager;
+    var fields = ViewBag.Fields as IList<FieldItem>;
+    var set = ViewBag.PageSetting as PageSetting;
+    var provider = ManageProvider.Provider;
+}
+<table class="table table-bordered table-hover table-striped table-condensed">
+    <thead>
+        <tr>
+            @if (set.EnableSelect)
+            {
+                <th class="text-center" style="width:10px;"><input type="checkbox" id="chkAll" title="全选" /></th>
+            }
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("ID"))">编号</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("Name"))">名称</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("Kind"))">类型</a></th>
+            <th class="text-center" title="团队。所属主团队"><a href="@Html.Raw(page.GetSortUrl("TeamId"))">团队</a></th>
+            <th class="text-center" title="用户。所属登录用户"><a href="@Html.Raw(page.GetSortUrl("UserId"))">用户</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("Enable"))">启用</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("Teams"))">团队数</a></th>
+            <th class="text-center">绑定</th>
+            <th class="text-center" style="min-width:134px;"><a href="@Html.Raw(page.GetSortUrl("CreateTime"))">创建时间</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("UpdateUser"))">更新者</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("UpdateUserID"))">更新人</a></th>
+            <th class="text-center"><a href="@Html.Raw(page.GetSortUrl("UpdateIP"))">更新地址</a></th>
+            <th class="text-center" style="min-width:134px;"><a href="@Html.Raw(page.GetSortUrl("UpdateTime"))">更新时间</a></th>
+            @if (this.Has(PermissionFlags.Detail, PermissionFlags.Update, PermissionFlags.Delete))
+            {
+                <th class="text-center">操作</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entity in Model)
+        {
+            <tr>
+                @if (set.EnableSelect)
+                {
+                    <td class="text-center"><input type="checkbox" name="keys" value="@entity.ID" /></td>
+                }
+                <td class="text-center">@entity.ID</td>
+                <td>@entity.Name</td>
+                <td>@entity.Kind</td>
+                <td><a href="Team?ID=@entity.TeamId">@entity.TeamName</a></td>
+                <td><a href="/Admin/User?q=@entity.UserName">@ManageProvider.Provider.FindByID(entity.UserId)</a></td>
+                <td class="text-center">
+                    <i class="glyphicon glyphicon-@(entity.Enable ? "ok" : "remove" )" style="color: @(entity.Enable ? "green" : "red" );"></i>
+                </td>
+                <td class="text-center"><a href="TeamMember?memberId=@entity.ID">@entity.Teams</a></td>
+                <td class="text-center"><a href="Member/BindUser?Id=@entity.ID" title="绑定当前登录用户到该成员">这是我</a></td>
+                <td class="text-center">@entity.CreateTime.ToFullString("")</td>
+                <td>@entity.UpdateUser</td>
+                <td class="text-center">@provider.FindByID(entity.UpdateUserID)</td>
+                <td class="text-center" title="@entity.UpdateIP.IPToAddress()">@entity.UpdateIP</td>
+                <td class="text-center">@entity.UpdateTime.ToFullString("")</td>
+                @if (this.Has(PermissionFlags.Detail, PermissionFlags.Update, PermissionFlags.Delete))
+                {
+                    <td class="text-center">
+                        @await Html.PartialAsync("_List_Data_Action", (Object)entity)
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

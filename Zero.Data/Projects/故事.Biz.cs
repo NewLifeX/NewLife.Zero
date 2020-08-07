@@ -1,35 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
-using NewLife.Log;
-using NewLife.Model;
-using NewLife.Reflection;
-using NewLife.Threading;
-using NewLife.Web;
 using XCode;
-using XCode.Cache;
-using XCode.Configuration;
-using XCode.DataAccessLayer;
 using XCode.Membership;
 
 namespace Zero.Data.Projects
 {
-    /// <summary>版本成员</summary>
-    public partial class VersionMember : Entity<VersionMember>
+    /// <summary>故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。</summary>
+    public partial class Story : LogEntity<Story>
     {
         #region 对象操作
-        static VersionMember()
+        static Story()
         {
             // 累加字段，生成 Update xx Set Count=Count+1234 Where xxx
             //var df = Meta.Factory.AdditionalFields;
@@ -48,86 +31,48 @@ namespace Zero.Data.Projects
             // 如果没有脏数据，则不需要进行任何处理
             if (!HasDirty) return;
 
-            // 在新插入数据或者修改了指定字段时进行修正
-            // 处理当前已登录用户信息，可以由UserModule过滤器代劳
-            /*var user = ManageProvider.User;
-            if (user != null)
+            var ver = Version;
+            if (ver != null)
             {
-                if (isNew && !Dirtys[nameof(CreateUserID)]) CreateUserID = user.ID;
-                if (!Dirtys[nameof(UpdateUserID)]) UpdateUserID = user.ID;
-            }*/
-            //if (isNew && !Dirtys[nameof(CreateTime)]) CreateTime = DateTime.Now;
-            //if (!Dirtys[nameof(UpdateTime)]) UpdateTime = DateTime.Now;
-            //if (isNew && !Dirtys[nameof(CreateIP)]) CreateIP = ManageProvider.UserHost;
-            //if (!Dirtys[nameof(UpdateIP)]) UpdateIP = ManageProvider.UserHost;
+                ProductId = ver.ProductId;
+            }
         }
-
-        ///// <summary>首次连接数据库时初始化数据，仅用于实体类重载，用户不应该调用该方法</summary>
-        //[EditorBrowsable(EditorBrowsableState.Never)]
-        //protected override void InitData()
-        //{
-        //    // InitData一般用于当数据表没有数据时添加一些默认数据，该实体类的任何第一次数据库操作都会触发该方法，默认异步调用
-        //    if (Meta.Session.Count > 0) return;
-
-        //    if (XTrace.Debug) XTrace.WriteLine("开始初始化VersionMember[版本成员]数据……");
-
-        //    var entity = new VersionMember();
-        //    entity.ID = 0;
-        //    entity.VersionId = 0;
-        //    entity.MemberId = 0;
-        //    entity.StartDate = DateTime.Now;
-        //    entity.EndDate = DateTime.Now;
-        //    entity.ManHours = 0;
-        //    entity.Major = true;
-        //    entity.Enable = true;
-        //    entity.CreateUser = "abc";
-        //    entity.CreateUserID = 0;
-        //    entity.CreateIP = "abc";
-        //    entity.CreateTime = DateTime.Now;
-        //    entity.UpdateUser = "abc";
-        //    entity.UpdateUserID = 0;
-        //    entity.UpdateIP = "abc";
-        //    entity.UpdateTime = DateTime.Now;
-        //    entity.Remark = "abc";
-        //    entity.Insert();
-
-        //    if (XTrace.Debug) XTrace.WriteLine("完成初始化VersionMember[版本成员]数据！");
-        //}
-
-        ///// <summary>已重载。基类先调用Valid(true)验证数据，然后在事务保护内调用OnInsert</summary>
-        ///// <returns></returns>
-        //public override Int32 Insert()
-        //{
-        //    return base.Insert();
-        //}
-
-        ///// <summary>已重载。在事务保护范围内处理业务，位于Valid之后</summary>
-        ///// <returns></returns>
-        //protected override Int32 OnDelete()
-        //{
-        //    return base.OnDelete();
-        //}
         #endregion
 
         #region 扩展属性
+        /// <summary>版本</summary>
+        [IgnoreDataMember]
+        public VersionPlan Version => Extends.Get(nameof(Version), k => VersionPlan.FindByID(VersionId));
+
+        /// <summary>版本</summary>
+        [IgnoreDataMember]
+        [Map(nameof(VersionId))]
+        public String VersionName => Version?.Name;
+
         /// <summary>成员</summary>
-        [XmlIgnore, IgnoreDataMember]
-        //[ScriptIgnore]
+        [IgnoreDataMember]
         public Member Member => Extends.Get(nameof(Member), k => Member.FindByID(MemberId));
 
         /// <summary>成员</summary>
-        [XmlIgnore, IgnoreDataMember]
-        //[ScriptIgnore]
-        [DisplayName("成员")]
+        [IgnoreDataMember]
         [Map(nameof(MemberId), typeof(Member), "ID")]
         public String MemberName => Member?.Name;
+
+        /// <summary>产品</summary>
+        [IgnoreDataMember]
+        public Product Product => Extends.Get(nameof(Product), k => Product.FindByID(ProductId));
+
+        /// <summary>产品</summary>
+        [IgnoreDataMember]
+        [Map(nameof(ProductId), typeof(Product), "ID")]
+        public String ProductName => Product?.Name;
         #endregion
 
         #region 扩展查询
         /// <summary>根据编号查找</summary>
         /// <param name="id">编号</param>
         /// <returns>实体对象</returns>
-        public static VersionMember FindByID(Int32 id)
+        public static Story FindByID(Int32 id)
         {
             if (id <= 0) return null;
 
@@ -140,10 +85,21 @@ namespace Zero.Data.Projects
             //return Find(_.ID == id);
         }
 
+        /// <summary>根据产品查找</summary>
+        /// <param name="productId">成员</param>
+        /// <returns>实体列表</returns>
+        public static IList<Story> FindAllByProductId(Int32 productId)
+        {
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.ProductId == productId);
+
+            return FindAll(_.ProductId == productId);
+        }
+
         /// <summary>根据版本查找</summary>
         /// <param name="versionId">版本</param>
         /// <returns>实体列表</returns>
-        public static IList<VersionMember> FindAllByVersionId(Int32 versionId)
+        public static IList<Story> FindAllByVersionId(Int32 versionId)
         {
             // 实体缓存
             if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.VersionId == versionId);
@@ -154,7 +110,7 @@ namespace Zero.Data.Projects
         /// <summary>根据成员查找</summary>
         /// <param name="memberId">成员</param>
         /// <returns>实体列表</returns>
-        public static IList<VersionMember> FindAllByMemberId(Int32 memberId)
+        public static IList<Story> FindAllByMemberId(Int32 memberId)
         {
             // 实体缓存
             if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.MemberId == memberId);
@@ -165,17 +121,24 @@ namespace Zero.Data.Projects
 
         #region 高级查询
         /// <summary>高级查询</summary>
+        /// <param name="productId">产品</param>
         /// <param name="versionId">版本</param>
         /// <param name="memberId">成员</param>
+        /// <param name="enable">启用</param>
+        /// <param name="start">开始</param>
+        /// <param name="end">结束</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
-        public static IList<VersionMember> Search(Int32 versionId, Int32 memberId, String key, PageParameter page)
+        public static IList<Story> Search(Int32 productId, Int32 versionId, Int32 memberId, Boolean? enable, DateTime start, DateTime end, String key, PageParameter page)
         {
             var exp = new WhereExpression();
 
+            if (productId >= 0) exp &= _.ProductId == productId;
             if (versionId >= 0) exp &= _.VersionId == versionId;
             if (memberId >= 0) exp &= _.MemberId == memberId;
+            if (enable != null) exp &= _.Enable == enable;
+            exp &= _.UpdateTime.Between(start, end);
             if (!key.IsNullOrEmpty()) exp &= _.CreateUser.Contains(key) | _.CreateIP.Contains(key) | _.UpdateUser.Contains(key) | _.UpdateIP.Contains(key) | _.Remark.Contains(key);
 
             return FindAll(exp, page);

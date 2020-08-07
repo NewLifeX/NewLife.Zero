@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("团队。管理一系列相关的产品和应用系统")]
     [BindIndex("IU_Team_Name", true, "Name")]
     [BindIndex("IU_Team_Code", true, "Code")]
-    [BindTable("Team", Description = "团队。管理一系列相关的产品和应用系统", ConnName = "Zero", DbType = DatabaseType.None)]
+    [BindTable("Team", Description = "团队。管理一系列相关的产品和应用系统", ConnName = "OA", DbType = DatabaseType.None)]
     public partial class Team : ITeam
     {
         #region 属性
@@ -59,6 +59,38 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("Enable", "启用", "")]
         public Boolean Enable { get => _Enable; set { if (OnPropertyChanging("Enable", value)) { _Enable = value; OnPropertyChanged("Enable"); } } }
+
+        private Int32 _Products;
+        /// <summary>产品数</summary>
+        [DisplayName("产品数")]
+        [Description("产品数")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Products", "产品数", "")]
+        public Int32 Products { get => _Products; set { if (OnPropertyChanging("Products", value)) { _Products = value; OnPropertyChanged("Products"); } } }
+
+        private Int32 _Versions;
+        /// <summary>版本数</summary>
+        [DisplayName("版本数")]
+        [Description("版本数")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Versions", "版本数", "")]
+        public Int32 Versions { get => _Versions; set { if (OnPropertyChanging("Versions", value)) { _Versions = value; OnPropertyChanged("Versions"); } } }
+
+        private Int32 _Members;
+        /// <summary>成员数。主要成员</summary>
+        [DisplayName("成员数")]
+        [Description("成员数。主要成员")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Members", "成员数。主要成员", "")]
+        public Int32 Members { get => _Members; set { if (OnPropertyChanging("Members", value)) { _Members = value; OnPropertyChanged("Members"); } } }
+
+        private Int32 _AssistMembers;
+        /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
+        [DisplayName("协助成员数")]
+        [Description("协助成员数。其它团队临时协助该团队的成员")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("AssistMembers", "协助成员数。其它团队临时协助该团队的成员", "")]
+        public Int32 AssistMembers { get => _AssistMembers; set { if (OnPropertyChanging("AssistMembers", value)) { _AssistMembers = value; OnPropertyChanged("AssistMembers"); } } }
 
         private String _CreateUser;
         /// <summary>创建者</summary>
@@ -148,6 +180,10 @@ namespace Zero.Data.Projects
                     case "Code": return _Code;
                     case "LeaderId": return _LeaderId;
                     case "Enable": return _Enable;
+                    case "Products": return _Products;
+                    case "Versions": return _Versions;
+                    case "Members": return _Members;
+                    case "AssistMembers": return _AssistMembers;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
                     case "CreateIP": return _CreateIP;
@@ -169,6 +205,10 @@ namespace Zero.Data.Projects
                     case "Code": _Code = Convert.ToString(value); break;
                     case "LeaderId": _LeaderId = value.ToInt(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
+                    case "Products": _Products = value.ToInt(); break;
+                    case "Versions": _Versions = value.ToInt(); break;
+                    case "Members": _Members = value.ToInt(); break;
+                    case "AssistMembers": _AssistMembers = value.ToInt(); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
                     case "CreateIP": _CreateIP = Convert.ToString(value); break;
@@ -202,6 +242,18 @@ namespace Zero.Data.Projects
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
+
+            /// <summary>产品数</summary>
+            public static readonly Field Products = FindByName("Products");
+
+            /// <summary>版本数</summary>
+            public static readonly Field Versions = FindByName("Versions");
+
+            /// <summary>成员数。主要成员</summary>
+            public static readonly Field Members = FindByName("Members");
+
+            /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
+            public static readonly Field AssistMembers = FindByName("AssistMembers");
 
             /// <summary>创建者</summary>
             public static readonly Field CreateUser = FindByName("CreateUser");
@@ -251,6 +303,18 @@ namespace Zero.Data.Projects
             /// <summary>启用</summary>
             public const String Enable = "Enable";
 
+            /// <summary>产品数</summary>
+            public const String Products = "Products";
+
+            /// <summary>版本数</summary>
+            public const String Versions = "Versions";
+
+            /// <summary>成员数。主要成员</summary>
+            public const String Members = "Members";
+
+            /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
+            public const String AssistMembers = "AssistMembers";
+
             /// <summary>创建者</summary>
             public const String CreateUser = "CreateUser";
 
@@ -299,6 +363,18 @@ namespace Zero.Data.Projects
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }
+
+        /// <summary>产品数</summary>
+        Int32 Products { get; set; }
+
+        /// <summary>版本数</summary>
+        Int32 Versions { get; set; }
+
+        /// <summary>成员数。主要成员</summary>
+        Int32 Members { get; set; }
+
+        /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
+        Int32 AssistMembers { get; set; }
 
         /// <summary>创建者</summary>
         String CreateUser { get; set; }

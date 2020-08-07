@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Cube;
 using NewLife.Web;
 using Zero.Data.Projects;
-using XCode;
 using XCode.Membership;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
-    public class ProductController : EntityController<Product>
+    public class VersionPlanController : EntityController<VersionPlan>
     {
-        static ProductController() => MenuOrder = 70;
+        static VersionPlanController() => MenuOrder = 60;
 
-        protected override IEnumerable<Product> Search(Pager p)
+        protected override IEnumerable<VersionPlan> Search(Pager p)
         {
             var teamId = p["teamId"].ToInt(-1);
+            var productId = p["productId"].ToInt(-1);
             var kind = p["kind"];
             var enable = p["enable"]?.ToBoolean();
             var completed = p["completed"]?.ToBoolean();
@@ -29,27 +28,28 @@ namespace Zero.Web.Areas.Projects.Controllers
 
             p.RetrieveState = true;
 
-            return Product.Search(teamId, kind, enable, completed, start, end, p["Q"], p);
+            return VersionPlan.Search(teamId, productId, kind, enable, completed, start, end, p["Q"], p);
         }
 
-        protected override Boolean Valid(Product entity, DataObjectMethodType type, Boolean post)
+        protected override Int32 OnInsert(VersionPlan entity)
         {
-            // 默认当前用户作为负责人
-            if (!post && type == DataObjectMethodType.Insert)
-            {
-                var member = Member.FindByUserId(ManageProvider.User.ID);
-                if (member != null) entity.LeaderId = member.ID;
-            }
+            var rs = base.OnInsert(entity);
 
-            return base.Valid(entity, type, post);
+            entity.Product?.Fix();
+            entity.Team?.Fix();
+
+            return rs;
         }
 
-        protected override Int32 OnUpdate(Product entity)
+        protected override Int32 OnUpdate(VersionPlan entity)
         {
-            // 修正成员数、产品数和版本数
+            var rs = base.OnUpdate(entity);
+
             entity.Refresh();
+            entity.Product?.Fix();
+            entity.Team?.Fix();
 
-            return base.OnUpdate(entity);
+            return rs;
         }
 
         /// <summary>批量刷新</summary>
@@ -63,16 +63,16 @@ namespace Zero.Web.Areas.Projects.Controllers
             {
                 foreach (var id in ids)
                 {
-                    var product = Product.FindByID(id);
-                    if (product != null)
+                    var version = VersionPlan.FindByID(id);
+                    if (version != null)
                     {
-                        product.Refresh();
-                        if (product.Update() != 0) count++;
+                        version.Refresh();
+                        if (version.Update() != 0) count++;
                     }
                 }
             }
 
-            return JsonRefresh("共刷新[{0}]个产品".F(count));
+            return JsonRefresh("共刷新[{0}]个版本".F(count));
         }
     }
 }

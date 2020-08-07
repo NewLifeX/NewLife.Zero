@@ -15,7 +15,7 @@ namespace Zero.Data.Projects
     [DataObject]
     [Description("成员。所有可用团队成员")]
     [BindIndex("IU_Member_Name", true, "Name")]
-    [BindTable("Member", Description = "成员。所有可用团队成员", ConnName = "Zero", DbType = DatabaseType.None)]
+    [BindTable("Member", Description = "成员。所有可用团队成员", ConnName = "OA", DbType = DatabaseType.None)]
     public partial class Member : IMember
     {
         #region 属性
@@ -58,6 +58,30 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("Enable", "启用", "")]
         public Boolean Enable { get => _Enable; set { if (OnPropertyChanging("Enable", value)) { _Enable = value; OnPropertyChanged("Enable"); } } }
+
+        private Int32 _Teams;
+        /// <summary>团队数。所在团队总数，含协助团队</summary>
+        [DisplayName("团队数")]
+        [Description("团队数。所在团队总数，含协助团队")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Teams", "团队数。所在团队总数，含协助团队", "")]
+        public Int32 Teams { get => _Teams; set { if (OnPropertyChanging("Teams", value)) { _Teams = value; OnPropertyChanged("Teams"); } } }
+
+        private Int32 _UserId;
+        /// <summary>用户。所属登录用户</summary>
+        [DisplayName("用户")]
+        [Description("用户。所属登录用户")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("UserId", "用户。所属登录用户", "")]
+        public Int32 UserId { get => _UserId; set { if (OnPropertyChanging("UserId", value)) { _UserId = value; OnPropertyChanged("UserId"); } } }
+
+        private String _UserName;
+        /// <summary>用户名</summary>
+        [DisplayName("用户名")]
+        [Description("用户名")]
+        [DataObjectField(false, false, true, 50)]
+        [BindColumn("UserName", "用户名", "")]
+        public String UserName { get => _UserName; set { if (OnPropertyChanging("UserName", value)) { _UserName = value; OnPropertyChanged("UserName"); } } }
 
         private String _CreateUser;
         /// <summary>创建者</summary>
@@ -147,6 +171,9 @@ namespace Zero.Data.Projects
                     case "Kind": return _Kind;
                     case "TeamId": return _TeamId;
                     case "Enable": return _Enable;
+                    case "Teams": return _Teams;
+                    case "UserId": return _UserId;
+                    case "UserName": return _UserName;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
                     case "CreateIP": return _CreateIP;
@@ -168,6 +195,9 @@ namespace Zero.Data.Projects
                     case "Kind": _Kind = Convert.ToString(value); break;
                     case "TeamId": _TeamId = value.ToInt(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
+                    case "Teams": _Teams = value.ToInt(); break;
+                    case "UserId": _UserId = value.ToInt(); break;
+                    case "UserName": _UserName = Convert.ToString(value); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
                     case "CreateIP": _CreateIP = Convert.ToString(value); break;
@@ -201,6 +231,15 @@ namespace Zero.Data.Projects
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
+
+            /// <summary>团队数。所在团队总数，含协助团队</summary>
+            public static readonly Field Teams = FindByName("Teams");
+
+            /// <summary>用户。所属登录用户</summary>
+            public static readonly Field UserId = FindByName("UserId");
+
+            /// <summary>用户名</summary>
+            public static readonly Field UserName = FindByName("UserName");
 
             /// <summary>创建者</summary>
             public static readonly Field CreateUser = FindByName("CreateUser");
@@ -250,6 +289,15 @@ namespace Zero.Data.Projects
             /// <summary>启用</summary>
             public const String Enable = "Enable";
 
+            /// <summary>团队数。所在团队总数，含协助团队</summary>
+            public const String Teams = "Teams";
+
+            /// <summary>用户。所属登录用户</summary>
+            public const String UserId = "UserId";
+
+            /// <summary>用户名</summary>
+            public const String UserName = "UserName";
+
             /// <summary>创建者</summary>
             public const String CreateUser = "CreateUser";
 
@@ -298,6 +346,15 @@ namespace Zero.Data.Projects
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }
+
+        /// <summary>团队数。所在团队总数，含协助团队</summary>
+        Int32 Teams { get; set; }
+
+        /// <summary>用户。所属登录用户</summary>
+        Int32 UserId { get; set; }
+
+        /// <summary>用户名</summary>
+        String UserName { get; set; }
 
         /// <summary>创建者</summary>
         String CreateUser { get; set; }

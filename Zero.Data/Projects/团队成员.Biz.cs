@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -26,7 +26,7 @@ using XCode.Membership;
 namespace Zero.Data.Projects
 {
     /// <summary>团队成员。每个团队拥有哪些成员，每个成员有一个主力团队</summary>
-    public partial class TeamMember : Entity<TeamMember>
+    public partial class TeamMember : LogEntity<TeamMember>
     {
         #region 对象操作
         static TeamMember()
@@ -61,49 +61,6 @@ namespace Zero.Data.Projects
             //if (isNew && !Dirtys[nameof(CreateIP)]) CreateIP = ManageProvider.UserHost;
             //if (!Dirtys[nameof(UpdateIP)]) UpdateIP = ManageProvider.UserHost;
         }
-
-        ///// <summary>首次连接数据库时初始化数据，仅用于实体类重载，用户不应该调用该方法</summary>
-        //[EditorBrowsable(EditorBrowsableState.Never)]
-        //protected override void InitData()
-        //{
-        //    // InitData一般用于当数据表没有数据时添加一些默认数据，该实体类的任何第一次数据库操作都会触发该方法，默认异步调用
-        //    if (Meta.Session.Count > 0) return;
-
-        //    if (XTrace.Debug) XTrace.WriteLine("开始初始化TeamMember[团队成员]数据……");
-
-        //    var entity = new TeamMember();
-        //    entity.ID = 0;
-        //    entity.TeamId = 0;
-        //    entity.MemberId = 0;
-        //    entity.Major = true;
-        //    entity.Enable = true;
-        //    entity.CreateUser = "abc";
-        //    entity.CreateUserID = 0;
-        //    entity.CreateIP = "abc";
-        //    entity.CreateTime = DateTime.Now;
-        //    entity.UpdateUser = "abc";
-        //    entity.UpdateUserID = 0;
-        //    entity.UpdateIP = "abc";
-        //    entity.UpdateTime = DateTime.Now;
-        //    entity.Remark = "abc";
-        //    entity.Insert();
-
-        //    if (XTrace.Debug) XTrace.WriteLine("完成初始化TeamMember[团队成员]数据！");
-        //}
-
-        ///// <summary>已重载。基类先调用Valid(true)验证数据，然后在事务保护内调用OnInsert</summary>
-        ///// <returns></returns>
-        //public override Int32 Insert()
-        //{
-        //    return base.Insert();
-        //}
-
-        ///// <summary>已重载。在事务保护范围内处理业务，位于Valid之后</summary>
-        ///// <returns></returns>
-        //protected override Int32 OnDelete()
-        //{
-        //    return base.OnDelete();
-        //}
         #endregion
 
         #region 扩展属性
@@ -118,6 +75,7 @@ namespace Zero.Data.Projects
         [DisplayName("团队")]
         [Map(nameof(TeamId), typeof(Team), "ID")]
         public String TeamName => Team?.Name;
+
         /// <summary>成员</summary>
         [XmlIgnore, IgnoreDataMember]
         //[ScriptIgnore]
@@ -175,15 +133,20 @@ namespace Zero.Data.Projects
         /// <summary>高级查询</summary>
         /// <param name="teamId">团队</param>
         /// <param name="memberId">成员</param>
+        /// <param name="enable">启用</param>
+        /// <param name="start">开始</param>
+        /// <param name="end">结束</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
-        public static IList<TeamMember> Search(Int32 teamId, Int32 memberId, String key, PageParameter page)
+        public static IList<TeamMember> Search(Int32 teamId, Int32 memberId, Boolean? enable, DateTime start, DateTime end, String key, PageParameter page)
         {
             var exp = new WhereExpression();
 
             if (teamId >= 0) exp &= _.TeamId == teamId;
             if (memberId >= 0) exp &= _.MemberId == memberId;
+            if (enable != null) exp &= _.Enable == enable;
+            exp &= _.UpdateTime.Between(start, end);
             if (!key.IsNullOrEmpty()) exp &= _.CreateUser.Contains(key) | _.CreateIP.Contains(key) | _.UpdateUser.Contains(key) | _.UpdateIP.Contains(key) | _.Remark.Contains(key);
 
             return FindAll(exp, page);

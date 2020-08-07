@@ -10,14 +10,14 @@ using XCode.DataAccessLayer;
 
 namespace Zero.Data.Projects
 {
-    /// <summary>版本成员</summary>
+    /// <summary>故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。</summary>
     [Serializable]
     [DataObject]
-    [Description("版本成员")]
-    [BindIndex("IX_VersionMember_VersionId", false, "VersionId")]
-    [BindIndex("IX_VersionMember_MemberId", false, "MemberId")]
-    [BindTable("VersionMember", Description = "版本成员", ConnName = "Zero", DbType = DatabaseType.None)]
-    public partial class VersionMember : IVersionMember
+    [Description("故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。")]
+    [BindIndex("IX_Story_VersionId", false, "VersionId")]
+    [BindIndex("IX_Story_MemberId", false, "MemberId")]
+    [BindTable("Story", Description = "故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。", ConnName = "OA", DbType = DatabaseType.None)]
+    public partial class Story : IStory
     {
         #region 属性
         private Int32 _ID;
@@ -28,6 +28,14 @@ namespace Zero.Data.Projects
         [BindColumn("ID", "编号", "")]
         public Int32 ID { get => _ID; set { if (OnPropertyChanging("ID", value)) { _ID = value; OnPropertyChanged("ID"); } } }
 
+        private Int32 _ProductId;
+        /// <summary>产品</summary>
+        [DisplayName("产品")]
+        [Description("产品")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("ProductId", "产品", "")]
+        public Int32 ProductId { get => _ProductId; set { if (OnPropertyChanging("ProductId", value)) { _ProductId = value; OnPropertyChanged("ProductId"); } } }
+
         private Int32 _VersionId;
         /// <summary>版本</summary>
         [DisplayName("版本")]
@@ -37,12 +45,20 @@ namespace Zero.Data.Projects
         public Int32 VersionId { get => _VersionId; set { if (OnPropertyChanging("VersionId", value)) { _VersionId = value; OnPropertyChanged("VersionId"); } } }
 
         private Int32 _MemberId;
-        /// <summary>成员</summary>
-        [DisplayName("成员")]
-        [Description("成员")]
+        /// <summary>处理人</summary>
+        [DisplayName("处理人")]
+        [Description("处理人")]
         [DataObjectField(false, false, false, 0)]
-        [BindColumn("MemberId", "成员", "")]
+        [BindColumn("MemberId", "处理人", "")]
         public Int32 MemberId { get => _MemberId; set { if (OnPropertyChanging("MemberId", value)) { _MemberId = value; OnPropertyChanged("MemberId"); } } }
+
+        private String _Title;
+        /// <summary>事项</summary>
+        [DisplayName("事项")]
+        [Description("事项")]
+        [DataObjectField(false, false, true, 50)]
+        [BindColumn("Title", "事项", "", Master = true)]
+        public String Title { get => _Title; set { if (OnPropertyChanging("Title", value)) { _Title = value; OnPropertyChanged("Title"); } } }
 
         private DateTime _StartDate;
         /// <summary>开始日期</summary>
@@ -67,14 +83,6 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("ManHours", "工时", "")]
         public Int32 ManHours { get => _ManHours; set { if (OnPropertyChanging("ManHours", value)) { _ManHours = value; OnPropertyChanged("ManHours"); } } }
-
-        private Boolean _Major;
-        /// <summary>主要。是否该成员的主要团队</summary>
-        [DisplayName("主要")]
-        [Description("主要。是否该成员的主要团队")]
-        [DataObjectField(false, false, false, 0)]
-        [BindColumn("Major", "主要。是否该成员的主要团队", "")]
-        public Boolean Major { get => _Major; set { if (OnPropertyChanging("Major", value)) { _Major = value; OnPropertyChanged("Major"); } } }
 
         private Boolean _Enable;
         /// <summary>启用</summary>
@@ -168,12 +176,13 @@ namespace Zero.Data.Projects
                 switch (name)
                 {
                     case "ID": return _ID;
+                    case "ProductId": return _ProductId;
                     case "VersionId": return _VersionId;
                     case "MemberId": return _MemberId;
+                    case "Title": return _Title;
                     case "StartDate": return _StartDate;
                     case "EndDate": return _EndDate;
                     case "ManHours": return _ManHours;
-                    case "Major": return _Major;
                     case "Enable": return _Enable;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
@@ -192,12 +201,13 @@ namespace Zero.Data.Projects
                 switch (name)
                 {
                     case "ID": _ID = value.ToInt(); break;
+                    case "ProductId": _ProductId = value.ToInt(); break;
                     case "VersionId": _VersionId = value.ToInt(); break;
                     case "MemberId": _MemberId = value.ToInt(); break;
+                    case "Title": _Title = Convert.ToString(value); break;
                     case "StartDate": _StartDate = value.ToDateTime(); break;
                     case "EndDate": _EndDate = value.ToDateTime(); break;
                     case "ManHours": _ManHours = value.ToInt(); break;
-                    case "Major": _Major = value.ToBoolean(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
@@ -215,17 +225,23 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 字段名
-        /// <summary>取得版本成员字段信息的快捷方式</summary>
+        /// <summary>取得故事字段信息的快捷方式</summary>
         public partial class _
         {
             /// <summary>编号</summary>
             public static readonly Field ID = FindByName("ID");
 
+            /// <summary>产品</summary>
+            public static readonly Field ProductId = FindByName("ProductId");
+
             /// <summary>版本</summary>
             public static readonly Field VersionId = FindByName("VersionId");
 
-            /// <summary>成员</summary>
+            /// <summary>处理人</summary>
             public static readonly Field MemberId = FindByName("MemberId");
+
+            /// <summary>事项</summary>
+            public static readonly Field Title = FindByName("Title");
 
             /// <summary>开始日期</summary>
             public static readonly Field StartDate = FindByName("StartDate");
@@ -235,9 +251,6 @@ namespace Zero.Data.Projects
 
             /// <summary>工时</summary>
             public static readonly Field ManHours = FindByName("ManHours");
-
-            /// <summary>主要。是否该成员的主要团队</summary>
-            public static readonly Field Major = FindByName("Major");
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
@@ -272,17 +285,23 @@ namespace Zero.Data.Projects
             static Field FindByName(String name) => Meta.Table.FindByName(name);
         }
 
-        /// <summary>取得版本成员字段名称的快捷方式</summary>
+        /// <summary>取得故事字段名称的快捷方式</summary>
         public partial class __
         {
             /// <summary>编号</summary>
             public const String ID = "ID";
 
+            /// <summary>产品</summary>
+            public const String ProductId = "ProductId";
+
             /// <summary>版本</summary>
             public const String VersionId = "VersionId";
 
-            /// <summary>成员</summary>
+            /// <summary>处理人</summary>
             public const String MemberId = "MemberId";
+
+            /// <summary>事项</summary>
+            public const String Title = "Title";
 
             /// <summary>开始日期</summary>
             public const String StartDate = "StartDate";
@@ -292,9 +311,6 @@ namespace Zero.Data.Projects
 
             /// <summary>工时</summary>
             public const String ManHours = "ManHours";
-
-            /// <summary>主要。是否该成员的主要团队</summary>
-            public const String Major = "Major";
 
             /// <summary>启用</summary>
             public const String Enable = "Enable";
@@ -329,18 +345,24 @@ namespace Zero.Data.Projects
         #endregion
     }
 
-    /// <summary>版本成员接口</summary>
-    public partial interface IVersionMember
+    /// <summary>故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。接口</summary>
+    public partial interface IStory
     {
         #region 属性
         /// <summary>编号</summary>
         Int32 ID { get; set; }
 
+        /// <summary>产品</summary>
+        Int32 ProductId { get; set; }
+
         /// <summary>版本</summary>
         Int32 VersionId { get; set; }
 
-        /// <summary>成员</summary>
+        /// <summary>处理人</summary>
         Int32 MemberId { get; set; }
+
+        /// <summary>事项</summary>
+        String Title { get; set; }
 
         /// <summary>开始日期</summary>
         DateTime StartDate { get; set; }
@@ -350,9 +372,6 @@ namespace Zero.Data.Projects
 
         /// <summary>工时</summary>
         Int32 ManHours { get; set; }
-
-        /// <summary>主要。是否该成员的主要团队</summary>
-        Boolean Major { get; set; }
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }

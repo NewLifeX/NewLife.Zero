@@ -1,32 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
-using NewLife.Log;
-using NewLife.Model;
-using NewLife.Reflection;
-using NewLife.Threading;
-using NewLife.Web;
 using XCode;
 using XCode.Cache;
-using XCode.Configuration;
-using XCode.DataAccessLayer;
 using XCode.Membership;
 
 namespace Zero.Data.Projects
 {
     /// <summary>产品</summary>
-    public partial class Product : Entity<Product>
+    public partial class Product : LogEntity<Product>
     {
         #region 对象操作
         static Product()
@@ -72,51 +58,6 @@ namespace Zero.Data.Projects
             // 检查唯一索引
             // CheckExist(isNew, nameof(Name));
         }
-
-        ///// <summary>首次连接数据库时初始化数据，仅用于实体类重载，用户不应该调用该方法</summary>
-        //[EditorBrowsable(EditorBrowsableState.Never)]
-        //protected override void InitData()
-        //{
-        //    // InitData一般用于当数据表没有数据时添加一些默认数据，该实体类的任何第一次数据库操作都会触发该方法，默认异步调用
-        //    if (Meta.Session.Count > 0) return;
-
-        //    if (XTrace.Debug) XTrace.WriteLine("开始初始化Product[产品]数据……");
-
-        //    var entity = new Product();
-        //    entity.ID = 0;
-        //    entity.TeamId = 0;
-        //    entity.Name = "abc";
-        //    entity.Kind = "abc";
-        //    entity.LeaderId = 0;
-        //    entity.Enable = true;
-        //    entity.Completed = true;
-        //    entity.CreateUser = "abc";
-        //    entity.CreateUserID = 0;
-        //    entity.CreateIP = "abc";
-        //    entity.CreateTime = DateTime.Now;
-        //    entity.UpdateUser = "abc";
-        //    entity.UpdateUserID = 0;
-        //    entity.UpdateIP = "abc";
-        //    entity.UpdateTime = DateTime.Now;
-        //    entity.Remark = "abc";
-        //    entity.Insert();
-
-        //    if (XTrace.Debug) XTrace.WriteLine("完成初始化Product[产品]数据！");
-        //}
-
-        ///// <summary>已重载。基类先调用Valid(true)验证数据，然后在事务保护内调用OnInsert</summary>
-        ///// <returns></returns>
-        //public override Int32 Insert()
-        //{
-        //    return base.Insert();
-        //}
-
-        ///// <summary>已重载。在事务保护范围内处理业务，位于Valid之后</summary>
-        ///// <returns></returns>
-        //protected override Int32 OnDelete()
-        //{
-        //    return base.OnDelete();
-        //}
         #endregion
 
         #region 扩展属性
@@ -131,6 +72,15 @@ namespace Zero.Data.Projects
         [DisplayName("团队")]
         [Map(nameof(TeamId), typeof(Team), "ID")]
         public String TeamName => Team?.Name;
+
+        /// <summary>组长</summary>
+        [IgnoreDataMember]
+        public Member Leader => Extends.Get(nameof(Leader), k => Member.FindByID(LeaderId));
+
+        /// <summary>组长</summary>
+        [IgnoreDataMember]
+        [Map(nameof(LeaderId), typeof(Member), "ID")]
+        public String LeaderName => Leader?.Name;
         #endregion
 
         #region 扩展查询
@@ -163,41 +113,71 @@ namespace Zero.Data.Projects
 
             return Find(_.Name == name);
         }
+
+        /// <summary>根据团队查找</summary>
+        /// <param name="teamId">团队</param>
+        /// <returns>实体列表</returns>
+        public static IList<Product> FindAllByTeamId(Int32 teamId)
+        {
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.TeamId == teamId);
+
+            return FindAll(_.TeamId == teamId);
+        }
         #endregion
 
         #region 高级查询
         /// <summary>高级查询</summary>
         /// <param name="teamId">名称</param>
         /// <param name="kind">名称</param>
-        /// <param name="start">名称</param>
-        /// <param name="end">名称</param>
+        /// <param name="enable">启用</param>
+        /// <param name="completed">完成</param>
+        /// <param name="start">开始</param>
+        /// <param name="end">结束</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
-        public static IList<Product> Search(Int32 teamId, String kind, DateTime start, DateTime end, String key, PageParameter page)
+        public static IList<Product> Search(Int32 teamId, String kind, Boolean? enable, Boolean? completed, DateTime start, DateTime end, String key, PageParameter page)
         {
             var exp = new WhereExpression();
 
-            if (teamId == 0) exp &= _.TeamId == teamId;
+            if (teamId >= 0) exp &= _.TeamId == teamId;
             if (!kind.IsNullOrEmpty()) exp &= _.Kind == kind;
+            if (enable != null) exp &= _.Enable == enable;
+            if (completed != null) exp &= _.Completed == completed;
             exp &= _.UpdateTime.Between(start, end);
             if (!key.IsNullOrEmpty()) exp &= _.Name.Contains(key) | _.Kind.Contains(key) | _.Remark.Contains(key);
 
             return FindAll(exp, page);
         }
 
-        // Select Count(ID) as ID,Category From Product Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
-        //static readonly FieldCache<Product> _CategoryCache = new FieldCache<Product>(nameof(Category))
-        //{
-        //Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
-        //};
+        static readonly FieldCache<Product> _KindCache = new FieldCache<Product>(nameof(Kind))
+        {
+            Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
+        };
 
-        ///// <summary>获取类别列表，字段缓存10分钟，分组统计数据最多的前20种，用于魔方前台下拉选择</summary>
-        ///// <returns></returns>
-        //public static IDictionary<String, String> GetCategoryList() => _CategoryCache.FindAllName();
+        /// <summary>获取类别列表，字段缓存10分钟，分组统计数据最多的前20种，用于魔方前台下拉选择</summary>
+        /// <returns></returns>
+        public static IDictionary<String, String> GetKinds() => _KindCache.FindAllName();
         #endregion
 
         #region 业务操作
+        /// <summary>刷新</summary>
+        public void Refresh()
+        {
+            if (ID == 0) return;
+
+            // 修正版本数
+            Versions = VersionPlan.FindAllByProductId(ID).Count;
+            Stories = Story.FindAllByProductId(ID).Count;
+        }
+
+        /// <summary>修正</summary>
+        public void Fix()
+        {
+            Refresh();
+            Update();
+        }
         #endregion
     }
 }

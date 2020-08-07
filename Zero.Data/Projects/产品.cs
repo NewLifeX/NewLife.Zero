@@ -15,7 +15,7 @@ namespace Zero.Data.Projects
     [DataObject]
     [Description("产品")]
     [BindIndex("IU_Product_Name", true, "Name")]
-    [BindTable("Product", Description = "产品", ConnName = "Zero", DbType = DatabaseType.None)]
+    [BindTable("Product", Description = "产品", ConnName = "OA", DbType = DatabaseType.None)]
     public partial class Product : IProduct
     {
         #region 属性
@@ -52,11 +52,11 @@ namespace Zero.Data.Projects
         public String Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
 
         private Int32 _LeaderId;
-        /// <summary>组长</summary>
-        [DisplayName("组长")]
-        [Description("组长")]
+        /// <summary>负责人</summary>
+        [DisplayName("负责人")]
+        [Description("负责人")]
         [DataObjectField(false, false, false, 0)]
-        [BindColumn("LeaderId", "组长", "")]
+        [BindColumn("LeaderId", "负责人", "")]
         public Int32 LeaderId { get => _LeaderId; set { if (OnPropertyChanging("LeaderId", value)) { _LeaderId = value; OnPropertyChanged("LeaderId"); } } }
 
         private Boolean _Enable;
@@ -66,6 +66,22 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("Enable", "启用", "")]
         public Boolean Enable { get => _Enable; set { if (OnPropertyChanging("Enable", value)) { _Enable = value; OnPropertyChanged("Enable"); } } }
+
+        private Int32 _Versions;
+        /// <summary>版本数</summary>
+        [DisplayName("版本数")]
+        [Description("版本数")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Versions", "版本数", "")]
+        public Int32 Versions { get => _Versions; set { if (OnPropertyChanging("Versions", value)) { _Versions = value; OnPropertyChanged("Versions"); } } }
+
+        private Int32 _Stories;
+        /// <summary>故事数</summary>
+        [DisplayName("故事数")]
+        [Description("故事数")]
+        [DataObjectField(false, false, false, 0)]
+        [BindColumn("Stories", "故事数", "")]
+        public Int32 Stories { get => _Stories; set { if (OnPropertyChanging("Stories", value)) { _Stories = value; OnPropertyChanged("Stories"); } } }
 
         private Boolean _Completed;
         /// <summary>完成</summary>
@@ -164,6 +180,8 @@ namespace Zero.Data.Projects
                     case "Kind": return _Kind;
                     case "LeaderId": return _LeaderId;
                     case "Enable": return _Enable;
+                    case "Versions": return _Versions;
+                    case "Stories": return _Stories;
                     case "Completed": return _Completed;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
@@ -187,6 +205,8 @@ namespace Zero.Data.Projects
                     case "Kind": _Kind = Convert.ToString(value); break;
                     case "LeaderId": _LeaderId = value.ToInt(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
+                    case "Versions": _Versions = value.ToInt(); break;
+                    case "Stories": _Stories = value.ToInt(); break;
                     case "Completed": _Completed = value.ToBoolean(); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
@@ -219,11 +239,17 @@ namespace Zero.Data.Projects
             /// <summary>类型</summary>
             public static readonly Field Kind = FindByName("Kind");
 
-            /// <summary>组长</summary>
+            /// <summary>负责人</summary>
             public static readonly Field LeaderId = FindByName("LeaderId");
 
             /// <summary>启用</summary>
             public static readonly Field Enable = FindByName("Enable");
+
+            /// <summary>版本数</summary>
+            public static readonly Field Versions = FindByName("Versions");
+
+            /// <summary>故事数</summary>
+            public static readonly Field Stories = FindByName("Stories");
 
             /// <summary>完成</summary>
             public static readonly Field Completed = FindByName("Completed");
@@ -273,11 +299,17 @@ namespace Zero.Data.Projects
             /// <summary>类型</summary>
             public const String Kind = "Kind";
 
-            /// <summary>组长</summary>
+            /// <summary>负责人</summary>
             public const String LeaderId = "LeaderId";
 
             /// <summary>启用</summary>
             public const String Enable = "Enable";
+
+            /// <summary>版本数</summary>
+            public const String Versions = "Versions";
+
+            /// <summary>故事数</summary>
+            public const String Stories = "Stories";
 
             /// <summary>完成</summary>
             public const String Completed = "Completed";
@@ -328,11 +360,17 @@ namespace Zero.Data.Projects
         /// <summary>类型</summary>
         String Kind { get; set; }
 
-        /// <summary>组长</summary>
+        /// <summary>负责人</summary>
         Int32 LeaderId { get; set; }
 
         /// <summary>启用</summary>
         Boolean Enable { get; set; }
+
+        /// <summary>版本数</summary>
+        Int32 Versions { get; set; }
+
+        /// <summary>故事数</summary>
+        Int32 Stories { get; set; }
 
         /// <summary>完成</summary>
         Boolean Completed { get; set; }

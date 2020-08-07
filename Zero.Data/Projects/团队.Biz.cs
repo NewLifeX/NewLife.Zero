@@ -1,32 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
-using NewLife.Log;
-using NewLife.Model;
-using NewLife.Reflection;
-using NewLife.Threading;
-using NewLife.Web;
 using XCode;
-using XCode.Cache;
-using XCode.Configuration;
-using XCode.DataAccessLayer;
 using XCode.Membership;
 
 namespace Zero.Data.Projects
 {
     /// <summary>团队。管理一系列相关的产品和应用系统</summary>
-    public partial class Team : Entity<Team>
+    public partial class Team : LogEntity<Team>
     {
         #region 对象操作
         static Team()
@@ -76,6 +60,14 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 扩展属性
+        /// <summary>组长</summary>
+        [IgnoreDataMember]
+        public Member Leader => Extends.Get(nameof(Leader), k => Member.FindByID(LeaderId));
+
+        /// <summary>组长</summary>
+        [IgnoreDataMember]
+        [Map(nameof(LeaderId), typeof(Member), "ID")]
+        public String LeaderName => Leader?.Name;
         #endregion
 
         #region 扩展查询
@@ -122,9 +114,62 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 高级查询
+        /// <summary>高级查询</summary>
+        /// <param name="name">名称</param>
+        /// <param name="code">编码</param>
+        /// <param name="enable">启用</param>
+        /// <param name="start">开始</param>
+        /// <param name="end">结束</param>
+        /// <param name="key">关键字</param>
+        /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
+        /// <returns>实体列表</returns>
+        public static IList<Team> Search(String name, String code, Boolean? enable, DateTime start, DateTime end, String key, PageParameter page)
+        {
+            var exp = new WhereExpression();
+
+            if (!name.IsNullOrEmpty()) exp &= _.Name == name;
+            if (!code.IsNullOrEmpty()) exp &= _.Code == code;
+            if (enable != null) exp &= _.Enable == enable;
+            exp &= _.UpdateTime.Between(start, end);
+            if (!key.IsNullOrEmpty()) exp &= _.CreateUser.Contains(key) | _.CreateIP.Contains(key) | _.UpdateUser.Contains(key) | _.UpdateIP.Contains(key) | _.Remark.Contains(key);
+
+            return FindAll(exp, page);
+        }
+
+        // Select Count(ID) as ID,Category From Team Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
+        //static readonly FieldCache<Team> _CategoryCache = new FieldCache<Team>(nameof(Category))
+        //{
+        //Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
+        //};
+
+        ///// <summary>获取类别列表，字段缓存10分钟，分组统计数据最多的前20种，用于魔方前台下拉选择</summary>
+        ///// <returns></returns>
+        //public static IDictionary<String, String> GetCategoryList() => _CategoryCache.FindAllName();
         #endregion
 
         #region 业务操作
+        /// <summary>刷新</summary>
+        public void Refresh()
+        {
+            if (ID == 0) return;
+
+            var list = TeamMember.FindAllByTeamId(ID);
+
+            // 修正成员数
+            Members = list.Count(e => e.Enable && e.Major);
+            AssistMembers = list.Count(e => e.Enable && !e.Major);
+
+            // 修正产品数和版本数
+            Products = Product.FindAllByTeamId(ID).Count;
+            Versions = VersionPlan.FindAllByTeamId(ID).Count;
+        }
+
+        /// <summary>修正</summary>
+        public void Fix()
+        {
+            Refresh();
+            Update();
+        }
         #endregion
     }
 }
