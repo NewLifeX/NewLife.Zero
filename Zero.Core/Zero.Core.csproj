@@ -34,4 +34,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
 </Project>
