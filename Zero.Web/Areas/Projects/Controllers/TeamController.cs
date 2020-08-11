@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Cube;
 using NewLife.Web;
 using Zero.Data.Projects;
+using Zero.Data.Common;
 using XCode;
 using XCode.Membership;
 
@@ -101,6 +103,53 @@ namespace Zero.Web.Areas.Projects.Controllers
                     {
                         team.Refresh();
                         if (team.Update() != 0) count++;
+
+                        // 机器人
+                        var robot = RobotHelper.CreateRobot(team);
+                        if (robot != null)
+                        {
+                            var prds = Product.FindAllByTeamId(team.ID).Where(e => e.Enable).ToList();
+                            var members = TeamMember.FindAllByTeamId(team.ID).Where(e => e.Enable).OrderBy(e => e.MemberName).ToList();
+                            var versions = VersionPlan.FindAllNotCompleted(team.ID, -1).OrderBy(e => e.StartDate).ToList();
+                            var uri = Request.GetRawUrl();
+                            uri = new Uri(uri, "/Projects/Product?teamId=" + team.ID);
+
+                            var sb = new StringBuilder();
+                            sb.AppendLine($"### [{team}]团队报告");
+                            sb.AppendLine($">组长：<font color=\"#FF0033\">{team.Leader}</font>");
+                            sb.AppendLine($">产品：<font color=\"#6600CC\">{prds.Join()}</font>");
+                            sb.AppendLine($">成员：<font color=\"info\">{members.Where(e => e.Major).Join(",", e => e.MemberName)}</font>");
+                            sb.AppendLine($">协助：<font color=\"info\">{members.Where(e => !e.Major).Join(",", e => e.MemberName)}</font>");
+
+                            if (versions.Count > 0)
+                            {
+                                sb.AppendLine($">版本：");
+                                foreach (var item in versions)
+                                {
+                                    // 过期、未开始、正常
+                                    var color = item.EndDate.Date < DateTime.Today
+                                        ? "#FF0000"
+                                        : item.StartDate.Date > DateTime.Today
+                                            ? "#00CC00"
+                                            : "#3366CC";
+                                    sb.AppendLine($">\t<font color=\"{color}\">[{item.Product}] {item} ({item.StartDate:MM/dd} - {item.EndDate:MM/dd})</font>");
+                                }
+
+                                var storis = Story.Search(versions.Select(e => e.ID).ToArray());
+                                if (storis.Count > 0)
+                                {
+                                    sb.AppendLine($">故事：");
+                                    foreach (var item in storis)
+                                    {
+                                        sb.AppendLine($">\t[{item.Product}/{item.Version}] {item} [{item.Member}] ({item.StartDate:MM/dd} - {item.EndDate:MM/dd})");
+                                    }
+                                }
+                            }
+
+                            sb.AppendLine($"[更多信息]({uri})");
+
+                            robot.SendMarkDown(sb.ToString());
+                        }
                     }
                 }
             }

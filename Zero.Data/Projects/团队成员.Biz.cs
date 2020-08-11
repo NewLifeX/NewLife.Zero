@@ -1,26 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
-using NewLife.Log;
-using NewLife.Model;
-using NewLife.Reflection;
-using NewLife.Threading;
-using NewLife.Web;
 using XCode;
-using XCode.Cache;
-using XCode.Configuration;
-using XCode.DataAccessLayer;
 using XCode.Membership;
 
 namespace Zero.Data.Projects
@@ -48,18 +33,7 @@ namespace Zero.Data.Projects
             // 如果没有脏数据，则不需要进行任何处理
             if (!HasDirty) return;
 
-            // 在新插入数据或者修改了指定字段时进行修正
-            // 处理当前已登录用户信息，可以由UserModule过滤器代劳
-            /*var user = ManageProvider.User;
-            if (user != null)
-            {
-                if (isNew && !Dirtys[nameof(CreateUserID)]) CreateUserID = user.ID;
-                if (!Dirtys[nameof(UpdateUserID)]) UpdateUserID = user.ID;
-            }*/
-            //if (isNew && !Dirtys[nameof(CreateTime)]) CreateTime = DateTime.Now;
-            //if (!Dirtys[nameof(UpdateTime)]) UpdateTime = DateTime.Now;
-            //if (isNew && !Dirtys[nameof(CreateIP)]) CreateIP = ManageProvider.UserHost;
-            //if (!Dirtys[nameof(UpdateIP)]) UpdateIP = ManageProvider.UserHost;
+            if (Kind.IsNullOrEmpty()) Kind = Member?.Kind;
         }
         #endregion
 
@@ -134,8 +108,8 @@ namespace Zero.Data.Projects
         /// <param name="teamId">团队</param>
         /// <param name="memberId">成员</param>
         /// <param name="enable">启用</param>
-        /// <param name="start">开始</param>
-        /// <param name="end">结束</param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>

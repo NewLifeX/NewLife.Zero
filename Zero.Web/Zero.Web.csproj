@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Areas\Projects\Views\Member\_List_Data.cshtml" />
+    <None Include="Areas\Projects\Views\Member\_List_Search.cshtml" />
+    <None Include="Areas\Projects\Views\Product\_List_Data.cshtml" />
     <None Include="Areas\Projects\Views\Product\_List_Search.cshtml" />
+    <None Include="Areas\Projects\Views\Product\_List_Toolbar_Batch.cshtml" />
+    <None Include="Areas\Projects\Views\Team\_List_Data.cshtml" />
     <None Include="Areas\Projects\Views\Team\_List_Search.cshtml" />
+    <None Include="Areas\Projects\Views\Team\_List_Toolbar_Batch.cshtml" />
+    <None Include="Areas\Projects\Views\VersionPlan\_List_Data.cshtml" />
+    <None Include="Areas\Projects\Views\VersionPlan\_List_Search.cshtml" />
+    <None Include="Areas\Projects\Views\VersionPlan\_List_Toolbar_Batch.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

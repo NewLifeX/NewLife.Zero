@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("团队成员。每个团队拥有哪些成员，每个成员有一个主力团队")]
     [BindIndex("IX_TeamMember_TeamId", false, "TeamId")]
     [BindIndex("IX_TeamMember_MemberId", false, "MemberId")]
-    [BindTable("TeamMember", Description = "团队成员。每个团队拥有哪些成员，每个成员有一个主力团队", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("TeamMember", Description = "团队成员。每个团队拥有哪些成员，每个成员有一个主力团队", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class TeamMember : ITeamMember
     {
         #region 属性
@@ -43,6 +43,14 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("MemberId", "成员", "")]
         public Int32 MemberId { get => _MemberId; set { if (OnPropertyChanging("MemberId", value)) { _MemberId = value; OnPropertyChanged("MemberId"); } } }
+
+        private String _Kind;
+        /// <summary>类型</summary>
+        [DisplayName("类型")]
+        [Description("类型")]
+        [DataObjectField(false, false, true, 50)]
+        [BindColumn("Kind", "类型", "")]
+        public String Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
 
         private Boolean _Major;
         /// <summary>主要。是否该成员的主要团队</summary>
@@ -154,6 +162,7 @@ namespace Zero.Data.Projects
                     case "ID": return _ID;
                     case "TeamId": return _TeamId;
                     case "MemberId": return _MemberId;
+                    case "Kind": return _Kind;
                     case "Major": return _Major;
                     case "Leader": return _Leader;
                     case "Enable": return _Enable;
@@ -176,6 +185,7 @@ namespace Zero.Data.Projects
                     case "ID": _ID = value.ToInt(); break;
                     case "TeamId": _TeamId = value.ToInt(); break;
                     case "MemberId": _MemberId = value.ToInt(); break;
+                    case "Kind": _Kind = Convert.ToString(value); break;
                     case "Major": _Major = value.ToBoolean(); break;
                     case "Leader": _Leader = value.ToBoolean(); break;
                     case "Enable": _Enable = value.ToBoolean(); break;
@@ -206,6 +216,9 @@ namespace Zero.Data.Projects
 
             /// <summary>成员</summary>
             public static readonly Field MemberId = FindByName("MemberId");
+
+            /// <summary>类型</summary>
+            public static readonly Field Kind = FindByName("Kind");
 
             /// <summary>主要。是否该成员的主要团队</summary>
             public static readonly Field Major = FindByName("Major");
@@ -258,6 +271,9 @@ namespace Zero.Data.Projects
             /// <summary>成员</summary>
             public const String MemberId = "MemberId";
 
+            /// <summary>类型</summary>
+            public const String Kind = "Kind";
+
             /// <summary>主要。是否该成员的主要团队</summary>
             public const String Major = "Major";
 
@@ -309,6 +325,9 @@ namespace Zero.Data.Projects
 
         /// <summary>成员</summary>
         Int32 MemberId { get; set; }
+
+        /// <summary>类型</summary>
+        String Kind { get; set; }
 
         /// <summary>主要。是否该成员的主要团队</summary>
         Boolean Major { get; set; }

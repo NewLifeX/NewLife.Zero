@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <label for="kind" class="control-label">类型：</label>
-    @Html.ForDropDownList("kind", Product.GetKinds(), page["kind"], "全部", true)
+    @Html.ForDropDownList("kind", Member.GetKinds(), page["kind"], "全部", true)
 </div>
 @await Html.PartialAsync("_Enable", "")
 @await Html.PartialAsync("_DateRange")

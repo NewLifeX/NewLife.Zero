@@ -118,8 +118,8 @@ namespace Zero.Data.Projects
         /// <param name="kind">类型</param>
         /// <param name="enable">启用</param>
         /// <param name="completed">完成</param>
-        /// <param name="start">开始</param>
-        /// <param name="end">结束</param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
@@ -138,6 +138,32 @@ namespace Zero.Data.Projects
             return FindAll(exp, page);
         }
 
+        /// <summary>高级查询</summary>
+        /// <param name="teamId">团队</param>
+        /// <param name="productId">产品</param>
+        /// <param name="kind">类型</param>
+        /// <param name="enable">启用</param>
+        /// <param name="completed">完成</param>
+        /// <returns>实体列表</returns>
+        public static IList<VersionPlan> Search(Int32 teamId, Int32 productId, String kind, Boolean? enable, Boolean? completed)
+        {
+            var exp = new WhereExpression();
+
+            if (teamId >= 0) exp &= _.TeamId == teamId;
+            if (productId >= 0) exp &= _.ProductId == productId;
+            if (!kind.IsNullOrEmpty()) exp &= _.Kind == kind;
+            if (enable != null) exp &= _.Enable == enable;
+            if (completed != null) exp &= _.Completed == completed;
+
+            return FindAll(exp, null);
+        }
+
+        /// <summary>查找未完成的版本</summary>
+        /// <param name="teamId">团队</param>
+        /// <param name="productId">产品</param>
+        /// <returns>实体列表</returns>
+        public static IList<VersionPlan> FindAllNotCompleted(Int32 teamId, Int32 productId) => Search(teamId, productId, null, true, false);
+
         // Select Count(ID) as ID,Category From VersionPlan Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
         static readonly FieldCache<VersionPlan> _KindCache = new FieldCache<VersionPlan>(nameof(Kind))
         {
@@ -150,22 +176,24 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 业务操作
-        /// <summary>刷新</summary>
+        /// <summary>刷新数据</summary>
         public void Refresh()
         {
             if (ID == 0) return;
 
             // 修正故事数
-            var list = Story.FindAllByVersionId(ID);
+            var list = Story.FindAllNotCompleted(-1, ID);
             Stories = list.Count;
             ManHours = list.Sum(e => e.ManHours);
         }
 
-        /// <summary>修正</summary>
-        public void Fix()
+        /// <summary>修正数据，刷新并保存</summary>
+        /// <returns></returns>
+        public Int32 Fix()
         {
             Refresh();
-            Update();
+
+            return Update();
         }
         #endregion
     }

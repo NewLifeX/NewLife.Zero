@@ -125,8 +125,8 @@ namespace Zero.Data.Projects
         /// <param name="versionId">版本</param>
         /// <param name="memberId">成员</param>
         /// <param name="enable">启用</param>
-        /// <param name="start">开始</param>
-        /// <param name="end">结束</param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
@@ -144,6 +144,21 @@ namespace Zero.Data.Projects
             return FindAll(exp, page);
         }
 
+        /// <summary>查找未完成的故事</summary>
+        /// <param name="productId"></param>
+        /// <param name="versionId"></param>
+        /// <returns></returns>
+        public static IList<Story> FindAllNotCompleted(Int32 productId, Int32 versionId) => Search(productId, versionId, -1, true, DateTime.MinValue, DateTime.MinValue, null, null);
+
+        /// <summary>查找指定版本的故事</summary>
+        /// <param name="versions"></param>
+        /// <returns></returns>
+        public static IList<Story> Search(Int32[] versions)
+        {
+            if (versions == null || versions.Length == 0) return new List<Story>();
+
+            return FindAll(_.VersionId.In(versions));
+        }
         // Select Count(ID) as ID,Category From VersionMember Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
         //static readonly FieldCache<VersionMember> _CategoryCache = new FieldCache<VersionMember>(nameof(Category))
         //{

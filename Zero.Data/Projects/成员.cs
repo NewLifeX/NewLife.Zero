@@ -15,7 +15,7 @@ namespace Zero.Data.Projects
     [DataObject]
     [Description("成员。所有可用团队成员")]
     [BindIndex("IU_Member_Name", true, "Name")]
-    [BindTable("Member", Description = "成员。所有可用团队成员", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("Member", Description = "成员。所有可用团队成员", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class Member : IMember
     {
         #region 属性

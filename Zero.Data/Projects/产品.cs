@@ -15,7 +15,7 @@ namespace Zero.Data.Projects
     [DataObject]
     [Description("产品")]
     [BindIndex("IU_Product_Name", true, "Name")]
-    [BindTable("Product", Description = "产品", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("Product", Description = "产品", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class Product : IProduct
     {
         #region 属性

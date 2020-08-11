@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("版本计划")]
     [BindIndex("IX_VersionPlan_TeamId", false, "TeamId")]
     [BindIndex("IX_VersionPlan_ProductId", false, "ProductId")]
-    [BindTable("VersionPlan", Description = "版本计划", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("VersionPlan", Description = "版本计划", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class VersionPlan : IVersionPlan
     {
         #region 属性
@@ -52,13 +52,13 @@ namespace Zero.Data.Projects
         [BindColumn("Name", "名称。版本号", "", Master = true)]
         public String Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
 
-        private Int32 _Kind;
-        /// <summary>类型。常规/紧急</summary>
+        private String _Kind;
+        /// <summary>类型</summary>
         [DisplayName("类型")]
-        [Description("类型。常规/紧急")]
-        [DataObjectField(false, false, false, 0)]
-        [BindColumn("Kind", "类型。常规/紧急", "")]
-        public Int32 Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
+        [Description("类型")]
+        [DataObjectField(false, false, true, 50)]
+        [BindColumn("Kind", "类型", "")]
+        public String Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
 
         private DateTime _StartDate;
         /// <summary>开始日期</summary>
@@ -222,7 +222,7 @@ namespace Zero.Data.Projects
                     case "TeamId": _TeamId = value.ToInt(); break;
                     case "ProductId": _ProductId = value.ToInt(); break;
                     case "Name": _Name = Convert.ToString(value); break;
-                    case "Kind": _Kind = value.ToInt(); break;
+                    case "Kind": _Kind = Convert.ToString(value); break;
                     case "StartDate": _StartDate = value.ToDateTime(); break;
                     case "EndDate": _EndDate = value.ToDateTime(); break;
                     case "ManHours": _ManHours = value.ToInt(); break;
@@ -260,7 +260,7 @@ namespace Zero.Data.Projects
             /// <summary>名称。版本号</summary>
             public static readonly Field Name = FindByName("Name");
 
-            /// <summary>类型。常规/紧急</summary>
+            /// <summary>类型</summary>
             public static readonly Field Kind = FindByName("Kind");
 
             /// <summary>开始日期</summary>
@@ -326,7 +326,7 @@ namespace Zero.Data.Projects
             /// <summary>名称。版本号</summary>
             public const String Name = "Name";
 
-            /// <summary>类型。常规/紧急</summary>
+            /// <summary>类型</summary>
             public const String Kind = "Kind";
 
             /// <summary>开始日期</summary>
@@ -393,8 +393,8 @@ namespace Zero.Data.Projects
         /// <summary>名称。版本号</summary>
         String Name { get; set; }
 
-        /// <summary>类型。常规/紧急</summary>
-        Int32 Kind { get; set; }
+        /// <summary>类型</summary>
+        String Kind { get; set; }
 
         /// <summary>开始日期</summary>
         DateTime StartDate { get; set; }

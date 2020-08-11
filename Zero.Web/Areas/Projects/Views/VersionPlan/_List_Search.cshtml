@@ -7,7 +7,7 @@
     var fact = ViewBag.Factory as IEntityFactory;
     var page = ViewBag.Page as Pager;
 
-    var dic = new Dictionary<String, Int32>();
+    var dic = Team.FindAllWithCache().ToDictionary(e => e.ID, e => e + "");
     var dic2 = new Dictionary<Int32, String>();
     dic2.Add(1, "已完成");
     dic2.Add(0, "未完成");

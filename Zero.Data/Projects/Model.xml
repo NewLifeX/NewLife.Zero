@@ -11,6 +11,7 @@
       <Column Name="Versions" DataType="Int32" Description="版本数" />
       <Column Name="Members" DataType="Int32" Description="成员数。主要成员" />
       <Column Name="AssistMembers" DataType="Int32" Description="协助成员数。其它团队临时协助该团队的成员" />
+      <Column Name="WebHook" DataType="String" Length="200" Description="机器人" />
       <Column Name="CreateUser" DataType="String" Description="创建者" />
       <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
       <Column Name="CreateIP" DataType="String" Description="创建地址" />
@@ -55,6 +56,7 @@
       <Column Name="ID" DataType="Int32" Identity="True" PrimaryKey="True" Description="编号" />
       <Column Name="TeamId" DataType="Int32" Description="团队" />
       <Column Name="MemberId" DataType="Int32" Description="成员" />
+      <Column Name="Kind" DataType="String" Description="类型" />
       <Column Name="Major" DataType="Boolean" Description="主要。是否该成员的主要团队" />
       <Column Name="Leader" DataType="Boolean" Description="组长。该团队组长" />
       <Column Name="Enable" DataType="Boolean" Description="启用" />
@@ -104,7 +106,7 @@
       <Column Name="TeamId" DataType="Int32" Description="团队" />
       <Column Name="ProductId" DataType="Int32" Description="产品" />
       <Column Name="Name" DataType="String" Master="True" Nullable="False" Description="名称。版本号" />
-      <Column Name="Kind" DataType="Int32" Description="类型。常规/紧急" />
+      <Column Name="Kind" DataType="String" Description="类型" />
       <Column Name="StartDate" DataType="DateTime" Description="开始日期" />
       <Column Name="EndDate" DataType="DateTime" Description="结束日期" />
       <Column Name="ManHours" DataType="Int32" Description="工时" />

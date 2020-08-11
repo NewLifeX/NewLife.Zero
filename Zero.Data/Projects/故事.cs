@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。")]
     [BindIndex("IX_Story_VersionId", false, "VersionId")]
     [BindIndex("IX_Story_MemberId", false, "MemberId")]
-    [BindTable("Story", Description = "故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("Story", Description = "故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class Story : IStory
     {
         #region 属性

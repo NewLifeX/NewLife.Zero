@@ -106,7 +106,7 @@ namespace Zero.Data.Projects
             return Find(_.Name == name);
         }
 
-        /// <summary>根据用户查询</summary>
+        /// <summary>查找用户绑定的成员</summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         public static Member FindByUserId(Int32 userId)
@@ -125,13 +125,13 @@ namespace Zero.Data.Projects
 
         #region 高级查询
         /// <summary>高级查询</summary>
-        /// <param name="teamId">团队</param>
-        /// <param name="kind">类型</param>
-        /// <param name="start">开始</param>
-        /// <param name="end">结束</param>
-        /// <param name="key">关键字</param>
-        /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
-        /// <returns>实体列表</returns>
+        /// <param name="teamId"></param>
+        /// <param name="kind"></param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
+        /// <param name="key"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public static IList<Member> Search(Int32 teamId, String kind, DateTime start, DateTime end, String key, PageParameter page)
         {
             var exp = new WhereExpression();
@@ -155,7 +155,7 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 业务操作
-        /// <summary>刷新</summary>
+        /// <summary>刷新数据</summary>
         public void Refresh()
         {
             if (ID == 0) return;
@@ -166,11 +166,13 @@ namespace Zero.Data.Projects
             Teams = list.Count(e => e.Enable);
         }
 
-        /// <summary>修正</summary>
-        public void Fix()
+        /// <summary>修正数据，刷新并保存</summary>
+        /// <returns></returns>
+        public Int32 Fix()
         {
             Refresh();
-            Update();
+
+            return Update();
         }
         #endregion
     }

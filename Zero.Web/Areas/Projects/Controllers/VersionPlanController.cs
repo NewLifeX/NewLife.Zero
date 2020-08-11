@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
+using NewLife.Common;
 using NewLife.Cube;
 using NewLife.Web;
-using Zero.Data.Projects;
 using XCode.Membership;
+using Zero.Data.Common;
+using Zero.Data.Projects;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {
@@ -38,6 +40,12 @@ namespace Zero.Web.Areas.Projects.Controllers
             entity.Product?.Fix();
             entity.Team?.Fix();
 
+            var robot = RobotHelper.CreateRobot(entity.Team);
+            if (robot != null)
+            {
+                robot.SendText($"产品[{entity.Product}]新增版本[{entity}]！", "@all");
+            }
+
             return rs;
         }
 
@@ -48,6 +56,17 @@ namespace Zero.Web.Areas.Projects.Controllers
             entity.Refresh();
             entity.Product?.Fix();
             entity.Team?.Fix();
+
+            var robot = RobotHelper.CreateRobot(entity.Team);
+            if (robot != null)
+            {
+                // 本项目组所有成员，名字转拼音
+                var members = TeamMember.FindAllByTeamId(entity.TeamId)
+                    .Where(e => e.Enable)
+                    .Select(e => PinYin.Get(e.MemberName))
+                    .ToArray();
+                robot.SendText($"产品[{entity.Product}]更新版本[{entity}]！", members);
+            }
 
             return rs;
         }

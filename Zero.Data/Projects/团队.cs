@@ -16,7 +16,7 @@ namespace Zero.Data.Projects
     [Description("团队。管理一系列相关的产品和应用系统")]
     [BindIndex("IU_Team_Name", true, "Name")]
     [BindIndex("IU_Team_Code", true, "Code")]
-    [BindTable("Team", Description = "团队。管理一系列相关的产品和应用系统", ConnName = "OA", DbType = DatabaseType.None)]
+    [BindTable("Team", Description = "团队。管理一系列相关的产品和应用系统", ConnName = "Zero", DbType = DatabaseType.None)]
     public partial class Team : ITeam
     {
         #region 属性
@@ -91,6 +91,14 @@ namespace Zero.Data.Projects
         [DataObjectField(false, false, false, 0)]
         [BindColumn("AssistMembers", "协助成员数。其它团队临时协助该团队的成员", "")]
         public Int32 AssistMembers { get => _AssistMembers; set { if (OnPropertyChanging("AssistMembers", value)) { _AssistMembers = value; OnPropertyChanged("AssistMembers"); } } }
+
+        private String _WebHook;
+        /// <summary>机器人</summary>
+        [DisplayName("机器人")]
+        [Description("机器人")]
+        [DataObjectField(false, false, true, 200)]
+        [BindColumn("WebHook", "机器人", "")]
+        public String WebHook { get => _WebHook; set { if (OnPropertyChanging("WebHook", value)) { _WebHook = value; OnPropertyChanged("WebHook"); } } }
 
         private String _CreateUser;
         /// <summary>创建者</summary>
@@ -184,6 +192,7 @@ namespace Zero.Data.Projects
                     case "Versions": return _Versions;
                     case "Members": return _Members;
                     case "AssistMembers": return _AssistMembers;
+                    case "WebHook": return _WebHook;
                     case "CreateUser": return _CreateUser;
                     case "CreateUserID": return _CreateUserID;
                     case "CreateIP": return _CreateIP;
@@ -209,6 +218,7 @@ namespace Zero.Data.Projects
                     case "Versions": _Versions = value.ToInt(); break;
                     case "Members": _Members = value.ToInt(); break;
                     case "AssistMembers": _AssistMembers = value.ToInt(); break;
+                    case "WebHook": _WebHook = Convert.ToString(value); break;
                     case "CreateUser": _CreateUser = Convert.ToString(value); break;
                     case "CreateUserID": _CreateUserID = value.ToInt(); break;
                     case "CreateIP": _CreateIP = Convert.ToString(value); break;
@@ -254,6 +264,9 @@ namespace Zero.Data.Projects
 
             /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
             public static readonly Field AssistMembers = FindByName("AssistMembers");
+
+            /// <summary>机器人</summary>
+            public static readonly Field WebHook = FindByName("WebHook");
 
             /// <summary>创建者</summary>
             public static readonly Field CreateUser = FindByName("CreateUser");
@@ -315,6 +328,9 @@ namespace Zero.Data.Projects
             /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
             public const String AssistMembers = "AssistMembers";
 
+            /// <summary>机器人</summary>
+            public const String WebHook = "WebHook";
+
             /// <summary>创建者</summary>
             public const String CreateUser = "CreateUser";
 
@@ -375,6 +391,9 @@ namespace Zero.Data.Projects
 
         /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
         Int32 AssistMembers { get; set; }
+
+        /// <summary>机器人</summary>
+        String WebHook { get; set; }
 
         /// <summary>创建者</summary>
         String CreateUser { get; set; }

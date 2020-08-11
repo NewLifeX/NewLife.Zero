@@ -58,8 +58,16 @@ namespace Zero.Web.Areas.Projects.Controllers
                 // 如果这个成员没有主要团队，就选这个吧
                 if (!list.Any(e => e.Major)) tm.Major = true;
 
+                tm.Kind = entity.Kind;
                 tm.Enable = true;
-                tm.Save();
+                //tm.Save();
+
+                // 同步更新关联表
+                foreach (var item in list)
+                {
+                    item.Kind = entity.Kind;
+                }
+                list.Save();
 
                 // 刷新成员所属团队数
                 entity.Teams = list.Count;

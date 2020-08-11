@@ -118,8 +118,8 @@ namespace Zero.Data.Projects
         /// <param name="name">名称</param>
         /// <param name="code">编码</param>
         /// <param name="enable">启用</param>
-        /// <param name="start">开始</param>
-        /// <param name="end">结束</param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
         /// <param name="key">关键字</param>
         /// <param name="page">分页参数信息。可携带统计和数据权限扩展查询等信息</param>
         /// <returns>实体列表</returns>
@@ -148,7 +148,7 @@ namespace Zero.Data.Projects
         #endregion
 
         #region 业务操作
-        /// <summary>刷新</summary>
+        /// <summary>刷新数据</summary>
         public void Refresh()
         {
             if (ID == 0) return;
@@ -160,15 +160,17 @@ namespace Zero.Data.Projects
             AssistMembers = list.Count(e => e.Enable && !e.Major);
 
             // 修正产品数和版本数
-            Products = Product.FindAllByTeamId(ID).Count;
-            Versions = VersionPlan.FindAllByTeamId(ID).Count;
+            Products = Product.FindAllByTeamId(ID).Count(e => e.Enable);
+            Versions = VersionPlan.FindAllNotCompleted(ID, -1).Count;
         }
 
-        /// <summary>修正</summary>
-        public void Fix()
+        /// <summary>修正数据，刷新并保存</summary>
+        /// <returns></returns>
+        public Int32 Fix()
         {
             Refresh();
-            Update();
+
+            return Update();
         }
         #endregion
     }

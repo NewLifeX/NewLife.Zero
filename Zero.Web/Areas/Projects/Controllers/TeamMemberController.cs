@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NewLife;
 using NewLife.Cube;
 using NewLife.Web;
 using Zero.Data.Projects;
