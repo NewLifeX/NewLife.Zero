@@ -1,21 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Net.Http.Headers;
-using NewLife;
-using NewLife.Cube;
-using NewLife.Data;
-using NewLife.Reflection;
-using NewLife.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Net.Http.Headers;
+using NewLife;
+using NewLife.Data;
+using NewLife.Reflection;
+using NewLife.Serialization;
 
-namespace ZTO.Scan.Server.Controllers
+namespace Zero.WebApi.Controllers
 {
-    public class ApiController : ControllerBaseX
+    /// <summary>接口探针</summary>
+    [ApiController]
+    [Route("[controller]")]
+    public class ApiController : ControllerBase
     {
         /// <summary>获取所有接口</summary>
         /// <returns></returns>
@@ -26,6 +28,9 @@ namespace ZTO.Scan.Server.Controllers
         private static readonly String _MachineName = Environment.MachineName;
         private static readonly String _UserName = Environment.UserName;
         private static readonly String _LocalIP = NetHelper.MyIP() + "";
+        private static AssemblyX _entry = AssemblyX.Entry;
+        private static AssemblyX _executing = AssemblyX.Create(Assembly.GetExecutingAssembly());
+
         /// <summary>服务器信息，用户健康检测</summary>
         /// <param name="state">状态信息</param>
         /// <returns></returns>
@@ -33,56 +38,26 @@ namespace ZTO.Scan.Server.Controllers
         public Object Info(String state)
         {
             var conn = HttpContext.Connection;
-            var asmx = AssemblyX.Entry;
-            var asmx2 = AssemblyX.Create(Assembly.GetExecutingAssembly());
 
-            var ip = HttpContext.GetUserHost();
+            var ip = Request.Host;
 
             var rs = new
             {
-                Server = asmx?.Name,
-                asmx?.Version,
+                Server = _entry?.Name,
+                _entry?.Version,
                 OS = _OS,
                 MachineName = _MachineName,
                 UserName = _UserName,
-                ApiVersion = asmx2?.Version,
+                ApiVersion = _executing?.Version,
 
                 LocalIP = _LocalIP,
+                conn.LocalPort,
                 Remote = ip + "",
-                State = state,
                 Time = DateTime.Now,
+                State = state,
             };
 
-            // 转字典
-            var dic = rs.ToDictionary();
-
-            dic["Port"] = conn.LocalPort;
-            //dic["Online"] = nsvr.SessionCount;
-            //dic["MaxOnline"] = nsvr.MaxSessionCount;
-
-            // 进程
-            dic["Process"] = GetProcess();
-
-            return dic;
-        }
-
-        private Object GetProcess()
-        {
-            var proc = Process.GetCurrentProcess();
-
-            return new
-            {
-                Environment.ProcessorCount,
-                ProcessId = proc.Id,
-                Threads = proc.Threads.Count,
-                Handles = proc.HandleCount,
-                WorkingSet = proc.WorkingSet64,
-                PrivateMemory = proc.PrivateMemorySize64,
-                GCMemory = GC.GetTotalMemory(false),
-                GC0 = GC.GetGeneration(0),
-                GC1 = GC.GetGeneration(1),
-                GC2 = GC.GetGeneration(2),
-            };
+            return rs;
         }
 
         private static Packet _myInfo;
