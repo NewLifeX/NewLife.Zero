@@ -39,7 +39,6 @@ namespace Zero.Web
             }
 
             // 引入魔方
-            app.UseStaticFiles(); // 暂时添加，待更新新版本Cube后可删除
             services.AddCube();
 
             services.AddControllersWithViews();
@@ -58,6 +57,7 @@ namespace Zero.Web
 
             if (!set.TracerServer.IsNullOrEmpty()) app.UseMiddleware<TracerMiddleware>();
 
+            app.UseStaticFiles(); // 暂时添加，待更新新版本Cube后可删除
             app.UseCube();
 
             //if (env.IsDevelopment())
