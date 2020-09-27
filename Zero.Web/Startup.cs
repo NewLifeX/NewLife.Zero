@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +39,7 @@ namespace Zero.Web
             }
 
             // 引入魔方
+            app.UseStaticFiles(); // 暂时添加，待更新新版本Cube后可删除
             services.AddCube();
 
             services.AddControllersWithViews();
