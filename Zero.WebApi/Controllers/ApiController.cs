@@ -87,7 +87,6 @@ namespace ZTO.Scan.Server.Controllers
 
         private static Packet _myInfo;
         /// <summary>服务器信息，用户健康检测，二进制压测</summary>
-        /// <param name="state">状态信息</param>
         /// <returns></returns>
         [HttpPost(nameof(Info2))]
         public async Task<ObjectResult> Info2()
