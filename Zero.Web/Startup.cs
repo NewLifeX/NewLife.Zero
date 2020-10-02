@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +57,7 @@ namespace Zero.Web
 
             if (!set.TracerServer.IsNullOrEmpty()) app.UseMiddleware<TracerMiddleware>();
 
+            app.UseStaticFiles(); // 暂时添加，待更新新版本Cube后可删除
             app.UseCube();
 
             //if (env.IsDevelopment())
