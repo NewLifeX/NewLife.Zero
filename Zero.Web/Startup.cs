@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,10 +38,10 @@ namespace Zero.Web
                 services.AddSingleton<ITracer>(tracer);
             }
 
+            services.AddControllersWithViews();
+
             // 引入魔方
             services.AddCube();
-
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,9 +55,6 @@ namespace Zero.Web
             else
                 app.UseExceptionHandler("/CubeHome/Error");
 
-            if (!set.TracerServer.IsNullOrEmpty()) app.UseMiddleware<TracerMiddleware>();
-
-            app.UseStaticFiles(); // 暂时添加，待更新新版本Cube后可删除
             app.UseCube();
 
             //if (env.IsDevelopment())
@@ -77,12 +74,12 @@ namespace Zero.Web
 
             //app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=CubeHome}/{action=Index}/{id?}");
+            });
         }
     }
 }

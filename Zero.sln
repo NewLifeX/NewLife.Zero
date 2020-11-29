@@ -12,15 +12,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Data", "Zero.Data\Zero
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Web", "Zero.Web\Zero.Web.csproj", "{517ACFC9-2727-4931-B06D-4B073B8CDE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.Core", "Zero.Core\Zero.Core.csproj", "{A456F9A4-C2C1-4DA0-BB49-302A3A2C78B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Core", "Zero.Core\Zero.Core.csproj", "{A456F9A4-C2C1-4DA0-BB49-302A3A2C78B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.Agent", "Zero.Agent\Zero.Agent.csproj", "{CDDFD803-5973-4AB9-9079-CB7A6CE85A40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Agent", "Zero.Agent\Zero.Agent.csproj", "{CDDFD803-5973-4AB9-9079-CB7A6CE85A40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.AntJob", "Zero.AntJob\Zero.AntJob.csproj", "{E59E32C0-DA0C-4983-A6DF-BD42A994EC35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.AntJob", "Zero.AntJob\Zero.AntJob.csproj", "{E59E32C0-DA0C-4983-A6DF-BD42A994EC35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.WebApi", "Zero.WebApi\Zero.WebApi.csproj", "{11AA0791-B891-40F9-94F4-07AC339C9C95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.WebApi", "Zero.WebApi\Zero.WebApi.csproj", "{11AA0791-B891-40F9-94F4-07AC339C9C95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.Server", "Zero.Server\Zero.Server.csproj", "{8BEB2416-E98A-4F8D-AFC8-EA3F61001553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Server", "Zero.Server\Zero.Server.csproj", "{8BEB2416-E98A-4F8D-AFC8-EA3F61001553}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
