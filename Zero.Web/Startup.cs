@@ -25,11 +25,11 @@ namespace Zero.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var set = Setting.Current;
-            if (!set.TracerServer.IsNullOrEmpty())
+            var set = Stardust.Setting.Current;
+            if (!set.Server.IsNullOrEmpty())
             {
                 // APM跟踪器
-                var tracer = new StarTracer(set.TracerServer) { Log = XTrace.Log };
+                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
                 DefaultTracer.Instance = tracer;
                 ApiHelper.Tracer = tracer;
                 DAL.GlobalTracer = tracer;
@@ -47,15 +47,13 @@ namespace Zero.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var set = Setting.Current;
-
             // 使用Cube前添加自己的管道
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
                 app.UseExceptionHandler("/CubeHome/Error");
 
-            app.UseCube();
+            app.UseCube(env);
 
             //if (env.IsDevelopment())
             //{
