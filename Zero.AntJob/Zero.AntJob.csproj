@@ -25,12 +25,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="8.7.2020.1201" />
+    <PackageReference Include="NewLife.Agent" Version="8.7.2021.101" />
     <PackageReference Include="NewLife.AntJob" Version="2.1.2020.1208-beta2" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="2.1.2020.1208-beta2" />
-    <PackageReference Include="NewLife.Core" Version="8.10.2020.1204" />
-    <PackageReference Include="NewLife.Stardust" Version="1.2.2020.1204" />
-    <PackageReference Include="NewLife.XCode" Version="10.0.2020.1204" />
+    <PackageReference Include="NewLife.Core" Version="8.10.2021.101" />
+    <PackageReference Include="NewLife.Stardust" Version="1.2.2021.103" />
+    <PackageReference Include="NewLife.XCode" Version="10.0.2021.101" />
   </ItemGroup>
 
   <ItemGroup>

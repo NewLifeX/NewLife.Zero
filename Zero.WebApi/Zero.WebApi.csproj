@@ -25,9 +25,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="8.10.2020.1204" />
-    <PackageReference Include="NewLife.Stardust" Version="1.2.2020.1204" />
-    <PackageReference Include="NewLife.XCode" Version="10.0.2020.1204" />
+    <PackageReference Include="NewLife.Core" Version="8.10.2021.101" />
+    <PackageReference Include="NewLife.Stardust" Version="1.2.2021.103" />
+    <PackageReference Include="NewLife.XCode" Version="10.0.2021.101" />
   </ItemGroup>
 
 
