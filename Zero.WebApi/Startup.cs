@@ -41,7 +41,6 @@ namespace Zero.WebApi
             var rds = new FullRedis { Tracer = tracer };
             rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
             services.AddSingleton<ICache>(rds);
-            services.AddSingleton<Redis>(rds);
             services.AddSingleton(rds);
 
             services.AddControllers();
