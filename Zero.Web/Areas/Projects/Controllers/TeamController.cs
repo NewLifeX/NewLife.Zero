@@ -154,7 +154,7 @@ namespace Zero.Web.Areas.Projects.Controllers
                 }
             }
 
-            return JsonRefresh("共刷新[{0}]个团队".F(count));
+            return JsonRefresh($"共刷新[{count}]个团队");
         }
     }
 }

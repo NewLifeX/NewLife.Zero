@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using NewLife;
+using NewLife.Caching;
+using NewLife.Cube.WebMiddleware;
+using NewLife.Log;
+using NewLife.Remoting;
+using Stardust.Monitors;
+using XCode.DataAccessLayer;
 
 namespace Zero.WebApi
 {
@@ -25,6 +25,25 @@ namespace Zero.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var server = Stardust.Setting.Current.Server;
+            if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
+
+            // APM跟踪器
+            var tracer = new StarTracer(server) { Log = XTrace.Log };
+            DefaultTracer.Instance = tracer;
+            ApiHelper.Tracer = tracer;
+            DAL.GlobalTracer = tracer;
+            TracerMiddleware.Tracer = tracer;
+
+            services.AddSingleton<ITracer>(tracer);
+
+            // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
+            var rds = new FullRedis { Tracer = tracer };
+            rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
+            services.AddSingleton<ICache>(rds);
+            services.AddSingleton<Redis>(rds);
+            services.AddSingleton(rds);
+
             services.AddControllers();
         }
 
@@ -37,6 +56,7 @@ namespace Zero.WebApi
             }
 
             //app.UseHttpsRedirection();
+            app.UseMiddleware<TracerMiddleware>();
 
             app.UseRouting();
 

@@ -1,31 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyTitle>WebApi接口</AssemblyTitle>
-    <Description>RESTful数据接口</Description>
+    <AssemblyTitle>系统守护服务</AssemblyTitle>
+    <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务，常安装为Windows服务，Linux上需要sudo才能安装为守护进程随系统启动</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2021 NewLife</Copyright>
     <Version>1.0.2021.0204</Version>
     <FileVersion>1.0.2021.0204</FileVersion>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
-    <OutputPath>..\Bin\WebApi</OutputPath>
+    <OutputPath>..\Bin\Worker</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="8.10.2021.202" />
-    <PackageReference Include="NewLife.Cube.Core" Version="3.8.2021.202" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="2.2.2021.202" />
+    <PackageReference Include="NewLife.MQTT" Version="1.0.2021.204" />
     <PackageReference Include="NewLife.Redis" Version="3.8.2021.202" />
+    <PackageReference Include="NewLife.RocketMQ" Version="1.5.2021.101" />
     <PackageReference Include="NewLife.Stardust" Version="1.2.2021.103" />
-    <PackageReference Include="NewLife.XCode" Version="10.0.2021.202" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
     <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
   </ItemGroup>
-
 </Project>

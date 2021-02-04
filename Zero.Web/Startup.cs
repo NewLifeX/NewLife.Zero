@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewLife;
+using NewLife.Caching;
 using NewLife.Cube;
 using NewLife.Cube.WebMiddleware;
 using NewLife.Log;
@@ -25,18 +26,24 @@ namespace Zero.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var set = Stardust.Setting.Current;
-            if (!set.Server.IsNullOrEmpty())
-            {
-                // APM跟踪器
-                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
-                DefaultTracer.Instance = tracer;
-                ApiHelper.Tracer = tracer;
-                DAL.GlobalTracer = tracer;
-                TracerMiddleware.Tracer = tracer;
+            var server = Stardust.Setting.Current.Server;
+            if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
 
-                services.AddSingleton<ITracer>(tracer);
-            }
+            // APM跟踪器
+            var tracer = new StarTracer(server) { Log = XTrace.Log };
+            DefaultTracer.Instance = tracer;
+            ApiHelper.Tracer = tracer;
+            DAL.GlobalTracer = tracer;
+            TracerMiddleware.Tracer = tracer;
+
+            services.AddSingleton<ITracer>(tracer);
+
+            // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
+            var rds = new FullRedis { Tracer = tracer };
+            rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
+            services.AddSingleton<ICache>(rds);
+            services.AddSingleton<Redis>(rds);
+            services.AddSingleton(rds);
 
             services.AddControllersWithViews();
 

@@ -91,7 +91,7 @@ namespace Zero.Web.Areas.Projects.Controllers
                 }
             }
 
-            return JsonRefresh("共刷新[{0}]个版本".F(count));
+            return JsonRefresh($"共刷新[{count}]个版本");
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Zero.Web.Areas.Projects.Controllers
                 }
             }
 
-            return JsonRefresh("共刷新[{0}]个产品".F(count));
+            return JsonRefresh($"共刷新[{count}]个产品");
         }
     }
 }
