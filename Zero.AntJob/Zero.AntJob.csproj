@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net45</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyTitle>大数据计算</AssemblyTitle>
     <Description>蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行</Description>
     <Company>新生命开发团队</Company>
@@ -25,12 +25,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="8.7.2021.101" />
+    <PackageReference Include="NewLife.Agent" Version="8.7.2021.204" />
     <PackageReference Include="NewLife.AntJob" Version="2.1.2020.1208-beta2" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="2.1.2020.1208-beta2" />
-    <PackageReference Include="NewLife.Core" Version="8.10.2021.101" />
+    <PackageReference Include="NewLife.Core" Version="8.10.2021.202" />
     <PackageReference Include="NewLife.Stardust" Version="1.2.2021.103" />
-    <PackageReference Include="NewLife.XCode" Version="10.0.2021.101" />
+    <PackageReference Include="NewLife.XCode" Version="10.0.2021.202" />
   </ItemGroup>
 
   <ItemGroup>

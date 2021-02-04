@@ -43,11 +43,11 @@ namespace Zero.Server
         protected override void StartWork(String reason)
         {
             // 配置APM性能跟踪器
-            var set = Setting.Current;
-            if (!set.TracerServer.IsNullOrEmpty())
+            var set = Stardust.Setting.Current;
+            if (!set.Server.IsNullOrEmpty())
             {
                 // 配置指向星尘监控中心
-                var tracer = new StarTracer(set.TracerServer) { Log = XTrace.Log };
+                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
                 DefaultTracer.Instance = tracer;
                 ApiHelper.Tracer = tracer;
                 DAL.GlobalTracer = tracer;
@@ -68,7 +68,7 @@ namespace Zero.Server
             // 实例化网络服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听
             var svr = new MyNetServer
             {
-                Port = 1234,
+                Port = 12345,
                 Log = XTrace.Log,
                 Tracer = Tracer,
 #if DEBUG
@@ -85,7 +85,7 @@ namespace Zero.Server
         void InitRpcServer()
         {
             // 实例化RPC服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听
-            var svr = new ApiServer(1235)
+            var svr = new ApiServer(12346)
             {
                 // 指定编码器
                 Encoder = new JsonEncoder(),

@@ -46,11 +46,11 @@ namespace Zero.Agent
             WriteLog("业务开始……");
 
             // 配置APM性能跟踪器
-            var set = Setting.Current;
-            if (!set.TracerServer.IsNullOrEmpty())
+            var set = Stardust.Setting.Current;
+            if (!set.Server.IsNullOrEmpty())
             {
                 // 配置指向星尘监控中心
-                var tracer = new StarTracer(set.TracerServer) { Log = XTrace.Log };
+                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
                 DefaultTracer.Instance = tracer;
                 ApiHelper.Tracer = tracer;
                 DAL.GlobalTracer = tracer;

@@ -16,7 +16,8 @@ namespace Zero.Core.WeiXin
         /// <summary>WebHook机器人地址</summary>
         public String Url { get; set; } = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={key}";
 
-        //public ITracer Tracer { get; set; }
+        /// <summary>性能跟踪</summary>
+        public ITracer Tracer { get; set; } = DefaultTracer.Instance;
 
         private HttpClient _Client;
         #endregion
@@ -29,8 +30,7 @@ namespace Zero.Core.WeiXin
         {
             if (_Client == null)
             {
-                _Client = /*Tracer?.CreateHttpClient() ??*/ new HttpClient();
-                //_Client.BaseAddress = new Uri(Url.Replace("{key}", Key));
+                _Client = Tracer?.CreateHttpClient() ?? new HttpClient();
             }
 
             return await _Client.PostAsync<Object>(Url, msg);
