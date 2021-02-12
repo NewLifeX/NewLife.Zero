@@ -28,9 +28,9 @@
     <PackageReference Include="NewLife.Agent" Version="8.7.2021.204" />
     <PackageReference Include="NewLife.AntJob" Version="2.2.2021.202" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="2.2.2021.202" />
-    <PackageReference Include="NewLife.Core" Version="8.10.2021.202" />
+    <PackageReference Include="NewLife.Core" Version="8.10.2021.212-beta1" />
     <PackageReference Include="NewLife.Stardust" Version="1.2.2021.103" />
-    <PackageReference Include="NewLife.XCode" Version="10.0.2021.202" />
+    <PackageReference Include="NewLife.XCode" Version="10.0.2021.212-beta1" />
   </ItemGroup>
 
   <ItemGroup>
