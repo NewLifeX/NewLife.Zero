@@ -5,8 +5,7 @@ using NewLife.Log;
 using NewLife.Net;
 using NewLife.Remoting;
 using NewLife.Threading;
-using Stardust.Monitors;
-using XCode.DataAccessLayer;
+using Stardust;
 
 namespace Zero.Server
 {
@@ -21,6 +20,8 @@ namespace Zero.Server
         #region 属性
         /// <summary>性能跟踪器</summary>
         public ITracer Tracer { get; set; }
+
+        private StarFactory _star;
         #endregion
 
         #region 构造函数
@@ -35,24 +36,16 @@ namespace Zero.Server
         #endregion
 
         #region 核心
-        MyNetServer _netServer;
-        ApiServer _rpcServer;
+        private MyNetServer _netServer;
+        private ApiServer _rpcServer;
 
         /// <summary>开始工作</summary>
         /// <param name="reason"></param>
         protected override void StartWork(String reason)
         {
-            // 配置APM性能跟踪器
-            var set = Stardust.Setting.Current;
-            if (!set.Server.IsNullOrEmpty())
-            {
-                // 配置指向星尘监控中心
-                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
-                DefaultTracer.Instance = tracer;
-                ApiHelper.Tracer = tracer;
-                DAL.GlobalTracer = tracer;
-                Tracer = tracer;
-            }
+            // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
+            _star = new StarFactory(null, null, null);
+            Tracer = _star.Tracer;
 
             InitNetServer();
             InitRpcServer();
@@ -63,7 +56,7 @@ namespace Zero.Server
             base.StartWork(reason);
         }
 
-        void InitNetServer()
+        private void InitNetServer()
         {
             // 实例化网络服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听
             var svr = new MyNetServer
@@ -79,10 +72,12 @@ namespace Zero.Server
             };
             svr.Start();
 
+            _star.Dust.Register("MyNetServer", $"tcp://*:{svr.Port},udp://*:{svr.Port}");
+
             _netServer = svr;
         }
 
-        void InitRpcServer()
+        private void InitRpcServer()
         {
             // 实例化RPC服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听
             var svr = new ApiServer(12346)
@@ -109,6 +104,8 @@ namespace Zero.Server
 #endif
 
             svr.Start();
+
+            _star.Dust.Register("MyRpcServer", $"tcp://*:{svr.Port},udp://*:{svr.Port}");
 
             _rpcServer = svr;
         }
