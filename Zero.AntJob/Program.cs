@@ -4,7 +4,9 @@ using AntJob.Providers;
 using NewLife;
 using NewLife.Agent;
 using NewLife.Log;
+using NewLife.Model;
 using NewLife.Remoting;
+using Stardust;
 using Stardust.Monitors;
 using XCode.DataAccessLayer;
 
@@ -21,6 +23,8 @@ namespace Zero.AntJob
         #region 属性
         /// <summary>性能跟踪器</summary>
         public ITracer Tracer { get; set; }
+
+        private StarFactory _star;
         #endregion
 
         #region 构造函数
@@ -45,20 +49,22 @@ namespace Zero.AntJob
         protected override void StartWork(String reason)
         {
             WriteLog("业务开始……");
+            var ioc = ObjectContainer.Current;
 
-            // 配置APM性能跟踪器
-            var set = Stardust.Setting.Current;
-            if (!set.Server.IsNullOrEmpty())
+            // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
+            _star = new StarFactory(null, null, null);
+            ioc.AddSingleton(p => _star.Tracer);
+            ioc.AddSingleton(p => _star.Config);
+            Tracer = _star.Tracer;
+
+            // 从配置中心读取参数设置
+            var set = AntSetting.Current;
+            var server = _star.Config["antServer"];
+            if (!server.IsNullOrEmpty())
             {
-                // 配置指向星尘监控中心
-                var tracer = new StarTracer(set.Server) { Log = XTrace.Log };
-                DefaultTracer.Instance = tracer;
-                ApiHelper.Tracer = tracer;
-                DAL.GlobalTracer = tracer;
-                Tracer = tracer;
+                set.Server = server;
+                set.Save();
             }
-
-            var set2 = AntSetting.Current;
 
             // 实例化调度器
             var sc = new Scheduler
@@ -68,19 +74,19 @@ namespace Zero.AntJob
                 // 使用分布式调度引擎替换默认的本地文件调度
                 Provider = new NetworkJobProvider
                 {
-                    Debug = set2.Debug,
-                    Server = set2.Server,
-                    AppID = set2.AppID,
-                    Secret = set2.Secret,
+                    Debug = set.Debug,
+                    Server = set.Server,
+                    AppID = set.AppID,
+                    Secret = set.Secret,
                 }
             };
 
             // 添加作业处理器
             //sc.Handlers.Add(new SqlHandler());
             //sc.Handlers.Add(new SqlMessage());
-            sc.Handlers.Add(new HelloJob());
-            sc.Handlers.Add(new BuildProduct());
-            sc.Handlers.Add(new BuildPlan());
+            sc.AddHandler<HelloJob>();
+            sc.AddHandler<BuildProduct>();
+            sc.AddHandler<BuildPlan>();
 
             // 启动调度引擎，调度器内部多线程处理
             sc.Start();
