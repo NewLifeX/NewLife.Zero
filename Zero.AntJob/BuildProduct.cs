@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AntJob;
+using NewLife.Caching;
 using NewLife.Security;
 using XCode;
 using Zero.Data.Projects;
@@ -10,11 +11,15 @@ namespace Zero.AntJob
     /// <summary>定时创建产品</summary>
     internal class BuildProduct : Handler
     {
-        public BuildProduct()
+        private readonly ICache _cache;
+
+        public BuildProduct(ICache cache)
         {
             var job = Job;
             job.Start = DateTime.Today;
             job.Step = 15;
+
+            _cache = cache;
         }
 
         protected override Int32 Execute(JobContext ctx)
@@ -34,6 +39,9 @@ namespace Zero.AntJob
                     CreateTime = DateTime.Now,
                     UpdateTime = DateTime.Now,
                 };
+
+                // Redis去重
+                if (!_cache.Add($"product:{pi.Name}", DateTime.Now)) pi.Name = Rand.NextString(8);
 
                 list.Add(pi);
             }

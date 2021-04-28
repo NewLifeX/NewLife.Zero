@@ -12,10 +12,6 @@
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\AntJob</OutputPath>
-    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -28,9 +24,10 @@
     <PackageReference Include="NewLife.Agent" Version="8.7.2021.204" />
     <PackageReference Include="NewLife.AntJob" Version="2.3.2021.308" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="2.3.2021.308" />
-    <PackageReference Include="NewLife.Core" Version="8.10.2021.404" />
-    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.408" />
-    <PackageReference Include="NewLife.XCode" Version="10.1.2021.404" />
+    <PackageReference Include="NewLife.Core" Version="8.10.2021.427-beta1" />
+    <PackageReference Include="NewLife.Redis" Version="3.9.2021.427-beta2" />
+    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.427-beta1" />
+    <PackageReference Include="NewLife.XCode" Version="10.1.2021.427-beta3" />
   </ItemGroup>
 
   <ItemGroup>

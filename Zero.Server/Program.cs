@@ -72,7 +72,7 @@ namespace Zero.Server
             };
             svr.Start();
 
-            _star.Dust.Register("MyNetServer", $"tcp://*:{svr.Port},udp://*:{svr.Port}");
+            _star.Service.Register("MyNetServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
 
             _netServer = svr;
         }
@@ -105,7 +105,7 @@ namespace Zero.Server
 
             svr.Start();
 
-            _star.Dust.Register("MyRpcServer", $"tcp://*:{svr.Port},udp://*:{svr.Port}");
+            _star.Service.Register("MyRpcServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
 
             _rpcServer = svr;
         }

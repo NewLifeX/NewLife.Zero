@@ -18,10 +18,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="2.3.2021.308" />
-    <PackageReference Include="NewLife.MQTT" Version="1.0.2021.204" />
-    <PackageReference Include="NewLife.Redis" Version="3.9.2021.407" />
-    <PackageReference Include="NewLife.RocketMQ" Version="1.5.2021.410" />
-    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.408" />
+    <PackageReference Include="NewLife.MQTT" Version="1.0.2021.427-beta1" />
+    <PackageReference Include="NewLife.Redis" Version="3.9.2021.427-beta2" />
+    <PackageReference Include="NewLife.RocketMQ" Version="1.5.2021.427-beta1" />
+    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.427-beta1" />
   </ItemGroup>
 
   <ItemGroup>

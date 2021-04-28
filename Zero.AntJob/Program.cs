@@ -1,115 +1,34 @@
 ﻿using System;
-using AntJob;
-using AntJob.Providers;
-using NewLife;
-using NewLife.Agent;
+using NewLife.Caching;
 using NewLife.Log;
 using NewLife.Model;
-using NewLife.Remoting;
 using Stardust;
-using Stardust.Monitors;
 using XCode.DataAccessLayer;
 
 namespace Zero.AntJob
 {
     internal class Program
     {
-        private static void Main(String[] args) => new MyServices().Main(args);
-    }
-
-    /// <summary>代理服务例子。自定义服务程序可参照该类实现。</summary>
-    public class MyServices : ServiceBase
-    {
-        #region 属性
-        /// <summary>性能跟踪器</summary>
-        public ITracer Tracer { get; set; }
-
-        private StarFactory _star;
-        #endregion
-
-        #region 构造函数
-        /// <summary>实例化一个代理服务</summary>
-        public MyServices()
+        private static void Main(String[] args)
         {
-            // 一般在构造函数里面指定服务名
-            ServiceName = "AntAgent";
+            XTrace.UseConsole();
 
-            DisplayName = "大数据计算";
-            Description = "蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行";
+            var services = ObjectContainer.Current;
 
-            // 注册菜单，在控制台菜单中按 t 可以执行Test函数，主要用于临时处理数据
-            AddMenu('t', "数据测试", Test);
+            var star = new StarFactory(null, null, null);
+
+            // 数据库连接配置
+            DAL.SetConfig(star.Config);
+
+            // 配置缓存，使用 MemoryCache 或 Redis，其中Redis从配置中心读取配置信息
+            var cache = new MemoryCache { Capacity = 1_000_000 };
+            services.AddSingleton<ICache>(cache);
+            //services.AddSingleton<ICache>(p => new FullRedis(p, "redisCache"));
+
+            // 后台任务
+            var host = services.BuildHost();
+            host.Add<JobHost>();
+            host.Run();
         }
-        #endregion
-
-        #region 核心
-        private Scheduler _Scheduler;
-        /// <summary>开始工作</summary>
-        /// <param name="reason"></param>
-        protected override void StartWork(String reason)
-        {
-            WriteLog("业务开始……");
-            var ioc = ObjectContainer.Current;
-
-            // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-            _star = new StarFactory(null, null, null);
-            ioc.AddSingleton(p => _star.Tracer);
-            ioc.AddSingleton(p => _star.Config);
-            Tracer = _star.Tracer;
-
-            // 从配置中心读取参数设置
-            var set = AntSetting.Current;
-            var server = _star.Config["antServer"];
-            if (!server.IsNullOrEmpty())
-            {
-                set.Server = server;
-                set.Save();
-            }
-
-            // 实例化调度器
-            var sc = new Scheduler
-            {
-                Tracer = Tracer,
-
-                // 使用分布式调度引擎替换默认的本地文件调度
-                Provider = new NetworkJobProvider
-                {
-                    Debug = set.Debug,
-                    Server = set.Server,
-                    AppID = set.AppID,
-                    Secret = set.Secret,
-                }
-            };
-
-            // 添加作业处理器
-            //sc.Handlers.Add(new SqlHandler());
-            //sc.Handlers.Add(new SqlMessage());
-            sc.AddHandler<HelloJob>();
-            sc.AddHandler<BuildProduct>();
-            sc.AddHandler<BuildPlan>();
-
-            // 启动调度引擎，调度器内部多线程处理
-            sc.Start();
-
-            _Scheduler = sc;
-
-            base.StartWork(reason);
-        }
-
-        /// <summary>停止服务</summary>
-        /// <param name="reason"></param>
-        protected override void StopWork(String reason)
-        {
-            base.StopWork(reason);
-
-            _Scheduler.TryDispose();
-            _Scheduler = null;
-        }
-
-        /// <summary>数据测试，菜单t</summary>
-        public void Test()
-        {
-        }
-        #endregion
     }
 }
