@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading;
 using AntJob;
 using NewLife;
 using NewLife.Configuration;
+using NewLife.Security;
 
 namespace Zero.AntJob
 {
@@ -27,6 +29,9 @@ namespace Zero.AntJob
             // 当前任务时间
             var time = ctx.Task.Start;
             WriteLog("{1}！当前任务时间：{0}", time, title);
+
+            // 模拟耗时
+            Thread.Sleep(Rand.Next(100, 10_000));
 
             // 成功处理数据量
             return 1;
