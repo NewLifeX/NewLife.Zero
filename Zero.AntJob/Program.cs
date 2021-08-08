@@ -60,8 +60,8 @@ namespace Zero.AntJob
 
             // 启动调度引擎，调度器内部多线程处理
             sc.Start();
-            
-            // 后台任务
+
+            // 退出事件
             var life = new TaskCompletionSource<Object>();
             AppDomain.CurrentDomain.ProcessExit += (s, e) => life.TrySetResult(null);
             Console.CancelKeyPress += (s, e) => life.TrySetResult(null);
