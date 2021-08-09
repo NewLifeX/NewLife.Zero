@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using NewLife;
 using NewLife.Log;
@@ -38,11 +40,35 @@ namespace Zero.TcpServer
             // 注册到星尘，非必须
             star?.Service.Register("MyNetServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
-            // 退出事件
-            var life = new TaskCompletionSource<Object>();
-            AppDomain.CurrentDomain.ProcessExit += (s, e) => life.TrySetResult(null);
-            Console.CancelKeyPress += (s, e) => life.TrySetResult(null);
-            life.Task.Wait();
+            // 客户端测试，非服务端代码
+            Task.Run(ClientTest);
+
+            // 友好退出
+            //ObjectContainer.Current.BuildHost().Run();
+            Thread.Sleep(-1);
+        }
+
+        private static async void ClientTest()
+        {
+            await Task.Delay(1_000);
+
+            var client = new TcpClient();
+            await client.ConnectAsync("127.0.0.1", 12345);
+            var ns = client.GetStream();
+
+            // 接收服务端握手
+            var buf = new Byte[1024];
+            var count = await ns.ReadAsync(buf);
+            XTrace.WriteLine("<={0}", buf.ToStr(null, 0, count));
+
+            // 发送数据
+            var str = "Hello NewLife";
+            XTrace.WriteLine("=>{0}", str);
+            await ns.WriteAsync(str.GetBytes());
+
+            // 接收数据
+            count = await ns.ReadAsync(buf);
+            XTrace.WriteLine("<={0}", buf.ToStr(null, 0, count));
         }
     }
 }

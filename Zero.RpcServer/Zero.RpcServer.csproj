@@ -3,28 +3,22 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyTitle>系统守护服务</AssemblyTitle>
-    <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务，常安装为Windows服务，Linux上需要sudo才能安装为守护进程随系统启动</Description>
+    <AssemblyTitle>RPC服务端</AssemblyTitle>
+    <Description>高性能，长连接，数据接口</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2021 NewLife</Copyright>
-    <Version>1.0.2021.0204</Version>
-    <FileVersion>1.0.2021.0204</FileVersion>
+    <Version>1.0.2021.0808</Version>
+    <FileVersion>1.0.2021.0808</FileVersion>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
-    <OutputPath>..\Bin\Agent</OutputPath>
+    <OutputPath>..\Bin\RpcServer</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Setting.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="8.7.2021.708" />
     <PackageReference Include="NewLife.Core" Version="8.11.2021.809" />
     <PackageReference Include="NewLife.Stardust" Version="1.5.2021.505" />
-    <PackageReference Include="NewLife.XCode" Version="10.2.2021.809" />
   </ItemGroup>
 
   <ItemGroup>
