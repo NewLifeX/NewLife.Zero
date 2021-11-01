@@ -13,7 +13,7 @@ namespace Zero.AntJob
 {
     internal class Program
     {
-        private static void Main(String[] args)
+        private static async Task Main(String[] args)
         {
             XTrace.UseConsole();
 
@@ -61,11 +61,8 @@ namespace Zero.AntJob
             // 启动调度引擎，调度器内部多线程处理
             sc.Start();
 
-            // 退出事件
-            var life = new TaskCompletionSource<Object>();
-            AppDomain.CurrentDomain.ProcessExit += (s, e) => life.TrySetResult(null);
-            Console.CancelKeyPress += (s, e) => life.TrySetResult(null);
-            life.Task.Wait();
+            // 阻塞，等待友好退出
+            await services.BuildHost().RunAsync();
 
             sc.TryDispose();
         }

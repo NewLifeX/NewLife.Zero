@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using NewLife;
 using NewLife.Log;
+using NewLife.Model;
 using NewLife.Remoting;
 using Stardust;
 
@@ -10,7 +10,7 @@ namespace Zero.RpcServer
 {
     internal class Program
     {
-        private static void Main(String[] args)
+        private static async Task Main(String[] args)
         {
             // 启用控制台日志，拦截所有异常
             XTrace.UseConsole();
@@ -43,9 +43,8 @@ namespace Zero.RpcServer
 
             star?.Service.Register("MyRpcServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
-            // 友好退出
-            //ObjectContainer.Current.BuildHost().Run();
-            Thread.Sleep(-1);
+            // 阻塞，等待友好退出
+            await ObjectContainer.Current.BuildHost().RunAsync();
         }
     }
 }

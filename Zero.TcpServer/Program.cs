@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
 using NewLife;
 using NewLife.Log;
+using NewLife.Model;
 using Stardust;
 
 namespace Zero.TcpServer
 {
     internal class Program
     {
-        private static void Main(String[] args)
+        private static async Task Main(String[] args)
         {
             // 启用控制台日志，拦截所有异常
             XTrace.UseConsole();
@@ -41,11 +41,10 @@ namespace Zero.TcpServer
             star?.Service.Register("MyNetServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
             // 客户端测试，非服务端代码
-            Task.Run(ClientTest);
+            _ = Task.Run(ClientTest);
 
-            // 友好退出
-            //ObjectContainer.Current.BuildHost().Run();
-            Thread.Sleep(-1);
+            // 阻塞，等待友好退出
+            await ObjectContainer.Current.BuildHost().RunAsync();
         }
 
         private static async void ClientTest()
