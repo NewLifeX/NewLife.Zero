@@ -1,11 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using NewLife.Log;
-using NewLife.Model;
-using NewLife.MQTT;
+﻿using NewLife.MQTT;
+using NewLife.MQTT.Messaging;
 
 namespace Zero.Console
 {
+    /// <summary>
+    /// MQTT消费端
+    /// </summary>
     public class MqttWorker : IHostedService
     {
         private readonly MqttClient _mqtt;
@@ -20,19 +20,21 @@ namespace Zero.Console
 
         protected async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _mqtt.Received += (s, e) =>
-            {
-                var pm = e.Arg;
-                var msg = pm.Payload.ToStr();
-
-                XTrace.WriteLine("消费消息：[{0}] {1}", pm.Topic, msg);
-            };
+            _mqtt.Received += OnConsume;
 
             // 连接
             await _mqtt.ConnectAsync();
 
             // 订阅
             await _mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
+        }
+
+        void OnConsume(Object? sender, EventArgs<PublishMessage> args)
+        {
+            var pm = args.Arg;
+            var msg = pm.Payload.ToStr();
+
+            XTrace.WriteLine("消费消息：[{0}] {1}", pm.Topic, msg);
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

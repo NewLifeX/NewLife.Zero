@@ -1,21 +1,26 @@
 ﻿using NewLife.Caching;
+using NewLife.MQTT;
+using NewLife.RocketMQ;
 using Zero.Console.Models;
 
 namespace Zero.Console
 {
+    /// <summary>
+    /// 后台任务。支持构造函数注入服务
+    /// </summary>
     public class Worker : IHostedService
     {
         private readonly ILog _logger;
         private readonly FullRedis _redis;
-        //private readonly MqttClient _mqtt;
-        //private readonly Producer _producer;
+        private readonly MqttClient _mqtt;
+        private readonly Producer _producer;
 
-        public Worker(ILog logger, FullRedis redis/*, MqttClient mqtt, Producer producer*/)
+        public Worker(ILog logger, FullRedis redis, MqttClient mqtt, Producer producer)
         {
             _logger = logger;
             _redis = redis;
-            //_mqtt = mqtt;
-            //_producer = producer;
+            _mqtt = mqtt;
+            _producer = producer;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

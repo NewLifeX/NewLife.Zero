@@ -1,9 +1,7 @@
 ﻿using NewLife.Caching;
 using NewLife.MQTT;
-using NewLife.Remoting;
 using NewLife.RocketMQ;
-using Stardust.Monitors;
-using XCode.DataAccessLayer;
+using Stardust;
 using Zero.Console;
 
 // 启用控制台日志，拦截所有异常
@@ -13,41 +11,28 @@ XTrace.UseConsole();
 var services = ObjectContainer.Current;
 services.AddSingleton(XTrace.Log);
 
-// 初始化星尘跟踪器
-var tracer = InitTracer(services);
+// 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
+var star = new StarFactory(null, null, null);
+if (star.Server.IsNullOrEmpty()) star = null;
 
-InitRedis(services, tracer);
-InitMqtt(services, tracer);
-InitRocketMq(services, tracer);
+// 初始化Redis、MQTT、RocketMQ，注册服务到容器
+InitRedis(services, star?.Tracer);
+InitMqtt(services, star?.Tracer);
+InitRocketMq(services, star?.Tracer);
 
+// 注册后台任务 IHostedService
 var host = services.BuildHost();
 host.Add<Worker>();
 host.Add<RedisWorker>();
 //host.Add<RocketMqWorker>();
 //host.Add<MqttWorker>();
 
-//host.Run();
+// 异步阻塞，友好退出
 await host.RunAsync();
 
 
 
-static ITracer InitTracer(IObjectContainer services)
-{
-    var server = Stardust.Setting.Current.Server;
-    if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
-
-    // 星尘监控，性能跟踪器
-    var tracer = new StarTracer(server) { Log = XTrace.Log };
-    DefaultTracer.Instance = tracer;
-    ApiHelper.Tracer = tracer;
-    DAL.GlobalTracer = tracer;
-
-    services.AddSingleton<ITracer>(tracer);
-
-    return tracer;
-}
-
-static void InitRedis(IObjectContainer services, ITracer tracer)
+static void InitRedis(IObjectContainer services, ITracer? tracer)
 {
     // 引入 Redis，用于消息队列和缓存，单例，带性能跟踪
     var rds = new FullRedis { Tracer = tracer };
@@ -56,12 +41,12 @@ static void InitRedis(IObjectContainer services, ITracer tracer)
     services.AddSingleton(rds);
 }
 
-static void InitMqtt(IObjectContainer services, ITracer tracer)
+static void InitMqtt(IObjectContainer services, ITracer? tracer)
 {
     // 引入 MQTT
     var mqtt = new MqttClient
     {
-        //Tracer = tracer,
+        Tracer = tracer,
         Log = XTrace.Log,
 
         Server = "tcp://127.0.0.1:1883",
@@ -72,7 +57,7 @@ static void InitMqtt(IObjectContainer services, ITracer tracer)
     services.AddSingleton(mqtt);
 }
 
-static void InitRocketMq(IObjectContainer services, ITracer tracer)
+static void InitRocketMq(IObjectContainer services, ITracer? tracer)
 {
     // 引入 RocketMQ 生产者
     var producer = new Producer

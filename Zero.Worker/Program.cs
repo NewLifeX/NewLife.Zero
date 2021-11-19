@@ -5,10 +5,8 @@ using NewLife;
 using NewLife.Caching;
 using NewLife.Log;
 using NewLife.MQTT;
-using NewLife.Remoting;
 using NewLife.RocketMQ;
-using Stardust.Monitors;
-using XCode.DataAccessLayer;
+using Stardust;
 
 namespace Zero.Worker
 {
@@ -28,12 +26,13 @@ namespace Zero.Worker
 
         public static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
-            // 初始化星尘跟踪器
-            var tracer = InitTracer(services);
+            // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
+            var star = new StarFactory(null, null, null);
+            if (star.Server.IsNullOrEmpty()) star = null;
 
-            InitRedis(services, tracer);
-            //InitMqtt(services, tracer);
-            //InitRocketMq(services, tracer);
+            InitRedis(services, star?.Tracer);
+            InitMqtt(services, star?.Tracer);
+            InitRocketMq(services, star?.Tracer);
 
             // 注册后台服务
             services.AddHostedService<Worker>();
@@ -42,23 +41,7 @@ namespace Zero.Worker
             //services.AddHostedService<RocketMqWorker>();
         }
 
-        static ITracer InitTracer(IServiceCollection services)
-        {
-            var server = Stardust.Setting.Current.Server;
-            if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
-
-            // 星尘监控，性能跟踪器
-            var tracer = new StarTracer(server) { Log = XTrace.Log };
-            DefaultTracer.Instance = tracer;
-            ApiHelper.Tracer = tracer;
-            DAL.GlobalTracer = tracer;
-
-            services.AddSingleton<ITracer>(tracer);
-
-            return tracer;
-        }
-
-        static void InitRedis(IServiceCollection services, ITracer tracer)
+        private static void InitRedis(IServiceCollection services, ITracer tracer)
         {
             // 引入 Redis，用于消息队列和缓存，单例，带性能跟踪
             var rds = new FullRedis { Tracer = tracer };
@@ -67,7 +50,7 @@ namespace Zero.Worker
             services.AddSingleton(rds);
         }
 
-        static void InitMqtt(IServiceCollection services, ITracer tracer)
+        private static void InitMqtt(IServiceCollection services, ITracer tracer)
         {
             // 引入 MQTT
             var mqtt = new MqttClient
@@ -83,7 +66,7 @@ namespace Zero.Worker
             services.AddSingleton(mqtt);
         }
 
-        static void InitRocketMq(IServiceCollection services, ITracer tracer)
+        private static void InitRocketMq(IServiceCollection services, ITracer tracer)
         {
             // 引入 RocketMQ 生产者
             var producer = new Producer
@@ -103,7 +86,6 @@ namespace Zero.Worker
                 NameServerAddress = "127.0.0.1:9876",
 
                 FromLastOffset = true,
-                SkipOverStoredMsgCount = 0,
                 BatchSize = 20,
 
                 Tracer = tracer,
