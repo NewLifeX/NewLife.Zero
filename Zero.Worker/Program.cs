@@ -44,7 +44,7 @@ namespace Zero.Worker
 
         static ITracer InitTracer(IServiceCollection services)
         {
-            var server = Stardust.Setting.Current.Server;
+            var server = Stardust.StarSetting.Current.Server;
             if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
 
             // 星尘监控，性能跟踪器

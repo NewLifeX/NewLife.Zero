@@ -26,7 +26,7 @@ namespace Zero.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Stardust.Setting.Current.Server;
+            var server = Stardust.StarSetting.Current.Server;
             if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
 
             // APM跟踪器
