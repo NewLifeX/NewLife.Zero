@@ -8,7 +8,7 @@ namespace Zero.AntJob2
 {
     public class Worker : BackgroundService
     {
-        private Scheduler _scheduler;
+        private readonly Scheduler _scheduler;
 
         public Worker(Scheduler scheduler)
         {

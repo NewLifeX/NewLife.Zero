@@ -10,6 +10,7 @@ namespace Zero.Web
     {
         public static void Main(string[] args)
         {
+            // 启用控制台日志，拦截所有异常
             XTrace.UseConsole();
 
             // 异步初始化

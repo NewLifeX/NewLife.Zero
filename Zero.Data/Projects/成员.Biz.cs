@@ -144,7 +144,7 @@ namespace Zero.Data.Projects
             return FindAll(exp, page);
         }
 
-        static readonly FieldCache<Member> _KindCache = new FieldCache<Member>(nameof(Kind))
+        static readonly FieldCache<Member> _KindCache = new(nameof(Kind))
         {
             Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
         };

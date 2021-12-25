@@ -10,7 +10,7 @@ namespace Zero.Data.Common
     public static class RobotHelper
     {
         #region 根据应用创建机器人
-        private static ConcurrentDictionary<Int32, Robot> _robots = new ConcurrentDictionary<Int32, Robot>();
+        private static readonly ConcurrentDictionary<Int32, Robot> _robots = new();
         /// <summary>根据团队创建机器人</summary>
         /// <param name="team"></param>
         /// <returns></returns>

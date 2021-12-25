@@ -165,7 +165,7 @@ namespace Zero.Data.Projects
         public static IList<VersionPlan> FindAllNotCompleted(Int32 teamId, Int32 productId) => Search(teamId, productId, null, true, false);
 
         // Select Count(ID) as ID,Category From VersionPlan Where CreateTime>'2020-01-24 00:00:00' Group By Category Order By ID Desc limit 20
-        static readonly FieldCache<VersionPlan> _KindCache = new FieldCache<VersionPlan>(nameof(Kind))
+        static readonly FieldCache<VersionPlan> _KindCache = new(nameof(Kind))
         {
             Where = _.CreateTime > DateTime.Today.AddDays(-30) & Expression.Empty
         };
