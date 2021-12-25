@@ -21,7 +21,7 @@
     <PackageReference Include="NewLife.MQTT" Version="1.0.2021.1204" />
     <PackageReference Include="NewLife.Redis" Version="3.9.2021.1204" />
     <PackageReference Include="NewLife.RocketMQ" Version="1.5.2021.1204" />
-    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.1225" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="1.5.2021.1225" />
   </ItemGroup>
 
   <ItemGroup>

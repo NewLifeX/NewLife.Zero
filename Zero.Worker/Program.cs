@@ -5,10 +5,7 @@ using NewLife;
 using NewLife.Caching;
 using NewLife.Log;
 using NewLife.MQTT;
-using NewLife.Remoting;
 using NewLife.RocketMQ;
-using Stardust.Monitors;
-using XCode.DataAccessLayer;
 
 //!!! 标准Worker模板，可以使用完整的IOC，缺点编译输出的DLL比较多，还不如WebApi
 
@@ -30,88 +27,34 @@ namespace Zero.Worker
 
         public static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
-            // 初始化星尘跟踪器
-            var tracer = InitTracer(services);
+            // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址
+            var star = services.AddStardust(null);
 
-            InitRedis(services, tracer);
-            //InitMqtt(services, tracer);
-            //InitRocketMq(services, tracer);
+            {
+                // 启用星尘配置中心。分布式部署或容器化部署推荐使用，单机部署不推荐使用
+                var config = star.Config;
+
+                // 默认内存缓存，如有配置可使用Redis缓存
+                var cache = new MemoryCache();
+                if (config != null && !config["redisCache"].IsNullOrEmpty())
+                    services.AddSingleton<ICache>(p => new FullRedis(p, "redisCache") { Name = "Cache" });
+                else
+                    services.AddSingleton<ICache>(cache);
+            }
+
+            {
+                // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
+                var rds = new FullRedis { Tracer = star.Tracer };
+                rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
+                //services.AddSingleton<ICache>(rds);
+                services.AddSingleton(rds);
+            }
 
             // 注册后台服务
             services.AddHostedService<Worker>();
             services.AddHostedService<RedisWorker>();
             //services.AddHostedService<MqttWorker>();
             //services.AddHostedService<RocketMqWorker>();
-        }
-
-        static ITracer InitTracer(IServiceCollection services)
-        {
-            var server = Stardust.StarSetting.Current.Server;
-            if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
-
-            // 星尘监控，性能跟踪器
-            var tracer = new StarTracer(server) { Log = XTrace.Log };
-            DefaultTracer.Instance = tracer;
-            ApiHelper.Tracer = tracer;
-            DAL.GlobalTracer = tracer;
-
-            services.AddSingleton<ITracer>(tracer);
-
-            return tracer;
-        }
-
-        static void InitRedis(IServiceCollection services, ITracer tracer)
-        {
-            // 引入 Redis，用于消息队列和缓存，单例，带性能跟踪
-            var rds = new FullRedis { Tracer = tracer };
-            rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
-            services.AddSingleton<ICache>(rds);
-            services.AddSingleton(rds);
-        }
-
-        static void InitMqtt(IServiceCollection services, ITracer tracer)
-        {
-            // 引入 MQTT
-            var mqtt = new MqttClient
-            {
-                //Tracer = tracer,
-                Log = XTrace.Log,
-
-                Server = "tcp://127.0.0.1:1883",
-                ClientId = Environment.MachineName,
-                UserName = "stone",
-                Password = "Pass@word",
-            };
-            services.AddSingleton(mqtt);
-        }
-
-        static void InitRocketMq(IServiceCollection services, ITracer tracer)
-        {
-            // 引入 RocketMQ 生产者
-            var producer = new Producer
-            {
-                Topic = "nx_test",
-                NameServerAddress = "127.0.0.1:9876",
-                Tracer = tracer,
-                Log = XTrace.Log,
-            };
-            services.AddSingleton(producer);
-
-            // 引入 RocketMQ 消费者
-            var consumer = new Consumer
-            {
-                Topic = "nx_test",
-                Group = "test",
-                NameServerAddress = "127.0.0.1:9876",
-
-                FromLastOffset = true,
-                //SkipOverStoredMsgCount = 0,
-                BatchSize = 20,
-
-                Tracer = tracer,
-                Log = XTrace.Log,
-            };
-            services.AddSingleton(consumer);
         }
     }
 }
