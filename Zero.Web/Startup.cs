@@ -3,43 +3,30 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NewLife;
 using NewLife.Caching;
 using NewLife.Cube;
 using NewLife.Cube.WebMiddleware;
-using NewLife.Log;
-using NewLife.Remoting;
-using Stardust.Monitors;
-using XCode.DataAccessLayer;
+using XCode;
 
 namespace Zero.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Stardust.StarSetting.Current.Server;
-            if (server.IsNullOrEmpty()) server = "http://star.newlifex.com:6600";
+            // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
+            var star = services.AddStardust(null);
 
             // APM跟踪器
-            var tracer = new StarTracer(server) { Log = XTrace.Log };
-            DefaultTracer.Instance = tracer;
-            ApiHelper.Tracer = tracer;
-            DAL.GlobalTracer = tracer;
-            TracerMiddleware.Tracer = tracer;
-
-            services.AddSingleton<ITracer>(tracer);
+            TracerMiddleware.Tracer = star.Tracer;
 
             // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
-            var rds = new FullRedis { Tracer = tracer };
+            var rds = new FullRedis { Tracer = star.Tracer };
             rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
             services.AddSingleton<ICache>(rds);
             services.AddSingleton(rds);
@@ -59,6 +46,12 @@ namespace Zero.Web
             else
                 app.UseExceptionHandler("/CubeHome/Error");
 
+            // 预热数据层，执行反向工程建表等操作
+            EntityFactory.InitConnection("Membership");
+            EntityFactory.InitConnection("Log");
+            EntityFactory.InitConnection("Cube");
+            EntityFactory.InitConnection("Zero");
+
             app.UseCube(env);
 
             //if (env.IsDevelopment())
@@ -77,6 +70,9 @@ namespace Zero.Web
             //app.UseRouting();
 
             //app.UseAuthorization();
+
+            // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
+            app.RegisterService("Zero.Web", null, "dev");
 
             app.UseEndpoints(endpoints =>
             {

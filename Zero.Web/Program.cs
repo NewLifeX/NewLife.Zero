@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NewLife.Log;
@@ -8,7 +9,7 @@ namespace Zero.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(String[] args)
         {
             // 启用控制台日志，拦截所有异常
             XTrace.UseConsole();
@@ -19,7 +20,7 @@ namespace Zero.Web
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(String[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
