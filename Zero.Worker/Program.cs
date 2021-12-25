@@ -10,6 +10,8 @@ using NewLife.RocketMQ;
 using Stardust.Monitors;
 using XCode.DataAccessLayer;
 
+//!!! 标准Worker模板，可以使用完整的IOC，缺点编译输出的DLL比较多，还不如WebApi
+
 namespace Zero.Worker
 {
     public class Program
@@ -103,7 +105,7 @@ namespace Zero.Worker
                 NameServerAddress = "127.0.0.1:9876",
 
                 FromLastOffset = true,
-                SkipOverStoredMsgCount = 0,
+                //SkipOverStoredMsgCount = 0,
                 BatchSize = 20,
 
                 Tracer = tracer,

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>RPC服务端</AssemblyTitle>
     <Description>高性能，长连接，数据接口</Description>
     <Company>新生命开发团队</Company>
@@ -17,8 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="8.11.2021.1204" />
-    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.1204" />
+    <PackageReference Include="NewLife.Core" Version="8.11.2021.1225" />
+    <PackageReference Include="NewLife.Stardust" Version="1.5.2021.1225" />
   </ItemGroup>
 
   <ItemGroup>

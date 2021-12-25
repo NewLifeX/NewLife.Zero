@@ -4,6 +4,8 @@ using NewLife.RocketMQ;
 using Stardust;
 using Zero.Console;
 
+//!!! 轻量级控制台项目模板，新生命团队强烈推荐
+
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();
 

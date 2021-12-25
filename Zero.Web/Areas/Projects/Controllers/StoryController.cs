@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using NewLife.Cube;
 using NewLife.Web;
-using Zero.Data.Projects;
-using XCode;
 using XCode.Membership;
+using Zero.Data.Projects;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {
+    [Menu(0, false)]
     [ProjectsArea]
     public class StoryController : EntityController<Story>
     {
@@ -24,20 +23,6 @@ namespace Zero.Web.Areas.Projects.Controllers
             var end = p["dtEnd"].ToDateTime();
 
             return Story.Search(productId, versionId, memberId, enable, start, end, p["Q"], p);
-        }
-
-        /// <summary>菜单不可见</summary>
-        /// <param name="menu"></param>
-        /// <returns></returns>
-        protected override IDictionary<MethodInfo, Int32> ScanActionMenu(IMenu menu)
-        {
-            if (menu.Visible)
-            {
-                menu.Visible = false;
-                (menu as IEntity).Update();
-            }
-
-            return base.ScanActionMenu(menu);
         }
 
         protected override Boolean Valid(Story entity, DataObjectMethodType type, Boolean post)
@@ -64,7 +49,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 
         protected override Int32 OnUpdate(Story entity)
         {
-            var rs= base.OnUpdate(entity);
+            var rs = base.OnUpdate(entity);
 
             entity.Product?.Fix();
             entity.Version?.Fix();
