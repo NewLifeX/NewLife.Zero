@@ -181,6 +181,26 @@ namespace Zero.Data.Projects
         public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
         #endregion
 
+        #region 拷贝
+        /// <summary>拷贝模型对象</summary>
+        /// <param name="model">模型</param>
+        public void Copy(IVersionPlan model)
+        {
+            ID = model.ID;
+            TeamId = model.TeamId;
+            ProductId = model.ProductId;
+            Name = model.Name;
+            Kind = model.Kind;
+            StartDate = model.StartDate;
+            EndDate = model.EndDate;
+            ManHours = model.ManHours;
+            Enable = model.Enable;
+            Completed = model.Completed;
+            Stories = model.Stories;
+            Remark = model.Remark;
+        }
+        #endregion
+
         #region 获取/设置 字段值
         /// <summary>获取/设置 字段值</summary>
         /// <param name="name">字段名</param>
@@ -374,79 +394,6 @@ namespace Zero.Data.Projects
             /// <summary>备注</summary>
             public const String Remark = "Remark";
         }
-        #endregion
-    }
-
-    /// <summary>版本计划接口</summary>
-    public partial interface IVersionPlan
-    {
-        #region 属性
-        /// <summary>编号</summary>
-        Int32 ID { get; set; }
-
-        /// <summary>团队</summary>
-        Int32 TeamId { get; set; }
-
-        /// <summary>产品</summary>
-        Int32 ProductId { get; set; }
-
-        /// <summary>名称。版本号</summary>
-        String Name { get; set; }
-
-        /// <summary>类型</summary>
-        String Kind { get; set; }
-
-        /// <summary>开始日期</summary>
-        DateTime StartDate { get; set; }
-
-        /// <summary>结束日期</summary>
-        DateTime EndDate { get; set; }
-
-        /// <summary>工时</summary>
-        Int32 ManHours { get; set; }
-
-        /// <summary>启用</summary>
-        Boolean Enable { get; set; }
-
-        /// <summary>完成</summary>
-        Boolean Completed { get; set; }
-
-        /// <summary>故事数</summary>
-        Int32 Stories { get; set; }
-
-        /// <summary>创建者</summary>
-        String CreateUser { get; set; }
-
-        /// <summary>创建人</summary>
-        Int32 CreateUserID { get; set; }
-
-        /// <summary>创建地址</summary>
-        String CreateIP { get; set; }
-
-        /// <summary>创建时间</summary>
-        DateTime CreateTime { get; set; }
-
-        /// <summary>更新者</summary>
-        String UpdateUser { get; set; }
-
-        /// <summary>更新人</summary>
-        Int32 UpdateUserID { get; set; }
-
-        /// <summary>更新地址</summary>
-        String UpdateIP { get; set; }
-
-        /// <summary>更新时间</summary>
-        DateTime UpdateTime { get; set; }
-
-        /// <summary>备注</summary>
-        String Remark { get; set; }
-        #endregion
-
-        #region 获取/设置 字段值
-        /// <summary>获取/设置 字段值</summary>
-        /// <param name="name">字段名</param>
-        /// <returns></returns>
-        Object this[String name] { get; set; }
         #endregion
     }
 }

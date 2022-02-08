@@ -165,6 +165,24 @@ namespace Zero.Data.Projects
         public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
         #endregion
 
+        #region 拷贝
+        /// <summary>拷贝模型对象</summary>
+        /// <param name="model">模型</param>
+        public void Copy(IStory model)
+        {
+            ID = model.ID;
+            ProductId = model.ProductId;
+            VersionId = model.VersionId;
+            MemberId = model.MemberId;
+            Title = model.Title;
+            StartDate = model.StartDate;
+            EndDate = model.EndDate;
+            ManHours = model.ManHours;
+            Enable = model.Enable;
+            Remark = model.Remark;
+        }
+        #endregion
+
         #region 获取/设置 字段值
         /// <summary>获取/设置 字段值</summary>
         /// <param name="name">字段名</param>
@@ -342,73 +360,6 @@ namespace Zero.Data.Projects
             /// <summary>备注</summary>
             public const String Remark = "Remark";
         }
-        #endregion
-    }
-
-    /// <summary>故事。用户故事的目标是将特定价值提供给客户，不必是传统意义上的外部最终用户，也可以是依赖您团队的组织内部客户或同事。用户故事是简单语言中的几句话，概述了所需的结果。接口</summary>
-    public partial interface IStory
-    {
-        #region 属性
-        /// <summary>编号</summary>
-        Int32 ID { get; set; }
-
-        /// <summary>产品</summary>
-        Int32 ProductId { get; set; }
-
-        /// <summary>版本</summary>
-        Int32 VersionId { get; set; }
-
-        /// <summary>处理人</summary>
-        Int32 MemberId { get; set; }
-
-        /// <summary>事项</summary>
-        String Title { get; set; }
-
-        /// <summary>开始日期</summary>
-        DateTime StartDate { get; set; }
-
-        /// <summary>结束日期</summary>
-        DateTime EndDate { get; set; }
-
-        /// <summary>工时</summary>
-        Int32 ManHours { get; set; }
-
-        /// <summary>启用</summary>
-        Boolean Enable { get; set; }
-
-        /// <summary>创建者</summary>
-        String CreateUser { get; set; }
-
-        /// <summary>创建人</summary>
-        Int32 CreateUserID { get; set; }
-
-        /// <summary>创建地址</summary>
-        String CreateIP { get; set; }
-
-        /// <summary>创建时间</summary>
-        DateTime CreateTime { get; set; }
-
-        /// <summary>更新者</summary>
-        String UpdateUser { get; set; }
-
-        /// <summary>更新人</summary>
-        Int32 UpdateUserID { get; set; }
-
-        /// <summary>更新地址</summary>
-        String UpdateIP { get; set; }
-
-        /// <summary>更新时间</summary>
-        DateTime UpdateTime { get; set; }
-
-        /// <summary>备注</summary>
-        String Remark { get; set; }
-        #endregion
-
-        #region 获取/设置 字段值
-        /// <summary>获取/设置 字段值</summary>
-        /// <param name="name">字段名</param>
-        /// <returns></returns>
-        Object this[String name] { get; set; }
         #endregion
     }
 }

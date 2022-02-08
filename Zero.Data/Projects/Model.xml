@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Tables Version="9.18.7505.2225" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.newlifex.com http://www.newlifex.com/Model2020.xsd" NameSpace="Zero.Data.Projects" ConnName="Zero" Output="" BaseClass="Entity" ChineseFileName="True" IgnoreNameCase="True" xmlns="http://www.newlifex.com/Model2020.xsd">
+<Tables xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.newlifex.com http://www.newlifex.com/Model2022.xsd" NameSpace="Zero.Data.Projects" ConnName="Zero" Output="" BaseClass="Entity" ModelClass="{name}Model" ModelInterface="I{name}" xmlns="http://www.newlifex.com/Model2022.xsd">
   <Table Name="Team" Description="团队。管理一系列相关的产品和应用系统">
     <Columns>
       <Column Name="ID" DataType="Int32" Identity="True" PrimaryKey="True" Description="编号" />
@@ -12,14 +12,14 @@
       <Column Name="Members" DataType="Int32" Description="成员数。主要成员" />
       <Column Name="AssistMembers" DataType="Int32" Description="协助成员数。其它团队临时协助该团队的成员" />
       <Column Name="WebHook" DataType="String" Length="200" Description="机器人" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>
@@ -27,7 +27,7 @@
       <Index Columns="Code" Unique="True" />
     </Indexes>
   </Table>
-  <Table Name="Member" Description="成员。所有可用团队成员">
+  <Table Name="Member" Description="成员。所有可用团队成员" ModelClass="{name}Dto" ModelInterface="I{name}">
     <Columns>
       <Column Name="ID" DataType="Int32" Identity="True" PrimaryKey="True" Description="编号" />
       <Column Name="Name" DataType="String" Master="True" Nullable="False" Description="名称" />
@@ -37,14 +37,14 @@
       <Column Name="Teams" DataType="Int32" Description="团队数。所在团队总数，含协助团队" />
       <Column Name="UserId" DataType="Int32" Description="用户。所属登录用户" />
       <Column Name="UserName" DataType="String" Description="用户名" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>
@@ -60,14 +60,14 @@
       <Column Name="Major" DataType="Boolean" Description="主要。是否该成员的主要团队" />
       <Column Name="Leader" DataType="Boolean" Description="组长。该团队组长" />
       <Column Name="Enable" DataType="Boolean" Description="启用" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>
@@ -86,14 +86,14 @@
       <Column Name="Versions" DataType="Int32" Description="版本数" />
       <Column Name="Stories" DataType="Int32" Description="故事数" />
       <Column Name="Completed" DataType="Boolean" Description="完成" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>
@@ -113,14 +113,14 @@
       <Column Name="Enable" DataType="Boolean" Description="启用" />
       <Column Name="Completed" DataType="Boolean" Description="完成" />
       <Column Name="Stories" DataType="Int32" Description="故事数" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>
@@ -139,14 +139,14 @@
       <Column Name="EndDate" DataType="DateTime" Description="结束日期" />
       <Column Name="ManHours" DataType="Int32" Description="工时" />
       <Column Name="Enable" DataType="Boolean" Description="启用" />
-      <Column Name="CreateUser" DataType="String" Description="创建者" />
-      <Column Name="CreateUserID" DataType="Int32" Description="创建人" />
-      <Column Name="CreateIP" DataType="String" Description="创建地址" />
-      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" />
-      <Column Name="UpdateUser" DataType="String" Description="更新者" />
-      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" />
-      <Column Name="UpdateIP" DataType="String" Description="更新地址" />
-      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" />
+      <Column Name="CreateUser" DataType="String" Description="创建者" Model="False" />
+      <Column Name="CreateUserID" DataType="Int32" Description="创建人" Model="False" />
+      <Column Name="CreateIP" DataType="String" Description="创建地址" Model="False" />
+      <Column Name="CreateTime" DataType="DateTime" Description="创建时间" Model="False" />
+      <Column Name="UpdateUser" DataType="String" Description="更新者" Model="False" />
+      <Column Name="UpdateUserID" DataType="Int32" Description="更新人" Model="False" />
+      <Column Name="UpdateIP" DataType="String" Description="更新地址" Model="False" />
+      <Column Name="UpdateTime" DataType="DateTime" Description="更新时间" Model="False" />
       <Column Name="Remark" DataType="String" Length="500" Description="备注" />
     </Columns>
     <Indexes>

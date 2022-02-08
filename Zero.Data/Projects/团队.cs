@@ -173,6 +173,25 @@ namespace Zero.Data.Projects
         public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
         #endregion
 
+        #region 拷贝
+        /// <summary>拷贝模型对象</summary>
+        /// <param name="model">模型</param>
+        public void Copy(ITeam model)
+        {
+            ID = model.ID;
+            Name = model.Name;
+            Code = model.Code;
+            LeaderId = model.LeaderId;
+            Enable = model.Enable;
+            Products = model.Products;
+            Versions = model.Versions;
+            Members = model.Members;
+            AssistMembers = model.AssistMembers;
+            WebHook = model.WebHook;
+            Remark = model.Remark;
+        }
+        #endregion
+
         #region 获取/设置 字段值
         /// <summary>获取/设置 字段值</summary>
         /// <param name="name">字段名</param>
@@ -358,76 +377,6 @@ namespace Zero.Data.Projects
             /// <summary>备注</summary>
             public const String Remark = "Remark";
         }
-        #endregion
-    }
-
-    /// <summary>团队。管理一系列相关的产品和应用系统接口</summary>
-    public partial interface ITeam
-    {
-        #region 属性
-        /// <summary>编号</summary>
-        Int32 ID { get; set; }
-
-        /// <summary>名称</summary>
-        String Name { get; set; }
-
-        /// <summary>编码</summary>
-        String Code { get; set; }
-
-        /// <summary>组长</summary>
-        Int32 LeaderId { get; set; }
-
-        /// <summary>启用</summary>
-        Boolean Enable { get; set; }
-
-        /// <summary>产品数</summary>
-        Int32 Products { get; set; }
-
-        /// <summary>版本数</summary>
-        Int32 Versions { get; set; }
-
-        /// <summary>成员数。主要成员</summary>
-        Int32 Members { get; set; }
-
-        /// <summary>协助成员数。其它团队临时协助该团队的成员</summary>
-        Int32 AssistMembers { get; set; }
-
-        /// <summary>机器人</summary>
-        String WebHook { get; set; }
-
-        /// <summary>创建者</summary>
-        String CreateUser { get; set; }
-
-        /// <summary>创建人</summary>
-        Int32 CreateUserID { get; set; }
-
-        /// <summary>创建地址</summary>
-        String CreateIP { get; set; }
-
-        /// <summary>创建时间</summary>
-        DateTime CreateTime { get; set; }
-
-        /// <summary>更新者</summary>
-        String UpdateUser { get; set; }
-
-        /// <summary>更新人</summary>
-        Int32 UpdateUserID { get; set; }
-
-        /// <summary>更新地址</summary>
-        String UpdateIP { get; set; }
-
-        /// <summary>更新时间</summary>
-        DateTime UpdateTime { get; set; }
-
-        /// <summary>备注</summary>
-        String Remark { get; set; }
-        #endregion
-
-        #region 获取/设置 字段值
-        /// <summary>获取/设置 字段值</summary>
-        /// <param name="name">字段名</param>
-        /// <returns></returns>
-        Object this[String name] { get; set; }
         #endregion
     }
 }

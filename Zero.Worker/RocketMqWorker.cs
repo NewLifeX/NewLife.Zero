@@ -1,37 +1,31 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using NewLife;
+﻿using NewLife;
 using NewLife.Log;
 using NewLife.RocketMQ;
 
-namespace Zero.Worker
+namespace Zero.Worker;
+
+public class RocketMqWorker : BackgroundService
 {
-    public class RocketMqWorker : BackgroundService
+    private readonly Consumer _consumer;
+
+    public RocketMqWorker(Consumer consumer) => _consumer = consumer;
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        private readonly Consumer _consumer;
+        await Task.Yield();
 
-        public RocketMqWorker(Consumer consumer) => _consumer = consumer;
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        _consumer.OnConsume = (q, ms) =>
         {
-            await Task.Yield();
+            XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", q.BrokerName, q.QueueId, ms.Length);
 
-            _consumer.OnConsume = (q, ms) =>
+            foreach (var item in ms.ToList())
             {
-                XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", q.BrokerName, q.QueueId, ms.Length);
+                XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
+            }
 
-                foreach (var item in ms.ToList())
-                {
-                    XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
-                }
+            return true;
+        };
 
-                return true;
-            };
-
-            _consumer.Start();
-        }
+        _consumer.Start();
     }
 }

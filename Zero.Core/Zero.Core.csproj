@@ -5,16 +5,16 @@
     <AssemblyTitle>零代核心库</AssemblyTitle>
     <Description>Web应用、微服务、应用服务、大数据计算和客户端等多个端共用的类库，例如模型类等。原则上要求最少依赖第三方</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2021 NewLife</Copyright>
-    <Version>1.0.2021.1225</Version>
-    <FileVersion>1.0.2021.1225</FileVersion>
+    <Copyright>©2002-2022 NewLife</Copyright>
+    <Version>1.0.2022.0208</Version>
+    <FileVersion>1.0.2022.0208</FileVersion>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="9.0.2022.101" />
+    <PackageReference Include="NewLife.Core" Version="9.0.2022.202" />
   </ItemGroup>
 
 </Project>

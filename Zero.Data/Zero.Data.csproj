@@ -5,26 +5,17 @@
     <AssemblyTitle>零代数据层</AssemblyTitle>
     <Description>Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2021 NewLife</Copyright>
-    <Version>1.0.2021.1225</Version>
-    <FileVersion>1.0.2021.1225</FileVersion>
+    <Copyright>©2002-2022 NewLife</Copyright>
+    <Version>1.0.2022.0208</Version>
+    <FileVersion>1.0.2022.0208</FileVersion>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Projects\Config\**" />
-    <Compile Remove="Projects\Log\**" />
-    <EmbeddedResource Remove="Projects\Config\**" />
-    <EmbeddedResource Remove="Projects\Log\**" />
-    <None Remove="Projects\Config\**" />
-    <None Remove="Projects\Log\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="9.0.2022.101" />
-    <PackageReference Include="NewLife.XCode" Version="11.0.2022.101" />
+    <PackageReference Include="NewLife.Core" Version="9.0.2022.202" />
+    <PackageReference Include="NewLife.XCode" Version="11.0.2022.202" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,15 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Projects\Build.log">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Build.tt</DependentUpon>
-    </None>
-    <None Update="Projects\Build.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Build.log</LastGenOutput>
-    </None>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

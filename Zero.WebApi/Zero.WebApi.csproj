@@ -5,9 +5,9 @@
     <AssemblyTitle>WebApi接口</AssemblyTitle>
     <Description>RESTful数据接口</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2021 NewLife</Copyright>
-    <Version>1.0.2021.0204</Version>
-    <FileVersion>1.0.2021.0204</FileVersion>
+    <Copyright>©2002-2022 NewLife</Copyright>
+    <Version>1.0.2022.0208</Version>
+    <FileVersion>1.0.2022.0208</FileVersion>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\WebApi</OutputPath>
@@ -17,10 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="9.0.2022.101" />
-    <PackageReference Include="NewLife.Redis" Version="3.9.2021.1204" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.101" />
-    <PackageReference Include="NewLife.XCode" Version="11.0.2022.101" />
+    <PackageReference Include="NewLife.Redis" Version="4.0.2022.203" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.204" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

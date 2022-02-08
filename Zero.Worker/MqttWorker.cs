@@ -1,34 +1,30 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using NewLife.Log;
+﻿using NewLife.Log;
 using NewLife.MQTT;
 
-namespace Zero.Worker
+namespace Zero.Worker;
+
+public class MqttWorker : BackgroundService
 {
-    public class MqttWorker : BackgroundService
+    private readonly MqttClient _mqtt;
+
+    public MqttWorker(MqttClient mqtt) => _mqtt = mqtt;
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        private readonly MqttClient _mqtt;
+        await Task.Yield();
 
-        public MqttWorker(MqttClient mqtt) => _mqtt = mqtt;
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        _mqtt.Received += (s, e) =>
         {
-            await Task.Yield();
+            var pm = e.Arg;
+            var msg = pm.Payload.ToStr();
 
-            _mqtt.Received += (s, e) =>
-            {
-                var pm = e.Arg;
-                var msg = pm.Payload.ToStr();
+            XTrace.WriteLine("消费消息：[{0}] {1}", pm.Topic, msg);
+        };
 
-                XTrace.WriteLine("消费消息：[{0}] {1}", pm.Topic, msg);
-            };
+        // 连接
+        await _mqtt.ConnectAsync();
 
-            // 连接
-            await _mqtt.ConnectAsync();
-
-            // 订阅
-            await _mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
-        }
+        // 订阅
+        await _mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
     }
 }
