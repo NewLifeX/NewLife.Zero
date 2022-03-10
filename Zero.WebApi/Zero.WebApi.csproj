@@ -17,9 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Redis" Version="4.0.2022.203" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.204" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="NewLife.Redis" Version="4.0.2022.304" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.309" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>

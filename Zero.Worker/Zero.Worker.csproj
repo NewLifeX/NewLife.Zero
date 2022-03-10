@@ -19,9 +19,9 @@
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.101" />
     <PackageReference Include="NewLife.MQTT" Version="1.0.2022.101" />
-    <PackageReference Include="NewLife.Redis" Version="4.0.2022.203" />
-    <PackageReference Include="NewLife.RocketMQ" Version="2.0.2022.101" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.204" />
+    <PackageReference Include="NewLife.Redis" Version="4.0.2022.304" />
+    <PackageReference Include="NewLife.RocketMQ" Version="2.0.2022.304" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.0.2022.309" />
   </ItemGroup>
 
   <ItemGroup>
