@@ -1,0 +1,1326 @@
+<style>
+    table {
+        border-collapse: collapse;
+        border: 1px solid;
+        border-color: rgb(211, 202, 221);
+    }
+
+    table thead,
+    table tr {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgb(211, 202, 221);
+    }
+
+    table {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(211, 202, 221);
+    }
+
+    table td,
+    table th {
+        padding: 5px 10px;
+        font-size: 14px;
+        font-family: Verdana;
+        color: rgb(95, 74, 121);
+    }
+
+    table tr:nth-child(even) {
+        background: rgb(223, 216, 232)
+    }
+
+    table tr:nth-child(odd) {
+        background: #FFF
+    }
+</style>
+<h3>团队（Team）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Name</td>
+            <td>名称</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td title="唯一索引">UQ</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Code</td>
+            <td>编码</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td title="唯一索引">UQ</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>LeaderId</td>
+            <td>组长</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Products</td>
+            <td>产品数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Versions</td>
+            <td>版本数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Members</td>
+            <td>成员数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>主要成员</td>
+        </tr>
+
+        <tr>
+            <td>AssistMembers</td>
+            <td>协助成员数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>其它团队临时协助该团队的成员</td>
+        </tr>
+
+        <tr>
+            <td>WebHook</td>
+            <td>机器人</td>
+            <td>String</td>
+            <td>200</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
+<h3>成员（Member）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Name</td>
+            <td>名称</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td title="唯一索引">UQ</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Kind</td>
+            <td>类型</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>TeamId</td>
+            <td>团队</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>所属主团队</td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Teams</td>
+            <td>团队数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>所在团队总数，含协助团队</td>
+        </tr>
+
+        <tr>
+            <td>UserId</td>
+            <td>用户</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>所属登录用户</td>
+        </tr>
+
+        <tr>
+            <td>UserName</td>
+            <td>用户名</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
+<h3>团队成员（TeamMember）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>TeamId</td>
+            <td>团队</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>MemberId</td>
+            <td>成员</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Kind</td>
+            <td>类型</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Major</td>
+            <td>主要</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>是否该成员的主要团队</td>
+        </tr>
+
+        <tr>
+            <td>Leader</td>
+            <td>组长</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>该团队组长</td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
+<h3>产品（Product）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>TeamId</td>
+            <td>团队</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Name</td>
+            <td>名称</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td title="唯一索引">UQ</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Kind</td>
+            <td>类型</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>LeaderId</td>
+            <td>负责人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Versions</td>
+            <td>版本数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Stories</td>
+            <td>故事数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Completed</td>
+            <td>完成</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
+<h3>版本计划（VersionPlan）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>TeamId</td>
+            <td>团队</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>ProductId</td>
+            <td>产品</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Name</td>
+            <td>名称</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>版本号</td>
+        </tr>
+
+        <tr>
+            <td>Kind</td>
+            <td>类型</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>StartDate</td>
+            <td>开始日期</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>EndDate</td>
+            <td>结束日期</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>ManHours</td>
+            <td>工时</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Completed</td>
+            <td>完成</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Stories</td>
+            <td>故事数</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
+<h3>故事（Story）</h3>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>显示名</th>
+            <th>类型</th>
+            <th>长度</th>
+            <th>精度</th>
+            <th>主键</th>
+            <th>允许空</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>编号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td title="自增">AI</td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>ProductId</td>
+            <td>产品</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>VersionId</td>
+            <td>版本</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>MemberId</td>
+            <td>处理人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Title</td>
+            <td>事项</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>StartDate</td>
+            <td>开始日期</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>EndDate</td>
+            <td>结束日期</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>ManHours</td>
+            <td>工时</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Enable</td>
+            <td>启用</td>
+            <td>Boolean</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUser</td>
+            <td>创建者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateUserID</td>
+            <td>创建人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateIP</td>
+            <td>创建地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>CreateTime</td>
+            <td>创建时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUser</td>
+            <td>更新者</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateUserID</td>
+            <td>更新人</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateIP</td>
+            <td>更新地址</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>UpdateTime</td>
+            <td>更新时间</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Remark</td>
+            <td>备注</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br></br>
