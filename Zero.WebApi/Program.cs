@@ -2,6 +2,7 @@
 using NewLife.Caching;
 using NewLife.Log;
 using XCode;
+using Zero.WebApi.Services;
 
 //!!! 标准WebApi项目模板，新生命团队强烈推荐
 
@@ -39,6 +40,9 @@ builder.Services.AddControllers();
 // 引入 Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 后台服务s
+services.AddHostedService<MyHostedService>();
 
 var app = builder.Build();
 

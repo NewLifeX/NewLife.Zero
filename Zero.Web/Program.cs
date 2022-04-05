@@ -3,6 +3,7 @@ using NewLife.Caching;
 using NewLife.Cube;
 using NewLife.Log;
 using XCode;
+using Zero.Web.Services;
 
 //!!! 标准Web项目模板，新生命团队强烈推荐
 
@@ -29,6 +30,9 @@ services.AddControllersWithViews();
 
 // 引入魔方
 services.AddCube();
+
+// 后台服务s
+services.AddHostedService<MyHostedService>();
 
 var app = builder.Build();
 
