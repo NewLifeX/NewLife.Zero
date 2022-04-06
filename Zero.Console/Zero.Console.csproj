@@ -7,9 +7,11 @@
     <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务，具有现代化.NET应用架构，支持DI</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2022 NewLife</Copyright>
-    <Version>1.0.2022.0208</Version>
-    <FileVersion>1.0.2022.0208</FileVersion>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <VersionPrefix>1.0</VersionPrefix>
+    <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+    <Version>$(VersionPrefix).$(VersionSuffix)</Version>
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(VersionPrefix).*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\Console</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

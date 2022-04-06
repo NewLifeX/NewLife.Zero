@@ -7,18 +7,19 @@
     <Description>高性能，长连接，数据接口</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2021 NewLife</Copyright>
-    <Version>1.0.2021.0204</Version>
-    <FileVersion>1.0.2021.0204</FileVersion>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <VersionPrefix>1.0</VersionPrefix>
+    <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+    <Version>$(VersionPrefix).$(VersionSuffix)</Version>
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(VersionPrefix).*</AssemblyVersion>
     <Deterministic>false</Deterministic>
-    <OutputPath>..\Bin\Server</OutputPath>
+    <OutputPath>..\Bin\HttpServer</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="9.0.2022.101" />
-    <PackageReference Include="NewLife.Core" Version="9.0.2022.401" />
+    <PackageReference Include="NewLife.Agent" Version="9.0.2022.406" />
     <PackageReference Include="NewLife.Stardust" Version="2.0.2022.404" />
     <PackageReference Include="NewLife.XCode" Version="11.0.2022.401" />
   </ItemGroup>

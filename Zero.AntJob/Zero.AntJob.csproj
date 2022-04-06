@@ -6,10 +6,12 @@
     <AssemblyTitle>大数据计算</AssemblyTitle>
     <Description>蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2020 NewLife</Copyright>
-    <Version>1.0.2020.0803</Version>
-    <FileVersion>1.0.2020.0803</FileVersion>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <Copyright>©2002-2022 NewLife</Copyright>
+    <VersionPrefix>1.0</VersionPrefix>
+    <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+    <Version>$(VersionPrefix).$(VersionSuffix)</Version>
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(VersionPrefix).*</AssemblyVersion>
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\AntJob</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -22,9 +24,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="9.0.2022.101" />
-    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.101" />
-    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.101" />
+    <PackageReference Include="NewLife.Agent" Version="9.0.2022.406" />
+    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.406" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.406" />
     <PackageReference Include="NewLife.Core" Version="9.0.2022.401" />
     <PackageReference Include="NewLife.Redis" Version="4.0.2022.401" />
     <PackageReference Include="NewLife.Stardust" Version="2.0.2022.404" />

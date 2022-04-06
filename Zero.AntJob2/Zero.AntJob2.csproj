@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.101" />
+    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.406" />
   </ItemGroup>
 
 </Project>
