@@ -33,7 +33,7 @@ public class MyHostedService : IHostedService
 
     async Task DoGetInfo(Object state)
     {
-        if (_client == null)
+        if (_client == null && _registry != null)
         {
             // 从注册中心获取地址
             var services = await _registry.ResolveAsync("Zero.WebApi");
