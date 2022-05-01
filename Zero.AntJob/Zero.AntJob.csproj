@@ -24,13 +24,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="9.0.2022.406" />
-    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.406" />
-    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.406" />
-    <PackageReference Include="NewLife.Core" Version="9.0.2022.422-beta0757" />
-    <PackageReference Include="NewLife.Redis" Version="4.0.2022.415-beta0501" />
-    <PackageReference Include="NewLife.Stardust" Version="2.0.2022.423-beta0230" />
-    <PackageReference Include="NewLife.XCode" Version="11.0.2022.422-beta1322" />
+    <PackageReference Include="NewLife.Agent" Version="9.1.2022.501" />
+    <PackageReference Include="NewLife.AntJob" Version="3.0.2022.501" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.501" />
+    <PackageReference Include="NewLife.Core" Version="9.1.2022.501" />
+    <PackageReference Include="NewLife.Redis" Version="4.1.2022.501" />
+    <PackageReference Include="NewLife.Stardust" Version="2.1.2022.501" />
+    <PackageReference Include="NewLife.XCode" Version="11.1.2022.501" />
   </ItemGroup>
 
   <ItemGroup>
