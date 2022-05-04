@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Cube;
 using NewLife.Web;
-using Zero.Data.Projects;
-using Zero.Data.Common;
 using XCode;
 using XCode.Membership;
+using Zero.Data.Common;
+using Zero.Data.Projects;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
+    [Menu(90)]
     public class TeamController : EntityController<Team>
     {
-        static TeamController() => MenuOrder = 90;
+        static TeamController() => LogOnChange = true;
 
         protected override IEnumerable<Team> Search(Pager p)
         {

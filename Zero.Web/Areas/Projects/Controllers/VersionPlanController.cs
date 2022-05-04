@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Common;
 using NewLife.Cube;
@@ -13,9 +10,10 @@ using Zero.Data.Projects;
 namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
+    [Menu(60)]
     public class VersionPlanController : EntityController<VersionPlan>
     {
-        static VersionPlanController() => MenuOrder = 60;
+        static VersionPlanController() => LogOnChange = true;
 
         protected override IEnumerable<VersionPlan> Search(Pager p)
         {

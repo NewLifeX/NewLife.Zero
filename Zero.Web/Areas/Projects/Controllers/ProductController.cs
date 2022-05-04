@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Cube;
 using NewLife.Web;
-using Zero.Data.Projects;
-using XCode;
 using XCode.Membership;
+using Zero.Data.Projects;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
+    [Menu(70)]
     public class ProductController : EntityController<Product>
     {
-        static ProductController() => MenuOrder = 70;
+        static ProductController() => LogOnChange = true;
 
         protected override IEnumerable<Product> Search(Pager p)
         {
