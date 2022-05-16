@@ -46,7 +46,7 @@ namespace Zero.Agent
             WriteLog("业务开始……");
 
             // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-            _star = new StarFactory(null, null, null);
+            _star = new StarFactory();
             Tracer = _star.Tracer;
 
             // 从配置中心读取参数设置

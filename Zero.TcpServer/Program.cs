@@ -16,7 +16,7 @@ namespace Zero.TcpServer
             XTrace.UseConsole();
 
             // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-            var star = new StarFactory(null, null, null);
+            var star = new StarFactory();
             if (star.Server.IsNullOrEmpty()) star = null;
 
             // 实例化网络服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听

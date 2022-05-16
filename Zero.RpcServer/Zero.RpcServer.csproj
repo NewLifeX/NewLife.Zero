@@ -15,6 +15,7 @@
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\RpcServer</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

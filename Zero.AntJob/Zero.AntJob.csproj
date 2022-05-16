@@ -1,7 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>大数据计算</AssemblyTitle>
     <Description>蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行</Description>
@@ -15,21 +14,16 @@
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\AntJob</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="9.1.2022.501" />
     <PackageReference Include="NewLife.AntJob" Version="3.0.2022.501" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.0.2022.501" />
     <PackageReference Include="NewLife.Core" Version="9.1.2022.501" />
     <PackageReference Include="NewLife.Redis" Version="4.1.2022.501" />
-    <PackageReference Include="NewLife.Stardust" Version="2.1.2022.501" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.1.2022.501" />
     <PackageReference Include="NewLife.XCode" Version="11.1.2022.501" />
   </ItemGroup>
 

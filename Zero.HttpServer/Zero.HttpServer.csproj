@@ -3,10 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyTitle>RPC网络服务</AssemblyTitle>
-    <Description>高性能，长连接，数据接口</Description>
+    <AssemblyTitle>Http服务</AssemblyTitle>
+    <Description>轻量级Http服务器，可用于追求简单Http服务的场景，例如暴露硬件控制为Http接口，如打印组件</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2021 NewLife</Copyright>
+    <Copyright>©2002-2022 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -15,11 +15,11 @@
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\HttpServer</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="9.1.2022.501" />
     <PackageReference Include="NewLife.Stardust" Version="2.1.2022.501" />
     <PackageReference Include="NewLife.XCode" Version="11.1.2022.501" />
   </ItemGroup>

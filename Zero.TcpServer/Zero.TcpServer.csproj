@@ -3,10 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyTitle>Tcp服务端</AssemblyTitle>
-    <Description>高性能，长连接，数据接口</Description>
+    <AssemblyTitle>Tcp网络服务器</AssemblyTitle>
+    <Description>高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2021 NewLife</Copyright>
+    <Copyright>©2002-2022 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -15,6 +15,7 @@
     <Deterministic>false</Deterministic>
     <OutputPath>..\Bin\TcpServer</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

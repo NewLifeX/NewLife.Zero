@@ -47,7 +47,6 @@ services.AddHostedService<MyHostedService>();
 var app = builder.Build();
 
 // 预热数据层，执行反向工程建表等操作
-EntityFactory.InitConnection("Membership");
 EntityFactory.InitConnection("Zero");
 
 // 使用星尘，启用性能监控，拦截所有接口做埋点统计

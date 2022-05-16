@@ -14,7 +14,7 @@ var services = ObjectContainer.Current;
 services.AddSingleton(XTrace.Log);
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
-var star = new StarFactory(null, null, null);
+var star = new StarFactory();
 if (star.Server.IsNullOrEmpty()) star = null;
 
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器

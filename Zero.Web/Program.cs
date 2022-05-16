@@ -37,9 +37,6 @@ services.AddHostedService<MyHostedService>();
 var app = builder.Build();
 
 // 预热数据层，执行反向工程建表等操作
-EntityFactory.InitConnection("Membership");
-EntityFactory.InitConnection("Log");
-EntityFactory.InitConnection("Cube");
 EntityFactory.InitConnection("Zero");
 
 // 使用Cube前添加自己的管道

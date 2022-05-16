@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>WebApi接口</AssemblyTitle>
-    <Description>RESTful数据接口</Description>
+    <Description>数据接口，带有Swagger的标准WebApi接口项目</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2022 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

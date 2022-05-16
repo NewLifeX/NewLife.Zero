@@ -1,63 +1,61 @@
-﻿using System;
-using NewLife.Log;
+﻿using NewLife.Log;
 using NewLife.Remoting;
 using Zero.Data.Projects;
 
-namespace Zero.RpcServer
+namespace Zero.RpcServer;
+
+/// <summary>产品控制器。会话获取，请求过滤</summary>
+[Api("Product")]
+internal class ProductController : IApi, IActionFilter
 {
-    /// <summary>产品控制器。会话获取，请求过滤</summary>
-    [Api("Product")]
-    class ProductController : IApi, IActionFilter
+    /// <summary>会话。同一Tcp/Udp会话多次请求共用，执行服务方法前赋值</summary>
+    public IApiSession Session { get; set; }
+
+    [Api(nameof(FindByID))]
+    public Product FindByID(Int32 id)
     {
-        /// <summary>会话。同一Tcp/Udp会话多次请求共用，执行服务方法前赋值</summary>
-        public IApiSession Session { get; set; }
+        // Session 用法同Web
+        var times = Session["Times"].ToInt();
+        times++;
+        Session["Times"] = times;
 
-        [Api(nameof(FindByID))]
-        public Product FindByID(Int32 id)
+        // 故意制造异常
+        if (times >= 2)
         {
-            // Session 用法同Web
-            var times = Session["Times"].ToInt();
-            times++;
-            Session["Times"] = times;
+            // 取得当前上下文
+            var ctx = ControllerContext.Current;
 
-            // 故意制造异常
-            if (times >= 2)
-            {
-                // 取得当前上下文
-                var ctx = ControllerContext.Current;
-
-                throw new ApiException(507, $"[{ctx.ActionName}]调用次数过多！Times={times}");
-            }
-
-            return Product.FindByID(id);
+            throw new ApiException(507, $"[{ctx.ActionName}]调用次数过多！Times={times}");
         }
 
-        /// <summary>本控制器执行前</summary>
-        /// <param name="filterContext"></param>
-        public void OnActionExecuting(ControllerContext filterContext)
+        return Product.FindByID(id);
+    }
+
+    /// <summary>本控制器执行前</summary>
+    /// <param name="filterContext"></param>
+    public void OnActionExecuting(ControllerContext filterContext)
+    {
+        // 请求参数
+        var ps = filterContext.Parameters;
+
+        // 服务参数
+        var cs = filterContext.ActionParameters;
+
+        foreach (var item in ps)
         {
-            // 请求参数
-            var ps = filterContext.Parameters;
-
-            // 服务参数
-            var cs = filterContext.ActionParameters;
-
-            foreach (var item in ps)
-            {
-                if (cs != null && !cs.ContainsKey(item.Key))
-                    XTrace.WriteLine("服务[{0}]未能找到匹配参数 {1}={2}", filterContext.ActionName, item.Key, item.Value);
-            }
+            if (cs != null && !cs.ContainsKey(item.Key))
+                XTrace.WriteLine("服务[{0}]未能找到匹配参数 {1}={2}", filterContext.ActionName, item.Key, item.Value);
         }
+    }
 
-        /// <summary>本控制器执行后，包括异常发生</summary>
-        /// <param name="filterContext"></param>
-        public void OnActionExecuted(ControllerContext filterContext)
+    /// <summary>本控制器执行后，包括异常发生</summary>
+    /// <param name="filterContext"></param>
+    public void OnActionExecuted(ControllerContext filterContext)
+    {
+        var ex = filterContext.Exception;
+        if (ex != null && !filterContext.ExceptionHandled)
         {
-            var ex = filterContext.Exception;
-            if (ex != null && !filterContext.ExceptionHandled)
-            {
-                XTrace.WriteLine("控制器拦截到异常：{0}", ex.Message);
-            }
+            XTrace.WriteLine("控制器拦截到异常：{0}", ex.Message);
         }
     }
 }

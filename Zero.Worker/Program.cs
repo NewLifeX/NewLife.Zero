@@ -8,7 +8,7 @@ using Zero.Worker;
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();
 
-IHost host = Host.CreateDefaultBuilder(args)
+var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
         // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址
