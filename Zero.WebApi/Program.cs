@@ -1,7 +1,11 @@
-﻿using NewLife;
+﻿using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using NewLife;
 using NewLife.Caching;
 using NewLife.Log;
 using XCode;
+using Zero.WebApi;
+using Zero.WebApi.Common;
 using Zero.WebApi.Services;
 
 //!!! 标准WebApi项目模板，新生命团队强烈推荐
@@ -35,7 +39,17 @@ var star = services.AddStardust(null);
     services.AddSingleton(rds);
 }
 
-builder.Services.AddControllers();
+var set = ProxySetting.Current;
+services.AddSingleton(set);
+
+services.AddSingleton<NodeService>();
+
+services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+    });
 
 // 引入 Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();

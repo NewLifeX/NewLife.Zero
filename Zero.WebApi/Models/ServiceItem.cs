@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Zero.WebApi;
+namespace Zero.WebApi.Models;
 
 /// <summary>应用服务信息</summary>
 public class ServiceItem
