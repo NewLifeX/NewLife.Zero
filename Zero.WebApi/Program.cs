@@ -44,6 +44,9 @@ services.AddSingleton(set);
 
 services.AddSingleton<NodeService>();
 
+// 启用接口响应压缩
+services.AddResponseCompression();
+
 services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -62,6 +65,8 @@ var app = builder.Build();
 
 // 预热数据层，执行反向工程建表等操作
 EntityFactory.InitConnection("Zero");
+
+app.UseResponseCompression();
 
 // 使用星尘，启用性能监控，拦截所有接口做埋点统计
 app.UseStardust();

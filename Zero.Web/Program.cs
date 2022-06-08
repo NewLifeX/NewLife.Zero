@@ -26,6 +26,9 @@ if (config != null && !config["redisCache"].IsNullOrEmpty())
 else
     services.AddSingleton<ICache>(cache);
 
+// 启用接口响应压缩
+services.AddResponseCompression();
+
 services.AddControllersWithViews();
 
 // 引入魔方
@@ -44,6 +47,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 else
     app.UseExceptionHandler("/CubeHome/Error");
+
+app.UseResponseCompression();
 
 // 使用魔方
 app.UseCube(app.Environment);
