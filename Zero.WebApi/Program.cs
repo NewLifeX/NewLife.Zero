@@ -63,8 +63,8 @@ services.AddHostedService<MyHostedService>();
 
 var app = builder.Build();
 
-// 预热数据层，执行反向工程建表等操作
-// 连接名 Zero 对应 Zero.Data/Projects/Model.xml 头部的 ConnName
+// 预热数据层，执行自动建表等操作
+// 连接名 Zero 对应连接字符串名字，同时也对应 Zero.Data/Projects/Model.xml 头部的 ConnName
 EntityFactory.InitConnection("Zero");
 
 app.UseResponseCompression();
