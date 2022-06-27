@@ -84,6 +84,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
-app.RegisterService("Zero.WebApi", null, "dev");
+app.RegisterService("Zero.WebApi", null, app.Environment.EnvironmentName);
 
 app.Run();

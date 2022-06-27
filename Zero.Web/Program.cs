@@ -57,7 +57,7 @@ app.UseCube(app.Environment);
 app.UseAuthorization();
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
-app.RegisterService("Zero.Web", null, "dev");
+app.RegisterService("Zero.Web", null, app.Environment.EnvironmentName);
 
 app.UseEndpoints(endpoints =>
 {
