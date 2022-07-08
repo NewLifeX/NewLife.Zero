@@ -1,31 +1,58 @@
 ﻿using NewLife;
 using NewLife.Log;
 using NewLife.RocketMQ;
+using NewLife.RocketMQ.Protocol;
 
 namespace Zero.Worker;
 
-public class RocketMqWorker : BackgroundService
+public class RocketMqWorker : IHostedService
 {
-    private readonly Consumer _consumer;
+    private Consumer _consumer;
+    private readonly ITracer _tracer;
 
-    public RocketMqWorker(Consumer consumer) => _consumer = consumer;
+    public RocketMqWorker(ITracer tracer) => _tracer = tracer;
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public Task StartAsync(CancellationToken cancellationToken)
     {
-        await Task.Yield();
-
-        _consumer.OnConsume = (q, ms) =>
+        // 引入 RocketMQ 消费者
+        var consumer = new Consumer
         {
-            XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", q.BrokerName, q.QueueId, ms.Length);
+            Topic = "nx_test",
+            Group = "test",
+            NameServerAddress = "127.0.0.1:9876",
 
-            foreach (var item in ms.ToList())
-            {
-                XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
-            }
+            FromLastOffset = true,
+            BatchSize = 20,
 
-            return true;
+            Tracer = _tracer,
+            Log = XTrace.Log,
+
+            OnConsume = OnConsume
         };
+        consumer.Start();
 
-        _consumer.Start();
+        _consumer = consumer;
+
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _consumer.Stop();
+        _consumer.TryDispose();
+
+        return Task.CompletedTask;
+    }
+
+    private Boolean OnConsume(MessageQueue queue, MessageExt[] messages)
+    {
+        XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", queue.BrokerName, queue.QueueId, messages.Length);
+
+        foreach (var item in messages.ToList())
+        {
+            XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
+        }
+
+        return true;
     }
 }

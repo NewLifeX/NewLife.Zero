@@ -1,37 +1,59 @@
 ﻿using NewLife.RocketMQ;
 using NewLife.RocketMQ.Protocol;
 
-namespace Zero.Console
+namespace Zero.Console;
+
+/// <summary>
+/// RocketMQ消费端
+/// </summary>
+public class RocketMqWorker : IHostedService
 {
-    /// <summary>
-    /// RocketMQ消费端
-    /// </summary>
-    public class RocketMqWorker : IHostedService
+    private Consumer _consumer;
+    private readonly ITracer _tracer;
+
+    public RocketMqWorker(ITracer tracer) => _tracer = tracer;
+
+    public Task StartAsync(CancellationToken cancellationToken)
     {
-        private readonly Consumer _consumer;
-
-        public RocketMqWorker(Consumer consumer) => _consumer = consumer;
-
-        public async Task StartAsync(CancellationToken cancellationToken)
+        // 引入 RocketMQ 消费者
+        var consumer = new Consumer
         {
-            await Task.Yield();
+            Topic = "nx_test",
+            Group = "test",
+            NameServerAddress = "127.0.0.1:9876",
 
-            _consumer.OnConsume = OnConsume;
-            _consumer.Start();
+            FromLastOffset = true,
+            BatchSize = 20,
+
+            Tracer = _tracer,
+            Log = XTrace.Log,
+
+            OnConsume = OnConsume
+        };
+        consumer.Start();
+
+        _consumer = consumer;
+
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _consumer.Stop();
+        _consumer.TryDispose();
+
+        return Task.CompletedTask;
+    }
+
+    private Boolean OnConsume(MessageQueue queue, MessageExt[] messages)
+    {
+        XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", queue.BrokerName, queue.QueueId, messages.Length);
+
+        foreach (var item in messages.ToList())
+        {
+            XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
         }
 
-        Boolean OnConsume(MessageQueue queue, MessageExt[] message)
-        {
-            XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", queue.BrokerName, queue.QueueId, message.Length);
-
-            foreach (var item in message.ToList())
-            {
-                XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
-            }
-
-            return true;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+        return true;
     }
 }

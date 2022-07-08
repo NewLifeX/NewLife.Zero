@@ -70,19 +70,4 @@ static void InitRocketMq(IObjectContainer services, ITracer? tracer)
         Log = XTrace.Log,
     };
     services.AddSingleton(producer);
-
-    // 引入 RocketMQ 消费者
-    var consumer = new Consumer
-    {
-        Topic = "nx_test",
-        Group = "test",
-        NameServerAddress = "127.0.0.1:9876",
-
-        FromLastOffset = true,
-        BatchSize = 20,
-
-        Tracer = tracer,
-        Log = XTrace.Log,
-    };
-    services.AddSingleton(consumer);
 }
