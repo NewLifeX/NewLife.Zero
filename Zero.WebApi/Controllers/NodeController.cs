@@ -13,9 +13,9 @@ public class NodeController : BaseController
 {
     private Node _node;
     private readonly NodeService _nodeService;
-    private readonly ProxySetting _setting;
+    private readonly ApiSetting _setting;
 
-    public NodeController(NodeService nodeService, ProxySetting setting)
+    public NodeController(NodeService nodeService, ApiSetting setting)
     {
         _nodeService = nodeService;
         _setting = setting;

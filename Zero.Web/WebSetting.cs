@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
 using NewLife.Configuration;
 
-namespace Zero.Worker;
+namespace Zero.Web;
 
-/// <summary>代理设置</summary>
-[DisplayName("代理设置")]
-[Config("Proxy")]
-public class ProxySetting : Config<ProxySetting>
+/// <summary>设置</summary>
+[Config("Web")]
+public class WebSetting : Config<WebSetting>
 {
     #region 属性
     /// <summary>调试。默认启用</summary>

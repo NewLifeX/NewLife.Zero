@@ -39,7 +39,7 @@ var star = services.AddStardust(null);
     services.AddSingleton(rds);
 }
 
-var set = ProxySetting.Current;
+var set = ApiSetting.Current;
 services.AddSingleton(set);
 
 services.AddSingleton<NodeService>();

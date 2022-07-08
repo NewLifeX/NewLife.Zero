@@ -47,7 +47,7 @@ public class NodeService
         return node;
     }
 
-    public TokenModel Login(Node node, LoginInfo inf, String ip, ProxySetting set)
+    public TokenModel Login(Node node, LoginInfo inf, String ip, ApiSetting set)
     {
         if (!inf.ProductCode.IsNullOrEmpty()) node.ProductCode = inf.ProductCode;
 
@@ -206,7 +206,7 @@ public class NodeService
     #endregion
 
     #region 心跳
-    public PingResponse Ping(Node node, PingInfo inf, String token, String ip, ProxySetting set)
+    public PingResponse Ping(Node node, PingInfo inf, String token, String ip, ApiSetting set)
     {
         var rs = new PingResponse
         {
@@ -292,7 +292,7 @@ public class NodeService
     #endregion
 
     #region 辅助
-    public TokenModel IssueToken(String name, ProxySetting set)
+    public TokenModel IssueToken(String name, ApiSetting set)
     {
         // 颁发令牌
         var ss = set.TokenSecret.Split(':');
@@ -340,7 +340,7 @@ public class NodeService
         return node;
     }
 
-    public TokenModel ValidAndIssueToken(String deviceCode, String token, ProxySetting set)
+    public TokenModel ValidAndIssueToken(String deviceCode, String token, ApiSetting set)
     {
         if (token.IsNullOrEmpty()) return null;
         //var set = Setting.Current;
