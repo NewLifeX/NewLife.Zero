@@ -34,7 +34,7 @@ services.AddControllersWithViews();
 // 引入魔方
 services.AddCube();
 
-// 后台服务s
+// 后台服务
 services.AddHostedService<MyHostedService>();
 
 var app = builder.Build();

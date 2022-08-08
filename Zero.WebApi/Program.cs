@@ -58,7 +58,7 @@ services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 后台服务s
+// 后台服务
 services.AddHostedService<MyHostedService>();
 
 var app = builder.Build();

@@ -18,7 +18,6 @@ bld/
 /Data
 /Log
 *.log
-*.htm
 *.nuspec
 *.nupkg
 Config/
