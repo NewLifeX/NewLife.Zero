@@ -47,7 +47,7 @@ public class MyHostedService : IHostedService
         if (_client != null && _client.Services.Count > 0)
         {
             // 尝试调用接口
-            var rs = await _client?.GetAsync<Object>("api/info", new { state = "NewLife1234" });
+            var rs = await _client?.GetAsync<Object>("api", new { state = "NewLife1234" });
             XTrace.WriteLine("api接口信息：{0}", rs.ToJson(true));
         }
     }
