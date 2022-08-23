@@ -28,10 +28,7 @@ var host = Host.CreateDefaultBuilder(args)
 
         {
             // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
-            var rds = new FullRedis { Tracer = star.Tracer };
-            rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
-            //services.AddSingleton<ICache>(rds);
-            services.AddSingleton(rds);
+            services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
         }
 
         // 注册后台服务
