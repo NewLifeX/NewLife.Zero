@@ -20,6 +20,8 @@ public class ApiController : ControllerBase
     {
         var asmx = AssemblyX.Entry;
         var conn = HttpContext.Connection;
+        var remote = conn.RemoteIpAddress;
+        if (remote.IsIPv4MappedToIPv6) remote = remote.MapToIPv4();
         var ip = HttpContext.GetUserHost();
 
         var rs = new
@@ -31,7 +33,7 @@ public class ApiController : ControllerBase
             OS = _OS,
 
             UserHost = ip + "",
-            Remote = conn.RemoteIpAddress + "",
+            Remote = remote + "",
             Port = conn.LocalPort,
             Time = DateTime.Now,
             State = state,
