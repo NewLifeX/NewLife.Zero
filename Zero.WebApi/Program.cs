@@ -16,6 +16,9 @@ XTrace.UseConsole();
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
+// 初始化配置文件
+InitConfig();
+
 // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust(null);
 
@@ -84,3 +87,23 @@ app.MapControllers();
 app.RegisterService("Zero.WebApi", null, app.Environment.EnvironmentName);
 
 app.Run();
+
+static void InitConfig()
+{
+    // 配置
+    var set = NewLife.Setting.Current;
+    if (set.IsNew)
+    {
+        set.LogPath = "../LogApi";
+        set.DataPath = "../Data";
+        set.BackupPath = "../Backup";
+        set.Save();
+    }
+    //var set2 = XCode.Setting.Current;
+    //if (set2.IsNew)
+    //{
+    //    // 关闭SQL日志输出
+    //    set2.ShowSQL = false;
+    //    set2.Save();
+    //}
+}
