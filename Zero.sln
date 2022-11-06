@@ -46,6 +46,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.WebSocketServer", "Zer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Console", "Zero.Console\Zero.Console.csproj", "{D237A243-D472-4C6B-86B7-59CC30DBF2ED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Agent2", "Zero.Agent2\Zero.Agent2.csproj", "{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{D237A243-D472-4C6B-86B7-59CC30DBF2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D237A243-D472-4C6B-86B7-59CC30DBF2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D237A243-D472-4C6B-86B7-59CC30DBF2ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{C37ACD4A-03B5-4B99-90D0-9A52AB297789} = {724BE399-0C7B-428E-A6C8-6290CEA910E6}
 		{7E77D545-3B99-4A02-80D7-DE8CCD968739} = {724BE399-0C7B-428E-A6C8-6290CEA910E6}
 		{D237A243-D472-4C6B-86B7-59CC30DBF2ED} = {F3C64311-26FD-4720-9C41-A33DBE0181BB}
+		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70} = {F3C64311-26FD-4720-9C41-A33DBE0181BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE924F3A-C35B-41BB-9987-B45CA13A8723}
