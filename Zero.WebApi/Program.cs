@@ -55,18 +55,14 @@ services.Configure<JsonOptions>(options =>
 #if NET7_0_OR_GREATER
     // 支持模型类中的DataMember特性
     options.JsonSerializerOptions.TypeInfoResolver = DataMemberResolver.Default;
-    options.JsonSerializerOptions.Converters.Add(new JsonConverterForType());
 #endif
+    options.JsonSerializerOptions.Converters.Add(new TypeConverter());
+    options.JsonSerializerOptions.Converters.Add(new LocalTimeConverter());
     // 支持中文编码
     options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 });
 
-services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
-        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-    });
+services.AddControllers();
 
 // 引入 Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
