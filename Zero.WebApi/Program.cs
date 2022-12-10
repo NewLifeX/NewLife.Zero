@@ -1,8 +1,10 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Caching;
 using NewLife.Log;
+using NewLife.Serialization;
 using XCode;
 using Zero.WebApi;
 using Zero.WebApi.Common;
@@ -46,6 +48,18 @@ services.AddSingleton<NodeService>();
 
 // 启用接口响应压缩
 services.AddResponseCompression();
+
+// 配置Json
+services.Configure<JsonOptions>(options =>
+{
+#if NET7_0_OR_GREATER
+    // 支持模型类中的DataMember特性
+    options.JsonSerializerOptions.TypeInfoResolver = DataMemberResolver.Default;
+    options.JsonSerializerOptions.Converters.Add(new JsonConverterForType());
+#endif
+    // 支持中文编码
+    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+});
 
 services.AddControllers()
     .AddJsonOptions(options =>
