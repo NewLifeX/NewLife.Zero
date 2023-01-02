@@ -34,7 +34,8 @@ server.EncoderLog = XTrace.Log;
 
 server.Start();
 
-star.Service?.Register("MyRpcServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
+// 注册到星尘，非必须
+star?.Service?.Register("MyRpcServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
 // 阻塞，等待友好退出
 await ObjectContainer.Current.BuildHost().RunAsync();

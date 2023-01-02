@@ -72,7 +72,8 @@ namespace Zero.Server
             };
             svr.Start();
 
-            _star.Service.Register("MyNetServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
+            // 注册到星尘，非必须
+            _star.Service?.Register("MyNetServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
 
             _netServer = svr;
         }
@@ -105,7 +106,8 @@ namespace Zero.Server
 
             svr.Start();
 
-            _star.Service.Register("MyRpcServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
+            // 注册到星尘，非必须
+            _star.Service?.Register("MyRpcServer", () => $"tcp://*:{svr.Port},udp://*:{svr.Port}");
 
             _rpcServer = svr;
         }

@@ -20,11 +20,11 @@
 
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.2.2022.1001" />
-    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.0.2022.1201" />
+    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.0.2023.101" />
     <PackageReference Include="NewLife.MQTT" Version="1.2.2022.1201" />
-    <PackageReference Include="NewLife.Redis" Version="5.0.2022.1201" />
+    <PackageReference Include="NewLife.Redis" Version="5.1.2023.101" />
     <PackageReference Include="NewLife.RocketMQ" Version="2.1.2022.1201" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.5.2022.1201" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.6.2023.101" />
   </ItemGroup>
 
   <ItemGroup>
