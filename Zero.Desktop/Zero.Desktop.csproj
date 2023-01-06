@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
+    <AssemblyName>ZeroDesktop</AssemblyName>
     <AssemblyTitle>客户端窗体应用</AssemblyTitle>
     <Description>CS架构的客户端窗体应用，给用户提供便捷操作，可对接硬件</Description>
     <Company>新生命开发团队</Company>
@@ -21,8 +22,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Stardust" Version="2.6.2023.101" />
+    <PackageReference Include="NewLife.Stardust" Version="2.6.2023.106-beta1502" />
     <PackageReference Include="NewLife.XCode" Version="11.5.2023.101" />
+    <PackageReference Include="System.Speech" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
   </ItemGroup>
 
 </Project>
