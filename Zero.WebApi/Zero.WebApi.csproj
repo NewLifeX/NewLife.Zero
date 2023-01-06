@@ -5,7 +5,7 @@
     <AssemblyTitle>WebApi接口</AssemblyTitle>
     <Description>数据接口，带有Swagger的标准WebApi接口项目</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2022 NewLife</Copyright>
+    <Copyright>©2002-2023 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -17,10 +17,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Common\DateTimeConverter.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.0.2023.101" />

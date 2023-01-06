@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyTitle>Tcp网络服务器</AssemblyTitle>
-    <Description>高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器</Description>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <AssemblyTitle>客户端窗体应用</AssemblyTitle>
+    <Description>CS架构的客户端窗体应用，给用户提供便捷操作，可对接硬件</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2023 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
@@ -13,21 +13,16 @@
     <FileVersion>$(Version)</FileVersion>
     <AssemblyVersion>$(VersionPrefix).*</AssemblyVersion>
     <Deterministic>false</Deterministic>
-    <OutputPath>..\Bin\TcpServer</OutputPath>
+    <OutputPath>..\Bin\Desktop</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="10.1.2023.101" />
     <PackageReference Include="NewLife.Stardust" Version="2.6.2023.101" />
     <PackageReference Include="NewLife.XCode" Version="11.5.2023.101" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
   </ItemGroup>
 
 </Project>
