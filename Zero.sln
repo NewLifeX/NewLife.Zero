@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "客户端应用", "客户�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.Desktop", "Zero.Desktop\Zero.Desktop.csproj", "{25394835-D3F9-45F8-8435-74B9E0E610DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.Client", "Zero.Client\Zero.Client.csproj", "{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{25394835-D3F9-45F8-8435-74B9E0E610DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25394835-D3F9-45F8-8435-74B9E0E610DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25394835-D3F9-45F8-8435-74B9E0E610DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{D237A243-D472-4C6B-86B7-59CC30DBF2ED} = {F3C64311-26FD-4720-9C41-A33DBE0181BB}
 		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70} = {F3C64311-26FD-4720-9C41-A33DBE0181BB}
 		{25394835-D3F9-45F8-8435-74B9E0E610DD} = {8D08D025-15F9-422C-AF16-9D93929570D0}
+		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE924F3A-C35B-41BB-9987-B45CA13A8723}
