@@ -1,4 +1,6 @@
-﻿using NewLife;
+﻿using System.Reflection;
+using NewLife;
+using NewLife.Reflection;
 using XCode.DataAccessLayer;
 
 namespace Zero.Desktop;
@@ -14,6 +16,9 @@ public partial class FrmMain : Form
 
     private void FrmMain_Load(Object sender, EventArgs e)
     {
+        var asm = AssemblyX.Create(Assembly.GetExecutingAssembly());
+        Text = String.Format("{2} v{0} {1:HH:mm:ss}", asm.FileVersion, asm.Compile, Text);
+
         cbConns.DataSource = DAL.ConnStrs.Keys;
     }
 
