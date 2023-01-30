@@ -1,10 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewLife.Extensions.Hosting.AgentService;
 using NewLife.Log;
 using Zero.Agent2;
 
 XTrace.UseConsole();
+
+Environment.CurrentDirectory = ".".GetFullPath();
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
