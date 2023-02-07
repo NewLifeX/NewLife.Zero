@@ -25,10 +25,10 @@
     <Using Include="NewLife.Reflection" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NewLife.MQTT" Version="1.2.2022.1201" />
-    <PackageReference Include="NewLife.Redis" Version="5.1.2023.101" />
-    <PackageReference Include="NewLife.RocketMQ" Version="2.1.2022.1201" />
-    <PackageReference Include="NewLife.Stardust" Version="2.6.2023.101" />
+    <PackageReference Include="NewLife.MQTT" Version="1.2.2023.203" />
+    <PackageReference Include="NewLife.Redis" Version="5.1.2023.203" />
+    <PackageReference Include="NewLife.RocketMQ" Version="2.1.2023.205" />
+    <PackageReference Include="NewLife.Stardust" Version="2.6.2023.203" />
   </ItemGroup>
 
 </Project>
