@@ -1,6 +1,7 @@
 ﻿using NewLife.Caching;
 using NewLife.Log;
 using Zero.Worker.Models;
+using NewLife.Caching.Queues;
 
 namespace Zero.Worker;
 
