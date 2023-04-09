@@ -83,6 +83,7 @@ app.UseResponseCompression();
 app.UseStardust();
 
 // Configure the HTTP request pipeline.
+// 注意：生产环境swagger会被禁用，如需要在生产环境启用sw需要取消环境判断参数
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -94,6 +95,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
+// 如不使用星尘的注册中心，可以注释该行代码
 app.RegisterService("Zero.WebApi", null, app.Environment.EnvironmentName);
 
 app.Run();
