@@ -9,7 +9,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [Menu(0, false)]
     [ProjectsArea]
-    public class TeamMemberController : EntityController<TeamMember>
+    public class TeamMemberController : EntityController<TeamMember, TeamMemberModel>
     {
         protected override IEnumerable<TeamMember> Search(Pager p)
         {

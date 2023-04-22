@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Projects\Controllers\" />
+  </ItemGroup>
+
 </Project>

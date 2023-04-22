@@ -11,7 +11,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
     [Menu(60)]
-    public class VersionPlanController : EntityController<VersionPlan>
+    public class VersionPlanController : EntityController<VersionPlan, VersionPlanModel>
     {
         static VersionPlanController() => LogOnChange = true;
 

@@ -12,7 +12,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
     [Menu(90)]
-    public class TeamController : EntityController<Team>
+    public class TeamController : EntityController<Team, TeamModel>
     {
         static TeamController() => LogOnChange = true;
 
