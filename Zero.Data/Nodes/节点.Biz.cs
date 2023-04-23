@@ -173,6 +173,45 @@ namespace Zero.Data.Nodes
 
             return FindAll(_.IP == ip);
         }
+
+        /// <summary>根据编码查找</summary>
+        /// <param name="code">编码</param>
+        /// <returns>实体对象</returns>
+        public static Node FindByCode(String code)
+        {
+            if (code.IsNullOrEmpty()) return null;
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.Find(e => e.Code.EqualIgnoreCase(code));
+
+            return Find(_.Code == code);
+        }
+
+        /// <summary>根据分类查找</summary>
+        /// <param name="category">分类</param>
+        /// <returns>实体列表</returns>
+        public static IList<Node> FindAllByCategory(String category)
+        {
+            if (category.IsNullOrEmpty()) return new List<Node>();
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.Category.EqualIgnoreCase(category));
+
+            return FindAll(_.Category == category);
+        }
+
+        /// <summary>根据产品查找</summary>
+        /// <param name="productCode">产品</param>
+        /// <returns>实体列表</returns>
+        public static IList<Node> FindAllByProductCode(String productCode)
+        {
+            if (productCode.IsNullOrEmpty()) return new List<Node>();
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.ProductCode.EqualIgnoreCase(productCode));
+
+            return FindAll(_.ProductCode == productCode);
+        }
         #endregion
 
         #region 高级查询
@@ -344,7 +383,7 @@ namespace Zero.Data.Nodes
         /// <summary>根据编码查询或添加</summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static Node GetOrAdd(String code) => GetOrAdd(code, FindByCode, k => new Node { Code = k, Enable = true });
+        public static Node GetOrAdd(String code) => GetOrAdd(code, (k, c) => FindByCode(k, c), k => new Node { Code = k, Enable = true });
 
         /// <summary>登录并保存信息</summary>
         /// <param name="di"></param>

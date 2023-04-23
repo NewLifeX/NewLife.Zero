@@ -16,6 +16,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NewLife.Core" Version="10.2.2023.401" />
     <PackageReference Include="NewLife.Stardust" Version="2.8.2023.403" />
     <PackageReference Include="NewLife.XCode" Version="11.8.2023.401" />
@@ -23,10 +32,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

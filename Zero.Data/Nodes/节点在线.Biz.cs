@@ -93,6 +93,61 @@ namespace Zero.Data.Nodes
         /// <param name="nodeId"></param>
         /// <returns></returns>
         public static IList<NodeOnline> FindAllByNodeId(Int32 nodeId) => FindAll(_.NodeID == nodeId);
+
+        /// <summary>根据编号查找</summary>
+        /// <param name="id">编号</param>
+        /// <returns>实体对象</returns>
+        public static NodeOnline FindByID(Int32 id)
+        {
+            if (id <= 0) return null;
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.Find(e => e.ID == id);
+
+            // 单对象缓存
+            return Meta.SingleCache[id];
+
+            //return Find(_.ID == id);
+        }
+
+        /// <summary>根据会话查找</summary>
+        /// <param name="sessionId">会话</param>
+        /// <returns>实体对象</returns>
+        public static NodeOnline FindBySessionID(String sessionId)
+        {
+            if (sessionId.IsNullOrEmpty()) return null;
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.Find(e => e.SessionID.EqualIgnoreCase(sessionId));
+
+            return Find(_.SessionID == sessionId);
+        }
+
+        /// <summary>根据令牌查找</summary>
+        /// <param name="token">令牌</param>
+        /// <returns>实体列表</returns>
+        public static IList<NodeOnline> FindAllByToken(String token)
+        {
+            if (token.IsNullOrEmpty()) return new List<NodeOnline>();
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.Token.EqualIgnoreCase(token));
+
+            return FindAll(_.Token == token);
+        }
+
+        /// <summary>根据省份、城市查找</summary>
+        /// <param name="provinceId">省份</param>
+        /// <param name="cityId">城市</param>
+        /// <returns>实体列表</returns>
+        public static IList<NodeOnline> FindAllByProvinceIDAndCityID(Int32 provinceId, Int32 cityId)
+        {
+
+            // 实体缓存
+            if (Meta.Session.Count < 1000) return Meta.Cache.FindAll(e => e.ProvinceID == provinceId && e.CityID == cityId);
+
+            return FindAll(_.ProvinceID == provinceId & _.CityID == cityId);
+        }
         #endregion
 
         #region 高级查询
@@ -135,7 +190,7 @@ namespace Zero.Data.Nodes
         /// <summary>根据编码查询或添加</summary>
         /// <param name="sessionid"></param>
         /// <returns></returns>
-        public static NodeOnline GetOrAdd(String sessionid) => GetOrAdd(sessionid, FindBySessionID, k => new NodeOnline { SessionID = k });
+        public static NodeOnline GetOrAdd(String sessionid) => GetOrAdd(sessionid, (k, c) => FindBySessionID(k, c), k => new NodeOnline { SessionID = k });
 
         /// <summary>删除过期，指定过期时间</summary>
         /// <param name="expire">超时时间，秒</param>
