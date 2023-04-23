@@ -9,7 +9,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
     [Menu(80)]
-    public class MemberController : EntityController<Member>
+    public class MemberController : EntityController<Member, MemberDto>
     {
         static MemberController() => LogOnChange = true;
 

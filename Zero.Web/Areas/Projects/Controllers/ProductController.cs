@@ -10,7 +10,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [ProjectsArea]
     [Menu(70)]
-    public class ProductController : EntityController<Product>
+    public class ProductController : EntityController<Product, ProductModel>
     {
         static ProductController() => LogOnChange = true;
 

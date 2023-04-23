@@ -10,7 +10,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 {
     [Menu(0, false)]
     [ProjectsArea]
-    public class StoryController : EntityController<Story>
+    public class StoryController : EntityController<Story, StoryModel>
     {
         protected override IEnumerable<Story> Search(Pager p)
         {
