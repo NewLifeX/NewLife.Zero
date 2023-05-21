@@ -16,11 +16,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Config\**" />
     <Compile Remove="Interfaces\**" />
+    <Compile Remove="Log\**" />
     <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Config\**" />
     <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Log\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="Config\**" />
     <None Remove="Interfaces\**" />
+    <None Remove="Log\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
