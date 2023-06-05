@@ -7,7 +7,6 @@ using NewLife.Log;
 using NewLife.Serialization;
 using XCode;
 using Zero.WebApi;
-using Zero.WebApi.Common;
 using Zero.WebApi.Services;
 
 //!!! 标准WebApi项目模板，新生命团队强烈推荐
@@ -93,6 +92,10 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+// 注册退出事件
+if (app is IHost host)
+    NewLife.Model.Host.RegisterExit(() => host.StopAsync().Wait());
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
 // 如不使用星尘的注册中心，可以注释该行代码

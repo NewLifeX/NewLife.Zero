@@ -59,15 +59,17 @@ app.UseCube(app.Environment);
 
 app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=CubeHome}/{action=Index}/{id?}"
+);
+
+// 注册退出事件
+if (app is IHost host)
+    NewLife.Model.Host.RegisterExit(() => host.StopAsync().Wait());
+
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
 app.RegisterService("Zero.Web", null, app.Environment.EnvironmentName);
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=CubeHome}/{action=Index}/{id?}");
-});
 
 app.Run();
 

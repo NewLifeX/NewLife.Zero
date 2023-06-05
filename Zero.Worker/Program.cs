@@ -42,6 +42,9 @@ var host = Host.CreateDefaultBuilder(args)
     })
     .Build();
 
+// 注册退出事件
+NewLife.Model.Host.RegisterExit(() => host.StopAsync().Wait());
+
 await host.RunAsync();
 
 static void InitConfig()

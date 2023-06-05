@@ -18,7 +18,9 @@ if (star.Server.IsNullOrEmpty()) star = null;
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器
 InitMqtt(services, star?.Tracer);
 
-Thread.Sleep(-1);
+// 异步阻塞，友好退出
+var host = services.BuildHost();
+await host.RunAsync();
 
 static void InitMqtt(IObjectContainer services, ITracer? tracer)
 {

@@ -51,7 +51,8 @@ internal class Program
         _ = Task.Run(ClientTest);
 
         // 阻塞，等待友好退出
-        await ObjectContainer.Current.BuildHost().RunAsync();
+        var host = services.BuildHost();
+        await host.RunAsync();
     }
 
     private static async void ClientTest()

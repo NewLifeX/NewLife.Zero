@@ -8,6 +8,8 @@ using Zero.RpcServer;
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();
 
+var services = ObjectContainer.Current;
+
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
 var star = new StarFactory();
 if (star.Server.IsNullOrEmpty()) star = null;
@@ -38,4 +40,5 @@ server.Start();
 star?.Service?.Register("MyRpcServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
 // 阻塞，等待友好退出
-await ObjectContainer.Current.BuildHost().RunAsync();
+var host = services.BuildHost();
+await host.RunAsync();
