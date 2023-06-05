@@ -20,10 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="10.4.2023.504" />
-    <PackageReference Include="NewLife.Core" Version="10.3.2023.503" />
-    <PackageReference Include="NewLife.Stardust" Version="2.8.2023.403" />
-    <PackageReference Include="NewLife.XCode" Version="11.8.2023.503" />
+    <PackageReference Include="NewLife.Agent" Version="10.4.2023.601" />
+    <PackageReference Include="NewLife.Core" Version="10.3.2023.601" />
+    <PackageReference Include="NewLife.Stardust" Version="2.9.2023.601" />
+    <PackageReference Include="NewLife.XCode" Version="11.8.2023.601" />
   </ItemGroup>
 
   <ItemGroup>

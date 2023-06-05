@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife.Data;
+using NewLife.Reflection;
 
 namespace Zero.Data.Projects;
 
@@ -55,7 +56,7 @@ public partial class TeamMemberModel : IModel
                 "Leader" => Leader,
                 "Enable" => Enable,
                 "Remark" => Remark,
-                _ => null
+                _ => this.GetValue(name),
             };
         }
         set
@@ -70,6 +71,7 @@ public partial class TeamMemberModel : IModel
                 case "Leader": Leader = value.ToBoolean(); break;
                 case "Enable": Enable = value.ToBoolean(); break;
                 case "Remark": Remark = Convert.ToString(value); break;
+                default: this.SetValue(name, value); break;
             }
         }
     }

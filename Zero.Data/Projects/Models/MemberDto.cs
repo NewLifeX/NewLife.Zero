@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife.Data;
+using NewLife.Reflection;
 
 namespace Zero.Data.Projects;
 
@@ -59,7 +60,7 @@ public partial class MemberDto : IMember, IModel
                 "UserId" => UserId,
                 "UserName" => UserName,
                 "Remark" => Remark,
-                _ => null
+                _ => this.GetValue(name),
             };
         }
         set
@@ -75,6 +76,7 @@ public partial class MemberDto : IMember, IModel
                 case "UserId": UserId = value.ToInt(); break;
                 case "UserName": UserName = Convert.ToString(value); break;
                 case "Remark": Remark = Convert.ToString(value); break;
+                default: this.SetValue(name, value); break;
             }
         }
     }

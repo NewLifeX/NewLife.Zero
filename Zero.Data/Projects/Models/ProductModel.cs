@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife.Data;
+using NewLife.Reflection;
 
 namespace Zero.Data.Projects;
 
@@ -63,7 +64,7 @@ public partial class ProductModel : IModel
                 "Stories" => Stories,
                 "Completed" => Completed,
                 "Remark" => Remark,
-                _ => null
+                _ => this.GetValue(name),
             };
         }
         set
@@ -80,6 +81,7 @@ public partial class ProductModel : IModel
                 case "Stories": Stories = value.ToInt(); break;
                 case "Completed": Completed = value.ToBoolean(); break;
                 case "Remark": Remark = Convert.ToString(value); break;
+                default: this.SetValue(name, value); break;
             }
         }
     }
