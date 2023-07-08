@@ -29,7 +29,7 @@ namespace Zero.Console
             await _mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
         }
 
-        void OnConsume(Object? sender, EventArgs<PublishMessage> args)
+        void OnConsume(Object sender, EventArgs<PublishMessage> args)
         {
             var pm = args.Arg;
             var msg = pm.Payload.ToStr();

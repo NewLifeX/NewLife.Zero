@@ -34,7 +34,7 @@ await host.RunAsync();
 
 
 
-static void InitRedis(IObjectContainer services, ITracer? tracer)
+static void InitRedis(IObjectContainer services, ITracer tracer)
 {
     // 引入 Redis，用于消息队列和缓存，单例，带性能跟踪
     var rds = new FullRedis { Tracer = tracer };
@@ -43,7 +43,7 @@ static void InitRedis(IObjectContainer services, ITracer? tracer)
     services.AddSingleton(rds);
 }
 
-static void InitMqtt(IObjectContainer services, ITracer? tracer)
+static void InitMqtt(IObjectContainer services, ITracer tracer)
 {
     // 引入 MQTT
     var mqtt = new MqttClient
@@ -59,7 +59,7 @@ static void InitMqtt(IObjectContainer services, ITracer? tracer)
     services.AddSingleton(mqtt);
 }
 
-static void InitRocketMq(IObjectContainer services, ITracer? tracer)
+static void InitRocketMq(IObjectContainer services, ITracer tracer)
 {
     // 引入 RocketMQ 生产者
     var producer = new Producer

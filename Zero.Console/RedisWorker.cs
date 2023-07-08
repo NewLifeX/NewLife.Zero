@@ -11,7 +11,7 @@ public class RedisWorker : IHostedService
 {
     private readonly FullRedis _redis;
     private readonly ILog _log;
-    private RedisReliableQueue<String>? _queue;
+    private RedisReliableQueue<String> _queue;
 
     public RedisWorker(FullRedis redis, ILog log)
     {

@@ -19,12 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.AntJob" Version="3.2.2023.402" />
-    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.2.2023.402" />
-    <PackageReference Include="NewLife.Core" Version="10.3.2023.601" />
-    <PackageReference Include="NewLife.Redis" Version="5.4.2023.601" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2023.601" />
-    <PackageReference Include="NewLife.XCode" Version="11.8.2023.601" />
+    <PackageReference Include="NewLife.AntJob" Version="3.3.2023.610-beta0452" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.3.2023.610-beta0452" />
+    <PackageReference Include="NewLife.Core" Version="10.4.2023.707" />
+    <PackageReference Include="NewLife.Redis" Version="5.4.2023.707-beta0321" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2023.707-beta0322" />
+    <PackageReference Include="NewLife.XCode" Version="11.8.2023.707-beta0320" />
   </ItemGroup>
 
   <ItemGroup>

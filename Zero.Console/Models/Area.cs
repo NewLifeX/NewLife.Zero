@@ -10,6 +10,6 @@ namespace Zero.Console.Models
     {
         public Int32 Code { get; set; }
 
-        public String? Name { get; set; }
+        public String Name { get; set; }
     }
 }

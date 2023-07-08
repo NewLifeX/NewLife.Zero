@@ -22,7 +22,7 @@ InitMqtt(services, star?.Tracer);
 var host = services.BuildHost();
 await host.RunAsync();
 
-static void InitMqtt(IObjectContainer services, ITracer? tracer)
+static void InitMqtt(IObjectContainer services, ITracer tracer)
 {
     // 引入 MQTT
     var mqtt = new MqttClient

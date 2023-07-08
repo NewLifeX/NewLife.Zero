@@ -18,7 +18,7 @@ namespace Zero.Console
         private readonly MqttClient _mqtt;
         private readonly Producer _producer;
         private readonly StarFactory _star;
-        private ApiHttpClient? _client;
+        private ApiHttpClient _client;
 
         public Worker(ILog logger, FullRedis redis, MqttClient mqtt, Producer producer, StarFactory star)
         {

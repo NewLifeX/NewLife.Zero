@@ -27,11 +27,11 @@ class MyNetSession : NetSession<MyNetServer>
     }
 
     /// <summary>客户端断开连接</summary>
-    protected override void OnDisconnected()
+    protected override void OnDisconnected(String reason)
     {
-        WriteLog("客户端{0}已经断开连接啦", Remote);
+        WriteLog("客户端{0}已经断开连接啦。{1}", Remote, reason);
 
-        base.OnDisconnected();
+        base.OnDisconnected(reason);
     }
 
     /// <summary>收到客户端数据</summary>

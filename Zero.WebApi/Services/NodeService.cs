@@ -6,7 +6,6 @@ using NewLife.Security;
 using NewLife.Serialization;
 using NewLife.Web;
 using Stardust.Models;
-using XCode;
 using Zero.Data.Nodes;
 
 namespace Zero.WebApi.Services;
@@ -158,7 +157,7 @@ public class NodeService
         var di = inf.Node;
         var code = (di.UUID + di.MachineGuid).GetBytes().Crc().GetBytes().ToHex();
         if (code.IsNullOrEmpty()) Rand.NextString(8);
-        if (node == null) node = Node.FindByCode(code);
+        node ??= Node.FindByCode(code);
 
         if (node == null)
         {
@@ -169,14 +168,14 @@ public class NodeService
             list = list.OrderBy(e => e.ID).ToList();
 
             // 找到节点
-            if (node == null) node = list.FirstOrDefault();
+            node ??= list.FirstOrDefault();
         }
 
         var name = "";
         if (name.IsNullOrEmpty()) name = di.MachineName;
         if (name.IsNullOrEmpty()) name = di.UserName;
 
-        if (node == null) node = new Node
+        node ??= new Node
         {
             Enable = true,
 
@@ -211,7 +210,7 @@ public class NodeService
         var rs = new PingResponse
         {
             Time = inf.Time,
-            ServerTime = DateTime.UtcNow,
+            ServerTime = DateTime.UtcNow.ToLong(),
         };
 
         if (node != null)
