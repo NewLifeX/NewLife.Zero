@@ -19,9 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.4.2023.707-beta0321" />
-    <PackageReference Include="NewLife.Redis" Version="5.4.2023.707-beta0321" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2023.707-beta0322" />
+    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.5.2023.803" />
+    <PackageReference Include="NewLife.Redis" Version="5.5.2023.803" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2023.801" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
