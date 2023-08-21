@@ -2,6 +2,7 @@
 using NewLife.Caching;
 using NewLife.Log;
 using Zero.Worker;
+using Zero.Worker.Services;
 
 //!!! 标准Worker模板，可以使用完整的IOC
 
@@ -39,6 +40,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddHostedService<RedisWorker>();
         //services.AddHostedService<MqttWorker>();
         //services.AddHostedService<RocketMqWorker>();
+        // 先预热数据，再启动Web服务，避免网络连接冲击
+        services.AddHostedService<PreheatHostedService>();
     })
     .Build();
 

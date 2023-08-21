@@ -69,6 +69,8 @@ builder.Services.AddSwaggerGen();
 
 // 后台服务
 services.AddHostedService<MyHostedService>();
+// 先预热数据，再启动Web服务，避免网络连接冲击
+services.AddHostedService<PreheatHostedService>();
 
 var app = builder.Build();
 
