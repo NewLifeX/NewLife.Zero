@@ -24,7 +24,7 @@ public partial interface IStory
     Int32 MemberId { get; set; }
 
     /// <summary>事项</summary>
-    String Title { get; set; }
+    String? Title { get; set; }
 
     /// <summary>开始日期</summary>
     DateTime StartDate { get; set; }
@@ -39,6 +39,6 @@ public partial interface IStory
     Boolean Enable { get; set; }
 
     /// <summary>备注</summary>
-    String Remark { get; set; }
+    String? Remark { get; set; }
     #endregion
 }

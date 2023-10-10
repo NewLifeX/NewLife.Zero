@@ -21,7 +21,7 @@ public partial interface ITeamMember
     Int32 MemberId { get; set; }
 
     /// <summary>类型</summary>
-    String Kind { get; set; }
+    String? Kind { get; set; }
 
     /// <summary>主要。是否该成员的主要团队</summary>
     Boolean Major { get; set; }
@@ -33,6 +33,6 @@ public partial interface ITeamMember
     Boolean Enable { get; set; }
 
     /// <summary>备注</summary>
-    String Remark { get; set; }
+    String? Remark { get; set; }
     #endregion
 }

@@ -23,10 +23,10 @@ public partial class VersionPlanModel : IModel
     public Int32 ProductId { get; set; }
 
     /// <summary>名称。版本号</summary>
-    public String Name { get; set; }
+    public String? Name { get; set; }
 
     /// <summary>类型</summary>
-    public String Kind { get; set; }
+    public String? Kind { get; set; }
 
     /// <summary>开始日期</summary>
     public DateTime StartDate { get; set; }
@@ -47,14 +47,14 @@ public partial class VersionPlanModel : IModel
     public Int32 Stories { get; set; }
 
     /// <summary>备注</summary>
-    public String Remark { get; set; }
+    public String? Remark { get; set; }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public virtual Object this[String name]
+    public virtual Object? this[String name]
     {
         get
         {
@@ -72,7 +72,7 @@ public partial class VersionPlanModel : IModel
                 "Completed" => Completed,
                 "Stories" => Stories,
                 "Remark" => Remark,
-                _ => this.GetValue(name),
+                _ => this.GetValue(name, false),
             };
         }
         set

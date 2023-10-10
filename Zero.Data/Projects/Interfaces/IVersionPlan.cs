@@ -21,10 +21,10 @@ public partial interface IVersionPlan
     Int32 ProductId { get; set; }
 
     /// <summary>名称。版本号</summary>
-    String Name { get; set; }
+    String? Name { get; set; }
 
     /// <summary>类型</summary>
-    String Kind { get; set; }
+    String? Kind { get; set; }
 
     /// <summary>开始日期</summary>
     DateTime StartDate { get; set; }
@@ -45,6 +45,6 @@ public partial interface IVersionPlan
     Int32 Stories { get; set; }
 
     /// <summary>备注</summary>
-    String Remark { get; set; }
+    String? Remark { get; set; }
     #endregion
 }

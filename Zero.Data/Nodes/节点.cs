@@ -35,29 +35,29 @@ public partial class Node
     [BindColumn("ID", "编号", "")]
     public Int32 ID { get => _ID; set { if (OnPropertyChanging("ID", value)) { _ID = value; OnPropertyChanged("ID"); } } }
 
-    private String _Name;
+    private String? _Name;
     /// <summary>名称</summary>
     [DisplayName("名称")]
     [Description("名称")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Name", "名称", "", Master = true)]
-    public String Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
+    public String? Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
 
-    private String _Code;
+    private String? _Code;
     /// <summary>编码。NodeKey</summary>
     [DisplayName("编码")]
     [Description("编码。NodeKey")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Code", "编码。NodeKey", "")]
-    public String Code { get => _Code; set { if (OnPropertyChanging("Code", value)) { _Code = value; OnPropertyChanged("Code"); } } }
+    public String? Code { get => _Code; set { if (OnPropertyChanging("Code", value)) { _Code = value; OnPropertyChanged("Code"); } } }
 
-    private String _Secret;
+    private String? _Secret;
     /// <summary>密钥。NodeSecret</summary>
     [DisplayName("密钥")]
     [Description("密钥。NodeSecret")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Secret", "密钥。NodeSecret", "")]
-    public String Secret { get => _Secret; set { if (OnPropertyChanging("Secret", value)) { _Secret = value; OnPropertyChanged("Secret"); } } }
+    public String? Secret { get => _Secret; set { if (OnPropertyChanging("Secret", value)) { _Secret = value; OnPropertyChanged("Secret"); } } }
 
     private Boolean _Enable;
     /// <summary>启用</summary>
@@ -67,29 +67,29 @@ public partial class Node
     [BindColumn("Enable", "启用", "")]
     public Boolean Enable { get => _Enable; set { if (OnPropertyChanging("Enable", value)) { _Enable = value; OnPropertyChanged("Enable"); } } }
 
-    private String _ProductCode;
+    private String? _ProductCode;
     /// <summary>产品。产品编码，用于区分不同类型节点</summary>
     [DisplayName("产品")]
     [Description("产品。产品编码，用于区分不同类型节点")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("ProductCode", "产品。产品编码，用于区分不同类型节点", "")]
-    public String ProductCode { get => _ProductCode; set { if (OnPropertyChanging("ProductCode", value)) { _ProductCode = value; OnPropertyChanged("ProductCode"); } } }
+    public String? ProductCode { get => _ProductCode; set { if (OnPropertyChanging("ProductCode", value)) { _ProductCode = value; OnPropertyChanged("ProductCode"); } } }
 
-    private String _Category;
+    private String? _Category;
     /// <summary>分类</summary>
     [DisplayName("分类")]
     [Description("分类")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Category", "分类", "")]
-    public String Category { get => _Category; set { if (OnPropertyChanging("Category", value)) { _Category = value; OnPropertyChanged("Category"); } } }
+    public String? Category { get => _Category; set { if (OnPropertyChanging("Category", value)) { _Category = value; OnPropertyChanged("Category"); } } }
 
-    private String _Version;
+    private String? _Version;
     /// <summary>版本</summary>
     [DisplayName("版本")]
     [Description("版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Version", "版本", "")]
-    public String Version { get => _Version; set { if (OnPropertyChanging("Version", value)) { _Version = value; OnPropertyChanged("Version"); } } }
+    public String? Version { get => _Version; set { if (OnPropertyChanging("Version", value)) { _Version = value; OnPropertyChanged("Version"); } } }
 
     private DateTime _CompileTime;
     /// <summary>编译时间</summary>
@@ -99,59 +99,59 @@ public partial class Node
     [BindColumn("CompileTime", "编译时间", "")]
     public DateTime CompileTime { get => _CompileTime; set { if (OnPropertyChanging("CompileTime", value)) { _CompileTime = value; OnPropertyChanged("CompileTime"); } } }
 
-    private String _OS;
+    private String? _OS;
     /// <summary>操作系统</summary>
     [Category("硬件信息")]
     [DisplayName("操作系统")]
     [Description("操作系统")]
     [DataObjectField(false, false, true, 100)]
     [BindColumn("OS", "操作系统", "")]
-    public String OS { get => _OS; set { if (OnPropertyChanging("OS", value)) { _OS = value; OnPropertyChanged("OS"); } } }
+    public String? OS { get => _OS; set { if (OnPropertyChanging("OS", value)) { _OS = value; OnPropertyChanged("OS"); } } }
 
-    private String _OSVersion;
+    private String? _OSVersion;
     /// <summary>系统版本</summary>
     [Category("硬件信息")]
     [DisplayName("系统版本")]
     [Description("系统版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("OSVersion", "系统版本", "")]
-    public String OSVersion { get => _OSVersion; set { if (OnPropertyChanging("OSVersion", value)) { _OSVersion = value; OnPropertyChanged("OSVersion"); } } }
+    public String? OSVersion { get => _OSVersion; set { if (OnPropertyChanging("OSVersion", value)) { _OSVersion = value; OnPropertyChanged("OSVersion"); } } }
 
-    private String _Architecture;
+    private String? _Architecture;
     /// <summary>架构。处理器架构，X86/X64/Arm/Arm64</summary>
     [Category("硬件信息")]
     [DisplayName("架构")]
     [Description("架构。处理器架构，X86/X64/Arm/Arm64")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Architecture", "架构。处理器架构，X86/X64/Arm/Arm64", "")]
-    public String Architecture { get => _Architecture; set { if (OnPropertyChanging("Architecture", value)) { _Architecture = value; OnPropertyChanged("Architecture"); } } }
+    public String? Architecture { get => _Architecture; set { if (OnPropertyChanging("Architecture", value)) { _Architecture = value; OnPropertyChanged("Architecture"); } } }
 
-    private String _MachineName;
+    private String? _MachineName;
     /// <summary>机器名称</summary>
     [Category("硬件信息")]
     [DisplayName("机器名称")]
     [Description("机器名称")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("MachineName", "机器名称", "")]
-    public String MachineName { get => _MachineName; set { if (OnPropertyChanging("MachineName", value)) { _MachineName = value; OnPropertyChanged("MachineName"); } } }
+    public String? MachineName { get => _MachineName; set { if (OnPropertyChanging("MachineName", value)) { _MachineName = value; OnPropertyChanged("MachineName"); } } }
 
-    private String _UserName;
+    private String? _UserName;
     /// <summary>用户名称</summary>
     [Category("硬件信息")]
     [DisplayName("用户名称")]
     [Description("用户名称")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("UserName", "用户名称", "")]
-    public String UserName { get => _UserName; set { if (OnPropertyChanging("UserName", value)) { _UserName = value; OnPropertyChanged("UserName"); } } }
+    public String? UserName { get => _UserName; set { if (OnPropertyChanging("UserName", value)) { _UserName = value; OnPropertyChanged("UserName"); } } }
 
-    private String _IP;
+    private String? _IP;
     /// <summary>本地IP</summary>
     [Category("硬件信息")]
     [DisplayName("本地IP")]
     [Description("本地IP")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("IP", "本地IP", "")]
-    public String IP { get => _IP; set { if (OnPropertyChanging("IP", value)) { _IP = value; OnPropertyChanged("IP"); } } }
+    public String? IP { get => _IP; set { if (OnPropertyChanging("IP", value)) { _IP = value; OnPropertyChanged("IP"); } } }
 
     private Int32 _Cpu;
     /// <summary>CPU。处理器核心数</summary>
@@ -189,95 +189,95 @@ public partial class Node
     [BindColumn("MaxOpenFiles", "最大打开文件。Linux上的ulimit -n", "")]
     public Int32 MaxOpenFiles { get => _MaxOpenFiles; set { if (OnPropertyChanging("MaxOpenFiles", value)) { _MaxOpenFiles = value; OnPropertyChanged("MaxOpenFiles"); } } }
 
-    private String _Dpi;
+    private String? _Dpi;
     /// <summary>像素点。默认96*96</summary>
     [Category("硬件信息")]
     [DisplayName("像素点")]
     [Description("像素点。默认96*96")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Dpi", "像素点。默认96*96", "")]
-    public String Dpi { get => _Dpi; set { if (OnPropertyChanging("Dpi", value)) { _Dpi = value; OnPropertyChanged("Dpi"); } } }
+    public String? Dpi { get => _Dpi; set { if (OnPropertyChanging("Dpi", value)) { _Dpi = value; OnPropertyChanged("Dpi"); } } }
 
-    private String _Resolution;
+    private String? _Resolution;
     /// <summary>分辨率。例如1024*768</summary>
     [Category("硬件信息")]
     [DisplayName("分辨率")]
     [Description("分辨率。例如1024*768")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Resolution", "分辨率。例如1024*768", "")]
-    public String Resolution { get => _Resolution; set { if (OnPropertyChanging("Resolution", value)) { _Resolution = value; OnPropertyChanged("Resolution"); } } }
+    public String? Resolution { get => _Resolution; set { if (OnPropertyChanging("Resolution", value)) { _Resolution = value; OnPropertyChanged("Resolution"); } } }
 
-    private String _Processor;
+    private String? _Processor;
     /// <summary>处理器</summary>
     [Category("硬件信息")]
     [DisplayName("处理器")]
     [Description("处理器")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("Processor", "处理器", "")]
-    public String Processor { get => _Processor; set { if (OnPropertyChanging("Processor", value)) { _Processor = value; OnPropertyChanged("Processor"); } } }
+    public String? Processor { get => _Processor; set { if (OnPropertyChanging("Processor", value)) { _Processor = value; OnPropertyChanged("Processor"); } } }
 
-    private String _Uuid;
+    private String? _Uuid;
     /// <summary>唯一标识</summary>
     [Category("硬件信息")]
     [DisplayName("唯一标识")]
     [Description("唯一标识")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Uuid", "唯一标识", "")]
-    public String Uuid { get => _Uuid; set { if (OnPropertyChanging("Uuid", value)) { _Uuid = value; OnPropertyChanged("Uuid"); } } }
+    public String? Uuid { get => _Uuid; set { if (OnPropertyChanging("Uuid", value)) { _Uuid = value; OnPropertyChanged("Uuid"); } } }
 
-    private String _MachineGuid;
+    private String? _MachineGuid;
     /// <summary>机器标识</summary>
     [Category("硬件信息")]
     [DisplayName("机器标识")]
     [Description("机器标识")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("MachineGuid", "机器标识", "")]
-    public String MachineGuid { get => _MachineGuid; set { if (OnPropertyChanging("MachineGuid", value)) { _MachineGuid = value; OnPropertyChanged("MachineGuid"); } } }
+    public String? MachineGuid { get => _MachineGuid; set { if (OnPropertyChanging("MachineGuid", value)) { _MachineGuid = value; OnPropertyChanged("MachineGuid"); } } }
 
-    private String _DiskID;
+    private String? _DiskID;
     /// <summary>磁盘序列号</summary>
     [Category("硬件信息")]
     [DisplayName("磁盘序列号")]
     [Description("磁盘序列号")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("DiskID", "磁盘序列号", "")]
-    public String DiskID { get => _DiskID; set { if (OnPropertyChanging("DiskID", value)) { _DiskID = value; OnPropertyChanged("DiskID"); } } }
+    public String? DiskID { get => _DiskID; set { if (OnPropertyChanging("DiskID", value)) { _DiskID = value; OnPropertyChanged("DiskID"); } } }
 
-    private String _MACs;
+    private String? _MACs;
     /// <summary>网卡</summary>
     [Category("硬件信息")]
     [DisplayName("网卡")]
     [Description("网卡")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("MACs", "网卡", "")]
-    public String MACs { get => _MACs; set { if (OnPropertyChanging("MACs", value)) { _MACs = value; OnPropertyChanged("MACs"); } } }
+    public String? MACs { get => _MACs; set { if (OnPropertyChanging("MACs", value)) { _MACs = value; OnPropertyChanged("MACs"); } } }
 
-    private String _InstallPath;
+    private String? _InstallPath;
     /// <summary>安装路径</summary>
     [Category("硬件信息")]
     [DisplayName("安装路径")]
     [Description("安装路径")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("InstallPath", "安装路径", "")]
-    public String InstallPath { get => _InstallPath; set { if (OnPropertyChanging("InstallPath", value)) { _InstallPath = value; OnPropertyChanged("InstallPath"); } } }
+    public String? InstallPath { get => _InstallPath; set { if (OnPropertyChanging("InstallPath", value)) { _InstallPath = value; OnPropertyChanged("InstallPath"); } } }
 
-    private String _Runtime;
+    private String? _Runtime;
     /// <summary>运行时。.Net运行时版本，可知道本地已安装版本</summary>
     [Category("硬件信息")]
     [DisplayName("运行时")]
     [Description("运行时。.Net运行时版本，可知道本地已安装版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Runtime", "运行时。.Net运行时版本，可知道本地已安装版本", "")]
-    public String Runtime { get => _Runtime; set { if (OnPropertyChanging("Runtime", value)) { _Runtime = value; OnPropertyChanged("Runtime"); } } }
+    public String? Runtime { get => _Runtime; set { if (OnPropertyChanging("Runtime", value)) { _Runtime = value; OnPropertyChanged("Runtime"); } } }
 
-    private String _Framework;
+    private String? _Framework;
     /// <summary>目标框架。编译程序集时的目标版本</summary>
     [Category("硬件信息")]
     [DisplayName("目标框架")]
     [Description("目标框架。编译程序集时的目标版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Framework", "目标框架。编译程序集时的目标版本", "")]
-    public String Framework { get => _Framework; set { if (OnPropertyChanging("Framework", value)) { _Framework = value; OnPropertyChanged("Framework"); } } }
+    public String? Framework { get => _Framework; set { if (OnPropertyChanging("Framework", value)) { _Framework = value; OnPropertyChanged("Framework"); } } }
 
     private Int32 _ProvinceID;
     /// <summary>省份</summary>
@@ -295,13 +295,13 @@ public partial class Node
     [BindColumn("CityID", "城市", "")]
     public Int32 CityID { get => _CityID; set { if (OnPropertyChanging("CityID", value)) { _CityID = value; OnPropertyChanged("CityID"); } } }
 
-    private String _Address;
+    private String? _Address;
     /// <summary>地址。该节点所处位置</summary>
     [DisplayName("地址")]
     [Description("地址。该节点所处位置")]
     [DataObjectField(false, false, true, 200)]
     [BindColumn("Address", "地址。该节点所处位置", "")]
-    public String Address { get => _Address; set { if (OnPropertyChanging("Address", value)) { _Address = value; OnPropertyChanged("Address"); } } }
+    public String? Address { get => _Address; set { if (OnPropertyChanging("Address", value)) { _Address = value; OnPropertyChanged("Address"); } } }
 
     private Int32 _Period;
     /// <summary>采样周期。默认60秒</summary>
@@ -311,14 +311,14 @@ public partial class Node
     [BindColumn("Period", "采样周期。默认60秒", "")]
     public Int32 Period { get => _Period; set { if (OnPropertyChanging("Period", value)) { _Period = value; OnPropertyChanged("Period"); } } }
 
-    private String _WebHook;
+    private String? _WebHook;
     /// <summary>告警机器人。钉钉、企业微信等</summary>
     [Category("告警")]
     [DisplayName("告警机器人")]
     [Description("告警机器人。钉钉、企业微信等")]
     [DataObjectField(false, false, true, 500)]
     [BindColumn("WebHook", "告警机器人。钉钉、企业微信等", "")]
-    public String WebHook { get => _WebHook; set { if (OnPropertyChanging("WebHook", value)) { _WebHook = value; OnPropertyChanged("WebHook"); } } }
+    public String? WebHook { get => _WebHook; set { if (OnPropertyChanging("WebHook", value)) { _WebHook = value; OnPropertyChanged("WebHook"); } } }
 
     private Int32 _AlarmCpuRate;
     /// <summary>CPU告警。CPU告警的百分比阈值，CPU使用率达到该值时告警，百分之一</summary>
@@ -356,14 +356,14 @@ public partial class Node
     [BindColumn("AlarmTcp", "连接数告警。TCP连接数达到该值时告警，包括连接数、主动关闭和被动关闭", "")]
     public Int32 AlarmTcp { get => _AlarmTcp; set { if (OnPropertyChanging("AlarmTcp", value)) { _AlarmTcp = value; OnPropertyChanged("AlarmTcp"); } } }
 
-    private String _AlarmProcesses;
+    private String? _AlarmProcesses;
     /// <summary>进程告警。要守护的进程不存在时告警，多进程逗号隔开，支持*模糊匹配</summary>
     [Category("告警")]
     [DisplayName("进程告警")]
     [Description("进程告警。要守护的进程不存在时告警，多进程逗号隔开，支持*模糊匹配")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("AlarmProcesses", "进程告警。要守护的进程不存在时告警，多进程逗号隔开，支持*模糊匹配", "")]
-    public String AlarmProcesses { get => _AlarmProcesses; set { if (OnPropertyChanging("AlarmProcesses", value)) { _AlarmProcesses = value; OnPropertyChanged("AlarmProcesses"); } } }
+    public String? AlarmProcesses { get => _AlarmProcesses; set { if (OnPropertyChanging("AlarmProcesses", value)) { _AlarmProcesses = value; OnPropertyChanged("AlarmProcesses"); } } }
 
     private Boolean _AlarmOnOffline;
     /// <summary>下线告警。节点下线时，发送告警</summary>
@@ -390,13 +390,13 @@ public partial class Node
     [BindColumn("LastLogin", "最后登录", "")]
     public DateTime LastLogin { get => _LastLogin; set { if (OnPropertyChanging("LastLogin", value)) { _LastLogin = value; OnPropertyChanged("LastLogin"); } } }
 
-    private String _LastLoginIP;
+    private String? _LastLoginIP;
     /// <summary>最后IP。最后的公网IP地址</summary>
     [DisplayName("最后IP")]
     [Description("最后IP。最后的公网IP地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("LastLoginIP", "最后IP。最后的公网IP地址", "")]
-    public String LastLoginIP { get => _LastLoginIP; set { if (OnPropertyChanging("LastLoginIP", value)) { _LastLoginIP = value; OnPropertyChanged("LastLoginIP"); } } }
+    public String? LastLoginIP { get => _LastLoginIP; set { if (OnPropertyChanging("LastLoginIP", value)) { _LastLoginIP = value; OnPropertyChanged("LastLoginIP"); } } }
 
     private Int32 _OnlineTime;
     /// <summary>在线时长。单位，秒</summary>
@@ -424,14 +424,14 @@ public partial class Node
     [BindColumn("CreateTime", "创建时间", "")]
     public DateTime CreateTime { get => _CreateTime; set { if (OnPropertyChanging("CreateTime", value)) { _CreateTime = value; OnPropertyChanged("CreateTime"); } } }
 
-    private String _CreateIP;
+    private String? _CreateIP;
     /// <summary>创建地址</summary>
     [Category("扩展")]
     [DisplayName("创建地址")]
     [Description("创建地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("CreateIP", "创建地址", "")]
-    public String CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
+    public String? CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
 
     private Int32 _UpdateUserID;
     /// <summary>更新者</summary>
@@ -451,30 +451,30 @@ public partial class Node
     [BindColumn("UpdateTime", "更新时间", "")]
     public DateTime UpdateTime { get => _UpdateTime; set { if (OnPropertyChanging("UpdateTime", value)) { _UpdateTime = value; OnPropertyChanged("UpdateTime"); } } }
 
-    private String _UpdateIP;
+    private String? _UpdateIP;
     /// <summary>更新地址</summary>
     [Category("扩展")]
     [DisplayName("更新地址")]
     [Description("更新地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("UpdateIP", "更新地址", "")]
-    public String UpdateIP { get => _UpdateIP; set { if (OnPropertyChanging("UpdateIP", value)) { _UpdateIP = value; OnPropertyChanged("UpdateIP"); } } }
+    public String? UpdateIP { get => _UpdateIP; set { if (OnPropertyChanging("UpdateIP", value)) { _UpdateIP = value; OnPropertyChanged("UpdateIP"); } } }
 
-    private String _Remark;
+    private String? _Remark;
     /// <summary>备注</summary>
     [Category("扩展")]
     [DisplayName("备注")]
     [Description("备注")]
     [DataObjectField(false, false, true, 500)]
     [BindColumn("Remark", "备注", "")]
-    public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
+    public String? Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public override Object this[String name]
+    public override Object? this[String name]
     {
         get => name switch
         {

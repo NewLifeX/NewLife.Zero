@@ -17,10 +17,10 @@ public partial class MemberDto : IMember, IModel
     public Int32 ID { get; set; }
 
     /// <summary>名称</summary>
-    public String Name { get; set; }
+    public String? Name { get; set; }
 
     /// <summary>类型</summary>
-    public String Kind { get; set; }
+    public String? Kind { get; set; }
 
     /// <summary>团队。所属主团队</summary>
     public Int32 TeamId { get; set; }
@@ -35,17 +35,17 @@ public partial class MemberDto : IMember, IModel
     public Int32 UserId { get; set; }
 
     /// <summary>用户名</summary>
-    public String UserName { get; set; }
+    public String? UserName { get; set; }
 
     /// <summary>备注</summary>
-    public String Remark { get; set; }
+    public String? Remark { get; set; }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public virtual Object this[String name]
+    public virtual Object? this[String name]
     {
         get
         {
@@ -60,7 +60,7 @@ public partial class MemberDto : IMember, IModel
                 "UserId" => UserId,
                 "UserName" => UserName,
                 "Remark" => Remark,
-                _ => this.GetValue(name),
+                _ => this.GetValue(name, false),
             };
         }
         set

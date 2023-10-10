@@ -15,10 +15,10 @@ public partial interface ITeam
     Int32 ID { get; set; }
 
     /// <summary>名称</summary>
-    String Name { get; set; }
+    String? Name { get; set; }
 
     /// <summary>编码</summary>
-    String Code { get; set; }
+    String? Code { get; set; }
 
     /// <summary>组长</summary>
     Int32 LeaderId { get; set; }
@@ -39,9 +39,9 @@ public partial interface ITeam
     Int32 AssistMembers { get; set; }
 
     /// <summary>机器人</summary>
-    String WebHook { get; set; }
+    String? WebHook { get; set; }
 
     /// <summary>备注</summary>
-    String Remark { get; set; }
+    String? Remark { get; set; }
     #endregion
 }

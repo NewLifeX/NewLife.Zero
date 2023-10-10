@@ -23,7 +23,7 @@ public partial class TeamMemberModel : IModel
     public Int32 MemberId { get; set; }
 
     /// <summary>类型</summary>
-    public String Kind { get; set; }
+    public String? Kind { get; set; }
 
     /// <summary>主要。是否该成员的主要团队</summary>
     public Boolean Major { get; set; }
@@ -35,14 +35,14 @@ public partial class TeamMemberModel : IModel
     public Boolean Enable { get; set; }
 
     /// <summary>备注</summary>
-    public String Remark { get; set; }
+    public String? Remark { get; set; }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public virtual Object this[String name]
+    public virtual Object? this[String name]
     {
         get
         {
@@ -56,7 +56,7 @@ public partial class TeamMemberModel : IModel
                 "Leader" => Leader,
                 "Enable" => Enable,
                 "Remark" => Remark,
-                _ => this.GetValue(name),
+                _ => this.GetValue(name, false),
             };
         }
         set

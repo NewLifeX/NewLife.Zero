@@ -20,10 +20,10 @@ public partial class ProductModel : IModel
     public Int32 TeamId { get; set; }
 
     /// <summary>名称</summary>
-    public String Name { get; set; }
+    public String? Name { get; set; }
 
     /// <summary>类型</summary>
-    public String Kind { get; set; }
+    public String? Kind { get; set; }
 
     /// <summary>负责人</summary>
     public Int32 LeaderId { get; set; }
@@ -41,14 +41,14 @@ public partial class ProductModel : IModel
     public Boolean Completed { get; set; }
 
     /// <summary>备注</summary>
-    public String Remark { get; set; }
+    public String? Remark { get; set; }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public virtual Object this[String name]
+    public virtual Object? this[String name]
     {
         get
         {
@@ -64,7 +64,7 @@ public partial class ProductModel : IModel
                 "Stories" => Stories,
                 "Completed" => Completed,
                 "Remark" => Remark,
-                _ => this.GetValue(name),
+                _ => this.GetValue(name, false),
             };
         }
         set

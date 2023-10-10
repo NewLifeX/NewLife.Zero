@@ -15,10 +15,10 @@ public partial interface IMember
     Int32 ID { get; set; }
 
     /// <summary>名称</summary>
-    String Name { get; set; }
+    String? Name { get; set; }
 
     /// <summary>类型</summary>
-    String Kind { get; set; }
+    String? Kind { get; set; }
 
     /// <summary>团队。所属主团队</summary>
     Int32 TeamId { get; set; }
@@ -33,9 +33,9 @@ public partial interface IMember
     Int32 UserId { get; set; }
 
     /// <summary>用户名</summary>
-    String UserName { get; set; }
+    String? UserName { get; set; }
 
     /// <summary>备注</summary>
-    String Remark { get; set; }
+    String? Remark { get; set; }
     #endregion
 }
