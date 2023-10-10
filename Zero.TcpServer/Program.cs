@@ -18,9 +18,7 @@ internal class Program
         var services = ObjectContainer.Current;
 
         // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-        var star = new StarFactory();
-        if (star.Server.IsNullOrEmpty()) star = null;
-        //services.AddStardust();
+        var star = services.AddStardust();
 
         services.AddTransient<IMsgHandler, MyHandler>();
 

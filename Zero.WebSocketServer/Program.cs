@@ -1,7 +1,4 @@
-﻿using System.Net.WebSockets;
-using NewLife;
-using NewLife.Data;
-using NewLife.Http;
+﻿using NewLife.Http;
 using NewLife.Log;
 using NewLife.Model;
 using Stardust;
@@ -12,7 +9,7 @@ XTrace.UseConsole();
 var services = ObjectContainer.Current;
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
-var star = new StarFactory();
+var star = services.AddStardust();
 
 var server = new HttpServer
 {

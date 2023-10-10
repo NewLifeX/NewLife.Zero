@@ -1,5 +1,4 @@
-﻿using NewLife;
-using NewLife.Log;
+﻿using NewLife.Log;
 using NewLife.Model;
 using NewLife.MQTT;
 using Stardust;
@@ -12,8 +11,7 @@ var services = ObjectContainer.Current;
 services.AddSingleton(XTrace.Log);
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
-var star = new StarFactory();
-if (star.Server.IsNullOrEmpty()) star = null;
+var star = services.AddStardust();
 
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器
 InitMqtt(services, star?.Tracer);

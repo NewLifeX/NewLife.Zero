@@ -11,8 +11,7 @@ XTrace.UseConsole();
 var services = ObjectContainer.Current;
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-var star = new StarFactory();
-if (star.Server.IsNullOrEmpty()) star = null;
+var star = services.AddStardust();
 
 // 实例化RPC服务端，指定端口，同时在Tcp/Udp/IPv4/IPv6上监听
 var server = new ApiServer(12346)
