@@ -38,13 +38,13 @@ public partial class NodeHistory
     [BindColumn("NodeID", "节点", "")]
     public Int32 NodeID { get => _NodeID; set { if (OnPropertyChanging("NodeID", value)) { _NodeID = value; OnPropertyChanged("NodeID"); } } }
 
-    private String? _Name;
+    private String _Name;
     /// <summary>名称</summary>
     [DisplayName("名称")]
     [Description("名称")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Name", "名称", "", Master = true)]
-    public String? Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
+    public String Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
 
     private Int32 _ProvinceID;
     /// <summary>省份</summary>
@@ -62,13 +62,13 @@ public partial class NodeHistory
     [BindColumn("CityID", "城市", "")]
     public Int32 CityID { get => _CityID; set { if (OnPropertyChanging("CityID", value)) { _CityID = value; OnPropertyChanged("CityID"); } } }
 
-    private String? _Action;
+    private String _Action;
     /// <summary>操作</summary>
     [DisplayName("操作")]
     [Description("操作")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Action", "操作", "")]
-    public String? Action { get => _Action; set { if (OnPropertyChanging("Action", value)) { _Action = value; OnPropertyChanged("Action"); } } }
+    public String Action { get => _Action; set { if (OnPropertyChanging("Action", value)) { _Action = value; OnPropertyChanged("Action"); } } }
 
     private Boolean _Success;
     /// <summary>成功</summary>
@@ -78,13 +78,13 @@ public partial class NodeHistory
     [BindColumn("Success", "成功", "")]
     public Boolean Success { get => _Success; set { if (OnPropertyChanging("Success", value)) { _Success = value; OnPropertyChanged("Success"); } } }
 
-    private String? _Version;
+    private String _Version;
     /// <summary>版本</summary>
     [DisplayName("版本")]
     [Description("版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Version", "版本", "")]
-    public String? Version { get => _Version; set { if (OnPropertyChanging("Version", value)) { _Version = value; OnPropertyChanged("Version"); } } }
+    public String Version { get => _Version; set { if (OnPropertyChanging("Version", value)) { _Version = value; OnPropertyChanged("Version"); } } }
 
     private DateTime _CompileTime;
     /// <summary>编译时间</summary>
@@ -94,23 +94,23 @@ public partial class NodeHistory
     [BindColumn("CompileTime", "编译时间", "")]
     public DateTime CompileTime { get => _CompileTime; set { if (OnPropertyChanging("CompileTime", value)) { _CompileTime = value; OnPropertyChanged("CompileTime"); } } }
 
-    private String? _TraceId;
+    private String _TraceId;
     /// <summary>追踪。最新一次查看采样，可用于关联多个片段，建立依赖关系，随线程上下文、Http、Rpc传递</summary>
     [Category("扩展")]
     [DisplayName("追踪")]
     [Description("追踪。最新一次查看采样，可用于关联多个片段，建立依赖关系，随线程上下文、Http、Rpc传递")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("TraceId", "追踪。最新一次查看采样，可用于关联多个片段，建立依赖关系，随线程上下文、Http、Rpc传递", "")]
-    public String? TraceId { get => _TraceId; set { if (OnPropertyChanging("TraceId", value)) { _TraceId = value; OnPropertyChanged("TraceId"); } } }
+    public String TraceId { get => _TraceId; set { if (OnPropertyChanging("TraceId", value)) { _TraceId = value; OnPropertyChanged("TraceId"); } } }
 
-    private String? _Creator;
+    private String _Creator;
     /// <summary>创建者。服务端节点</summary>
     [Category("扩展")]
     [DisplayName("创建者")]
     [Description("创建者。服务端节点")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Creator", "创建者。服务端节点", "")]
-    public String? Creator { get => _Creator; set { if (OnPropertyChanging("Creator", value)) { _Creator = value; OnPropertyChanged("Creator"); } } }
+    public String Creator { get => _Creator; set { if (OnPropertyChanging("Creator", value)) { _Creator = value; OnPropertyChanged("Creator"); } } }
 
     private DateTime _CreateTime;
     /// <summary>创建时间</summary>
@@ -121,29 +121,29 @@ public partial class NodeHistory
     [BindColumn("CreateTime", "创建时间", "")]
     public DateTime CreateTime { get => _CreateTime; set { if (OnPropertyChanging("CreateTime", value)) { _CreateTime = value; OnPropertyChanged("CreateTime"); } } }
 
-    private String? _CreateIP;
+    private String _CreateIP;
     /// <summary>创建地址</summary>
     [Category("扩展")]
     [DisplayName("创建地址")]
     [Description("创建地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("CreateIP", "创建地址", "")]
-    public String? CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
+    public String CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
 
-    private String? _Remark;
+    private String _Remark;
     /// <summary>内容</summary>
     [DisplayName("内容")]
     [Description("内容")]
     [DataObjectField(false, false, true, 2000)]
     [BindColumn("Content", "内容", "")]
-    public String? Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
+    public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public override Object? this[String name]
+    public override Object this[String name]
     {
         get => name switch
         {

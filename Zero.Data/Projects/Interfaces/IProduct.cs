@@ -18,10 +18,10 @@ public partial interface IProduct
     Int32 TeamId { get; set; }
 
     /// <summary>名称</summary>
-    String? Name { get; set; }
+    String Name { get; set; }
 
     /// <summary>类型</summary>
-    String? Kind { get; set; }
+    String Kind { get; set; }
 
     /// <summary>负责人</summary>
     Int32 LeaderId { get; set; }
@@ -39,6 +39,6 @@ public partial interface IProduct
     Boolean Completed { get; set; }
 
     /// <summary>备注</summary>
-    String? Remark { get; set; }
+    String Remark { get; set; }
     #endregion
 }

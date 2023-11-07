@@ -26,7 +26,7 @@ public partial class StoryModel : IModel
     public Int32 MemberId { get; set; }
 
     /// <summary>事项</summary>
-    public String? Title { get; set; }
+    public String Title { get; set; }
 
     /// <summary>开始日期</summary>
     public DateTime StartDate { get; set; }
@@ -41,14 +41,14 @@ public partial class StoryModel : IModel
     public Boolean Enable { get; set; }
 
     /// <summary>备注</summary>
-    public String? Remark { get; set; }
+    public String Remark { get; set; }
     #endregion
 
     #region 获取/设置 字段值
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public virtual Object? this[String name]
+    public virtual Object this[String name]
     {
         get
         {

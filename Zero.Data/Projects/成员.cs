@@ -30,21 +30,21 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("ID", "编号", "")]
     public Int32 ID { get => _ID; set { if (OnPropertyChanging("ID", value)) { _ID = value; OnPropertyChanged("ID"); } } }
 
-    private String? _Name;
+    private String _Name;
     /// <summary>名称</summary>
     [DisplayName("名称")]
     [Description("名称")]
     [DataObjectField(false, false, false, 50)]
     [BindColumn("Name", "名称", "", Master = true)]
-    public String? Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
+    public String Name { get => _Name; set { if (OnPropertyChanging("Name", value)) { _Name = value; OnPropertyChanged("Name"); } } }
 
-    private String? _Kind;
+    private String _Kind;
     /// <summary>类型</summary>
     [DisplayName("类型")]
     [Description("类型")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Kind", "类型", "")]
-    public String? Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
+    public String Kind { get => _Kind; set { if (OnPropertyChanging("Kind", value)) { _Kind = value; OnPropertyChanged("Kind"); } } }
 
     private Int32 _TeamId;
     /// <summary>团队。所属主团队</summary>
@@ -78,21 +78,21 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("UserId", "用户。所属登录用户", "")]
     public Int32 UserId { get => _UserId; set { if (OnPropertyChanging("UserId", value)) { _UserId = value; OnPropertyChanged("UserId"); } } }
 
-    private String? _UserName;
+    private String _UserName;
     /// <summary>用户名</summary>
     [DisplayName("用户名")]
     [Description("用户名")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("UserName", "用户名", "")]
-    public String? UserName { get => _UserName; set { if (OnPropertyChanging("UserName", value)) { _UserName = value; OnPropertyChanged("UserName"); } } }
+    public String UserName { get => _UserName; set { if (OnPropertyChanging("UserName", value)) { _UserName = value; OnPropertyChanged("UserName"); } } }
 
-    private String? _CreateUser;
+    private String _CreateUser;
     /// <summary>创建者</summary>
     [DisplayName("创建者")]
     [Description("创建者")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("CreateUser", "创建者", "")]
-    public String? CreateUser { get => _CreateUser; set { if (OnPropertyChanging("CreateUser", value)) { _CreateUser = value; OnPropertyChanged("CreateUser"); } } }
+    public String CreateUser { get => _CreateUser; set { if (OnPropertyChanging("CreateUser", value)) { _CreateUser = value; OnPropertyChanged("CreateUser"); } } }
 
     private Int32 _CreateUserID;
     /// <summary>创建人</summary>
@@ -102,13 +102,13 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("CreateUserID", "创建人", "")]
     public Int32 CreateUserID { get => _CreateUserID; set { if (OnPropertyChanging("CreateUserID", value)) { _CreateUserID = value; OnPropertyChanged("CreateUserID"); } } }
 
-    private String? _CreateIP;
+    private String _CreateIP;
     /// <summary>创建地址</summary>
     [DisplayName("创建地址")]
     [Description("创建地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("CreateIP", "创建地址", "")]
-    public String? CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
+    public String CreateIP { get => _CreateIP; set { if (OnPropertyChanging("CreateIP", value)) { _CreateIP = value; OnPropertyChanged("CreateIP"); } } }
 
     private DateTime _CreateTime;
     /// <summary>创建时间</summary>
@@ -118,13 +118,13 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("CreateTime", "创建时间", "")]
     public DateTime CreateTime { get => _CreateTime; set { if (OnPropertyChanging("CreateTime", value)) { _CreateTime = value; OnPropertyChanged("CreateTime"); } } }
 
-    private String? _UpdateUser;
+    private String _UpdateUser;
     /// <summary>更新者</summary>
     [DisplayName("更新者")]
     [Description("更新者")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("UpdateUser", "更新者", "")]
-    public String? UpdateUser { get => _UpdateUser; set { if (OnPropertyChanging("UpdateUser", value)) { _UpdateUser = value; OnPropertyChanged("UpdateUser"); } } }
+    public String UpdateUser { get => _UpdateUser; set { if (OnPropertyChanging("UpdateUser", value)) { _UpdateUser = value; OnPropertyChanged("UpdateUser"); } } }
 
     private Int32 _UpdateUserID;
     /// <summary>更新人</summary>
@@ -134,13 +134,13 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("UpdateUserID", "更新人", "")]
     public Int32 UpdateUserID { get => _UpdateUserID; set { if (OnPropertyChanging("UpdateUserID", value)) { _UpdateUserID = value; OnPropertyChanged("UpdateUserID"); } } }
 
-    private String? _UpdateIP;
+    private String _UpdateIP;
     /// <summary>更新地址</summary>
     [DisplayName("更新地址")]
     [Description("更新地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("UpdateIP", "更新地址", "")]
-    public String? UpdateIP { get => _UpdateIP; set { if (OnPropertyChanging("UpdateIP", value)) { _UpdateIP = value; OnPropertyChanged("UpdateIP"); } } }
+    public String UpdateIP { get => _UpdateIP; set { if (OnPropertyChanging("UpdateIP", value)) { _UpdateIP = value; OnPropertyChanged("UpdateIP"); } } }
 
     private DateTime _UpdateTime;
     /// <summary>更新时间</summary>
@@ -150,13 +150,13 @@ public partial class Member : IMember, IEntity<IMember>
     [BindColumn("UpdateTime", "更新时间", "")]
     public DateTime UpdateTime { get => _UpdateTime; set { if (OnPropertyChanging("UpdateTime", value)) { _UpdateTime = value; OnPropertyChanged("UpdateTime"); } } }
 
-    private String? _Remark;
+    private String _Remark;
     /// <summary>备注</summary>
     [DisplayName("备注")]
     [Description("备注")]
     [DataObjectField(false, false, true, 500)]
     [BindColumn("Remark", "备注", "")]
-    public String? Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
+    public String Remark { get => _Remark; set { if (OnPropertyChanging("Remark", value)) { _Remark = value; OnPropertyChanged("Remark"); } } }
     #endregion
 
     #region 拷贝
@@ -180,7 +180,7 @@ public partial class Member : IMember, IEntity<IMember>
     /// <summary>获取/设置 字段值</summary>
     /// <param name="name">字段名</param>
     /// <returns></returns>
-    public override Object? this[String name]
+    public override Object this[String name]
     {
         get => name switch
         {
