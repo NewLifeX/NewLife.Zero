@@ -6,6 +6,8 @@ using NewLife.Extensions.Hosting.AgentService;
 using NewLife.Log;
 using Zero.Agent2;
 
+// 使用系统服务的Worker模版。优先推荐Console+StarAgent
+
 XTrace.UseConsole();
 
 Environment.CurrentDirectory = ".".GetFullPath();

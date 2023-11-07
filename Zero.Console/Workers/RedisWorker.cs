@@ -2,7 +2,7 @@
 using NewLife.Caching.Queues;
 using Zero.Console.Models;
 
-namespace Zero.Console;
+namespace Zero.Console.Workers;
 
 /// <summary>
 /// Redis队列消费端
@@ -21,6 +21,8 @@ public class RedisWorker : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        XTrace.WriteLine("RedisWorker.StartAsync");
+
         var task = ExecuteAsync(cancellationToken);
         return task.IsCompleted ? task : Task.CompletedTask;
     }

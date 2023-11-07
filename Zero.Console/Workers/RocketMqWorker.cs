@@ -1,7 +1,7 @@
 ﻿using NewLife.RocketMQ;
 using NewLife.RocketMQ.Protocol;
 
-namespace Zero.Console;
+namespace Zero.Console.Workers;
 
 /// <summary>
 /// RocketMQ消费端
@@ -15,6 +15,8 @@ public class RocketMqWorker : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        XTrace.WriteLine("RocketMqWorker.StartAsync");
+
         // 引入 RocketMQ 消费者
         var consumer = new Consumer
         {
@@ -50,9 +52,7 @@ public class RocketMqWorker : IHostedService
         XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", queue.BrokerName, queue.QueueId, messages.Length);
 
         foreach (var item in messages.ToList())
-        {
             XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
-        }
 
         return true;
     }

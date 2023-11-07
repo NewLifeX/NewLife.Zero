@@ -1,6 +1,7 @@
 ﻿using NewLife.Caching;
 using NewLife.MQTT;
 using NewLife.RocketMQ;
+using Zero.Console.Workers;
 
 namespace Zero.Console;
 
@@ -17,6 +18,8 @@ static class ServiceExtensions
         rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
         services.AddSingleton<ICache>(rds);
         services.AddSingleton(rds);
+
+        services.AddHostedService<RedisWorker>();
     }
 
     public static void AddMqtt(this IObjectContainer services, ITracer tracer)
@@ -33,6 +36,8 @@ static class ServiceExtensions
             Password = "Pass@word",
         };
         services.AddSingleton(mqtt);
+
+        //services.AddHostedService<MqttWorker>();
     }
 
     public static void AddRocketMQ(this IObjectContainer services, ITracer tracer)
@@ -46,5 +51,7 @@ static class ServiceExtensions
             Log = XTrace.Log,
         };
         services.AddSingleton(producer);
+
+        //services.AddHostedService<RocketMqWorker>();
     }
 }
