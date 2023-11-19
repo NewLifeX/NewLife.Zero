@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyTitle>Web管理平台</AssemblyTitle>
     <Description>零代数据管理平台，基于魔方，快速开发各种管理后台</Description>
     <Company>新生命开发团队</Company>

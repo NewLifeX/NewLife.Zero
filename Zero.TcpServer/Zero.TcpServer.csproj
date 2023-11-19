@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyTitle>Tcp网络服务器</AssemblyTitle>
     <Description>高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器</Description>
     <Company>新生命开发团队</Company>

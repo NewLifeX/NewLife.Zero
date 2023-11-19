@@ -1,4 +1,7 @@
-﻿using NewLife.Http;
+﻿using System.Net.WebSockets;
+using NewLife;
+using NewLife.Data;
+using NewLife.Http;
 using NewLife.Log;
 using NewLife.Model;
 using Stardust;

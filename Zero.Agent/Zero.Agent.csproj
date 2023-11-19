@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyTitle>系统守护服务</AssemblyTitle>
     <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务，常安装为Windows服务，Linux上需要sudo才能安装为守护进程随系统启动</Description>
     <Company>新生命开发团队</Company>
