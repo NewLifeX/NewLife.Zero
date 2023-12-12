@@ -19,11 +19,11 @@ var host = Host.CreateDefaultBuilder(args)
         // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址
         var star = services.AddStardust(null);
 
-        // 默认内存缓存，如有配置可使用Redis缓存
+        // 默认内存缓存，如有配置RedisCache可使用Redis缓存
         services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 
-        // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
-        services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
+        // 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
+        services.AddRedis("127.0.0.1:6379", "", 3, 5000);
 
         // 注册后台服务
         services.AddHostedService<Worker>();

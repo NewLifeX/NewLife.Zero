@@ -1,7 +1,10 @@
 ﻿using System;
 using NewLife;
 using NewLife.Agent;
+using NewLife.Caching.Services;
+using NewLife.Caching;
 using NewLife.Log;
+using NewLife.Model;
 using NewLife.Net;
 using NewLife.Remoting;
 using NewLife.Threading;
@@ -11,13 +14,29 @@ namespace Zero.Server;
 
 internal class Program
 {
-    private static void Main(String[] args) => new MyServices().Main(args);
+    private static void Main(String[] args)
+    {
+        // 初始化对象容器，提供注入能力
+        var services = ObjectContainer.Current;
+        services.AddSingleton(XTrace.Log);
+
+        // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
+        var star = services.AddStardust();
+
+        // 默认内存缓存，如有配置RedisCache可使用Redis缓存
+        services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+
+        var svc = new MyServices { ServiceProvider = services.BuildServiceProvider() };
+        svc.Main(args);
+    }
 }
 
 /// <summary>代理服务例子。自定义服务程序可参照该类实现。</summary>
 public class MyServices : ServiceBase
 {
     #region 属性
+    public IServiceProvider ServiceProvider { get; set; }
+
     /// <summary>性能跟踪器</summary>
     public ITracer Tracer { get; set; }
 
@@ -44,7 +63,7 @@ public class MyServices : ServiceBase
     protected override void StartWork(String reason)
     {
         // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
-        _star = new StarFactory();
+        _star = ServiceProvider.GetService<StarFactory>();
         Tracer = _star.Tracer;
 
         InitNetServer();

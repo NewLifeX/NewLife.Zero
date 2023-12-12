@@ -3,6 +3,7 @@ using System.Text.Unicode;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Caching;
+using NewLife.Caching.Services;
 using NewLife.Log;
 using NewLife.Serialization;
 using XCode;
@@ -23,22 +24,11 @@ InitConfig();
 // 配置星尘。借助StarAgent，或者读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust(null);
 
-{
-    // 启用星尘配置中心。分布式部署或容器化部署推荐使用，单机部署不推荐使用
-    var config = star.Config;
+// 默认内存缓存，如有配置RedisCache可使用Redis缓存
+services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 
-    // 默认内存缓存，如有配置可使用Redis缓存
-    var cache = new MemoryCache();
-    if (config != null && !config["redisCache"].IsNullOrEmpty())
-        services.AddSingleton<ICache>(p => new FullRedis(p, "redisCache") { Name = "Cache" });
-    else
-        services.AddSingleton<ICache>(cache);
-}
-
-{
-    // 引入Redis，用于消息队列和缓存，单例，带性能跟踪
-    services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
-}
+// 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
+//services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
 
 var set = ApiSetting.Current;
 services.AddSingleton(set);
@@ -75,8 +65,7 @@ services.AddHostedService<PreheatHostedService>();
 var app = builder.Build();
 
 // 预热数据层，执行自动建表等操作
-// 连接名 Zero 对应连接字符串名字，同时也对应 Zero.Data/Projects/Model.xml 头部的 ConnName
-EntityFactory.InitConnection("Zero");
+_ = EntityFactory.InitAllAsync();
 
 app.UseResponseCompression();
 

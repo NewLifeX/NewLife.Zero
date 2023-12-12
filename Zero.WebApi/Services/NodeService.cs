@@ -12,7 +12,9 @@ namespace Zero.WebApi.Services;
 
 public class NodeService
 {
-    private static readonly ICache _cache = new MemoryCache();
+    private readonly ICacheProvider _cacheProvider;
+
+    public NodeService(ICacheProvider cacheProvider) => _cacheProvider = cacheProvider;
 
     #region 注册&登录
     public Boolean Auth(Node node, LoginInfo inf, String ip, String secret)
@@ -81,7 +83,7 @@ public class NodeService
         online.Delete();
 
         var sid = $"{node.ID}@{ip}";
-        _cache.Remove($"NodeOnline:{sid}");
+        _cacheProvider.Cache.Remove($"NodeOnline:{sid}");
 
         // 计算在线时长
         if (online.CreateTime.Year > 2000)
@@ -250,10 +252,10 @@ public class NodeService
     public NodeOnline GetOnline(Node node, String ip)
     {
         var sid = $"{node.ID}@{ip}";
-        var olt = _cache.Get<NodeOnline>($"NodeOnline:{sid}");
+        var olt = _cacheProvider.Cache.Get<NodeOnline>($"NodeOnline:{sid}");
         if (olt != null)
         {
-            _cache.SetExpire($"NodeOnline:{sid}", TimeSpan.FromSeconds(600));
+            _cacheProvider.Cache.SetExpire($"NodeOnline:{sid}", TimeSpan.FromSeconds(600));
             return olt;
         }
 
@@ -284,7 +286,7 @@ public class NodeService
 
         olt.Creator = Environment.MachineName;
 
-        _cache.Set($"NodeOnline:{sid}", olt, 600);
+        _cacheProvider.Cache.Set($"NodeOnline:{sid}", olt, 600);
 
         return olt;
     }

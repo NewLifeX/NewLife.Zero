@@ -16,7 +16,7 @@ services.AddSingleton(XTrace.Log);
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust();
 
-// 缓存服务
+// 默认内存缓存，如有配置RedisCache可使用Redis缓存
 services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器

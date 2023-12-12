@@ -1,6 +1,5 @@
-﻿using System.Net.WebSockets;
-using NewLife;
-using NewLife.Data;
+﻿using NewLife.Caching;
+using NewLife.Caching.Services;
 using NewLife.Http;
 using NewLife.Log;
 using NewLife.Model;
@@ -13,6 +12,12 @@ var services = ObjectContainer.Current;
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust();
+
+// 默认内存缓存，如有配置RedisCache可使用Redis缓存
+services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+
+// 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
+//services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
 
 var server = new HttpServer
 {

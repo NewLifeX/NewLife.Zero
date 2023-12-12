@@ -28,7 +28,7 @@ public class ClientSetting : Config<ClientSetting>
     #region 加载/保存
     protected override void OnLoaded()
     {
-        if (Server.IsNullOrEmpty()) Server = "http://star.newlifex.com:6600";
+        if (Server.IsNullOrEmpty()) Server = "http://s.newlifex.com:6600";
 
         base.OnLoaded();
     }

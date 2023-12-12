@@ -9,15 +9,15 @@ namespace Zero.AntJob.Jobs;
 /// <summary>定时创建产品</summary>
 internal class BuildProduct : Handler
 {
-    private readonly ICache _cache;
+    private readonly ICacheProvider _cacheProvider;
 
-    public BuildProduct(ICache cache)
+    public BuildProduct(ICacheProvider cacheProvider)
     {
         var job = Job;
         job.Start = DateTime.Today;
         job.Step = 15;
 
-        _cache = cache;
+        _cacheProvider = cacheProvider;
     }
 
     protected override Int32 Execute(JobContext ctx)
@@ -39,7 +39,7 @@ internal class BuildProduct : Handler
             };
 
             // Redis去重
-            if (!_cache.Add($"product:{pi.Name}", DateTime.Now)) pi.Name = Rand.NextString(8);
+            if (!_cacheProvider.Cache.Add($"product:{pi.Name}", DateTime.Now)) pi.Name = Rand.NextString(8);
 
             list.Add(pi);
         }

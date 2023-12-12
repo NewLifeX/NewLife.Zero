@@ -37,7 +37,8 @@ internal static class Program
 
         if (set.IsNew) "学无先后达者为师，欢迎使用新生命零代客户端！".SpeechTip();
 
-        EntityFactory.InitAll();
+        // 预热数据层，执行自动建表等操作
+        _ = EntityFactory.InitAllAsync();
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
