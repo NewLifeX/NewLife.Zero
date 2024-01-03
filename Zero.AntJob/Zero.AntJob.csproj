@@ -29,10 +29,10 @@
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob" Version="3.3.2023.814" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.3.2023.814" />
-    <PackageReference Include="NewLife.Core" Version="10.6.2023.1201" />
-    <PackageReference Include="NewLife.Redis" Version="5.5.2023.1201" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2023.1201" />
-    <PackageReference Include="NewLife.XCode" Version="11.10.2023.1201" />
+    <PackageReference Include="NewLife.Core" Version="10.6.2024.101" />
+    <PackageReference Include="NewLife.Redis" Version="5.6.2024.101" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2024.101" />
+    <PackageReference Include="NewLife.XCode" Version="11.10.2024.101" />
   </ItemGroup>
 
   <ItemGroup>
