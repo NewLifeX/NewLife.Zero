@@ -9,6 +9,7 @@ using NewLife.Serialization;
 using XCode;
 using Zero.WebApi;
 using Zero.WebApi.Services;
+using JsonOptions = Microsoft.AspNetCore.Mvc.JsonOptions;
 
 //!!! 标准WebApi项目模板，新生命团队强烈推荐
 
