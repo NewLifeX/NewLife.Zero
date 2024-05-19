@@ -7,7 +7,7 @@
     <AssemblyTitle>客户端控制台</AssemblyTitle>
     <Description>CS架构的客户端应用，以后台服务工作，一般由StarAgent负责守护</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2023 NewLife</Copyright>
+    <Copyright>©2002-2024 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>

@@ -6,7 +6,7 @@
     <AssemblyTitle>Tcp网络服务器</AssemblyTitle>
     <Description>高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2023 NewLife</Copyright>
+    <Copyright>©2002-2024 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>

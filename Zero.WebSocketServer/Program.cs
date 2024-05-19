@@ -1,5 +1,8 @@
-﻿using NewLife.Caching;
+﻿using System.Net.WebSockets;
+using NewLife;
+using NewLife.Caching;
 using NewLife.Caching.Services;
+using NewLife.Data;
 using NewLife.Http;
 using NewLife.Log;
 using NewLife.Model;
