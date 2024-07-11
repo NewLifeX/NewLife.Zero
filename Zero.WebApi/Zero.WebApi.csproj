@@ -16,9 +16,12 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NewLife.Cube" Version="6.1.2024.710" />
     <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.5.2023.803" />
     <PackageReference Include="NewLife.Redis" Version="5.7.2024.709" />
     <PackageReference Include="NewLife.Stardust.Extensions" Version="3.0.2024.711-beta0023" />
@@ -28,6 +31,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
     <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NewLife.Cube.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

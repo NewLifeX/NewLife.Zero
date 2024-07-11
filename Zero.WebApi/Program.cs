@@ -1,11 +1,14 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Options;
 using NewLife;
 using NewLife.Caching;
 using NewLife.Caching.Services;
 using NewLife.Log;
 using NewLife.Serialization;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using XCode;
 using Zero.WebApi;
 using Zero.WebApi.Services;
@@ -56,7 +59,26 @@ services.AddControllers();
 
 // 引入 Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
+builder.Services.AddSwaggerGen(options =>
+{
+    // 解决 NewLife.Setting 与 XCode.Setting 冲突的问题
+    options.CustomSchemaIds(type => type.FullName);
+    options.IncludeXmlComments("NewLife.Cube.xml".GetFullPath());
+    options.IncludeXmlComments("Zero.WebApi.xml".GetFullPath());
+
+    options.DocInclusionPredicate((docName, apiDesc) =>
+    {
+        if (apiDesc.ActionDescriptor is not ControllerActionDescriptor controller) return false;
+
+        var groups = controller.ControllerTypeInfo.GetCustomAttributes(true).OfType<IApiDescriptionGroupNameProvider>().Select(e => e.GroupName).ToList();
+
+        if (docName == "v1" && (groups == null || groups.Count == 0)) return true;
+
+        return groups != null && groups.Any(e => e == docName);
+    });
+});
 
 // 后台服务
 services.AddHostedService<MyHostedService>();
@@ -78,7 +100,18 @@ app.UseStardust();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.RoutePrefix = String.Empty;
+        var groups = app.Services.GetRequiredService<IApiDescriptionGroupCollectionProvider>().ApiDescriptionGroups.Items;
+        foreach (var description in groups)
+        {
+            var group = description.GroupName;
+            if (group.IsNullOrEmpty()) continue;
+            options.SwaggerEndpoint($"/swagger/{group}/swagger.json", group);
+        }
+    });
 }
 
 app.UseAuthorization();
