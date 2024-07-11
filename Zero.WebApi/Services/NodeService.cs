@@ -2,6 +2,7 @@
 using NewLife;
 using NewLife.Caching;
 using NewLife.Remoting;
+using NewLife.Remoting.Models;
 using NewLife.Security;
 using NewLife.Serialization;
 using NewLife.Web;

@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
 using NewLife;
 using NewLife.Configuration;
+using NewLife.Remoting.Clients;
 
 namespace Zero.Desktop;
 
 [Config("ClientSetting")]
-public class ClientSetting : Config<ClientSetting>
+public class ClientSetting : Config<ClientSetting>, IClientSetting
 {
     #region 属性
     /// <summary>语音提示。默认true</summary>

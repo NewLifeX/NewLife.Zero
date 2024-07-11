@@ -20,9 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Redis" Version="5.6.2024.402" />
-    <PackageReference Include="NewLife.Stardust" Version="2.9.2024.402" />
-    <PackageReference Include="NewLife.XCode" Version="11.11.2024.402" />
+    <PackageReference Include="NewLife.Redis" Version="5.7.2024.709" />
+    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.711-beta0023" />
+    <PackageReference Include="NewLife.XCode" Version="11.14.2024.710-beta0410" />
   </ItemGroup>
 
   <ItemGroup>

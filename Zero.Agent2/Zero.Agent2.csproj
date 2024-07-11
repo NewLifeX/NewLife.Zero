@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Extensions.Hosting.AgentService" Version="10.7.2024.402" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="2.9.2024.402" />
+    <PackageReference Include="NewLife.Extensions.Hosting.AgentService" Version="10.7.2024.701" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.0.2024.711-beta0023" />
   </ItemGroup>
 
   <ItemGroup>

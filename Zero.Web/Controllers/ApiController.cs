@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewLife.Cube;
 using NewLife.Reflection;
-using Zero.Web.Common;
 
 namespace Zero.Web.Controllers;
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewLife.Remoting;
+using NewLife.Remoting.Models;
 using Stardust.Models;
 using Zero.Data.Nodes;
 using Zero.WebApi.Services;

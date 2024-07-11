@@ -1,10 +1,8 @@
-﻿using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using NewLife;
 using NewLife.Log;
 using NewLife.Threading;
 using Stardust;
-using Stardust.Services;
 using XCode;
 
 namespace Zero.Desktop;
@@ -48,7 +46,6 @@ internal static class Program
 
     static TimerX _timer;
     static StarClient _Client;
-    //static ServiceManager _Manager;
     private static void StartClient()
     {
         var set = ClientSetting.Current;
@@ -64,116 +61,16 @@ internal static class Program
             Code = set.Code,
             Secret = set.Secret,
             ProductCode = "ZeroDesktop",
+            Setting = set,
+
             Log = XTrace.Log,
         };
-
-        // 登录后保存证书
-        client.OnLogined += (s, e) =>
-        {
-            var inf = client.Info;
-            if (inf != null && !inf.Code.IsNullOrEmpty())
-            {
-                set.Code = inf.Code;
-                set.Secret = inf.Secret;
-                set.Save();
-            }
-        };
-
-        client.UseTrace();
 
         Application.ApplicationExit += (s, e) => client.Logout("ApplicationExit");
 
         // 可能需要多次尝试
-        _timer = new TimerX(TryConnectServer, client, 0, 5_000) { Async = true };
+        client.Open();
 
         _Client = client;
-    }
-
-    private static async Task TryConnectServer(Object state)
-    {
-        var client = state as StarClient;
-        await client.Login();
-        await CheckUpgrade(client, null);
-
-        // 登录成功，销毁定时器
-        //TimerX.Current.Period = 0;
-        _timer.TryDispose();
-        _timer = null;
-    }
-
-    private static String _lastVersion;
-    private static async Task CheckUpgrade(StarClient client, String channel)
-    {
-        var ug = new Stardust.Web.Upgrade { Log = XTrace.Log };
-
-        // 检查更新
-        var ur = await client.Upgrade(channel, _lastVersion);
-        if (ur != null && ur.Version != _lastVersion)
-        {
-            client.WriteInfoEvent("Upgrade", $"准备从[{_lastVersion}]更新到[{ur.Version}]，开始下载 {ur.Source}");
-            try
-            {
-                ug.Url = client.BuildUrl(ur.Source);
-                await ug.Download();
-
-                // 检查文件完整性
-                var checkHash = ug.CheckFileHash(ur.FileHash);
-                if (!ur.FileHash.IsNullOrEmpty() && !checkHash)
-                {
-                    client.WriteInfoEvent("Upgrade", "下载完成，哈希校验失败");
-                }
-                else
-                {
-                    client.WriteInfoEvent("Upgrade", "下载完成，准备解压文件");
-                    if (!ug.Extract())
-                    {
-                        client.WriteInfoEvent("Upgrade", "解压失败");
-                    }
-                    else
-                    {
-                        if (!ur.Preinstall.IsNullOrEmpty())
-                        {
-                            client.WriteInfoEvent("Upgrade", "执行预安装脚本");
-
-                            ug.Run(ur.Preinstall);
-                        }
-
-                        client.WriteInfoEvent("Upgrade", "解压完成，准备覆盖文件");
-
-                        // 执行更新，解压缩覆盖文件
-                        var rs = ug.Update();
-                        if (rs && !ur.Executor.IsNullOrEmpty()) ug.Run(ur.Executor);
-                        _lastVersion = ur.Version;
-
-                        // 强制更新时，马上重启
-                        if (rs && ur.Force)
-                        {
-                            // 重新拉起进程
-                            var star = "CrazyCoder.exe";
-                            XTrace.WriteLine("强制升级，拉起进程 {0} -upgrade", star.GetFullPath());
-                            var p = Process.Start(star.GetFullPath(), "-upgrade");
-
-                            if (p.WaitForExit(5_000) && p.ExitCode != 0)
-                            {
-                                client.WriteInfoEvent("Upgrade", "强制更新完成，但拉起新进程失败");
-                            }
-                            else
-                            {
-                                client.WriteInfoEvent("Upgrade", "强制更新完成，新进程已拉起，准备退出当前进程");
-
-                                ug.KillSelf();
-                            }
-
-                            Application.Exit();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                XTrace.WriteException(ex);
-                client.WriteErrorEvent("Upgrade", ex.ToString());
-            }
-        }
     }
 }

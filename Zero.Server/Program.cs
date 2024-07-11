@@ -60,7 +60,7 @@ public class MyServices : ServiceBase
 
     /// <summary>开始工作</summary>
     /// <param name="reason"></param>
-    protected override void StartWork(String reason)
+    public override void StartWork(String reason)
     {
         // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址、应用标识、密钥
         _star = ServiceProvider.GetService<StarFactory>();
@@ -133,7 +133,7 @@ public class MyServices : ServiceBase
 
     /// <summary>停止服务</summary>
     /// <param name="reason"></param>
-    protected override void StopWork(String reason)
+    public override void StopWork(String reason)
     {
         _netServer.TryDispose();
         _netServer = null;

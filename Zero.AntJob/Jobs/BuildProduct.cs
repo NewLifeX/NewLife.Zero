@@ -14,7 +14,7 @@ internal class BuildProduct : Handler
     public BuildProduct(ICacheProvider cacheProvider)
     {
         var job = Job;
-        job.Start = DateTime.Today;
+        job.DataTime = DateTime.Today;
         job.Step = 15;
 
         _cacheProvider = cacheProvider;

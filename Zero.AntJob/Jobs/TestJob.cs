@@ -16,7 +16,7 @@ public class TestJob : Handler
     public TestJob(ITestService testService)
     {
         var job = Job;
-        job.Start = DateTime.Now; // 开始时间
+        job.DataTime = DateTime.Now; // 开始时间
         job.Step = 24 * 60 * 60; // 一天执行一次
         _testService = testService;
     }

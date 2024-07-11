@@ -1,18 +1,43 @@
 ﻿using AntJob;
 using NewLife;
+using NewLife.Log;
+using NewLife.Model;
+using Zero.AntJob.Jobs;
 
 namespace Zero.AntJob;
 
 public class AntJobWorker : BackgroundService
 {
-    private readonly Scheduler _scheduler;
+    private Scheduler _scheduler;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly AntSetting _setting;
 
-    public AntJobWorker(Scheduler scheduler) => _scheduler = scheduler;
+    public AntJobWorker(IServiceProvider serviceProvider, AntSetting setting)
+    {
+        _serviceProvider = serviceProvider;
+        _setting = setting;
+    }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        // 实例化调度器
+        var scheduler = new Scheduler
+        {
+            ServiceProvider = _serviceProvider,
+            Log = XTrace.Log,
+        };
+
+        scheduler.Join(_setting);
+
+        // 添加作业
+        scheduler.AddHandler<HelloJob>();
+        scheduler.AddHandler<TestJob>();
+        scheduler.AddHandler<BuildProduct>();
+        scheduler.AddHandler<BuildPlan>();
+
         // 启动调度引擎，调度器内部多线程处理
-        _scheduler.Start();
+        scheduler.StartAsync();
+        _scheduler = scheduler;
 
         return Task.CompletedTask;
     }
@@ -20,7 +45,8 @@ public class AntJobWorker : BackgroundService
     public override Task StopAsync(CancellationToken cancellationToken)
     {
         _scheduler.TryDispose();
+        _scheduler = null;
 
-        return base.StopAsync(cancellationToken);
+        return Task.CompletedTask;
     }
 }

@@ -12,7 +12,7 @@ internal class BuildPlan : DataHandler
     public BuildPlan()
     {
         var job = Job;
-        job.Start = DateTime.Today;
+        job.DataTime = DateTime.Today;
         job.Step = 30;
     }
 

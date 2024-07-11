@@ -13,7 +13,7 @@ internal class HelloJob : Handler
     {
         // 今天零点开始，每10秒一次
         var job = Job;
-        job.Start = DateTime.Today;
+        job.DataTime = DateTime.Today;
         job.Step = 10;
 
         _config = config;
@@ -25,7 +25,7 @@ internal class HelloJob : Handler
         if (title.IsNullOrEmpty()) title = "新生命系统";
 
         // 当前任务时间
-        var time = ctx.Task.Start;
+        var time = ctx.Task.DataTime;
         WriteLog("{1}！当前任务时间：{0}", time, title);
 
         // 模拟耗时
