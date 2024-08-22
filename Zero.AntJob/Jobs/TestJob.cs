@@ -21,5 +21,5 @@ public class TestJob : Handler
         _testService = testService;
     }
 
-    protected override Int32 Execute(JobContext ctx) => _testService.TestInt();
+    public override Int32 Execute(JobContext ctx) => _testService.TestInt();
 }

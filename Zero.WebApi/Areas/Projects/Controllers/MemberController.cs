@@ -76,7 +76,7 @@ namespace Zero.Web.Areas.Projects.Controllers
         /// <summary>绑定用户</summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet(nameof(BindUser))]
+        [HttpGet]
         [EntityAuthorize(PermissionFlags.Update)]
         public ActionResult BindUser(Int32 id)
         {

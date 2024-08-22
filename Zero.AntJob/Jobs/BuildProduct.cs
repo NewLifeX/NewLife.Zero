@@ -20,7 +20,7 @@ internal class BuildProduct : Handler
         _cacheProvider = cacheProvider;
     }
 
-    protected override Int32 Execute(JobContext ctx)
+    public override Int32 Execute(JobContext ctx)
     {
         // 随机
         var count = Rand.Next(1, 9);

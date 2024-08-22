@@ -26,9 +26,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NewLife.MQTT" Version="2.0.2024.708" />
-    <PackageReference Include="NewLife.Redis" Version="5.7.2024.709" />
+    <PackageReference Include="NewLife.Redis" Version="5.7.2024.801" />
     <PackageReference Include="NewLife.RocketMQ" Version="2.5.2024.708" />
-    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.711-beta0023" />
+    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.806" />
   </ItemGroup>
 
 </Project>

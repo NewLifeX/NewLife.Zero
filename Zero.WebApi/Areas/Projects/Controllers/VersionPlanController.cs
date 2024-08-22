@@ -71,7 +71,7 @@ namespace Zero.Web.Areas.Projects.Controllers
 
         /// <summary>批量刷新</summary>
         /// <returns></returns>
-        [HttpGet(nameof(Refresh))]
+        [HttpGet]
         [EntityAuthorize(PermissionFlags.Update)]
         public ActionResult Refresh()
         {

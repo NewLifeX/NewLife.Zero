@@ -424,6 +424,21 @@ public partial class NodeOnline
     #region 关联映射
     #endregion
 
+    #region 扩展查询
+    /// <summary>根据会话查找</summary>
+    /// <param name="sessionId">会话</param>
+    /// <returns>实体对象</returns>
+    public static NodeOnline FindBySessionID(String sessionId)
+    {
+        if (sessionId.IsNullOrEmpty()) return null;
+
+        // 实体缓存
+        if (Meta.Session.Count < 1000) return Meta.Cache.Find(e => e.SessionID.EqualIgnoreCase(sessionId));
+
+        return Find(_.SessionID == sessionId);
+    }
+    #endregion
+
     #region 字段名
     /// <summary>取得节点在线字段信息的快捷方式</summary>
     public partial class _

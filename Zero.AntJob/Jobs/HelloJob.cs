@@ -19,7 +19,7 @@ internal class HelloJob : Handler
         _config = config;
     }
 
-    protected override Int32 Execute(JobContext ctx)
+    public override Int32 Execute(JobContext ctx)
     {
         var title = _config["Title"];
         if (title.IsNullOrEmpty()) title = "新生命系统";
