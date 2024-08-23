@@ -3,9 +3,9 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <AssemblyName>ZeroDesktop</AssemblyName>
-    <AssemblyTitle>客户端桌面应用</AssemblyTitle>
-    <Description>CS架构的客户端桌面应用，给用户提供便捷操作，可对接硬件</Description>
+    <AssemblyName>ZeroWebView</AssemblyName>
+    <AssemblyTitle>Web桌面应用</AssemblyTitle>
+    <Description>嵌入Web的客户端桌面应用，给用户提供便捷操作，可对接硬件</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2024 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
@@ -14,7 +14,7 @@
     <FileVersion>$(Version)</FileVersion>
     <AssemblyVersion>$(VersionPrefix).*</AssemblyVersion>
     <Deterministic>false</Deterministic>
-    <OutputPath>..\Bin\Desktop</OutputPath>
+    <OutputPath>..\Bin\WebView</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
@@ -27,6 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2651.64" />
     <PackageReference Include="NewLife.Stardust" Version="3.0.2024.806" />
     <PackageReference Include="NewLife.XCode" Version="11.15.2024.806" />
     <PackageReference Include="System.Speech" Version="8.0.0" />

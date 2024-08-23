@@ -56,6 +56,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Client", "Zero.Client\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.GtkForm", "Zero.GtkForm\Zero.GtkForm.csproj", "{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zero.WebView", "Zero.WebView\Zero.WebView.csproj", "{D90833AF-76C2-4F59-A2B6-46227EC8B853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,10 @@ Global
 		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90833AF-76C2-4F59-A2B6-46227EC8B853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90833AF-76C2-4F59-A2B6-46227EC8B853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90833AF-76C2-4F59-A2B6-46227EC8B853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90833AF-76C2-4F59-A2B6-46227EC8B853}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{25394835-D3F9-45F8-8435-74B9E0E610DD} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C} = {8D08D025-15F9-422C-AF16-9D93929570D0}
+		{D90833AF-76C2-4F59-A2B6-46227EC8B853} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE924F3A-C35B-41BB-9987-B45CA13A8723}
