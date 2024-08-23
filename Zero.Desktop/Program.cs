@@ -1,9 +1,11 @@
 ﻿using System.Text;
 using NewLife;
 using NewLife.Log;
-using NewLife.Threading;
+using NewLife.Model;
 using Stardust;
 using XCode;
+using XCode.Membership;
+using Zero.Data.Nodes;
 
 namespace Zero.Desktop;
 
@@ -18,12 +20,7 @@ internal static class Program
         // 支持GB2312编码
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-#if NET5_0_OR_GREATER
         XTrace.UseWinForm();
-        Application.SetHighDpiMode(HighDpiMode.SystemAware);
-#else
-        XTrace.UseWinForm();
-#endif
         MachineInfo.RegisterAsync();
 
         StartClient();
@@ -36,15 +33,23 @@ internal static class Program
         if (set.IsNew) "学无先后达者为师，欢迎使用新生命零代客户端！".SpeechTip();
 
         // 预热数据层，执行自动建表等操作
-        _ = EntityFactory.InitAllAsync();
+        Task.Run(() =>
+        {
+            var dal = User.Meta.Session.Dal;
+            dal = Node.Meta.Session.Dal;
+            _ = EntityFactory.InitAllAsync();
+        });
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
+        //Application.EnableVisualStyles();
+        //Application.SetCompatibleTextRenderingDefault(false);
+        //Application.SetHighDpiMode(HighDpiMode.SystemAware);
         Application.Run(new FrmMain());
     }
 
-    static TimerX _timer;
+    static StarFactory _factory;
     static StarClient _Client;
     private static void StartClient()
     {
@@ -54,7 +59,10 @@ internal static class Program
 
         XTrace.WriteLine("初始化服务端地址：{0}", server);
 
-        var star = new StarFactory();
+        _factory = new StarFactory(server, "ZeroDesktop", null)
+        {
+            Log = XTrace.Log,
+        };
 
         var client = new StarClient(server)
         {
@@ -63,13 +71,13 @@ internal static class Program
             ProductCode = "ZeroDesktop",
             Setting = set,
 
+            Tracer = _factory.Tracer,
             Log = XTrace.Log,
         };
 
-        Application.ApplicationExit += (s, e) => client.Logout("ApplicationExit");
-
-        // 可能需要多次尝试
         client.Open();
+
+        Host.RegisterExit(() => client.Logout("ApplicationExit"));
 
         _Client = client;
     }

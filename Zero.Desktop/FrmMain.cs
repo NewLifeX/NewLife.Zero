@@ -1,7 +1,10 @@
 ﻿using System.Reflection;
 using NewLife;
 using NewLife.Reflection;
+using NewLife.Threading;
 using XCode.DataAccessLayer;
+using XCode.Membership;
+using Zero.Data.Nodes;
 
 namespace Zero.Desktop;
 
@@ -19,7 +22,19 @@ public partial class FrmMain : Form
         var asm = AssemblyX.Create(Assembly.GetExecutingAssembly());
         Text = String.Format("{2} v{0} {1:HH:mm:ss}", asm.FileVersion, asm.Compile, Text);
 
-        cbConns.DataSource = DAL.ConnStrs.Keys;
+        _timer = new TimerX(OnBindConn, null, 1_000, 3_000);
+    }
+
+    private TimerX _timer;
+    private String _lastConns;
+    private void OnBindConn(Object state)
+    {
+        var keys = DAL.ConnStrs.Keys;
+        var ks = keys.Join(",");
+        if (ks == _lastConns) return;
+        _lastConns = ks;
+
+        cbConns.DataSource = keys;
     }
 
     private void btnOpen_Click(Object sender, EventArgs e)
