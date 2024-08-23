@@ -54,6 +54,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Desktop", "Zero.Deskto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.Client", "Zero.Client\Zero.Client.csproj", "{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zero.GtkForm", "Zero.GtkForm\Zero.GtkForm.csproj", "{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{67BAF6AD-913C-42C3-96B1-0F1D5A0CDD70} = {F3C64311-26FD-4720-9C41-A33DBE0181BB}
 		{25394835-D3F9-45F8-8435-74B9E0E610DD} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 		{CC2DD8F4-7A6C-4139-B63E-99C7934BA935} = {8D08D025-15F9-422C-AF16-9D93929570D0}
+		{6ABA4B38-62A7-4BEA-9074-D7DAA1304F0C} = {8D08D025-15F9-422C-AF16-9D93929570D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE924F3A-C35B-41BB-9987-B45CA13A8723}
