@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.806" />
-    <PackageReference Include="NewLife.XCode" Version="11.15.2024.806" />
+    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.902" />
+    <PackageReference Include="NewLife.XCode" Version="11.15.2024.902" />
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
   </ItemGroup>
 

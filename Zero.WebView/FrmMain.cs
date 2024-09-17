@@ -13,7 +13,7 @@ public partial class FrmMain : Form
         try
         {
             await webView.EnsureCoreWebView2Async(null);
-            webView.CoreWebView2.Navigate("https://www.bing.com");
+            webView.CoreWebView2.Navigate("https://newlifex.com");
         }
         catch (Exception ex)
         {

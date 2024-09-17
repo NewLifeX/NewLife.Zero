@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2651.64" />
-    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.806" />
-    <PackageReference Include="NewLife.XCode" Version="11.15.2024.806" />
+    <PackageReference Include="NewLife.Stardust" Version="3.0.2024.902" />
+    <PackageReference Include="NewLife.XCode" Version="11.15.2024.902" />
     <PackageReference Include="System.Speech" Version="8.0.0" />
   </ItemGroup>
 
