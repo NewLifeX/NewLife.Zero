@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- The package metadata. Fill in the properties marked as TODO below -->
+    <!-- Follow the instructions on https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
+    <PackageId>NewLife.Templates</PackageId>
+    <Title>新生命模版包</Title>
+    <Authors>新生命团队</Authors>
+    <Description>新生命各个开源项目的项目模版包，包括XCode、魔方、星尘、网络库、Agent服务、RPC、MQTT、RocketMQ等</Description>
+    <PackageTags>NewLife;新生命;X组件;XCode;Cube;魔方;Stardust;星尘;AntJob;蚂蚁调度;Console;Web;Service;dotnet-new;templates</PackageTags>
+    <PackageProjectUrl>https://newlifex.com</PackageProjectUrl>
+    <VersionPrefix>1.0</VersionPrefix>
+    <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+    <PackageVersion>$(VersionPrefix).$(VersionSuffix)</PackageVersion>
+    <OutputPath>..\Bin</OutputPath>
+
+    <!-- Keep package type as 'Template' to show the package as a template package on nuget.org and make your template available in dotnet new search.-->
+    <PackageType>Template</PackageType>
+    <TargetFrameworks>net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <PackageIcon>leaf.png</PackageIcon>
+    <RepositoryUrl>https://github.com/NewLifeX/NewLife.Zero</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LocalizeTemplates>false</LocalizeTemplates>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TemplateEngine.Tasks" Version="*" PrivateAssets="all" IsImplicitlyDefined="true"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Doc\leaf.png" Link="leaf.png" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Readme.MD">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
