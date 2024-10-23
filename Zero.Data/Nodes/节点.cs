@@ -27,13 +27,13 @@ namespace Zero.Data.Nodes;
 public partial class Node
 {
     #region 属性
-    private Int32 _ID;
+    private Int32 _Id;
     /// <summary>编号</summary>
     [DisplayName("编号")]
     [Description("编号")]
     [DataObjectField(true, true, false, 0)]
-    [BindColumn("ID", "编号", "")]
-    public Int32 ID { get => _ID; set { if (OnPropertyChanging("ID", value)) { _ID = value; OnPropertyChanged("ID"); } } }
+    [BindColumn("Id", "编号", "")]
+    public Int32 Id { get => _Id; set { if (OnPropertyChanging("Id", value)) { _Id = value; OnPropertyChanged("Id"); } } }
 
     private String _Name;
     /// <summary>名称</summary>
@@ -101,7 +101,7 @@ public partial class Node
 
     private String _OS;
     /// <summary>操作系统</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("操作系统")]
     [Description("操作系统")]
     [DataObjectField(false, false, true, 100)]
@@ -110,16 +110,25 @@ public partial class Node
 
     private String _OSVersion;
     /// <summary>系统版本</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("系统版本")]
     [Description("系统版本")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("OSVersion", "系统版本", "")]
     public String OSVersion { get => _OSVersion; set { if (OnPropertyChanging("OSVersion", value)) { _OSVersion = value; OnPropertyChanged("OSVersion"); } } }
 
+    private Stardust.Models.OSKinds _OSKind;
+    /// <summary>系统种类。主流操作系统类型，不考虑子版本</summary>
+    [Category("系统信息")]
+    [DisplayName("系统种类")]
+    [Description("系统种类。主流操作系统类型，不考虑子版本")]
+    [DataObjectField(false, false, false, 0)]
+    [BindColumn("OSKind", "系统种类。主流操作系统类型，不考虑子版本", "")]
+    public Stardust.Models.OSKinds OSKind { get => _OSKind; set { if (OnPropertyChanging("OSKind", value)) { _OSKind = value; OnPropertyChanged("OSKind"); } } }
+
     private String _Architecture;
     /// <summary>架构。处理器架构，X86/X64/Arm/Arm64</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("架构")]
     [Description("架构。处理器架构，X86/X64/Arm/Arm64")]
     [DataObjectField(false, false, true, 50)]
@@ -128,7 +137,7 @@ public partial class Node
 
     private String _MachineName;
     /// <summary>机器名称</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("机器名称")]
     [Description("机器名称")]
     [DataObjectField(false, false, true, 50)]
@@ -137,7 +146,7 @@ public partial class Node
 
     private String _UserName;
     /// <summary>用户名称</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("用户名称")]
     [Description("用户名称")]
     [DataObjectField(false, false, true, 50)]
@@ -146,7 +155,7 @@ public partial class Node
 
     private String _IP;
     /// <summary>本地IP</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("本地IP")]
     [Description("本地IP")]
     [DataObjectField(false, false, true, 200)]
@@ -180,9 +189,27 @@ public partial class Node
     [BindColumn("TotalSize", "磁盘。应用所在盘，单位M", "")]
     public Int32 TotalSize { get => _TotalSize; set { if (OnPropertyChanging("TotalSize", value)) { _TotalSize = value; OnPropertyChanged("TotalSize"); } } }
 
+    private Int32 _DriveSize;
+    /// <summary>驱动器大小。所有分区总大小，单位M</summary>
+    [Category("硬件信息")]
+    [DisplayName("驱动器大小")]
+    [Description("驱动器大小。所有分区总大小，单位M")]
+    [DataObjectField(false, false, false, 0)]
+    [BindColumn("DriveSize", "驱动器大小。所有分区总大小，单位M", "")]
+    public Int32 DriveSize { get => _DriveSize; set { if (OnPropertyChanging("DriveSize", value)) { _DriveSize = value; OnPropertyChanged("DriveSize"); } } }
+
+    private String _DriveInfo;
+    /// <summary>驱动器信息。各分区大小，逗号分隔</summary>
+    [Category("硬件信息")]
+    [DisplayName("驱动器信息")]
+    [Description("驱动器信息。各分区大小，逗号分隔")]
+    [DataObjectField(false, false, true, 500)]
+    [BindColumn("DriveInfo", "驱动器信息。各分区大小，逗号分隔", "")]
+    public String DriveInfo { get => _DriveInfo; set { if (OnPropertyChanging("DriveInfo", value)) { _DriveInfo = value; OnPropertyChanged("DriveInfo"); } } }
+
     private Int32 _MaxOpenFiles;
     /// <summary>最大打开文件。Linux上的ulimit -n</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("最大打开文件")]
     [Description("最大打开文件。Linux上的ulimit -n")]
     [DataObjectField(false, false, false, 0)]
@@ -191,7 +218,7 @@ public partial class Node
 
     private String _Dpi;
     /// <summary>像素点。默认96*96</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("像素点")]
     [Description("像素点。默认96*96")]
     [DataObjectField(false, false, true, 50)]
@@ -200,12 +227,30 @@ public partial class Node
 
     private String _Resolution;
     /// <summary>分辨率。例如1024*768</summary>
-    [Category("硬件信息")]
+    [Category("系统信息")]
     [DisplayName("分辨率")]
     [Description("分辨率。例如1024*768")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("Resolution", "分辨率。例如1024*768", "")]
     public String Resolution { get => _Resolution; set { if (OnPropertyChanging("Resolution", value)) { _Resolution = value; OnPropertyChanged("Resolution"); } } }
+
+    private String _Product;
+    /// <summary>产品名</summary>
+    [Category("硬件信息")]
+    [DisplayName("产品名")]
+    [Description("产品名")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("Product", "产品名", "")]
+    public String Product { get => _Product; set { if (OnPropertyChanging("Product", value)) { _Product = value; OnPropertyChanged("Product"); } } }
+
+    private String _Vendor;
+    /// <summary>制造商</summary>
+    [Category("硬件信息")]
+    [DisplayName("制造商")]
+    [Description("制造商")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("Vendor", "制造商", "")]
+    public String Vendor { get => _Vendor; set { if (OnPropertyChanging("Vendor", value)) { _Vendor = value; OnPropertyChanged("Vendor"); } } }
 
     private String _Processor;
     /// <summary>处理器</summary>
@@ -234,6 +279,24 @@ public partial class Node
     [BindColumn("MachineGuid", "机器标识", "")]
     public String MachineGuid { get => _MachineGuid; set { if (OnPropertyChanging("MachineGuid", value)) { _MachineGuid = value; OnPropertyChanged("MachineGuid"); } } }
 
+    private String _SerialNumber;
+    /// <summary>序列号。适用于品牌机，跟笔记本标签显示一致</summary>
+    [Category("硬件信息")]
+    [DisplayName("序列号")]
+    [Description("序列号。适用于品牌机，跟笔记本标签显示一致")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("SerialNumber", "序列号。适用于品牌机，跟笔记本标签显示一致", "")]
+    public String SerialNumber { get => _SerialNumber; set { if (OnPropertyChanging("SerialNumber", value)) { _SerialNumber = value; OnPropertyChanged("SerialNumber"); } } }
+
+    private String _Board;
+    /// <summary>主板。序列号或家族信息</summary>
+    [Category("硬件信息")]
+    [DisplayName("主板")]
+    [Description("主板。序列号或家族信息")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("Board", "主板。序列号或家族信息", "")]
+    public String Board { get => _Board; set { if (OnPropertyChanging("Board", value)) { _Board = value; OnPropertyChanged("Board"); } } }
+
     private String _DiskID;
     /// <summary>磁盘序列号</summary>
     [Category("硬件信息")]
@@ -254,7 +317,6 @@ public partial class Node
 
     private String _InstallPath;
     /// <summary>安装路径</summary>
-    [Category("硬件信息")]
     [DisplayName("安装路径")]
     [Description("安装路径")]
     [DataObjectField(false, false, true, 200)]
@@ -262,25 +324,35 @@ public partial class Node
     public String InstallPath { get => _InstallPath; set { if (OnPropertyChanging("InstallPath", value)) { _InstallPath = value; OnPropertyChanged("InstallPath"); } } }
 
     private String _Runtime;
-    /// <summary>运行时。.Net运行时版本，可知道本地已安装版本</summary>
-    [Category("硬件信息")]
+    /// <summary>运行时。.Net运行时版本</summary>
+    [Category("系统信息")]
     [DisplayName("运行时")]
-    [Description("运行时。.Net运行时版本，可知道本地已安装版本")]
+    [Description("运行时。.Net运行时版本")]
     [DataObjectField(false, false, true, 50)]
-    [BindColumn("Runtime", "运行时。.Net运行时版本，可知道本地已安装版本", "")]
+    [BindColumn("Runtime", "运行时。.Net运行时版本", "")]
     public String Runtime { get => _Runtime; set { if (OnPropertyChanging("Runtime", value)) { _Runtime = value; OnPropertyChanged("Runtime"); } } }
 
     private String _Framework;
-    /// <summary>目标框架。编译程序集时的目标版本</summary>
-    [Category("硬件信息")]
-    [DisplayName("目标框架")]
-    [Description("目标框架。编译程序集时的目标版本")]
+    /// <summary>框架。本地支持的最高版本框架</summary>
+    [Category("系统信息")]
+    [DisplayName("框架")]
+    [Description("框架。本地支持的最高版本框架")]
     [DataObjectField(false, false, true, 50)]
-    [BindColumn("Framework", "目标框架。编译程序集时的目标版本", "")]
+    [BindColumn("Framework", "框架。本地支持的最高版本框架", "")]
     public String Framework { get => _Framework; set { if (OnPropertyChanging("Framework", value)) { _Framework = value; OnPropertyChanged("Framework"); } } }
+
+    private String _Frameworks;
+    /// <summary>框架集合。本地支持的所有版本框架，逗号隔开</summary>
+    [Category("系统信息")]
+    [DisplayName("框架集合")]
+    [Description("框架集合。本地支持的所有版本框架，逗号隔开")]
+    [DataObjectField(false, false, true, 200)]
+    [BindColumn("Frameworks", "框架集合。本地支持的所有版本框架，逗号隔开", "")]
+    public String Frameworks { get => _Frameworks; set { if (OnPropertyChanging("Frameworks", value)) { _Frameworks = value; OnPropertyChanged("Frameworks"); } } }
 
     private Int32 _ProvinceID;
     /// <summary>省份</summary>
+    [Category("参数设置")]
     [DisplayName("省份")]
     [Description("省份")]
     [DataObjectField(false, false, false, 0)]
@@ -289,6 +361,7 @@ public partial class Node
 
     private Int32 _CityID;
     /// <summary>城市</summary>
+    [Category("参数设置")]
     [DisplayName("城市")]
     [Description("城市")]
     [DataObjectField(false, false, false, 0)]
@@ -297,6 +370,7 @@ public partial class Node
 
     private String _Address;
     /// <summary>地址。该节点所处位置</summary>
+    [Category("参数设置")]
     [DisplayName("地址")]
     [Description("地址。该节点所处位置")]
     [DataObjectField(false, false, true, 200)]
@@ -305,11 +379,30 @@ public partial class Node
 
     private Int32 _Period;
     /// <summary>采样周期。默认60秒</summary>
+    [Category("参数设置")]
     [DisplayName("采样周期")]
     [Description("采样周期。默认60秒")]
     [DataObjectField(false, false, false, 0)]
     [BindColumn("Period", "采样周期。默认60秒", "")]
     public Int32 Period { get => _Period; set { if (OnPropertyChanging("Period", value)) { _Period = value; OnPropertyChanged("Period"); } } }
+
+    private String _NewServer;
+    /// <summary>新服务器。该节点自动迁移到新的服务器地址</summary>
+    [Category("参数设置")]
+    [DisplayName("新服务器")]
+    [Description("新服务器。该节点自动迁移到新的服务器地址")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("NewServer", "新服务器。该节点自动迁移到新的服务器地址", "")]
+    public String NewServer { get => _NewServer; set { if (OnPropertyChanging("NewServer", value)) { _NewServer = value; OnPropertyChanged("NewServer"); } } }
+
+    private String _LastVersion;
+    /// <summary>最后版本。最后一次升级所使用的版本号，避免重复升级同一个版本</summary>
+    [Category("参数设置")]
+    [DisplayName("最后版本")]
+    [Description("最后版本。最后一次升级所使用的版本号，避免重复升级同一个版本")]
+    [DataObjectField(false, false, true, 50)]
+    [BindColumn("LastVersion", "最后版本。最后一次升级所使用的版本号，避免重复升级同一个版本", "")]
+    public String LastVersion { get => _LastVersion; set { if (OnPropertyChanging("LastVersion", value)) { _LastVersion = value; OnPropertyChanged("LastVersion"); } } }
 
     private String _WebHook;
     /// <summary>告警机器人。钉钉、企业微信等</summary>
@@ -376,6 +469,7 @@ public partial class Node
 
     private Int32 _Logins;
     /// <summary>登录次数</summary>
+    [Category("登录信息")]
     [DisplayName("登录次数")]
     [Description("登录次数")]
     [DataObjectField(false, false, false, 0)]
@@ -384,6 +478,7 @@ public partial class Node
 
     private DateTime _LastLogin;
     /// <summary>最后登录</summary>
+    [Category("登录信息")]
     [DisplayName("最后登录")]
     [Description("最后登录")]
     [DataObjectField(false, false, true, 0)]
@@ -392,18 +487,29 @@ public partial class Node
 
     private String _LastLoginIP;
     /// <summary>最后IP。最后的公网IP地址</summary>
+    [Category("登录信息")]
     [DisplayName("最后IP")]
     [Description("最后IP。最后的公网IP地址")]
     [DataObjectField(false, false, true, 50)]
     [BindColumn("LastLoginIP", "最后IP。最后的公网IP地址", "")]
     public String LastLoginIP { get => _LastLoginIP; set { if (OnPropertyChanging("LastLoginIP", value)) { _LastLoginIP = value; OnPropertyChanged("LastLoginIP"); } } }
 
+    private DateTime _LastActive;
+    /// <summary>最后活跃。心跳过程中每10分钟更新活跃时间</summary>
+    [Category("登录信息")]
+    [DisplayName("最后活跃")]
+    [Description("最后活跃。心跳过程中每10分钟更新活跃时间")]
+    [DataObjectField(false, false, true, 0)]
+    [BindColumn("LastActive", "最后活跃。心跳过程中每10分钟更新活跃时间", "")]
+    public DateTime LastActive { get => _LastActive; set { if (OnPropertyChanging("LastActive", value)) { _LastActive = value; OnPropertyChanged("LastActive"); } } }
+
     private Int32 _OnlineTime;
     /// <summary>在线时长。单位，秒</summary>
+    [Category("登录信息")]
     [DisplayName("在线时长")]
     [Description("在线时长。单位，秒")]
     [DataObjectField(false, false, false, 0)]
-    [BindColumn("OnlineTime", "在线时长。单位，秒", "")]
+    [BindColumn("OnlineTime", "在线时长。单位，秒", "", ItemType = "TimeSpan")]
     public Int32 OnlineTime { get => _OnlineTime; set { if (OnPropertyChanging("OnlineTime", value)) { _OnlineTime = value; OnPropertyChanged("OnlineTime"); } } }
 
     private Int32 _CreateUserID;
@@ -478,7 +584,7 @@ public partial class Node
     {
         get => name switch
         {
-            "ID" => _ID,
+            "Id" => _Id,
             "Name" => _Name,
             "Code" => _Code,
             "Secret" => _Secret,
@@ -489,6 +595,7 @@ public partial class Node
             "CompileTime" => _CompileTime,
             "OS" => _OS,
             "OSVersion" => _OSVersion,
+            "OSKind" => _OSKind,
             "Architecture" => _Architecture,
             "MachineName" => _MachineName,
             "UserName" => _UserName,
@@ -496,21 +603,30 @@ public partial class Node
             "Cpu" => _Cpu,
             "Memory" => _Memory,
             "TotalSize" => _TotalSize,
+            "DriveSize" => _DriveSize,
+            "DriveInfo" => _DriveInfo,
             "MaxOpenFiles" => _MaxOpenFiles,
             "Dpi" => _Dpi,
             "Resolution" => _Resolution,
+            "Product" => _Product,
+            "Vendor" => _Vendor,
             "Processor" => _Processor,
             "Uuid" => _Uuid,
             "MachineGuid" => _MachineGuid,
+            "SerialNumber" => _SerialNumber,
+            "Board" => _Board,
             "DiskID" => _DiskID,
             "MACs" => _MACs,
             "InstallPath" => _InstallPath,
             "Runtime" => _Runtime,
             "Framework" => _Framework,
+            "Frameworks" => _Frameworks,
             "ProvinceID" => _ProvinceID,
             "CityID" => _CityID,
             "Address" => _Address,
             "Period" => _Period,
+            "NewServer" => _NewServer,
+            "LastVersion" => _LastVersion,
             "WebHook" => _WebHook,
             "AlarmCpuRate" => _AlarmCpuRate,
             "AlarmMemoryRate" => _AlarmMemoryRate,
@@ -521,6 +637,7 @@ public partial class Node
             "Logins" => _Logins,
             "LastLogin" => _LastLogin,
             "LastLoginIP" => _LastLoginIP,
+            "LastActive" => _LastActive,
             "OnlineTime" => _OnlineTime,
             "CreateUserID" => _CreateUserID,
             "CreateTime" => _CreateTime,
@@ -535,7 +652,7 @@ public partial class Node
         {
             switch (name)
             {
-                case "ID": _ID = value.ToInt(); break;
+                case "Id": _Id = value.ToInt(); break;
                 case "Name": _Name = Convert.ToString(value); break;
                 case "Code": _Code = Convert.ToString(value); break;
                 case "Secret": _Secret = Convert.ToString(value); break;
@@ -546,6 +663,7 @@ public partial class Node
                 case "CompileTime": _CompileTime = value.ToDateTime(); break;
                 case "OS": _OS = Convert.ToString(value); break;
                 case "OSVersion": _OSVersion = Convert.ToString(value); break;
+                case "OSKind": _OSKind = (Stardust.Models.OSKinds)value.ToInt(); break;
                 case "Architecture": _Architecture = Convert.ToString(value); break;
                 case "MachineName": _MachineName = Convert.ToString(value); break;
                 case "UserName": _UserName = Convert.ToString(value); break;
@@ -553,21 +671,30 @@ public partial class Node
                 case "Cpu": _Cpu = value.ToInt(); break;
                 case "Memory": _Memory = value.ToInt(); break;
                 case "TotalSize": _TotalSize = value.ToInt(); break;
+                case "DriveSize": _DriveSize = value.ToInt(); break;
+                case "DriveInfo": _DriveInfo = Convert.ToString(value); break;
                 case "MaxOpenFiles": _MaxOpenFiles = value.ToInt(); break;
                 case "Dpi": _Dpi = Convert.ToString(value); break;
                 case "Resolution": _Resolution = Convert.ToString(value); break;
+                case "Product": _Product = Convert.ToString(value); break;
+                case "Vendor": _Vendor = Convert.ToString(value); break;
                 case "Processor": _Processor = Convert.ToString(value); break;
                 case "Uuid": _Uuid = Convert.ToString(value); break;
                 case "MachineGuid": _MachineGuid = Convert.ToString(value); break;
+                case "SerialNumber": _SerialNumber = Convert.ToString(value); break;
+                case "Board": _Board = Convert.ToString(value); break;
                 case "DiskID": _DiskID = Convert.ToString(value); break;
                 case "MACs": _MACs = Convert.ToString(value); break;
                 case "InstallPath": _InstallPath = Convert.ToString(value); break;
                 case "Runtime": _Runtime = Convert.ToString(value); break;
                 case "Framework": _Framework = Convert.ToString(value); break;
+                case "Frameworks": _Frameworks = Convert.ToString(value); break;
                 case "ProvinceID": _ProvinceID = value.ToInt(); break;
                 case "CityID": _CityID = value.ToInt(); break;
                 case "Address": _Address = Convert.ToString(value); break;
                 case "Period": _Period = value.ToInt(); break;
+                case "NewServer": _NewServer = Convert.ToString(value); break;
+                case "LastVersion": _LastVersion = Convert.ToString(value); break;
                 case "WebHook": _WebHook = Convert.ToString(value); break;
                 case "AlarmCpuRate": _AlarmCpuRate = value.ToInt(); break;
                 case "AlarmMemoryRate": _AlarmMemoryRate = value.ToInt(); break;
@@ -578,6 +705,7 @@ public partial class Node
                 case "Logins": _Logins = value.ToInt(); break;
                 case "LastLogin": _LastLogin = value.ToDateTime(); break;
                 case "LastLoginIP": _LastLoginIP = Convert.ToString(value); break;
+                case "LastActive": _LastActive = value.ToDateTime(); break;
                 case "OnlineTime": _OnlineTime = value.ToInt(); break;
                 case "CreateUserID": _CreateUserID = value.ToInt(); break;
                 case "CreateTime": _CreateTime = value.ToDateTime(); break;
@@ -596,6 +724,22 @@ public partial class Node
     #endregion
 
     #region 扩展查询
+    /// <summary>根据编号查找</summary>
+    /// <param name="id">编号</param>
+    /// <returns>实体对象</returns>
+    public static Node FindById(Int32 id)
+    {
+        if (id < 0) return null;
+
+        // 实体缓存
+        if (Meta.Session.Count < 1000) return Meta.Cache.Find(e => e.Id == id);
+
+        // 单对象缓存
+        return Meta.SingleCache[id];
+
+        //return Find(_.Id == id);
+    }
+
     /// <summary>根据编码查找</summary>
     /// <param name="code">编码</param>
     /// <returns>实体对象</returns>
@@ -615,7 +759,7 @@ public partial class Node
     public partial class _
     {
         /// <summary>编号</summary>
-        public static readonly Field ID = FindByName("ID");
+        public static readonly Field Id = FindByName("Id");
 
         /// <summary>名称</summary>
         public static readonly Field Name = FindByName("Name");
@@ -647,6 +791,9 @@ public partial class Node
         /// <summary>系统版本</summary>
         public static readonly Field OSVersion = FindByName("OSVersion");
 
+        /// <summary>系统种类。主流操作系统类型，不考虑子版本</summary>
+        public static readonly Field OSKind = FindByName("OSKind");
+
         /// <summary>架构。处理器架构，X86/X64/Arm/Arm64</summary>
         public static readonly Field Architecture = FindByName("Architecture");
 
@@ -668,6 +815,12 @@ public partial class Node
         /// <summary>磁盘。应用所在盘，单位M</summary>
         public static readonly Field TotalSize = FindByName("TotalSize");
 
+        /// <summary>驱动器大小。所有分区总大小，单位M</summary>
+        public static readonly Field DriveSize = FindByName("DriveSize");
+
+        /// <summary>驱动器信息。各分区大小，逗号分隔</summary>
+        public static readonly Field DriveInfo = FindByName("DriveInfo");
+
         /// <summary>最大打开文件。Linux上的ulimit -n</summary>
         public static readonly Field MaxOpenFiles = FindByName("MaxOpenFiles");
 
@@ -676,6 +829,12 @@ public partial class Node
 
         /// <summary>分辨率。例如1024*768</summary>
         public static readonly Field Resolution = FindByName("Resolution");
+
+        /// <summary>产品名</summary>
+        public static readonly Field Product = FindByName("Product");
+
+        /// <summary>制造商</summary>
+        public static readonly Field Vendor = FindByName("Vendor");
 
         /// <summary>处理器</summary>
         public static readonly Field Processor = FindByName("Processor");
@@ -686,6 +845,12 @@ public partial class Node
         /// <summary>机器标识</summary>
         public static readonly Field MachineGuid = FindByName("MachineGuid");
 
+        /// <summary>序列号。适用于品牌机，跟笔记本标签显示一致</summary>
+        public static readonly Field SerialNumber = FindByName("SerialNumber");
+
+        /// <summary>主板。序列号或家族信息</summary>
+        public static readonly Field Board = FindByName("Board");
+
         /// <summary>磁盘序列号</summary>
         public static readonly Field DiskID = FindByName("DiskID");
 
@@ -695,11 +860,14 @@ public partial class Node
         /// <summary>安装路径</summary>
         public static readonly Field InstallPath = FindByName("InstallPath");
 
-        /// <summary>运行时。.Net运行时版本，可知道本地已安装版本</summary>
+        /// <summary>运行时。.Net运行时版本</summary>
         public static readonly Field Runtime = FindByName("Runtime");
 
-        /// <summary>目标框架。编译程序集时的目标版本</summary>
+        /// <summary>框架。本地支持的最高版本框架</summary>
         public static readonly Field Framework = FindByName("Framework");
+
+        /// <summary>框架集合。本地支持的所有版本框架，逗号隔开</summary>
+        public static readonly Field Frameworks = FindByName("Frameworks");
 
         /// <summary>省份</summary>
         public static readonly Field ProvinceID = FindByName("ProvinceID");
@@ -712,6 +880,12 @@ public partial class Node
 
         /// <summary>采样周期。默认60秒</summary>
         public static readonly Field Period = FindByName("Period");
+
+        /// <summary>新服务器。该节点自动迁移到新的服务器地址</summary>
+        public static readonly Field NewServer = FindByName("NewServer");
+
+        /// <summary>最后版本。最后一次升级所使用的版本号，避免重复升级同一个版本</summary>
+        public static readonly Field LastVersion = FindByName("LastVersion");
 
         /// <summary>告警机器人。钉钉、企业微信等</summary>
         public static readonly Field WebHook = FindByName("WebHook");
@@ -742,6 +916,9 @@ public partial class Node
 
         /// <summary>最后IP。最后的公网IP地址</summary>
         public static readonly Field LastLoginIP = FindByName("LastLoginIP");
+
+        /// <summary>最后活跃。心跳过程中每10分钟更新活跃时间</summary>
+        public static readonly Field LastActive = FindByName("LastActive");
 
         /// <summary>在线时长。单位，秒</summary>
         public static readonly Field OnlineTime = FindByName("OnlineTime");
@@ -774,7 +951,7 @@ public partial class Node
     public partial class __
     {
         /// <summary>编号</summary>
-        public const String ID = "ID";
+        public const String Id = "Id";
 
         /// <summary>名称</summary>
         public const String Name = "Name";
@@ -806,6 +983,9 @@ public partial class Node
         /// <summary>系统版本</summary>
         public const String OSVersion = "OSVersion";
 
+        /// <summary>系统种类。主流操作系统类型，不考虑子版本</summary>
+        public const String OSKind = "OSKind";
+
         /// <summary>架构。处理器架构，X86/X64/Arm/Arm64</summary>
         public const String Architecture = "Architecture";
 
@@ -827,6 +1007,12 @@ public partial class Node
         /// <summary>磁盘。应用所在盘，单位M</summary>
         public const String TotalSize = "TotalSize";
 
+        /// <summary>驱动器大小。所有分区总大小，单位M</summary>
+        public const String DriveSize = "DriveSize";
+
+        /// <summary>驱动器信息。各分区大小，逗号分隔</summary>
+        public const String DriveInfo = "DriveInfo";
+
         /// <summary>最大打开文件。Linux上的ulimit -n</summary>
         public const String MaxOpenFiles = "MaxOpenFiles";
 
@@ -835,6 +1021,12 @@ public partial class Node
 
         /// <summary>分辨率。例如1024*768</summary>
         public const String Resolution = "Resolution";
+
+        /// <summary>产品名</summary>
+        public const String Product = "Product";
+
+        /// <summary>制造商</summary>
+        public const String Vendor = "Vendor";
 
         /// <summary>处理器</summary>
         public const String Processor = "Processor";
@@ -845,6 +1037,12 @@ public partial class Node
         /// <summary>机器标识</summary>
         public const String MachineGuid = "MachineGuid";
 
+        /// <summary>序列号。适用于品牌机，跟笔记本标签显示一致</summary>
+        public const String SerialNumber = "SerialNumber";
+
+        /// <summary>主板。序列号或家族信息</summary>
+        public const String Board = "Board";
+
         /// <summary>磁盘序列号</summary>
         public const String DiskID = "DiskID";
 
@@ -854,11 +1052,14 @@ public partial class Node
         /// <summary>安装路径</summary>
         public const String InstallPath = "InstallPath";
 
-        /// <summary>运行时。.Net运行时版本，可知道本地已安装版本</summary>
+        /// <summary>运行时。.Net运行时版本</summary>
         public const String Runtime = "Runtime";
 
-        /// <summary>目标框架。编译程序集时的目标版本</summary>
+        /// <summary>框架。本地支持的最高版本框架</summary>
         public const String Framework = "Framework";
+
+        /// <summary>框架集合。本地支持的所有版本框架，逗号隔开</summary>
+        public const String Frameworks = "Frameworks";
 
         /// <summary>省份</summary>
         public const String ProvinceID = "ProvinceID";
@@ -871,6 +1072,12 @@ public partial class Node
 
         /// <summary>采样周期。默认60秒</summary>
         public const String Period = "Period";
+
+        /// <summary>新服务器。该节点自动迁移到新的服务器地址</summary>
+        public const String NewServer = "NewServer";
+
+        /// <summary>最后版本。最后一次升级所使用的版本号，避免重复升级同一个版本</summary>
+        public const String LastVersion = "LastVersion";
 
         /// <summary>告警机器人。钉钉、企业微信等</summary>
         public const String WebHook = "WebHook";
@@ -901,6 +1108,9 @@ public partial class Node
 
         /// <summary>最后IP。最后的公网IP地址</summary>
         public const String LastLoginIP = "LastLoginIP";
+
+        /// <summary>最后活跃。心跳过程中每10分钟更新活跃时间</summary>
+        public const String LastActive = "LastActive";
 
         /// <summary>在线时长。单位，秒</summary>
         public const String OnlineTime = "OnlineTime";

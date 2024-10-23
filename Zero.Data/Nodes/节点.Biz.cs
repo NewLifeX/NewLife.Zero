@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
-using Stardust.Models;
+using NewLife.Remoting.Models;
 using XCode;
 using XCode.Cache;
 using XCode.Membership;
+using Zero.Models;
 
 namespace Zero.Data.Nodes;
 
 /// <summary>节点信息</summary>
-public partial class Node : Entity<Node>
+public partial class Node : Entity<Node>, IDeviceModel
 {
     #region 对象操作
     static Node()
@@ -103,7 +102,7 @@ public partial class Node : Entity<Node>
     {
         if (id <= 0) return null;
 
-        if (Meta.Count < 1000) return Meta.Cache.Entities.FirstOrDefault(e => e.ID == id);
+        if (Meta.Count < 1000) return Meta.Cache.Entities.FirstOrDefault(e => e.Id == id);
 
         // 单对象缓存
         return Meta.SingleCache[id];
@@ -323,24 +322,24 @@ public partial class Node : Entity<Node>
     {
         var exp = new WhereExpression();
         exp &= _.CreateTime.Between(start, end);
-        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.ID.Count() & _.ProvinceID, 0, 0);
-        return list.ToDictionary(e => e.ProvinceID, e => e.ID);
+        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.Id.Count() & _.ProvinceID, 0, 0);
+        return list.ToDictionary(e => e.ProvinceID, e => e.Id);
     }
 
     internal static IDictionary<Int32, Int32> SearchGroupByLastLogin(DateTime start, DateTime end)
     {
         var exp = new WhereExpression();
         exp &= _.LastLogin.Between(start, end);
-        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.ID.Count() & _.ProvinceID, 0, 0);
-        return list.ToDictionary(e => e.ProvinceID, e => e.ID);
+        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.Id.Count() & _.ProvinceID, 0, 0);
+        return list.ToDictionary(e => e.ProvinceID, e => e.Id);
     }
 
     internal static IDictionary<Int32, Int32> SearchCountByCreateDate(DateTime date)
     {
         var exp = new WhereExpression();
         exp &= _.CreateTime < date.AddDays(1);
-        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.ID.Count() & _.ProvinceID, 0, 0);
-        return list.ToDictionary(e => e.ProvinceID, e => e.ID);
+        var list = FindAll(exp.GroupBy(_.ProvinceID), null, _.Id.Count() & _.ProvinceID, 0, 0);
+        return list.ToDictionary(e => e.ProvinceID, e => e.Id);
     }
     #endregion
 
@@ -386,13 +385,13 @@ public partial class Node : Entity<Node>
     public static Node GetOrAdd(String code) => GetOrAdd(code, (k, c) => FindByCode(k, c), k => new Node { Code = k, Enable = true });
 
     /// <summary>登录并保存信息</summary>
-    /// <param name="di"></param>
+    /// <param name="info"></param>
     /// <param name="ip"></param>
-    public void Login(NodeInfo di, String ip)
+    public void Login(LoginInfo info, String ip)
     {
         var node = this;
 
-        node.Fill(di);
+        node.Fill(info);
 
         // 如果节点本地IP为空，而来源IP是局域网，则直接取用
         //if (node.IP.IsNullOrEmpty() && ip.StartsWithIgnoreCase("10.", "192.", "172.")) node.IP = ip;
@@ -411,37 +410,28 @@ public partial class Node : Entity<Node>
     }
 
     /// <summary>填充</summary>
-    /// <param name="di"></param>
-    public void Fill(NodeInfo di)
+    /// <param name="info"></param>
+    public void Fill(LoginInfo info)
     {
         var node = this;
 
-        if (!di.OSName.IsNullOrEmpty()) node.OS = di.OSName;
-        if (!di.OSVersion.IsNullOrEmpty()) node.OSVersion = di.OSVersion;
-        if (!di.Architecture.IsNullOrEmpty()) node.Architecture = di.Architecture;
-        if (!di.Version.IsNullOrEmpty()) node.Version = di.Version;
-        if (di.Compile.Year > 2000) node.CompileTime = di.Compile;
+        if (!info.OSName.IsNullOrEmpty()) node.OS = info.OSName;
+        if (!info.OSVersion.IsNullOrEmpty()) node.OSVersion = info.OSVersion;
+        if (!info.Architecture.IsNullOrEmpty()) node.Architecture = info.Architecture;
+        if (!info.Version.IsNullOrEmpty()) node.Version = info.Version;
+        if (info.Compile > 2000) node.CompileTime = info.Compile.ToDateTime().ToLocalTime();
 
-        if (!di.MachineName.IsNullOrEmpty()) node.MachineName = di.MachineName;
-        if (!di.UserName.IsNullOrEmpty()) node.UserName = di.UserName;
-        if (!di.IP.IsNullOrEmpty()) node.IP = di.IP;
-        if (!di.Processor.IsNullOrEmpty()) node.Processor = di.Processor;
-        //if (!di.CpuID.IsNullOrEmpty()) node.CpuID = di.CpuID;
-        if (!di.UUID.IsNullOrEmpty()) node.Uuid = di.UUID;
-        if (!di.MachineGuid.IsNullOrEmpty()) node.MachineGuid = di.MachineGuid;
-        if (!di.DiskID.IsNullOrEmpty()) node.DiskID = di.DiskID;
+        if (!info.MachineName.IsNullOrEmpty()) node.MachineName = info.MachineName;
+        if (!info.UserName.IsNullOrEmpty()) node.UserName = info.UserName;
+        if (!info.IP.IsNullOrEmpty()) node.IP = info.IP;
+        if (!info.UUID.IsNullOrEmpty()) node.Uuid = info.UUID;
 
-        if (di.ProcessorCount > 0) node.Cpu = di.ProcessorCount;
-        if (di.Memory > 0) node.Memory = (Int32)(di.Memory / 1024 / 1024);
-        if (di.TotalSize > 0) node.TotalSize = (Int32)(di.TotalSize / 1024 / 1024);
-        if (di.MaxOpenFiles > 0) node.MaxOpenFiles = di.MaxOpenFiles;
-        if (!di.Dpi.IsNullOrEmpty()) node.Dpi = di.Dpi;
-        if (!di.Resolution.IsNullOrEmpty()) node.Resolution = di.Resolution;
-        if (!di.Macs.IsNullOrEmpty()) node.MACs = di.Macs;
-        //if (!di.COMs.IsNullOrEmpty()) node.COMs = di.COMs;
-        if (!di.InstallPath.IsNullOrEmpty()) node.InstallPath = di.InstallPath;
-        if (!di.Runtime.IsNullOrEmpty()) node.Runtime = di.Runtime;
-        if (!di.Framework.IsNullOrEmpty()) node.Framework = di.Framework;
+        if (info.ProcessorCount > 0) node.Cpu = info.ProcessorCount;
+        if (info.Memory > 0) node.Memory = (Int32)(info.Memory / 1024 / 1024);
+        if (info.TotalSize > 0) node.TotalSize = (Int32)(info.TotalSize / 1024 / 1024);
+        if (!info.Macs.IsNullOrEmpty()) node.MACs = info.Macs;
+
+        if (!node.OS.IsNullOrEmpty()) node.OSKind = Stardust.Models.OSKindHelper.Parse(node.OS, node.OSVersion);
     }
 
     /// <summary>修正地区</summary>
@@ -453,39 +443,6 @@ public partial class Node : Entity<Node>
         var rs = Area.SearchIP(node.UpdateIP);
         if (rs.Count > 0) node.ProvinceID = rs[0].ID;
         if (rs.Count > 1) node.CityID = rs[^1].ID;
-    }
-
-    ///// <summary>
-    ///// 根据IP地址修正名称和分类
-    ///// </summary>
-    //public void FixNameByRule()
-    //{
-    //    //var ip = IP;
-    //    //if (ip.IsNullOrEmpty()) return;
-
-    //    var rule = NodeResolver.Instance.Match(IP, UpdateIP);
-    //    if (rule != null)
-    //    {
-    //        if ((Name.IsNullOrEmpty() || Name == MachineName) && !rule.Name.IsNullOrEmpty())
-    //            Name = rule.Name;
-
-    //        if (!rule.Category.IsNullOrEmpty())
-    //            Category = rule.Category;
-    //    }
-    //}
-
-    /// <summary>写历史</summary>
-    /// <param name="action"></param>
-    /// <param name="success"></param>
-    /// <param name="remark"></param>
-    /// <param name="ip"></param>
-    /// <returns></returns>
-    public NodeHistory WriteHistory(String action, Boolean success, String remark, String ip)
-    {
-        var hi = NodeHistory.Create(this, action, success, remark, Environment.MachineName, ip);
-        hi.SaveAsync();
-
-        return hi;
     }
     #endregion
 }

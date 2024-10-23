@@ -17,7 +17,7 @@ namespace Zero.Data.Nodes;
 [Serializable]
 [DataObject]
 [Description("节点历史")]
-[BindIndex("IX_NodeHistory_NodeID_Action", false, "NodeID,Action")]
+[BindIndex("IX_NodeHistory_NodeId_Action", false, "NodeId,Action")]
 [BindTable("NodeHistory", Description = "节点历史", ConnName = "StardustData", DbType = DatabaseType.None)]
 public partial class NodeHistory
 {
@@ -30,13 +30,13 @@ public partial class NodeHistory
     [BindColumn("Id", "编号", "", DataScale = "time")]
     public Int64 Id { get => _Id; set { if (OnPropertyChanging("Id", value)) { _Id = value; OnPropertyChanged("Id"); } } }
 
-    private Int32 _NodeID;
+    private Int32 _NodeId;
     /// <summary>节点</summary>
     [DisplayName("节点")]
     [Description("节点")]
     [DataObjectField(false, false, false, 0)]
-    [BindColumn("NodeID", "节点", "")]
-    public Int32 NodeID { get => _NodeID; set { if (OnPropertyChanging("NodeID", value)) { _NodeID = value; OnPropertyChanged("NodeID"); } } }
+    [BindColumn("NodeId", "节点", "")]
+    public Int32 NodeId { get => _NodeId; set { if (OnPropertyChanging("NodeId", value)) { _NodeId = value; OnPropertyChanged("NodeId"); } } }
 
     private String _Name;
     /// <summary>名称</summary>
@@ -148,7 +148,7 @@ public partial class NodeHistory
         get => name switch
         {
             "Id" => _Id,
-            "NodeID" => _NodeID,
+            "NodeId" => _NodeId,
             "Name" => _Name,
             "ProvinceID" => _ProvinceID,
             "CityID" => _CityID,
@@ -168,7 +168,7 @@ public partial class NodeHistory
             switch (name)
             {
                 case "Id": _Id = value.ToLong(); break;
-                case "NodeID": _NodeID = value.ToInt(); break;
+                case "NodeId": _NodeId = value.ToInt(); break;
                 case "Name": _Name = Convert.ToString(value); break;
                 case "ProvinceID": _ProvinceID = value.ToInt(); break;
                 case "CityID": _CityID = value.ToInt(); break;
@@ -191,6 +191,17 @@ public partial class NodeHistory
     #endregion
 
     #region 扩展查询
+    /// <summary>根据节点、操作查找</summary>
+    /// <param name="nodeId">节点</param>
+    /// <param name="action">操作</param>
+    /// <returns>实体列表</returns>
+    public static IList<NodeHistory> FindAllByNodeIdAndAction(Int32 nodeId, String action)
+    {
+        if (nodeId < 0) return [];
+        if (action.IsNullOrEmpty()) return [];
+
+        return FindAll(_.NodeId == nodeId & _.Action == action);
+    }
     #endregion
 
     #region 数据清理
@@ -212,7 +223,7 @@ public partial class NodeHistory
         public static readonly Field Id = FindByName("Id");
 
         /// <summary>节点</summary>
-        public static readonly Field NodeID = FindByName("NodeID");
+        public static readonly Field NodeId = FindByName("NodeId");
 
         /// <summary>名称</summary>
         public static readonly Field Name = FindByName("Name");
@@ -260,7 +271,7 @@ public partial class NodeHistory
         public const String Id = "Id";
 
         /// <summary>节点</summary>
-        public const String NodeID = "NodeID";
+        public const String NodeId = "NodeId";
 
         /// <summary>名称</summary>
         public const String Name = "Name";

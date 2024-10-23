@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewLife.Reflection;
-using Zero.WebApi.Common;
+using NewLife.Remoting.Extensions;
 
 namespace Zero.WebApi.Controllers;
 

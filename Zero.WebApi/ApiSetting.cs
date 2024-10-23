@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using NewLife;
 using NewLife.Configuration;
+using NewLife.Remoting.Extensions.Models;
 using NewLife.Security;
 using Zero.WebApi.Models;
 
@@ -8,7 +9,7 @@ namespace Zero.WebApi;
 
 /// <summary>Api设置</summary>
 [Config("Api")]
-public class ApiSetting : Config<ApiSetting>
+public class ApiSetting : Config<ApiSetting>, ITokenSetting
 {
     #region 属性
     /// <summary>调试。默认启用</summary>
@@ -26,6 +27,16 @@ public class ApiSetting : Config<ApiSetting>
     /// <summary>令牌有效期。默认2*3600秒</summary>
     [Description("令牌有效期。默认2*3600秒")]
     public Int32 TokenExpire { get; set; } = 2 * 3600;
+
+    /// <summary>会话超时。默认600秒</summary>
+    [Description("会话超时。默认600秒")]
+    [Category("设备管理")]
+    public Int32 SessionTimeout { get; set; } = 600;
+
+    /// <summary>自动注册。允许客户端自动注册，默认true</summary>
+    [Description("自动注册。允许客户端自动注册，默认true")]
+    [Category("设备管理")]
+    public Boolean AutoRegister { get; set; } = true;
 
     /// <summary>服务集合</summary>
     [Description("服务集合")]

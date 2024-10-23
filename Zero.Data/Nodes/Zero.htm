@@ -50,7 +50,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>ID</td>
+            <td>Id</td>
             <td>编号</td>
             <td>Int32</td>
             <td></td>
@@ -171,6 +171,17 @@
         </tr>
 
         <tr>
+            <td>OSKind</td>
+            <td>系统种类</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>主流操作系统类型，不考虑子版本</td>
+        </tr>
+
+        <tr>
             <td>Architecture</td>
             <td>架构</td>
             <td>String</td>
@@ -248,6 +259,28 @@
         </tr>
 
         <tr>
+            <td>DriveSize</td>
+            <td>驱动器大小</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>所有分区总大小，单位M</td>
+        </tr>
+
+        <tr>
+            <td>DriveInfo</td>
+            <td>驱动器信息</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>各分区大小，逗号分隔</td>
+        </tr>
+
+        <tr>
             <td>MaxOpenFiles</td>
             <td>最大打开文件</td>
             <td>Int32</td>
@@ -281,6 +314,28 @@
         </tr>
 
         <tr>
+            <td>Product</td>
+            <td>产品名</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Vendor</td>
+            <td>制造商</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
             <td>Processor</td>
             <td>处理器</td>
             <td>String</td>
@@ -311,6 +366,28 @@
             <td></td>
             <td></td>
             <td></td>
+        </tr>
+
+        <tr>
+            <td>SerialNumber</td>
+            <td>序列号</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>适用于品牌机，跟笔记本标签显示一致</td>
+        </tr>
+
+        <tr>
+            <td>Board</td>
+            <td>主板</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>序列号或家族信息</td>
         </tr>
 
         <tr>
@@ -354,18 +431,29 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>.Net运行时版本，可知道本地已安装版本</td>
+            <td>.Net运行时版本</td>
         </tr>
 
         <tr>
             <td>Framework</td>
-            <td>目标框架</td>
+            <td>框架</td>
             <td>String</td>
             <td>50</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>编译程序集时的目标版本</td>
+            <td>本地支持的最高版本框架</td>
+        </tr>
+
+        <tr>
+            <td>Frameworks</td>
+            <td>框架集合</td>
+            <td>String</td>
+            <td>200</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>本地支持的所有版本框架，逗号隔开</td>
         </tr>
 
         <tr>
@@ -410,6 +498,28 @@
             <td></td>
             <td>N</td>
             <td>默认60秒</td>
+        </tr>
+
+        <tr>
+            <td>NewServer</td>
+            <td>新服务器</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>该节点自动迁移到新的服务器地址</td>
+        </tr>
+
+        <tr>
+            <td>LastVersion</td>
+            <td>最后版本</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>最后一次升级所使用的版本号，避免重复升级同一个版本</td>
         </tr>
 
         <tr>
@@ -523,6 +633,17 @@
         </tr>
 
         <tr>
+            <td>LastActive</td>
+            <td>最后活跃</td>
+            <td>DateTime</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>心跳过程中每10分钟更新活跃时间</td>
+        </tr>
+
+        <tr>
             <td>OnlineTime</td>
             <td>在线时长</td>
             <td>Int32</td>
@@ -628,7 +749,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>ID</td>
+            <td>Id</td>
             <td>编号</td>
             <td>Int32</td>
             <td></td>
@@ -650,7 +771,7 @@
         </tr>
 
         <tr>
-            <td>NodeID</td>
+            <td>NodeId</td>
             <td>节点</td>
             <td>Int32</td>
             <td></td>
@@ -760,6 +881,17 @@
         </tr>
 
         <tr>
+            <td>OSKind</td>
+            <td>系统种类</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>主流操作系统类型，不考虑子版本</td>
+        </tr>
+
+        <tr>
             <td>Memory</td>
             <td>内存</td>
             <td>Int32</td>
@@ -782,6 +914,17 @@
         </tr>
 
         <tr>
+            <td>MemoryUsed</td>
+            <td>已用内存</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>单位M</td>
+        </tr>
+
+        <tr>
             <td>AvailableFreeSpace</td>
             <td>可用磁盘</td>
             <td>Int32</td>
@@ -790,6 +933,28 @@
             <td></td>
             <td>N</td>
             <td>应用所在盘，单位M</td>
+        </tr>
+
+        <tr>
+            <td>SpaceUsed</td>
+            <td>已用磁盘</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>应用所在盘，单位M</td>
+        </tr>
+
+        <tr>
+            <td>DriveInfo</td>
+            <td>驱动器信息</td>
+            <td>String</td>
+            <td>500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>各分区大小，逗号分隔</td>
         </tr>
 
         <tr>
@@ -823,6 +988,17 @@
             <td></td>
             <td>N</td>
             <td></td>
+        </tr>
+
+        <tr>
+            <td>Signal</td>
+            <td>信号</td>
+            <td>Int32</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+            <td>信号强度，WiFi/4G</td>
         </tr>
 
         <tr>
@@ -980,6 +1156,17 @@
         </tr>
 
         <tr>
+            <td>TraceId</td>
+            <td>追踪</td>
+            <td>String</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>最新一次查看采样，可用于关联多个片段，建立依赖关系，随线程上下文、Http、Rpc传递</td>
+        </tr>
+
+        <tr>
             <td>Creator</td>
             <td>创建者</td>
             <td>String</td>
@@ -1063,7 +1250,7 @@
         </tr>
 
         <tr>
-            <td>NodeID</td>
+            <td>NodeId</td>
             <td>节点</td>
             <td>Int32</td>
             <td></td>

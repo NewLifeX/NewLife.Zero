@@ -1,18 +1,11 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.Extensions.Options;
-using NewLife;
-using NewLife.Caching;
+﻿using NewLife.Caching;
 using NewLife.Caching.Services;
+using NewLife.Cube;
+using NewLife.Cube.Swagger;
 using NewLife.Log;
-using NewLife.Serialization;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using XCode;
 using Zero.WebApi;
 using Zero.WebApi.Services;
-using JsonOptions = Microsoft.AspNetCore.Mvc.JsonOptions;
 
 //!!! 标准WebApi项目模板，新生命团队强烈推荐
 
@@ -34,51 +27,24 @@ services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 // 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
 //services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
 
+// 注入应用配置
 var set = ApiSetting.Current;
 services.AddSingleton(set);
 
+// 注册Remoting所必须的服务
+services.AddIoT(set);
+
+// 注入多个功能服务
 services.AddSingleton<NodeService>();
 
 // 启用接口响应压缩
 services.AddResponseCompression();
 
-// 配置Json
-services.Configure<JsonOptions>(options =>
-{
-#if NET7_0_OR_GREATER
-    // 支持模型类中的DataMember特性
-    options.JsonSerializerOptions.TypeInfoResolver = DataMemberResolver.Default;
-#endif
-    options.JsonSerializerOptions.Converters.Add(new TypeConverter());
-    options.JsonSerializerOptions.Converters.Add(new LocalTimeConverter());
-    // 支持中文编码
-    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-});
-
 services.AddControllers();
 
-// 引入 Swagger/OpenAPI
-builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
-builder.Services.AddSwaggerGen(options =>
-{
-    // 解决 NewLife.Setting 与 XCode.Setting 冲突的问题
-    options.CustomSchemaIds(type => type.FullName);
-    options.IncludeXmlComments("NewLife.Cube.xml".GetFullPath());
-    options.IncludeXmlComments("Zero.WebApi.xml".GetFullPath());
-
-    options.DocInclusionPredicate((docName, apiDesc) =>
-    {
-        if (apiDesc.ActionDescriptor is not ControllerActionDescriptor controller) return false;
-
-        var groups = controller.ControllerTypeInfo.GetCustomAttributes(true).OfType<IApiDescriptionGroupNameProvider>().Select(e => e.GroupName).ToList();
-
-        if (docName == "v1" && (groups == null || groups.Count == 0)) return true;
-
-        return groups != null && groups.Any(e => e == docName);
-    });
-});
+// 引入魔方框架，包含Swagger、OAuth等
+services.AddCubeSwagger();
+services.AddCube();
 
 // 后台服务
 services.AddHostedService<MyHostedService>();
@@ -99,20 +65,11 @@ app.UseStardust();
 // 注意：生产环境swagger会被禁用，如需要在生产环境启用sw需要取消环境判断参数
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    //app.UseSwaggerUI();
-    app.UseSwaggerUI(options =>
-    {
-        options.RoutePrefix = String.Empty;
-        var groups = app.Services.GetRequiredService<IApiDescriptionGroupCollectionProvider>().ApiDescriptionGroups.Items;
-        foreach (var description in groups)
-        {
-            var group = description.GroupName;
-            if (group.IsNullOrEmpty()) continue;
-            options.SwaggerEndpoint($"/swagger/{group}/swagger.json", group);
-        }
-    });
+    app.UseCubeSwagger();
 }
+
+// 使用魔方框架
+app.UseCube(builder.Environment);
 
 app.UseAuthorization();
 
@@ -139,11 +96,11 @@ static void InitConfig()
         set.BackupPath = "../Backup";
         set.Save();
     }
-    //var set2 = XCode.Setting.Current;
-    //if (set2.IsNew)
-    //{
-    //    // 关闭SQL日志输出
-    //    set2.ShowSQL = false;
-    //    set2.Save();
-    //}
+    var set2 = XCodeSetting.Current;
+    if (set2.IsNew)
+    {
+        // 关闭SQL日志输出
+        set2.ShowSQL = false;
+        set2.Save();
+    }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using NewLife;
-using Zero.Core.WeiXin;
 using Zero.Data.Projects;
+using Zero.WeiXin;
 
 namespace Zero.Data.Common
 {
