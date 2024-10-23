@@ -1,4 +1,5 @@
 ﻿using NewLife;
+using NewLife.Data;
 using NewLife.Model;
 using NewLife.Net;
 using Zero.TcpServer.Handlers;

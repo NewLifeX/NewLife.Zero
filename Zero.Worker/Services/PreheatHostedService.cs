@@ -1,7 +1,6 @@
 ﻿using NewLife.Caching;
 using NewLife.Log;
 using XCode.Membership;
-using Zero.Data.Nodes;
 
 namespace Zero.Worker.Services;
 
@@ -20,7 +19,7 @@ public class PreheatHostedService : IHostedService
         XTrace.WriteLine("在提供服务前预热数据库和中间件的网络连接，避免应用启动时的网络连接冲击导致雪崩……");
 
         // 预热数据库连接
-        XTrace.WriteLine("节点数：{0:n0}", Node.Meta.Count);
+        //XTrace.WriteLine("节点数：{0:n0}", Node.Meta.Count);
         XTrace.WriteLine("用户数：{0:n0}", User.Meta.Count);
 
         // 预热缓存

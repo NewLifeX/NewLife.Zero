@@ -20,15 +20,10 @@
 
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2024.904" />
-    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.5.2023.803" />
     <PackageReference Include="NewLife.MQTT" Version="2.0.2024.708" />
-    <PackageReference Include="NewLife.Redis" Version="5.7.2024.801" />
-    <PackageReference Include="NewLife.RocketMQ" Version="2.5.2024.708" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.0.2024.902" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1006" />
+    <PackageReference Include="NewLife.Redis.Extensions" Version="6.0.2024.1006" />
+    <PackageReference Include="NewLife.RocketMQ" Version="2.6.2024.1004" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1004" />
   </ItemGroup>
 </Project>

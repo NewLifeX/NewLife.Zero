@@ -33,8 +33,15 @@ public class Worker : IHostedService
     {
         XTrace.WriteLine("Worker.StartAsync");
 
-        // 从注册中心消费一个服务，创建客户端，该客户端能够自动感知服务提供者的地址变化
-        _client = _star.CreateForService("Zero.WebApi", "dev") as ApiHttpClient;
+        try
+        {
+            // 从注册中心消费一个服务，创建客户端，该客户端能够自动感知服务提供者的地址变化
+            _client = _star.CreateForService("Zero.WebApi", "dev") as ApiHttpClient;
+        }
+        catch (Exception ex)
+        {
+            XTrace.Log.Error(ex.Message);
+        }
 
         var task = ExecuteAsync(cancellationToken);
         return task.IsCompleted ? task : Task.CompletedTask;
@@ -42,7 +49,7 @@ public class Worker : IHostedService
 
     protected async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (_client.Services.Count == 0) return;
+        //if (_client.Services.Count == 0) return;
 
         // Redis 可信消息队列，支持消费确认
         var rdsQueue = _redis.GetReliableQueue<Object>("rdsTopic");
@@ -64,7 +71,8 @@ public class Worker : IHostedService
             //_producer.Publish(area);
 
             // 调用远程服务
-            _client?.Get<Object>("api", new { state = area.ToJson() });
+            if (_client != null && _client.Services.Count > 0)
+                await _client.GetAsync<Object>("api", new { state = area.ToJson() });
 
             _logger.Info("Worker running at: {0}", DateTimeOffset.Now);
             await Task.Delay(1000, stoppingToken);

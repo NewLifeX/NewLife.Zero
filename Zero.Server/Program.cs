@@ -9,6 +9,7 @@ using NewLife.Net;
 using NewLife.Remoting;
 using NewLife.Threading;
 using Stardust;
+using NewLife.Data;
 
 namespace Zero.Server;
 
@@ -171,7 +172,7 @@ public class MyServices : ServiceBase
 
         var str = DateTime.Now.ToFullString() + Environment.NewLine;
         var buf = str.GetBytes();
-        ns.SendAllAsync(buf);
+        ns.SendAllAsync((ArrayPacket)buf);
     }
     #endregion
 }

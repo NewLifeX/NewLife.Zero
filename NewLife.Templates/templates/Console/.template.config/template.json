@@ -5,7 +5,7 @@
   "name": "NewLife Console",
   "identity": "NewLife.Console",
   "groupIdentity": "NewLife",
-  "shortName": "newlifeConsole",
+  "shortName": "NewlifeConsole",
   "tags": {
     "language": "C#",
     "type": "project"
