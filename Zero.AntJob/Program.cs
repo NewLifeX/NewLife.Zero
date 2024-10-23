@@ -10,6 +10,7 @@ using Zero.AntJob.Services;
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();
 
+// 初始化对象容器，提供依赖注入能力
 var services = ObjectContainer.Current;
 services.AddStardust();
 
