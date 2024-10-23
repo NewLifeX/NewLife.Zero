@@ -34,11 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Zero.Console\**\*" Link="content\Console\" PackagePath="content\content\Console\" Exclude="..\Zero.Console\**\bin\**;..\Zero.Console\**\obj\**" />
+    <Content Include="..\Zero.Console\**\*" Link="templates\Console\" PackagePath="content\templates\Console\" Exclude="..\Zero.Console\**\bin\**;..\Zero.Console\**\obj\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**" />
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
 
