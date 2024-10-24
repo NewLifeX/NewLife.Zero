@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "Console" ],
+  "name": "NewLife WebSocketServer",
+  "identity": "NewLife.WebSocketServer",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeWebSocketServer",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.WebSocketServer",
+  "preferNameDirectory": true
+}

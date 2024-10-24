@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "Console" ],
+  "name": "NewLife NetServer",
+  "identity": "NewLife.NetServer",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeNetServer",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.TcpServer",
+  "preferNameDirectory": true
+}

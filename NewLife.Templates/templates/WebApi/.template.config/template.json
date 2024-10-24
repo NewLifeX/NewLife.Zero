@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "WebApi" ],
+  "name": "NewLife WebApi",
+  "identity": "NewLife.WebApi",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeWebApi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.WebApi",
+  "preferNameDirectory": true
+}

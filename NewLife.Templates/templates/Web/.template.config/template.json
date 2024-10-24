@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "MVC" ],
+  "name": "NewLife Web",
+  "identity": "NewLife.Web",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeWeb",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.Web",
+  "preferNameDirectory": true
+}

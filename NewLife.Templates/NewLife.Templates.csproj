@@ -36,6 +36,33 @@
   <ItemGroup>
     <Content Include="..\Zero.Console\**\*" Link="templates\Console\" PackagePath="content\templates\Console\" Exclude="..\Zero.Console\**\bin\**;..\Zero.Console\**\obj\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.Worker\**\*" Link="templates\Worker\" PackagePath="content\templates\Worker\" Exclude="..\Zero.Worker\**\bin\**;..\Zero.Worker\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.Web\**\*" Link="templates\Web\" PackagePath="content\templates\Web\" Exclude="..\Zero.Web\**\bin\**;..\Zero.Web\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.WebApi\**\*" Link="templates\WebApi\" PackagePath="content\templates\WebApi\" Exclude="..\Zero.WebApi\**\bin\**;..\Zero.WebApi\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.Agent\**\*" Link="templates\Service\" PackagePath="content\templates\Service\" Exclude="..\Zero.Agent\**\bin\**;..\Zero.Agent\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.AntJob\**\*" Link="templates\AntJob\" PackagePath="content\templates\AntJob\" Exclude="..\Zero.AntJob\**\bin\**;..\Zero.AntJob\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.TcpServer\**\*" Link="templates\NetServer\" PackagePath="content\templates\NetServer\" Exclude="..\Zero.TcpServer\**\bin\**;..\Zero.TcpServer\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.HttpServer\**\*" Link="templates\HttpServer\" PackagePath="content\templates\HttpServer\" Exclude="..\Zero.HttpServer\**\bin\**;..\Zero.HttpServer\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.RpcServer\**\*" Link="templates\RpcServer\" PackagePath="content\templates\RpcServer\" Exclude="..\Zero.RpcServer\**\bin\**;..\Zero.RpcServer\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.WebSocketServer\**\*" Link="templates\WebSocketServer\" PackagePath="content\templates\WebSocketServer\" Exclude="..\Zero.WebSocketServer\**\bin\**;..\Zero.WebSocketServer\**\obj\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
