@@ -34,51 +34,60 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Zero.Console\**\*" Link="templates\Console\" PackagePath="content\templates\Console\" Exclude="..\Zero.Console\**\bin\**;..\Zero.Console\**\obj\**" />
+    <Content Include="..\Zero.Console\**\*" Link=".\Console\" PackagePath="content\Console\" Exclude="..\Zero.Console\**\bin\**;..\Zero.Console\**\obj\**" />
+    <Content Include="Console\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Worker\**\*" Link="templates\Worker\" PackagePath="content\templates\Worker\" Exclude="..\Zero.Worker\**\bin\**;..\Zero.Worker\**\obj\**" />
+    <Content Include="..\Zero.Worker\**\*" Link=".\Worker\" PackagePath="content\Worker\" Exclude="..\Zero.Worker\**\bin\**;..\Zero.Worker\**\obj\**" />
+    <Content Include="Worker\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Web\**\*" Link="templates\Web\" PackagePath="content\templates\Web\" Exclude="..\Zero.Web\**\bin\**;..\Zero.Web\**\obj\**" />
+    <Content Include="..\Zero.Web\**\*" Link=".\Web\" PackagePath="content\Web\" Exclude="..\Zero.Web\**\bin\**;..\Zero.Web\**\obj\**" />
+    <Content Include="Web\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.WebApi\**\*" Link="templates\WebApi\" PackagePath="content\templates\WebApi\" Exclude="..\Zero.WebApi\**\bin\**;..\Zero.WebApi\**\obj\**" />
+    <Content Include="..\Zero.WebApi\**\*" Link=".\WebApi\" PackagePath="content\WebApi\" Exclude="..\Zero.WebApi\**\bin\**;..\Zero.WebApi\**\obj\**" />
+    <Content Include="WebApi\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Agent\**\*" Link="templates\Service\" PackagePath="content\templates\Service\" Exclude="..\Zero.Agent\**\bin\**;..\Zero.Agent\**\obj\**" />
+    <Content Include="..\Zero.Agent\**\*" Link=".\Service\" PackagePath="content\Service\" Exclude="..\Zero.Agent\**\bin\**;..\Zero.Agent\**\obj\**" />
+    <Content Include="Service\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.AntJob\**\*" Link="templates\AntJob\" PackagePath="content\templates\AntJob\" Exclude="..\Zero.AntJob\**\bin\**;..\Zero.AntJob\**\obj\**" />
+    <Content Include="..\Zero.AntJob\**\*" Link=".\AntJob\" PackagePath="content\AntJob\" Exclude="..\Zero.AntJob\**\bin\**;..\Zero.AntJob\**\obj\**" />
+    <Content Include="AntJob\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.TcpServer\**\*" Link="templates\NetServer\" PackagePath="content\templates\NetServer\" Exclude="..\Zero.TcpServer\**\bin\**;..\Zero.TcpServer\**\obj\**" />
+    <Content Include="..\Zero.TcpServer\**\*" Link=".\NetServer\" PackagePath="content\NetServer\" Exclude="..\Zero.TcpServer\**\bin\**;..\Zero.TcpServer\**\obj\**" />
+    <Content Include="NetServer\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.HttpServer\**\*" Link="templates\HttpServer\" PackagePath="content\templates\HttpServer\" Exclude="..\Zero.HttpServer\**\bin\**;..\Zero.HttpServer\**\obj\**" />
+    <Content Include="..\Zero.HttpServer\**\*" Link=".\HttpServer\" PackagePath="content\HttpServer\" Exclude="..\Zero.HttpServer\**\bin\**;..\Zero.HttpServer\**\obj\**" />
+    <Content Include="HttpServer\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.RpcServer\**\*" Link="templates\RpcServer\" PackagePath="content\templates\RpcServer\" Exclude="..\Zero.RpcServer\**\bin\**;..\Zero.RpcServer\**\obj\**" />
+    <Content Include="..\Zero.RpcServer\**\*" Link=".\RpcServer\" PackagePath="content\RpcServer\" Exclude="..\Zero.RpcServer\**\bin\**;..\Zero.RpcServer\**\obj\**" />
+    <Content Include="RpcServer\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.WebSocketServer\**\*" Link="templates\WebSocket\" PackagePath="content\templates\WebSocket\" Exclude="..\Zero.WebSocketServer\**\bin\**;..\Zero.WebSocketServer\**\obj\**" />
+    <Content Include="..\Zero.WebSocketServer\**\*" Link=".\WebSocket\" PackagePath="content\WebSocket\" Exclude="..\Zero.WebSocketServer\**\bin\**;..\Zero.WebSocketServer\**\obj\**" />
+    <Content Include="WebSocket\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Client\**\*" Link="templates\Client\" PackagePath="content\templates\Client\" Exclude="..\Zero.Client\**\bin\**;..\Zero.Client\**\obj\**" />
+    <Content Include="..\Zero.Client\**\*" Link=".\Client\" PackagePath="content\Client\" Exclude="..\Zero.Client\**\bin\**;..\Zero.Client\**\obj\**" />
+    <Content Include="Client\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Desktop\**\*" Link="templates\WinForm\" PackagePath="content\templates\WinForm\" Exclude="..\Zero.Desktop\**\bin\**;..\Zero.Desktop\**\obj\**" />
+    <Content Include="..\Zero.Desktop\**\*" Link=".\WinForm\" PackagePath="content\WinForm\" Exclude="..\Zero.Desktop\**\bin\**;..\Zero.Desktop\**\obj\**" />
+    <Content Include="WinForm\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.GtkForm\**\*" Link="templates\GtkForm\" PackagePath="content\templates\GtkForm\" Exclude="..\Zero.GtkForm\**\bin\**;..\Zero.GtkForm\**\obj\**" />
+    <Content Include="..\Zero.GtkForm\**\*" Link=".\GtkForm\" PackagePath="content\GtkForm\" Exclude="..\Zero.GtkForm\**\bin\**;..\Zero.GtkForm\**\obj\**" />
+    <Content Include="GtkForm\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.WebView\**\*" Link="templates\WebView\" PackagePath="content\templates\WebView\" Exclude="..\Zero.WebView\**\bin\**;..\Zero.WebView\**\obj\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
-    <Compile Remove="**\*" />
+    <Content Include="..\Zero.WebView\**\*" Link=".\WebView\" PackagePath="content\WebView\" Exclude="..\Zero.WebView\**\bin\**;..\Zero.WebView\**\obj\**" />
+    <Content Include="WebView\**\*" />
   </ItemGroup>
 
   <ItemGroup>
