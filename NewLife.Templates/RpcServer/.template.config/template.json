@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife RpcServer",
   "identity": "NewLife.RpcServer",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeRpcServer",
   "tags": {
     "language": "C#",

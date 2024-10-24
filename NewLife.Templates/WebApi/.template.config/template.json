@@ -5,7 +5,6 @@
   "name": "NewLife WebApi",
   "description": "数据接口，带有Swagger的标准WebApi接口项目",
   "identity": "NewLife.WebApi",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeWebApi",
   "tags": {
     "language": "C#",

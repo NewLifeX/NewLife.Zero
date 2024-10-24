@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife WebSocket",
   "identity": "NewLife.WebSocket",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeWebSocket",
   "tags": {
     "language": "C#",

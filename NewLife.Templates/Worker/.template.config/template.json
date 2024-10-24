@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Worker" ],
   "name": "NewLife Worker",
   "identity": "NewLife.Worker",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeWorker",
   "tags": {
     "language": "C#",

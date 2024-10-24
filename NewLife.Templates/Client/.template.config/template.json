@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife Client",
   "identity": "NewLife.Client",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeClient",
   "tags": {
     "language": "C#",

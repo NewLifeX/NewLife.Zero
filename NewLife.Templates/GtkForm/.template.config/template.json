@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Desktop" ],
   "name": "NewLife GtkForm",
   "identity": "NewLife.GtkForm",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeGtkForm",
   "tags": {
     "language": "C#",

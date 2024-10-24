@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife AntJob",
   "identity": "NewLife.AntJob",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeAntJob",
   "tags": {
     "language": "C#",

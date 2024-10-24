@@ -4,7 +4,6 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife NetServer",
   "identity": "NewLife.NetServer",
-  "groupIdentity": "NewLife",
   "shortName": "NewlifeNetServer",
   "tags": {
     "language": "C#",
