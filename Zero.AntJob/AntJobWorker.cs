@@ -6,6 +6,7 @@ using Zero.AntJob.Jobs;
 
 namespace Zero.AntJob;
 
+/// <summary>蚂蚁调度后台工作者，负责装配并启动调度作业程序</summary>
 public class AntJobWorker : BackgroundService
 {
     private Scheduler _scheduler;

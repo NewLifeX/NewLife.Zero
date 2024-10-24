@@ -1,18 +1,19 @@
-﻿using NewLife.Log;
+﻿using System;
+using NewLife.Log;
 using NewLife.Remoting;
-using Zero.Data.Projects;
+using XCode.Membership;
 
-namespace Zero.RpcServer;
+namespace Zero.Server;
 
 /// <summary>产品控制器。会话获取，请求过滤</summary>
-[Api("Product")]
-internal class ProductController : IApi, IActionFilter
+[Api("User")]
+class UserController : IApi, IActionFilter
 {
     /// <summary>会话。同一Tcp/Udp会话多次请求共用，执行服务方法前赋值</summary>
     public IApiSession Session { get; set; }
 
     [Api(nameof(FindByID))]
-    public Product FindByID(Int32 id)
+    public User FindByID(Int32 id)
     {
         // Session 用法同Web
         var times = Session["Times"].ToInt();
@@ -28,7 +29,7 @@ internal class ProductController : IApi, IActionFilter
             throw new ApiException(507, $"[{ctx.ActionName}]调用次数过多！Times={times}");
         }
 
-        return Product.FindByID(id);
+        return User.FindByID(id);
     }
 
     /// <summary>本控制器执行前</summary>

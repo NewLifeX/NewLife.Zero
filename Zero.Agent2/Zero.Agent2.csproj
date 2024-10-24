@@ -22,9 +22,4 @@
     <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1004" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
-  </ItemGroup>
-
 </Project>

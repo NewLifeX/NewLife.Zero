@@ -7,8 +7,8 @@ namespace Zero.AntJob.Jobs;
 /// <summary>
 /// TestJob
 /// </summary>
-[DisplayName("Zero.AntJob2.TestJob")]
-[Description("Zero.AntJob2.TestJob")]
+[DisplayName("测试定时作业")]
+[Description("Zero.AntJob.TestJob")]
 public class TestJob : Handler
 {
     private readonly ITestService _testService;
@@ -18,6 +18,7 @@ public class TestJob : Handler
         var job = Job;
         job.DataTime = DateTime.Now; // 开始时间
         job.Step = 24 * 60 * 60; // 一天执行一次
+
         _testService = testService;
     }
 

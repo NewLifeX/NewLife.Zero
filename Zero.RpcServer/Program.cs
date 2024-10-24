@@ -35,7 +35,7 @@ var server = new ApiServer(12346)
 
 // 注册服务控制器
 server.Register<MyController>();
-server.Register<ProductController>();
+server.Register<UserController>();
 
 #if DEBUG
 // 打开编码日志
@@ -45,7 +45,7 @@ server.EncoderLog = XTrace.Log;
 server.Start();
 
 // 注册到星尘，非必须
-star?.Service?.Register("MyRpcServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
+star?.Service?.Register(star.AppId, () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
 // 阻塞，等待友好退出
 var host = services.BuildHost();

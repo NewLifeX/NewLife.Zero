@@ -49,7 +49,7 @@ var server = new MyNetServer
 server.Start();
 
 // 注册到星尘，非必须
-star?.Service?.Register("MyNetServer", () => $"tcp://*:{server.Port},udp://*:{server.Port}");
+star?.Service?.Register(star.AppId, () => $"tcp://*:{server.Port},udp://*:{server.Port}");
 
 // 客户端测试，非服务端代码
 _ = Task.Run(ClientTest);

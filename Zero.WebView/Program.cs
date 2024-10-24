@@ -4,8 +4,6 @@ using NewLife.Log;
 using NewLife.Model;
 using Stardust;
 using XCode;
-using XCode.Membership;
-using Zero.Data.Nodes;
 
 namespace Zero.WebView;
 
@@ -35,8 +33,8 @@ internal static class Program
         // 预热数据层，执行自动建表等操作
         Task.Run(() =>
         {
-            var dal = User.Meta.Session.Dal;
-            dal = Node.Meta.Session.Dal;
+            //var dal = User.Meta.Session.Dal;
+            //dal = Node.Meta.Session.Dal;
             _ = EntityFactory.InitAllAsync();
         });
 
@@ -58,7 +56,7 @@ internal static class Program
 
         XTrace.WriteLine("初始化服务端地址：{0}", server);
 
-        _factory = new StarFactory(server, "ZeroWebView", null)
+        _factory = new StarFactory(server, null, null)
         {
             Log = XTrace.Log,
         };
@@ -67,7 +65,7 @@ internal static class Program
         {
             Code = set.Code,
             Secret = set.Secret,
-            ProductCode = "ZeroWebView",
+            ProductCode = _factory.AppId,
             Setting = set,
 
             Tracer = _factory.Tracer,

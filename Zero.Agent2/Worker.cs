@@ -6,6 +6,7 @@ using NewLife.Log;
 
 namespace Zero.Agent2;
 
+/// <summary>后台工作者。可根据业务需要定义多个后台工作者</summary>
 public class Worker : BackgroundService
 {
     private readonly ILog _logger;

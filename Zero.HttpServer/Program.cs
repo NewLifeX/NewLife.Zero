@@ -38,7 +38,7 @@ server.Map("/my", new MyHttpHandler());
 server.Start();
 
 // 发布到星尘注册中心
-await star.Service?.RegisterAsync("MyHttpServer", $"http://*:{server.Port}");
+await star.Service?.RegisterAsync(star.AppId, $"http://*:{server.Port}");
 
 // 异步阻塞，友好退出
 var host = services.BuildHost();

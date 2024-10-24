@@ -3,8 +3,6 @@ using NewLife;
 using NewLife.Reflection;
 using NewLife.Threading;
 using XCode.DataAccessLayer;
-using XCode.Membership;
-using Zero.Data.Nodes;
 
 namespace Zero.Desktop;
 

@@ -32,8 +32,4 @@
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Data\Zero.Data.csproj" />
-  </ItemGroup>
-
 </Project>
