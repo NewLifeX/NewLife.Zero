@@ -61,7 +61,19 @@
     <Content Include="..\Zero.RpcServer\**\*" Link="templates\RpcServer\" PackagePath="content\templates\RpcServer\" Exclude="..\Zero.RpcServer\**\bin\**;..\Zero.RpcServer\**\obj\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.WebSocketServer\**\*" Link="templates\WebSocketServer\" PackagePath="content\templates\WebSocketServer\" Exclude="..\Zero.WebSocketServer\**\bin\**;..\Zero.WebSocketServer\**\obj\**" />
+    <Content Include="..\Zero.WebSocketServer\**\*" Link="templates\WebSocket\" PackagePath="content\templates\WebSocket\" Exclude="..\Zero.WebSocketServer\**\bin\**;..\Zero.WebSocketServer\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.Client\**\*" Link="templates\Client\" PackagePath="content\templates\Client\" Exclude="..\Zero.Client\**\bin\**;..\Zero.Client\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.Desktop\**\*" Link="templates\WinForm\" PackagePath="content\templates\WinForm\" Exclude="..\Zero.Desktop\**\bin\**;..\Zero.Desktop\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.GtkForm\**\*" Link="templates\GtkForm\" PackagePath="content\templates\GtkForm\" Exclude="..\Zero.GtkForm\**\bin\**;..\Zero.GtkForm\**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Zero.WebView\**\*" Link="templates\WebView\" PackagePath="content\templates\WebView\" Exclude="..\Zero.WebView\**\bin\**;..\Zero.WebView\**\obj\**" />
   </ItemGroup>
 
   <ItemGroup>

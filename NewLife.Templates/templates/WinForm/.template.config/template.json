@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "Windows", "WinForm", "Desktop" ],
+  "name": "NewLife WinForm",
+  "identity": "NewLife.WinForm",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeWinForm",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.WinForm",
+  "preferNameDirectory": true
+}

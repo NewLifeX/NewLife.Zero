@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "NewLife",
+  "classifications": [ "Desktop" ],
+  "name": "NewLife Console",
+  "identity": "NewLife.Console",
+  "groupIdentity": "NewLife",
+  "shortName": "NewlifeConsole",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Zero.Console",
+  "preferNameDirectory": true
+}
