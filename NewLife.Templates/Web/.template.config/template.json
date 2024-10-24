@@ -4,8 +4,9 @@
   "classifications": [ "NewLife", "Common", "Web", "MVC" ],
   "name": "NewLife Web",
   "description": "零代数据管理平台，基于魔方，快速开发各种管理后台",
-  "identity": "NewLife.Web",
-  "shortName": "NewlifeWeb",
+  "identity": "NewLife.Web.2024",
+  "groupIdentity": "NewLife.Web",
+  "shortName": "cube",
   "tags": {
     "language": "C#",
     "type": "project"

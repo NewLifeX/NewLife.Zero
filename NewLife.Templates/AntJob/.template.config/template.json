@@ -1,10 +1,10 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console" ],
+  "classifications": [ "NewLife", "Console", "Job" ],
   "name": "NewLife AntJob",
   "identity": "NewLife.AntJob",
-  "shortName": "NewlifeAntJob",
+  "shortName": "antjob",
   "tags": {
     "language": "C#",
     "type": "project"

@@ -4,8 +4,9 @@
   "classifications": [ "NewLife", "Common", "Console" ],
   "name": "NewLife Console",
   "description": "数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务",
-  "identity": "NewLife.Console",
-  "shortName": "NewlifeConsole",
+  "identity": "NewLife.Console.2024",
+  "groupIdentity": "NewLife.Console",
+  "shortName": "nconsole",
   "tags": {
     "language": "C#",
     "type": "project"

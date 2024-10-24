@@ -4,7 +4,7 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife HttpServer",
   "identity": "NewLife.HttpServer",
-  "shortName": "NewlifeHttpServer",
+  "shortName": "http",
   "tags": {
     "language": "C#",
     "type": "project"

@@ -1,10 +1,10 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console" ],
+  "classifications": [ "NewLife", "Console", "IoT" ],
   "name": "NewLife Client",
   "identity": "NewLife.Client",
-  "shortName": "NewlifeClient",
+  "shortName": "client",
   "tags": {
     "language": "C#",
     "type": "project"

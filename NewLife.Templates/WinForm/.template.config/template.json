@@ -4,7 +4,7 @@
   "classifications": [ "NewLife", "Windows", "WinForm", "Desktop" ],
   "name": "NewLife WinForm",
   "identity": "NewLife.WinForm",
-  "shortName": "NewlifeWinForm",
+  "shortName": "nwinform",
   "tags": {
     "language": "C#",
     "type": "project"

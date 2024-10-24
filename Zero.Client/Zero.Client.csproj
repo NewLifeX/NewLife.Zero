@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyName>ZeroClient</AssemblyName>
     <AssemblyTitle>客户端控制台</AssemblyTitle>
     <Description>CS架构的客户端应用，以后台服务工作，一般由StarAgent负责守护</Description>
     <Company>新生命开发团队</Company>

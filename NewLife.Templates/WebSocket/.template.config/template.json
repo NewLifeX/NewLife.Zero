@@ -4,7 +4,7 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife WebSocket",
   "identity": "NewLife.WebSocket",
-  "shortName": "NewlifeWebSocket",
+  "shortName": "websocket",
   "tags": {
     "language": "C#",
     "type": "project"

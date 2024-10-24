@@ -4,7 +4,7 @@
   "classifications": [ "NewLife", "Console" ],
   "name": "NewLife Service",
   "identity": "NewLife.Service",
-  "shortName": "NewlifeService",
+  "shortName": "service",
   "tags": {
     "language": "C#",
     "type": "project"
