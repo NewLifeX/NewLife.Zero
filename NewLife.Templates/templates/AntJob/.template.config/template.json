@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "Console" ],
+  "classifications": [ "NewLife", "Console" ],
   "name": "NewLife AntJob",
   "identity": "NewLife.AntJob",
   "groupIdentity": "NewLife",

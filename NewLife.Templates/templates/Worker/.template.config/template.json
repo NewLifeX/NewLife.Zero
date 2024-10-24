@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "Worker" ],
+  "classifications": [ "NewLife", "Worker" ],
   "name": "NewLife Worker",
   "identity": "NewLife.Worker",
   "groupIdentity": "NewLife",

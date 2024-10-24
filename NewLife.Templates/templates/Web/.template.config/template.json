@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "MVC" ],
+  "classifications": [ "NewLife", "Common", "Web", "MVC" ],
   "name": "NewLife Web",
+  "description": "零代数据管理平台，基于魔方，快速开发各种管理后台",
   "identity": "NewLife.Web",
   "groupIdentity": "NewLife",
   "shortName": "NewlifeWeb",

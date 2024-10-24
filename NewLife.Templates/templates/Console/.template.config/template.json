@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "Console" ],
+  "classifications": [ "NewLife", "Common", "Console" ],
   "name": "NewLife Console",
+  "description": "数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务",
   "identity": "NewLife.Console",
   "groupIdentity": "NewLife",
   "shortName": "NewlifeConsole",
