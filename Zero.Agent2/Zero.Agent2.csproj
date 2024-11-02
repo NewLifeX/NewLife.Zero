@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="NewLife.Extensions.Hosting.AgentService" Version="10.9.2024.902" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1004" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1101" />
   </ItemGroup>
 
 </Project>

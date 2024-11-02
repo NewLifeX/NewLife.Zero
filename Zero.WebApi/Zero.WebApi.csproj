@@ -32,12 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Cube" Version="6.1.2024.1005" />
-    <PackageReference Include="NewLife.Cube.Swagger" Version="6.1.2024.1005" />
+    <PackageReference Include="NewLife.Cube" Version="6.1.2024.1102" />
+    <PackageReference Include="NewLife.Cube.Swagger" Version="6.1.2024.1102" />
     <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.5.2023.803" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1006" />
-    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.0.2024.1002" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1004" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1101" />
+    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.0.2024.1101" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.1.2024.1101" />
   </ItemGroup>
 
   <ItemGroup>

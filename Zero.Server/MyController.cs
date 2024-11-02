@@ -16,11 +16,11 @@ class MyController
     /// <summary>RC4加解密，高速业务服务，二进制收发不经序列化</summary>
     /// <param name="pk"></param>
     /// <returns></returns>
-    public Packet RC4(Packet pk)
+    public IPacket RC4(IPacket pk)
     {
         var data = pk.ToArray();
         var pass = "NewLife".GetBytes();
 
-        return data.RC4(pass);
+        return (ArrayPacket)data.RC4(pass);
     }
 }
