@@ -1,9 +1,6 @@
-﻿using NewLife.Log;
+﻿using NewLife;
+using NewLife.Log;
 using NewLife.Model;
-using NewLife.MQTT;
-using NewLife.Remoting;
-using NewLife.Serialization;
-using Stardust;
 using ZeroClient;
 
 namespace Zero.Client;
@@ -13,27 +10,45 @@ namespace Zero.Client;
 /// </summary>
 public class Worker : IHostedService
 {
-    private readonly IServiceProvider _serviceProvider;
+    private NodeClient _client;
+    private readonly ILog _log;
+    private readonly ITracer _tracer;
 
-    public Worker(IServiceProvider serviceProvider)
+    public Worker(ILog log, ITracer tracer)
     {
-        _serviceProvider = serviceProvider;
+        _log = log;
+        _tracer = tracer;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        XTrace.WriteLine("Worker.StartAsync");
+        XTrace.WriteLine("开始Node客户端");
 
-        var task = ExecuteAsync(cancellationToken);
-        return task.IsCompleted ? task : Task.CompletedTask;
+#if DEBUG
+        // 降低日志等级，输出通信详情。生产环境不建议这么做
+        XTrace.Log.Level = NewLife.Log.LogLevel.Debug;
+#endif
+
+        var set = ClientSetting.Current;
+
+        // 产品编码、产品密钥从IoT管理平台获取，设备编码支持自动注册
+        var client = new NodeClient(set)
+        {
+            Tracer = _tracer,
+            Log = _log,
+        };
+
+        client.Open();
+
+        _client = client;
+
+        return Task.CompletedTask;
     }
 
-    protected async Task ExecuteAsync(CancellationToken stoppingToken)
+    public Task StopAsync(CancellationToken cancellationToken)
     {
-        await Task.Delay(1000);
+        _client.TryDispose();
 
-        _ = Task.Run(() => ClientTest.Process(_serviceProvider));
+        return Task.CompletedTask;
     }
-
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

@@ -25,8 +25,4 @@
     <PackageReference Include="NewLife.Stardust" Version="3.1.2024.1101" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -4,12 +4,12 @@ using NewLife.Model;
 using NewLife.Remoting.Clients;
 using NewLife.Remoting.Models;
 using NewLife.Security;
-using Zero.Models;
+using Zero.Client.Models;
 using MigrationEventArgs = Stardust.Models.MigrationEventArgs;
 
 namespace ZeroClient;
 
-/// <summary>Http协议设备</summary>
+/// <summary>节点客户端</summary>
 public class NodeClient : ClientBase
 {
     #region 属性
