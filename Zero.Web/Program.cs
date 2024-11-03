@@ -58,10 +58,7 @@ else
 if (Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") is null)
     app.UseResponseCompression();
 
-app.UseWebSockets(new WebSocketOptions()
-{
-    KeepAliveInterval = TimeSpan.FromSeconds(60),
-});
+app.UseIoT();
 
 // 使用魔方
 app.UseCube(app.Environment);

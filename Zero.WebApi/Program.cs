@@ -63,10 +63,7 @@ _ = EntityFactory.InitAllAsync();
 if (Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") is null)
     app.UseResponseCompression();
 
-app.UseWebSockets(new WebSocketOptions()
-{
-    KeepAliveInterval = TimeSpan.FromSeconds(60),
-});
+app.UseIoT();
 
 // 使用星尘，启用性能监控，拦截所有接口做埋点统计
 app.UseStardust();
