@@ -3,6 +3,7 @@ using NewLife.Caching.Services;
 using NewLife.Cube;
 using NewLife.Log;
 using XCode;
+using Zero.Web;
 using Zero.Web.Services;
 
 //!!! 标准Web项目模板，新生命团队强烈推荐
@@ -25,6 +26,14 @@ services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 // 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
 //services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
 
+// 注入应用配置
+var set = WebSetting.Current;
+services.AddSingleton(set);
+
+// 注册Remoting所必须的服务
+services.AddIoT(set);
+//services.AddRemoting(set);
+
 // 启用接口响应压缩
 services.AddResponseCompression();
 
@@ -46,7 +55,13 @@ if (app.Environment.IsDevelopment())
 else
     app.UseExceptionHandler("/CubeHome/Error");
 
-app.UseResponseCompression();
+if (Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") is null)
+    app.UseResponseCompression();
+
+app.UseWebSockets(new WebSocketOptions()
+{
+    KeepAliveInterval = TimeSpan.FromSeconds(60),
+});
 
 // 使用魔方
 app.UseCube(app.Environment);
@@ -63,14 +78,14 @@ if (app is IHost host)
     NewLife.Model.Host.RegisterExit(() => host.StopAsync().Wait());
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
-app.RegisterService("Zero.Web", null, app.Environment.EnvironmentName);
+app.RegisterService(star.AppId, null, app.Environment.EnvironmentName);
 
 app.Run();
 
 
 static void InitConfig()
 {
-    // 配置
+    // 把数据目录指向上层，例如部署到 /root/iot/edge/，这些目录放在 /root/iot/
     var set = NewLife.Setting.Current;
     if (set.IsNew)
     {
@@ -79,11 +94,20 @@ static void InitConfig()
         set.BackupPath = "../Backup";
         set.Save();
     }
-    //var set2 = XCode.Setting.Current;
-    //if (set2.IsNew)
-    //{
-    //    // 关闭SQL日志输出
-    //    set2.ShowSQL = false;
-    //    set2.Save();
-    //}
+    var set2 = CubeSetting.Current;
+    if (set2.IsNew)
+    {
+        set2.AvatarPath = "../Avatars";
+        set2.UploadPath = "../Uploads";
+        set2.Save();
+    }
+    var set3 = XCodeSetting.Current;
+    if (set3.IsNew)
+    {
+        // 关闭SQL日志输出
+        set3.ShowSQL = false;
+        //set3.EntityCacheExpire = 60;
+        //set3.SingleCacheExpire = 60;
+        set3.Save();
+    }
 }

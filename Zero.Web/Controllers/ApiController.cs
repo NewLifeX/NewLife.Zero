@@ -4,6 +4,7 @@ using NewLife.Reflection;
 
 namespace Zero.Web.Controllers;
 
+/// <summary>接口探针</summary>
 [ApiFilter]
 [ApiController]
 [Route("[controller]")]

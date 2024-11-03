@@ -4,7 +4,7 @@ using NewLife.Remoting.Extensions.Services;
 using NewLife.Remoting.Models;
 using Zero.Models;
 
-namespace Zero.WebApi.Services;
+namespace Zero.Web.Services;
 
 /// <summary>IoT扩展</summary>
 public static class IoTExtensions

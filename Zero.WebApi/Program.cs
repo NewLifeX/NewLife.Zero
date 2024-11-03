@@ -36,25 +36,13 @@ services.AddSingleton(set);
 
 // 注册Remoting所必须的服务
 services.AddIoT(set);
+//services.AddRemoting(set);
 
 // 注入多个功能服务
 services.AddSingleton<NodeService>();
 
-//// 启用接口响应压缩
-//services.AddResponseCompression();
-
-// 配置Json
-services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
-{
-#if NET7_0_OR_GREATER
-    // 支持模型类中的DataMember特性
-    options.JsonSerializerOptions.TypeInfoResolver = DataMemberResolver.Default;
-#endif
-    options.JsonSerializerOptions.Converters.Add(new TypeConverter());
-    options.JsonSerializerOptions.Converters.Add(new LocalTimeConverter());
-    // 支持中文编码
-    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-});
+// 启用接口响应压缩
+services.AddResponseCompression();
 
 services.AddControllers();
 
@@ -72,7 +60,13 @@ var app = builder.Build();
 // 预热数据层，执行自动建表等操作
 _ = EntityFactory.InitAllAsync();
 
-app.UseResponseCompression();
+if (Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") is null)
+    app.UseResponseCompression();
+
+app.UseWebSockets(new WebSocketOptions()
+{
+    KeepAliveInterval = TimeSpan.FromSeconds(60),
+});
 
 // 使用星尘，启用性能监控，拦截所有接口做埋点统计
 app.UseStardust();
@@ -97,13 +91,13 @@ if (app is IHost host)
 
 // 启用星尘注册中心，向注册中心注册服务，服务消费者将自动更新服务端地址列表
 // 如不使用星尘的注册中心，可以注释该行代码
-app.RegisterService("Zero.WebApi", null, app.Environment.EnvironmentName);
+app.RegisterService(star.AppId, null, app.Environment.EnvironmentName);
 
 app.Run();
 
 static void InitConfig()
 {
-    // 配置
+    // 把数据目录指向上层，例如部署到 /root/iot/edge/，这些目录放在 /root/iot/
     var set = NewLife.Setting.Current;
     if (set.IsNew)
     {
@@ -112,11 +106,20 @@ static void InitConfig()
         set.BackupPath = "../Backup";
         set.Save();
     }
-    var set2 = XCodeSetting.Current;
+    var set2 = CubeSetting.Current;
     if (set2.IsNew)
     {
-        // 关闭SQL日志输出
-        set2.ShowSQL = false;
+        set2.AvatarPath = "../Avatars";
+        set2.UploadPath = "../Uploads";
         set2.Save();
+    }
+    var set3 = XCodeSetting.Current;
+    if (set3.IsNew)
+    {
+        // 关闭SQL日志输出
+        set3.ShowSQL = false;
+        //set3.EntityCacheExpire = 60;
+        //set3.SingleCacheExpire = 60;
+        set3.Save();
     }
 }

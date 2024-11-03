@@ -4,9 +4,9 @@ using NewLife.Remoting.Extensions;
 using NewLife.Remoting.Extensions.Services;
 using NewLife.Remoting.Models;
 using Zero.Data.Nodes;
-using Zero.WebApi.Services;
+using Zero.Web.Services;
 
-namespace Zero.WebApi.Controllers;
+namespace Zero.Web.Controllers;
 
 /// <summary>设备控制器</summary>
 [ApiFilter]
@@ -53,9 +53,7 @@ public class NodeController : BaseDeviceController
             rs.Period = node.Period;
 
             if (rs is PingResponse rs2)
-            {
                 rs2.NewServer = node.NewServer;
-            }
         }
 
         return rs;

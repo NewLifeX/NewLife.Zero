@@ -2,6 +2,7 @@
 using NewLife.Model;
 using NewLife.MQTT;
 using Stardust;
+using Zero.Client;
 
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();
@@ -15,6 +16,9 @@ var star = services.AddStardust();
 
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器
 InitMqtt(services, star?.Tracer);
+
+// 注册后台任务 IHostedService
+services.AddHostedService<Worker>();
 
 // 异步阻塞，友好退出
 var host = services.BuildHost();
