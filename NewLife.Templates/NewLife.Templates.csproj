@@ -13,7 +13,7 @@
     <OutputPath>..\Bin</OutputPath>
 
     <PackageType>Template</PackageType>
-    <TargetFrameworks>net45;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageIcon>leaf.png</PackageIcon>
     <RepositoryUrl>https://github.com/NewLifeX/NewLife.Zero</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
