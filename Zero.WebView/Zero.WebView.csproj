@@ -26,9 +26,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2849.39" />
-    <PackageReference Include="NewLife.Stardust" Version="3.1.2024.1101" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1101" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
+    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
     <PackageReference Include="System.Speech" Version="8.0.0" />
   </ItemGroup>
 

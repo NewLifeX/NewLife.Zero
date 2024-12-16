@@ -1,4 +1,5 @@
-﻿using NewLife.MQTT;
+﻿using NewLife.Data;
+using NewLife.MQTT;
 using NewLife.MQTT.Messaging;
 
 namespace Zero.Console.Workers;

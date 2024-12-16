@@ -19,11 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="10.9.2024.902" />
-    <PackageReference Include="NewLife.Core" Version="11.0.2024.1101" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1101" />
-    <PackageReference Include="NewLife.Stardust" Version="3.1.2024.1101" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1101" />
+    <PackageReference Include="NewLife.Agent" Version="10.10.2024.1202" />
+    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1205" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
+    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
   </ItemGroup>
 
 </Project>

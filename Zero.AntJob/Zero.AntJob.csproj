@@ -30,9 +30,9 @@
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob" Version="4.0.2024.904" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2024.904" />
-    <PackageReference Include="NewLife.Core" Version="11.0.2024.1101" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1101" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1101" />
+    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1205" />
+    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
   </ItemGroup>
 
   <ItemGroup>

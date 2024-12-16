@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyTitle>零代数据层</AssemblyTitle>
     <Description>Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端</Description>
     <Company>新生命开发团队</Company>
@@ -19,23 +19,17 @@
 
   <ItemGroup>
     <Compile Remove="Config\**" />
-    <Compile Remove="Interfaces\**" />
     <Compile Remove="Log\**" />
-    <Compile Remove="Models\**" />
     <EmbeddedResource Remove="Config\**" />
-    <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Log\**" />
-    <EmbeddedResource Remove="Models\**" />
     <None Remove="Config\**" />
-    <None Remove="Interfaces\**" />
     <None Remove="Log\**" />
-    <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="11.0.2024.1101" />
-    <PackageReference Include="NewLife.Stardust" Version="3.1.2024.1101" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1101" />
+    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
+    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
   </ItemGroup>
 
   <ItemGroup>
