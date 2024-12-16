@@ -23,4 +23,4 @@ jobs:
           9.x
     - name: Build
       run: |
-        dotnet build -c Release
+        dotnet build -c Release Zero.sln
