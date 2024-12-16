@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Windows", "WinForm", "Desktop" ],
+  "classifications": [ "NewLife", "Windows", "WinForms", "Desktop" ],
   "name": "NewLife WebView",
+  "description": "嵌入Web的客户端桌面应用，给用户提供便捷操作，可对接硬件",
   "identity": "NewLife.WebView",
   "shortName": "webview",
   "tags": {

@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console", "IoT" ],
+  "classifications": [ "NewLife", "IoT" ],
   "name": "NewLife Client",
+  "description": "CS架构的客户端应用，以后台服务工作，一般由StarAgent负责守护",
   "identity": "NewLife.Client",
   "shortName": "client",
   "tags": {

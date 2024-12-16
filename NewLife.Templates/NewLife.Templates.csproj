@@ -42,6 +42,10 @@
     <Content Include="Worker\**\*" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Zero.Data\**\*" Link=".\Data\" PackagePath="content\Data\" Exclude="..\Zero.Data\**\bin\**;..\Zero.Data\**\obj\**" />
+    <Content Include="Data\**\*" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\Zero.Web\**\*" Link=".\Web\" PackagePath="content\Web\" Exclude="..\Zero.Web\**\bin\**;..\Zero.Web\**\obj\**" />
     <Content Include="Web\**\*" />
   </ItemGroup>

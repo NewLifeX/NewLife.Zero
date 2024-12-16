@@ -3,7 +3,7 @@ using NewLife.Remoting.Extensions;
 using NewLife.Remoting.Extensions.Models;
 using NewLife.Remoting.Extensions.Services;
 using NewLife.Remoting.Models;
-using Zero.Models;
+using Zero.Data.Models;
 
 namespace Zero.Web.Services;
 

@@ -8,7 +8,7 @@ using NewLife.Remoting.Models;
 using XCode;
 using XCode.Cache;
 using XCode.Membership;
-using Zero.Models;
+using Zero.Data.Models;
 
 namespace Zero.Data.Nodes;
 

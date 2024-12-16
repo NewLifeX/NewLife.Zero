@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console" ],
+  "classifications": [ "NewLife", "Server" ],
   "name": "NewLife WebSocket",
+  "description": "轻量级WebSocket服务，可用于网页与终端本地硬件保持长连接通信",
   "identity": "NewLife.WebSocket",
   "shortName": "websocket",
   "tags": {

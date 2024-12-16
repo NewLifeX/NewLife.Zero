@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console", "Job" ],
+  "classifications": [ "NewLife", "Job" ],
   "name": "NewLife AntJob",
+  "description": "蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行",
   "identity": "NewLife.AntJob",
   "shortName": "antjob",
   "tags": {

@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console" ],
+  "classifications": [ "NewLife", "Server" ],
   "name": "NewLife RpcServer",
+  "description": "高性能，长连接，数据接口",
   "identity": "NewLife.RpcServer",
   "shortName": "rpc",
   "tags": {

@@ -7,7 +7,7 @@ using NewLife.Remoting.Models;
 using NewLife.Serialization;
 using XCode;
 using XCode.Membership;
-using Zero.Models;
+using Zero.Data.Models;
 
 namespace Zero.Data.Nodes;
 

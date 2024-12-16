@@ -4,8 +4,8 @@ using NewLife.Common;
 using NewLife.Cube;
 using NewLife.Web;
 using XCode.Membership;
-using Zero.Data.Common;
 using Zero.Data.Projects;
+using Zero.Data.WeiXin;
 
 namespace Zero.Web.Areas.Projects.Controllers
 {

@@ -4,7 +4,7 @@ using NewLife;
 using Zero.Data.Projects;
 using Zero.WeiXin;
 
-namespace Zero.Data.Common
+namespace Zero.Data.WeiXin
 {
     /// <summary>机器人助手</summary>
     public static class RobotHelper

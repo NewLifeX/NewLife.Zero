@@ -1,8 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "NewLife",
-  "classifications": [ "NewLife", "Console" ],
+  "classifications": [ "NewLife", "Server" ],
   "name": "NewLife NetServer",
+  "description": "高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器",
   "identity": "NewLife.NetServer",
   "shortName": "net",
   "tags": {

@@ -32,8 +32,4 @@
     <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zero.Core\Zero.Core.csproj" />
-  </ItemGroup>
-
 </Project>
