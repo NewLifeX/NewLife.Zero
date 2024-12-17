@@ -10,6 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Zero.WinForm",
+  "sourceName": "Zero.Desktop",
   "preferNameDirectory": true
 }
