@@ -10,6 +10,6 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Zero.WebSocket",
+  "sourceName": "Zero.WebSocketServer",
   "preferNameDirectory": true
 }
