@@ -6,7 +6,7 @@
   "description": "数据接口，带有Swagger的标准WebApi接口项目",
   "identity": "NewLife.WebApi.2024",
   "groupIdentity": "NewLife.WebApi",
-  "shortName": "napi",
+  "shortName": "cubeapi",
   "tags": {
     "language": "C#",
     "type": "project"

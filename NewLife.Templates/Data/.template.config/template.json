@@ -6,7 +6,7 @@
   "description": "Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端",
   "identity": "NewLife.Data.2024",
   "groupIdentity": "NewLife.Data",
-  "shortName": "data",
+  "shortName": "xcode",
   "tags": {
     "language": "C#",
     "type": "project"

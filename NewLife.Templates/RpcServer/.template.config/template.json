@@ -5,7 +5,7 @@
   "name": "NewLife RpcServer",
   "description": "高性能，长连接，数据接口",
   "identity": "NewLife.RpcServer",
-  "shortName": "rpc",
+  "shortName": "rpcserver",
   "tags": {
     "language": "C#",
     "type": "project"

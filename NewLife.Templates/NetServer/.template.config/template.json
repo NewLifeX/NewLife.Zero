@@ -5,7 +5,7 @@
   "name": "NewLife NetServer",
   "description": "高性能Tcp网络服务器，单机最高400万连接，可用于建立各种协议的网络服务器",
   "identity": "NewLife.NetServer",
-  "shortName": "net",
+  "shortName": "netserver",
   "tags": {
     "language": "C#",
     "type": "project"
