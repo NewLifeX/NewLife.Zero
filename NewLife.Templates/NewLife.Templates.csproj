@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://newlifex.com</PackageProjectUrl>
     <VersionPrefix>1.1</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+    <Version>$(VersionPrefix).$(VersionSuffix)</Version>
     <PackageVersion>$(VersionPrefix).$(VersionSuffix)</PackageVersion>
     <OutputPath>..\Bin</OutputPath>
 
