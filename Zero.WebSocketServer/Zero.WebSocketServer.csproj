@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,7 +6,7 @@
     <AssemblyTitle>WebSocket服务</AssemblyTitle>
     <Description>轻量级WebSocket服务，可用于网页与终端本地硬件保持长连接通信</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2024 NewLife</Copyright>
+    <Copyright>©2002-2025 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -20,11 +20,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="10.10.2024.1202" />
-    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1205" />
-    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
+    <PackageReference Include="NewLife.Agent" Version="10.11.2025.101" />
+    <PackageReference Include="NewLife.Core" Version="11.3.2025.101" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2025.101" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2025.101" />
+    <PackageReference Include="NewLife.XCode" Version="11.17.2025.101" />
   </ItemGroup>
 
 </Project>

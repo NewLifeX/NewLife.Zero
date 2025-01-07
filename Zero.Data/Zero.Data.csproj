@@ -5,7 +5,7 @@
     <AssemblyTitle>零代数据层</AssemblyTitle>
     <Description>Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2024 NewLife</Copyright>
+    <Copyright>©2002-2025 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
-    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
+    <PackageReference Include="NewLife.Core" Version="11.3.2025.101" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2025.101" />
+    <PackageReference Include="NewLife.XCode" Version="11.17.2025.101" />
   </ItemGroup>
 
 </Project>

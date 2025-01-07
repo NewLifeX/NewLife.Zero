@@ -6,7 +6,7 @@
     <AssemblyTitle>GTK桌面应用</AssemblyTitle>
     <Description>使用GTK#技术的跨平台桌面应用，给用户提供便捷操作，可对接硬件</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2024 NewLife</Copyright>
+    <Copyright>©2002-2025 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Stardust" Version="3.2.2024.1211" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
+    <PackageReference Include="NewLife.Stardust" Version="3.2.2025.101" />
+    <PackageReference Include="NewLife.XCode" Version="11.17.2025.101" />
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
   </ItemGroup>
 

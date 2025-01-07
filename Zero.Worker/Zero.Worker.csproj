@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyTitle>系统后台任务</AssemblyTitle>
     <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2024 NewLife</Copyright>
+    <Copyright>©2002-2025 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -21,9 +21,9 @@
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2024.1216" />
     <PackageReference Include="NewLife.MQTT" Version="2.0.2024.1212" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1205" />
-    <PackageReference Include="NewLife.Redis.Extensions" Version="6.0.2024.1205" />
-    <PackageReference Include="NewLife.RocketMQ" Version="2.6.2024.1212" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.2.2024.1211" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2025.101" />
+    <PackageReference Include="NewLife.Redis.Extensions" Version="6.0.2025.101" />
+    <PackageReference Include="NewLife.RocketMQ" Version="2.6.2025.101" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.2.2025.101" />
   </ItemGroup>
 </Project>

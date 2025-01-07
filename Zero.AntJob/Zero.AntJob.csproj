@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,7 +6,7 @@
     <AssemblyTitle>大数据计算</AssemblyTitle>
     <Description>蚂蚁调度系统子程序，编写数据处理等业务逻辑，连接蚂蚁调度中心，拉取作业任务来执行</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2024 NewLife</Copyright>
+    <Copyright>©2002-2025 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -30,9 +30,9 @@
   <ItemGroup>
     <PackageReference Include="NewLife.AntJob" Version="4.0.2024.1216" />
     <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2024.1216" />
-    <PackageReference Include="NewLife.Core" Version="11.1.2024.1206" />
-    <PackageReference Include="NewLife.Redis" Version="6.0.2024.1205" />
-    <PackageReference Include="NewLife.XCode" Version="11.16.2024.1202" />
+    <PackageReference Include="NewLife.Core" Version="11.3.2025.101" />
+    <PackageReference Include="NewLife.Redis" Version="6.0.2025.101" />
+    <PackageReference Include="NewLife.XCode" Version="11.17.2025.101" />
   </ItemGroup>
 
   <ItemGroup>
