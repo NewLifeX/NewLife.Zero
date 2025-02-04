@@ -1,4 +1,5 @@
-﻿using NewLife.Log;
+﻿using NewLife;
+using NewLife.Log;
 using NewLife.Remoting;
 using XCode.Membership;
 

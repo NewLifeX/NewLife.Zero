@@ -1,4 +1,5 @@
 ﻿using System;
+using NewLife;
 using NewLife.Agent;
 using NewLife.Log;
 using NewLife.Threading;

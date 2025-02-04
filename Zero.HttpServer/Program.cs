@@ -6,6 +6,7 @@ using NewLife.Model;
 using NewLife.Remoting;
 using Stardust;
 using Zero.HttpServer;
+using NewLife;
 
 // 启用控制台日志，拦截所有异常
 XTrace.UseConsole();

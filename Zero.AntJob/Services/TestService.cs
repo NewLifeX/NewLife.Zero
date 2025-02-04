@@ -1,4 +1,5 @@
-﻿using NewLife.Security;
+﻿using NewLife;
+using NewLife.Security;
 
 namespace Zero.AntJob.Services;
 
