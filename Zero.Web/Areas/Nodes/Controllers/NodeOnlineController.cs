@@ -1,19 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Zero.Data.Nodes;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using NewLife.Cube;
-using NewLife.Cube.Extensions;
-using NewLife.Cube.ViewModels;
-using NewLife.Log;
-using NewLife.Web;
-using XCode.Membership;
-using static Zero.Data.Nodes.NodeOnline;
-using Stardust;
-using System.ComponentModel;
 using NewLife.Remoting.Extensions.Services;
 using NewLife.Remoting.Models;
-using NewLife.Serialization;
-using Zero.Web.Areas.Nodes;
+using NewLife.Web;
+using XCode.Membership;
+using Zero.Data.Nodes;
 
 namespace Zero.Web.Areas.Nodes.Controllers;
 
@@ -74,19 +67,15 @@ public class NodeOnlineController : NodeEntityController<NodeOnline>
         var ts = new List<Task>();
         foreach (var item in SelectKeys)
         {
-            var online = FindById(item.ToInt());
+            var online = NodeOnline.FindById(item.ToInt());
             if (online?.Node != null)
             {
-                //ts.Add(_starFactory.SendNodeCommand(online.Node.Code, "node/upgrade", null, 600, 0));
-                var code = online.Node.Code;
                 var cmd = new CommandModel
                 {
-                    //Code = online.Node.Code,
                     Command = "node/upgrade",
-                    Expire = DateTime.Now.AddSeconds(600),
+                    Expire = DateTime.UtcNow.AddSeconds(600),
                 };
-                var queue = _deviceService.GetQueue(code);
-                queue.Add(cmd.ToJson());
+                ts.Add(_deviceService.SendCommand(online.Node, cmd, HttpContext.RequestAborted));
             }
         }
 
@@ -105,20 +94,16 @@ public class NodeOnlineController : NodeEntityController<NodeOnline>
         var ts = new List<Task<Int32>>();
         foreach (var item in SelectKeys)
         {
-            var online = FindById(item.ToInt());
+            var online = NodeOnline.FindById(item.ToInt());
             if (online != null && online.Node != null)
             {
-                //ts.Add(_starFactory.SendNodeCommand(online.Node.Code, command, argument, 30, 0));
                 var cmd = new CommandModel
                 {
-                    //Code = online.Node.Code,
                     Command = command,
                     Argument = argument,
-                    Expire = DateTime.Now.AddSeconds(30),
+                    Expire = DateTime.UtcNow.AddSeconds(30),
                 };
-                var queue = _deviceService.GetQueue(online.Node.Code);
-                queue.Add(cmd.ToJson());
-                ts.Add(Task.FromResult(1));
+                ts.Add(_deviceService.SendCommand(online.Node, cmd, HttpContext.RequestAborted));
             }
         }
 

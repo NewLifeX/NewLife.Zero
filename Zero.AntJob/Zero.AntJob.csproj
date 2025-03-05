@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.AntJob" Version="4.0.2025.204" />
-    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2025.204" />
-    <PackageReference Include="NewLife.Core" Version="11.4.2025.201" />
-    <PackageReference Include="NewLife.Redis" Version="6.1.2025.202" />
-    <PackageReference Include="NewLife.XCode" Version="11.18.2025.201" />
+    <PackageReference Include="NewLife.AntJob" Version="4.0.2025.305" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2025.305" />
+    <PackageReference Include="NewLife.Core" Version="11.4.2025.301" />
+    <PackageReference Include="NewLife.Redis" Version="6.1.2025.301" />
+    <PackageReference Include="NewLife.XCode" Version="11.18.2025.301" />
   </ItemGroup>
 
   <ItemGroup>
