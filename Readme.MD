@@ -1,4 +1,11 @@
 ## NewLife.Zero 零代脚手架
+
+![GitHub top language](https://img.shields.io/github/languages/top/newlifex/NewLife.Templates?logo=github)
+![GitHub License](https://img.shields.io/github/license/newlifex/NewLife.Templates?logo=github)
+![Nuget Downloads](https://img.shields.io/nuget/dt/NewLife.Templates?logo=nuget)
+![Nuget](https://img.shields.io/nuget/v/NewLife.Templates?logo=nuget)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/NewLife.Templates?label=dev%20nuget&logo=nuget)
+
 这里展现了NewLife生态圈各种类型项目的模版，开发新项目时可以直接拷贝使用。  
 
 ## 公共项目
