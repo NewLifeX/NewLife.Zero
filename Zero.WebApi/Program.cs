@@ -1,11 +1,6 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using NewLife.Caching;
-using NewLife.Caching.Services;
-using NewLife.Cube;
+﻿using NewLife.Cube;
 using NewLife.Cube.Swagger;
 using NewLife.Log;
-using NewLife.Serialization;
 using XCode;
 using Zero.WebApi;
 using Zero.WebApi.Services;
@@ -25,7 +20,8 @@ InitConfig();
 var star = services.AddStardust(null);
 
 // 默认内存缓存，如有配置RedisCache可使用Redis缓存
-services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+//services.AddSingleton<ICacheProvider, RedisCacheProvider>();
+services.AddRedis();
 
 // 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
 //services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);

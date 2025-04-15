@@ -32,13 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="11.4.2025.301" />
-    <PackageReference Include="NewLife.Cube" Version="6.4.2025.305" />
-    <PackageReference Include="NewLife.Cube.Swagger" Version="6.4.2025.305" />
-    <PackageReference Include="NewLife.Extensions.Caching.Redis" Version="5.5.2023.803" />
-    <PackageReference Include="NewLife.Redis" Version="6.1.2025.301" />
-    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.3.2025.301" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.3.2025.301" />
+    <PackageReference Include="NewLife.Core" Version="11.4.2025.401" />
+    <PackageReference Include="NewLife.Cube" Version="6.4.2025.403" />
+    <PackageReference Include="NewLife.Cube.Swagger" Version="6.4.2025.403" />
+    <PackageReference Include="NewLife.Redis" Version="6.1.2025.411" />
+    <PackageReference Include="NewLife.Redis.Extensions" Version="6.1.2025.411" />
+    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.3.2025.401" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.3.2025.401" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,12 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2025.305" />
-    <PackageReference Include="NewLife.Core" Version="11.4.2025.301" />
-    <PackageReference Include="NewLife.MQTT" Version="2.0.2025.301" />
-    <PackageReference Include="NewLife.Redis" Version="6.1.2025.301" />
-    <PackageReference Include="NewLife.Redis.Extensions" Version="6.1.2025.301" />
+    <PackageReference Include="NewLife.AntJob.Extensions" Version="3.4.2025.402" />
+    <PackageReference Include="NewLife.Core" Version="11.4.2025.401" />
+    <PackageReference Include="NewLife.MQTT" Version="2.0.2025.415" />
+    <PackageReference Include="NewLife.Redis" Version="6.1.2025.411" />
+    <PackageReference Include="NewLife.Redis.Extensions" Version="6.1.2025.411" />
     <PackageReference Include="NewLife.RocketMQ" Version="2.7.2025.202" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.3.2025.301" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.3.2025.401" />
   </ItemGroup>
 </Project>
