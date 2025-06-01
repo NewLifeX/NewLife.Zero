@@ -111,7 +111,7 @@ public class NodeClient : ClientBase
                     Client = null;
 
                     if (Features.HasFlag(Features.Login))
-                        await Login(cancellationToken);
+                        await Login(nameof(Ping), cancellationToken);
                 }
             }
         }
