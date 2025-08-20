@@ -39,10 +39,6 @@
     <Content Include="Console\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Zero.Worker\**\*" Link=".\Worker\" PackagePath="content/Worker/" Exclude="..\Zero.Worker\**\bin\**;..\Zero.Worker\**\obj\**" />
-    <Content Include="Worker\**\*" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\Zero.Data\**\*" Link=".\Data\" PackagePath="content/Data/" Exclude="..\Zero.Data\**\bin\**;..\Zero.Data\**\obj\**" />
     <Content Include="Data\**\*" />
   </ItemGroup>
