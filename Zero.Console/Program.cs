@@ -11,7 +11,6 @@ XTrace.UseConsole();
 
 // 初始化对象容器，提供依赖注入能力
 var services = ObjectContainer.Current;
-services.AddSingleton(XTrace.Log);
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust();
@@ -20,9 +19,9 @@ var star = services.AddStardust();
 services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 
 // 初始化Redis、MQTT、RocketMQ，注册服务到容器
-services.AddRedis(star?.Tracer);
-services.AddMqtt(star?.Tracer);
-services.AddRocketMQ(star?.Tracer);
+services.AddRedis();
+services.AddMqtt();
+services.AddRocketMQ();
 
 // 注册后台任务 IHostedService
 services.AddHostedService<Worker>();

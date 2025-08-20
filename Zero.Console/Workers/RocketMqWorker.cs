@@ -3,31 +3,26 @@ using NewLife.RocketMQ.Protocol;
 
 namespace Zero.Console.Workers;
 
-/// <summary>
-/// RocketMQ消费端
-/// </summary>
-public class RocketMqWorker : IHostedService
+/// <summary>RocketMQ消费端</summary>
+public class RocketMqWorker(Producer producer, ITracer tracer) : IHostedService
 {
     private Consumer _consumer;
-    private readonly ITracer _tracer;
-
-    public RocketMqWorker(ITracer tracer) => _tracer = tracer;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        XTrace.WriteLine("RocketMqWorker.StartAsync");
+        XTrace.WriteLine("RocketMQ.StartAsync");
 
         // 引入 RocketMQ 消费者
         var consumer = new Consumer
         {
-            Topic = "nx_test",
-            Group = "test",
-            NameServerAddress = "127.0.0.1:9876",
+            Topic = producer.Topic,
+            Group = Environment.MachineName,
+            NameServerAddress = producer.NameServerAddress,
 
             FromLastOffset = true,
             BatchSize = 20,
 
-            Tracer = _tracer,
+            Tracer = tracer,
             Log = XTrace.Log,
 
             OnConsume = OnConsume
@@ -49,10 +44,12 @@ public class RocketMqWorker : IHostedService
 
     private Boolean OnConsume(MessageQueue queue, MessageExt[] messages)
     {
-        XTrace.WriteLine("[{0}@{1}]收到消息[{2}]", queue.BrokerName, queue.QueueId, messages.Length);
+        XTrace.WriteLine("RocketMQ消费[{0}@{1}][{2}]：", queue.BrokerName, queue.QueueId, messages.Length);
 
         foreach (var item in messages.ToList())
-            XTrace.WriteLine($"消息：主键【{item.Keys}】，产生时间【{item.BornTimestamp.ToDateTime()}】，内容【{item.Body.ToStr()}】");
+        {
+            XTrace.WriteLine($"\t消息：{item.Body.ToStr()}");
+        }
 
         return true;
     }

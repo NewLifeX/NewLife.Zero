@@ -4,43 +4,37 @@ using Zero.Console.Models;
 
 namespace Zero.Console.Workers;
 
-/// <summary>
-/// Redis队列消费端
-/// </summary>
-public class RedisWorker : IHostedService
+/// <summary>Redis队列消费端</summary>
+public class RedisWorker(FullRedis redis) : IHostedService
 {
-    private readonly FullRedis _redis;
-    private readonly ILog _log;
-    private RedisReliableQueue<String> _queue;
-
-    public RedisWorker(FullRedis redis, ILog log)
-    {
-        _redis = redis;
-        _log = log;
-    }
+    private RedisStream<Area> _queue;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        XTrace.WriteLine("RedisWorker.StartAsync");
-
-        var task = ExecuteAsync(cancellationToken);
-        return task.IsCompleted ? task : Task.CompletedTask;
-    }
-
-    protected async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        await Task.Yield();
+        XTrace.WriteLine("RedisQueue.StartAsync");
 
         // Redis 可信消息队列，支持消费确认
-        _queue = _redis.GetReliableQueue<String>("rdsTopic");
+        _queue = redis.GetStream<Area>("rdsTopic");
+        _queue.Group = Environment.MachineName; // 设置消费者组，默认是机器名
 
-        await _queue.ConsumeAsync<Area>(OnConsume, stoppingToken, _log);
+        _ = _queue.ConsumeAsync(OnConsume, cancellationToken);
+
+        return Task.CompletedTask;
     }
 
-    void OnConsume(Area area)
+    private Task OnConsume(Area area, Message message, CancellationToken cancellationToken)
     {
-        XTrace.WriteLine("RedisQueue.Consume {0} {1}", area.Code, area.Name);
+        XTrace.WriteLine("Redis消费 {0} {1}", area.Code, area.Name);
+
+        return Task.CompletedTask;
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        XTrace.WriteLine("RedisQueue.StopAsync");
+
+        _queue.TryDispose();
+
+        return Task.CompletedTask;
+    }
 }

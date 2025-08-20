@@ -8,26 +8,10 @@ using Zero.Console.Models;
 
 namespace Zero.Console.Workers;
 
-/// <summary>
-/// 后台任务。支持构造函数注入服务
-/// </summary>
-public class Worker : IHostedService
+/// <summary>后台任务。支持构造函数注入服务</summary>
+public class Worker(ILog logger, FullRedis redis, StarFactory star, IServiceProvider serviceProvider) : IHostedService
 {
-    private readonly ILog _logger;
-    private readonly FullRedis _redis;
-    private readonly MqttClient _mqtt;
-    private readonly Producer _producer;
-    private readonly StarFactory _star;
     private ApiHttpClient _client;
-
-    public Worker(ILog logger, FullRedis redis, MqttClient mqtt, Producer producer, StarFactory star)
-    {
-        _logger = logger;
-        _redis = redis;
-        _mqtt = mqtt;
-        _producer = producer;
-        _star = star;
-    }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -36,48 +20,61 @@ public class Worker : IHostedService
         try
         {
             // 从注册中心消费一个服务，创建客户端，该客户端能够自动感知服务提供者的地址变化
-            _client = _star.CreateForService("Zero.WebApi", "dev") as ApiHttpClient;
+            _client = star.CreateForService("Zero.WebApi", "dev") as ApiHttpClient;
         }
         catch (Exception ex)
         {
             XTrace.Log.Error(ex.Message);
         }
 
-        var task = ExecuteAsync(cancellationToken);
-        return task.IsCompleted ? task : Task.CompletedTask;
+        _ = ExecuteAsync(cancellationToken);
+
+        return Task.CompletedTask;
     }
 
     protected async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        //if (_client.Services.Count == 0) return;
+        await Task.Yield();
 
         // Redis 可信消息队列，支持消费确认
-        var rdsQueue = _redis.GetReliableQueue<Object>("rdsTopic");
+        var rdsQueue = redis.GetStream<Object>("rdsTopic");
 
-        //// RocketMQ 生产者
-        //_producer.Start();
+        // MQTT 客户端
+        var mqtt = serviceProvider.GetService<MqttClient>();
 
+        // RocketMQ 生产者
+        var producer = serviceProvider.GetService<Producer>();
+        producer?.Start();
+
+        var index = 1;
         while (!stoppingToken.IsCancellationRequested)
         {
-            var area = new Area { Code = 110000, Name = "北京市" };
+            var area = new Area { Code = 110000, Name = "北京市" + index };
+            XTrace.WriteLine("");
+            XTrace.WriteLine("[{0}]正在向多个队列发布消息……", index++);
 
             // Redis 发布
             rdsQueue.Add(area);
 
-            //// MQTT 发布
-            //await _mqtt.PublicAsync("mqttTopic", area);
+            // MQTT 发布
+            if (mqtt != null) await mqtt?.PublishAsync("mqttTopic", area);
 
-            //// RocketMQ 发布
-            //_producer.Publish(area);
+            // RocketMQ 发布
+            producer?.Publish(area);
 
             // 调用远程服务
             if (_client != null && _client.Services.Count > 0)
                 await _client.GetAsync<Object>("api", new { state = area.ToJson() });
 
-            _logger.Info("Worker running at: {0}", DateTimeOffset.Now);
-            await Task.Delay(1000, stoppingToken);
+            logger.Info("Worker running at: {0}", DateTimeOffset.Now);
+            await Task.Delay(5000, stoppingToken);
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        XTrace.WriteLine("Worker.StopAsync");
+
+        return Task.CompletedTask;
+    }
 }
