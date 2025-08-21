@@ -17,6 +17,8 @@ public class MqttWorker(MqttClient mqtt) : IHostedService
 
     protected async Task ExecuteAsync(CancellationToken cancellationToken)
     {
+        await Task.Yield();
+
         mqtt.Received += OnConsume;
 
         // 连接

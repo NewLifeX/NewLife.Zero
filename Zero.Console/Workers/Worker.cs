@@ -57,10 +57,10 @@ public class Worker(ILog logger, FullRedis redis, StarFactory star, IServiceProv
             rdsQueue.Add(area);
 
             // MQTT 发布
-            if (mqtt != null) await mqtt?.PublishAsync("mqttTopic", area);
+            if (mqtt != null) await mqtt.PublishAsync("mqttTopic", area);
 
             // RocketMQ 发布
-            producer?.Publish(area);
+            if (producer != null) await producer.PublishAsync(area);
 
             // 调用远程服务
             if (_client != null && _client.Services.Count > 0)
