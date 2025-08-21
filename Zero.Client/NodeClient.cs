@@ -7,7 +7,7 @@ using NewLife.Security;
 using Zero.Client.Models;
 using MigrationEventArgs = Stardust.Models.MigrationEventArgs;
 
-namespace ZeroClient;
+namespace Zero.Client;
 
 /// <summary>节点客户端</summary>
 public class NodeClient : ClientBase
@@ -18,8 +18,6 @@ public class NodeClient : ClientBase
 
     /// <summary>服务迁移</summary>
     public event EventHandler<MigrationEventArgs> OnMigration;
-
-    private readonly ClientSetting _setting;
     #endregion
 
     #region 构造
@@ -28,8 +26,6 @@ public class NodeClient : ClientBase
         // 设置动作，开启下行通知
         Features = Features.Login | Features.Logout | Features.Ping | Features.Notify | Features.Upgrade;
         SetActions("Node/");
-
-        _setting = setting;
     }
     #endregion
 
@@ -41,7 +37,7 @@ public class NodeClient : ClientBase
         PasswordProvider = new SaltPasswordProvider { Algorithm = "md5", SaltTime = 60 };
 
         // 找到容器，注册默认的模型实现，供后续InvokeAsync时自动创建正确的模型对象
-        var container = ModelExtension.GetService<IObjectContainer>(provider) ?? ObjectContainer.Current;
+        var container = provider.GetService<IObjectContainer>() ?? ObjectContainer.Current;
         if (container != null)
         {
             container.TryAddTransient<ILoginRequest, LoginInfo>();

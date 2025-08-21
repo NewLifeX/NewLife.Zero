@@ -5,12 +5,9 @@ using NewLife.RocketMQ.Protocol;
 
 namespace Zero.Worker;
 
-public class RocketMqWorker : IHostedService
+public class RocketMqWorker(ITracer tracer) : IHostedService
 {
     private Consumer _consumer;
-    private readonly ITracer _tracer;
-
-    public RocketMqWorker(ITracer tracer) => _tracer = tracer;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -24,7 +21,7 @@ public class RocketMqWorker : IHostedService
             FromLastOffset = true,
             BatchSize = 20,
 
-            Tracer = _tracer,
+            Tracer = tracer,
             Log = XTrace.Log,
 
             OnConsume = OnConsume

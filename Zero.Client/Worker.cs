@@ -1,24 +1,15 @@
 ﻿using NewLife;
 using NewLife.Log;
 using NewLife.Model;
-using ZeroClient;
 
 namespace Zero.Client;
 
 /// <summary>
 /// 后台任务。支持构造函数注入服务
 /// </summary>
-public class Worker : IHostedService
+public class Worker(ILog log, ITracer tracer) : IHostedService
 {
     private NodeClient _client;
-    private readonly ILog _log;
-    private readonly ITracer _tracer;
-
-    public Worker(ILog log, ITracer tracer)
-    {
-        _log = log;
-        _tracer = tracer;
-    }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -34,8 +25,8 @@ public class Worker : IHostedService
         // 产品编码、产品密钥从IoT管理平台获取，设备编码支持自动注册
         var client = new NodeClient(set)
         {
-            Tracer = _tracer,
-            Log = _log,
+            Tracer = tracer,
+            Log = log,
         };
 
         client.Open();

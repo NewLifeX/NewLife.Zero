@@ -4,7 +4,7 @@ using NewLife.Caching.Services;
 using NewLife.Log;
 using NewLife.Model;
 using Stardust;
-using Zero.AntJob;
+using Zero.AntJob.Jobs;
 using Zero.AntJob.Services;
 
 // 启用控制台日志，拦截所有异常
@@ -22,8 +22,12 @@ services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 // 注册服务
 services.AddSingleton<ITestService, TestService>();
 
-// 注册后台服务
-services.AddHostedService<AntJobWorker>();
+// 注册作业处理器
+services.AddAntJob()
+    .AddHandler<HelloJob>()
+    .AddHandler<TestJob>()
+    .AddHandler<BuildProduct>()
+    .AddHandler<BuildPlan>();
 
 // 友好退出
 var host = services.BuildHost();

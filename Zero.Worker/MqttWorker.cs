@@ -4,17 +4,13 @@ using NewLife.MQTT;
 
 namespace Zero.Worker;
 
-public class MqttWorker : BackgroundService
+public class MqttWorker(MqttClient mqtt) : BackgroundService
 {
-    private readonly MqttClient _mqtt;
-
-    public MqttWorker(MqttClient mqtt) => _mqtt = mqtt;
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         await Task.Yield();
 
-        _mqtt.Received += (s, e) =>
+        mqtt.Received += (s, e) =>
         {
             var pm = e.Arg;
             var msg = pm.Payload.ToStr();
@@ -23,9 +19,9 @@ public class MqttWorker : BackgroundService
         };
 
         // 连接
-        await _mqtt.ConnectAsync();
+        await mqtt.ConnectAsync();
 
         // 订阅
-        await _mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
+        await mqtt.SubscribeAsync(new[] { "mqttTopic", "qosTopic" });
     }
 }

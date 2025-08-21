@@ -1,5 +1,4 @@
-﻿using NewLife;
-using NewLife.Caching;
+﻿using NewLife.Caching;
 using NewLife.Caching.Services;
 using NewLife.Log;
 using Zero.Worker;

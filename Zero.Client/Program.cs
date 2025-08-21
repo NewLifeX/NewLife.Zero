@@ -9,7 +9,6 @@ XTrace.UseConsole();
 
 // 初始化对象容器，提供依赖注入能力
 var services = ObjectContainer.Current;
-services.AddSingleton(XTrace.Log);
 
 // 配置星尘。自动读取配置文件 config/star.config 中的服务器地址
 var star = services.AddStardust();
@@ -32,7 +31,7 @@ static void InitMqtt(IObjectContainer services, ITracer tracer)
         Tracer = tracer,
         Log = XTrace.Log,
 
-        Server = "tcp://127.0.0.1:1883",
+        Server = "tcp://iot.feifan.link:1883",
         ClientId = Environment.MachineName,
         UserName = "stone",
         Password = "Pass@word",

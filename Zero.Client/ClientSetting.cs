@@ -2,7 +2,7 @@
 using NewLife.Configuration;
 using NewLife.Remoting.Clients;
 
-namespace ZeroClient;
+namespace Zero.Client;
 
 /// <summary>配置</summary>
 [Config("ZeroClient")]
