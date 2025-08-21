@@ -36,6 +36,8 @@ public class RocketMqWorker(Producer producer, ITracer tracer) : IHostedService
 
     public Task StopAsync(CancellationToken cancellationToken)
     {
+        XTrace.WriteLine("RocketMQ.StopAsync");
+
         _consumer.Stop();
         _consumer.TryDispose();
 

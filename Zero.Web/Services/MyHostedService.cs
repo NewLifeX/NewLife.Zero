@@ -11,18 +11,10 @@ namespace Zero.Web.Services;
 /// <summary>
 /// 星尘注册中心用法，消费其它应用提供的服务
 /// </summary>
-public class MyHostedService : IHostedService
+public class MyHostedService(IRegistry registry, StarFactory factory) : IHostedService
 {
-    private readonly IRegistry _registry;
-    private readonly StarFactory _factory;
     private ApiHttpClient _client;
     TimerX _timer;
-
-    public MyHostedService(IRegistry registry, StarFactory factory)
-    {
-        _registry = registry;
-        _factory = factory;
-    }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -33,14 +25,14 @@ public class MyHostedService : IHostedService
 
     async Task DoGetInfo(Object state)
     {
-        if (_client == null && _registry != null)
+        if (_client == null && registry != null)
         {
             // 从注册中心获取地址
-            var services = await _registry.ResolveAsync("Zero.WebApi");
+            var services = await registry.ResolveAsync("Zero.WebApi");
             XTrace.WriteLine("Zero.WebApi服务信息：{0}", services.ToJson(true));
 
             // 创建指定服务的客户端，它的服务端地址绑定注册中心，自动更新
-            _client = await _factory.CreateForServiceAsync("Zero.WebApi") as ApiHttpClient;
+            _client = await factory.CreateForServiceAsync("Zero.WebApi") as ApiHttpClient;
             XTrace.WriteLine("Zero.WebApi服务地址：{0}", _client.Services.Select(e => e.Address).Join());
         }
 

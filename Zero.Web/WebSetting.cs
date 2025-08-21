@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using NewLife;
 using NewLife.Configuration;
-using NewLife.Remoting.Extensions.Models;
+using NewLife.Remoting.Models;
 using NewLife.Security;
 
 namespace Zero.Web;
@@ -47,7 +47,7 @@ public class WebSetting : Config<WebSetting>, ITokenSetting
     protected override void OnLoaded()
     {
         if (Port == 0) Port = 1080;
-      
+
         if (TokenSecret.IsNullOrEmpty() || TokenSecret.Split(':').Length != 2) TokenSecret = $"HS256:{Rand.NextString(16)}";
 
         if (Services == null || Services.Length == 0)

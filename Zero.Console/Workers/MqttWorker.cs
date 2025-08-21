@@ -36,5 +36,12 @@ public class MqttWorker(MqttClient mqtt) : IHostedService
         XTrace.WriteLine("MQTT消费[{0}]：{1}", pm.Topic, msg);
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        XTrace.WriteLine("MqttWorker.StopAsync");
+
+        mqtt.TryDispose();
+
+        return Task.CompletedTask;
+    }
 }

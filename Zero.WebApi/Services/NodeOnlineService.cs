@@ -1,36 +1,22 @@
 ﻿using NewLife;
 using NewLife.Log;
-using NewLife.Remoting.Extensions.Models;
-using NewLife.Remoting.Extensions.Services;
+using NewLife.Remoting.Models;
+using NewLife.Remoting.Services;
 using NewLife.Threading;
 using Zero.Data.Nodes;
 
 namespace Zero.WebApi.Services;
 
 /// <summary>节点在线服务</summary>
-public class NodeOnlineService : IHostedService
+/// <remarks>
+/// 实例化节点在线服务
+/// </remarks>
+/// <param name="nodeService"></param>
+/// <param name="setting"></param>
+/// <param name="tracer"></param>
+public class NodeOnlineService(IDeviceService nodeService, ITokenSetting setting, ITracer tracer) : IHostedService
 {
-    #region 属性
     private TimerX _timer;
-    private readonly IDeviceService _nodeService;
-    private readonly ITokenSetting _setting;
-    private readonly ITracer _tracer;
-    #endregion
-
-    #region 构造
-    /// <summary>
-    /// 实例化节点在线服务
-    /// </summary>
-    /// <param name="nodeService"></param>
-    /// <param name="setting"></param>
-    /// <param name="tracer"></param>
-    public NodeOnlineService(IDeviceService nodeService, ITokenSetting setting, ITracer tracer)
-    {
-        _nodeService = nodeService;
-        _setting = setting;
-        _tracer = tracer;
-    }
-    #endregion
 
     #region 方法
     /// <summary>
@@ -60,19 +46,19 @@ public class NodeOnlineService : IHostedService
     private void CheckOnline(Object state)
     {
         // 节点超时
-        if (_setting.SessionTimeout > 0)
+        if (setting.SessionTimeout > 0)
         {
-            using var span = _tracer?.NewSpan(nameof(CheckOnline));
+            using var span = tracer?.NewSpan(nameof(CheckOnline));
 
-            var rs = NodeOnline.ClearExpire(TimeSpan.FromSeconds(_setting.SessionTimeout));
+            var rs = NodeOnline.ClearExpire(TimeSpan.FromSeconds(setting.SessionTimeout));
             if (rs != null)
                 foreach (var olt in rs)
                 {
                     var node = olt?.Node;
                     var msg = $"[{node}]登录于{olt.CreateTime.ToFullString()}，最后活跃于{olt.UpdateTime.ToFullString()}";
-                    _nodeService.WriteHistory(node, "超时下线", true, msg, olt.CreateIP);
+                    nodeService.WriteHistory(node, "超时下线", true, msg, olt.CreateIP);
 
-                    if (_nodeService is NodeService ds)
+                    if (nodeService is NodeService ds)
                         ds.RemoveOnline(olt.NodeId, olt.CreateIP);
 
                     if (node != null)

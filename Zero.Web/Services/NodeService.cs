@@ -3,8 +3,6 @@ using NewLife;
 using NewLife.Caching;
 using NewLife.Log;
 using NewLife.Remoting;
-using NewLife.Remoting.Extensions.Models;
-using NewLife.Remoting.Extensions.Services;
 using NewLife.Remoting.Models;
 using NewLife.Remoting.Services;
 using NewLife.Security;
