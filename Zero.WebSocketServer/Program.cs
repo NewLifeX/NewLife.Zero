@@ -34,7 +34,7 @@ server.Map("/ws", new WebSocketHandler());
 server.Start();
 
 // 发布到星尘注册中心
-await star.Service?.RegisterAsync("MyWebSocketServer", $"ws://*:{server.Port}");
+if (star.Service != null) await star.Service.RegisterAsync("Zero.WebSocketServer", $"ws://*:{server.Port}");
 
 #if DEBUG
 var client = new ClientWebSocket();

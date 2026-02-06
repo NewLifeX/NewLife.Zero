@@ -20,7 +20,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NewLife.Agent" Version="10.15.2026.201" />
     <PackageReference Include="NewLife.Core" Version="11.11.2026.201" />
     <PackageReference Include="NewLife.Redis" Version="6.4.2026.201" />
     <PackageReference Include="NewLife.Stardust" Version="3.7.2026.201" />

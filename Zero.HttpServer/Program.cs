@@ -60,7 +60,7 @@ server.Start();
 XTrace.WriteLine("服务端启动完成！");
 
 // 注册到星尘，非必须
-star.Service?.RegisterAsync("Zero.HttpServer", $"http://*:{server.Port}");
+if (star.Service != null) await star.Service.RegisterAsync("Zero.HttpServer", $"http://*:{server.Port}");
 
 // 客户端测试，非服务端代码，正式使用时请注释掉
 _ = Task.Run(ClientTest.HttpClientTest);

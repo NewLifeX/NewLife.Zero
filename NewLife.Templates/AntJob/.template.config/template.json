@@ -11,5 +11,32 @@
     "type": "project"
   },
   "sourceName": "Zero.AntJob",
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "目标框架",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "net10.0", "description": ".NET 10 (LTS)" },
+        { "choice": "net9.0", "description": ".NET 9 (STS)" },
+        { "choice": "net8.0", "description": ".NET 8 (LTS)" }
+      ],
+      "defaultValue": "net10.0",
+      "replaces": "net10.0"
+    },
+    "DataProject": {
+      "type": "generated",
+      "generator": "regex",
+      "datatype": "string",
+      "parameters": {
+        "source": "name",
+        "steps": [
+          { "regex": "\\..+$", "replacement": ".Data" },
+          { "regex": "^([^.]+)$", "replacement": "$1.Data" }
+        ]
+      },
+      "replaces": "Zero.Data"
+    }
+  },
   "preferNameDirectory": true
 }

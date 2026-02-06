@@ -52,7 +52,7 @@ public class MyServices : ServiceBase
         if (cron3 == null) cron3 = "*/30 * 9-17 * * 1-5";
 
         // 5秒开始，每60秒执行一次
-        _timer = new TimerX(DoWork1, null, 5_000, period1 * 000) { Async = true };
+        _timer = new TimerX(DoWork1, null, 5_000, period1 * 1_000) { Async = true };
         // 每天凌晨2点13分执行一次
         _timer2 = new TimerX(DoWork2, null, DateTime.Today.AddMinutes(2 * 60 + 13), period2 * 1000) { Async = true };
         // 工作日朝九晚五每半分钟
@@ -98,10 +98,6 @@ public class MyServices : ServiceBase
             span?.SetError(ex, time);
 
             throw;
-        }
-        finally
-        {
-            span?.Dispose();
         }
     }
 
