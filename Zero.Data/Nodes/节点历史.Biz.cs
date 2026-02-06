@@ -17,9 +17,9 @@ public partial class NodeHistory : Entity<NodeHistory>
     {
         Meta.Table.DataTable.InsertOnly = true;
 
-        Meta.Modules.Add<TimeModule>();
-        Meta.Modules.Add<IPModule>();
-        Meta.Modules.Add<TraceModule>();
+        Meta.Interceptors.Add<TimeInterceptor>();
+        Meta.Interceptors.Add<IPInterceptor>();
+        Meta.Interceptors.Add<TraceInterceptor>();
     }
 
     /// <summary>插入或修改时</summary>
@@ -162,9 +162,10 @@ public partial class NodeHistory : Entity<NodeHistory>
     /// <param name="creator"></param>
     /// <param name="ip"></param>
     /// <returns></returns>
-    public static NodeHistory Create(Node node, String action, Boolean success, String remark, String creator, String ip)
+    public static NodeHistory Create(Node node, String action, Boolean success, String remark, String creator = null, String ip = null)
     {
         node ??= new Node();
+        if (creator.IsNullOrEmpty()) creator = Environment.MachineName;
 
         var history = new NodeHistory
         {
@@ -187,6 +188,13 @@ public partial class NodeHistory : Entity<NodeHistory>
         };
 
         //history.SaveAsync();
+
+        if (history.CityID == 0 && !ip.IsNullOrEmpty())
+        {
+            var rs = Area.SearchIP(ip);
+            if (rs.Count > 0) history.ProvinceID = rs[0].ID;
+            if (rs.Count > 1) history.CityID = rs[^1].ID;
+        }
 
         return history;
     }

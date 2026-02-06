@@ -13,7 +13,7 @@ static class ServiceExtensions
         // 引入 Redis，用于消息队列和缓存，单例，带性能跟踪
         var rds = new FullRedis
         {
-            Tracer = services.Resolve(typeof(ITracer)) as ITracer,
+            Tracer = services.GetService<ITracer>(),
             Log = XTrace.Log,
         };
         rds.Init("server=127.0.0.1:6379;password=;db=3;timeout=5000");
@@ -34,7 +34,7 @@ static class ServiceExtensions
             Password = "Pass@word",
             ClientId = Environment.MachineName,
 
-            Tracer = services.Resolve(typeof(ITracer)) as ITracer,
+            Tracer = services.GetService<ITracer>(),
             Log = XTrace.Log,
         };
         services.AddSingleton(mqtt);
@@ -51,7 +51,7 @@ static class ServiceExtensions
             Version = MQVersion.V5_2_0,
             Topic = "nx_test",
 
-            Tracer = services.Resolve(typeof(ITracer)) as ITracer,
+            Tracer = services.GetService<ITracer>(),
             Log = XTrace.Log,
         };
         services.AddSingleton(producer);

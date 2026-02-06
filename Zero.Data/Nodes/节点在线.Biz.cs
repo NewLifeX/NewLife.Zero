@@ -12,7 +12,7 @@ using Zero.Data.Models;
 namespace Zero.Data.Nodes;
 
 /// <summary>节点在线</summary>
-public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
+public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel2
 {
     #region 对象操作
     static NodeOnline()
@@ -20,12 +20,12 @@ public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
         var df = Meta.Factory.AdditionalFields;
         df.Add(__.PingCount);
 
-        Meta.Modules.Add<TimeModule>();
-        Meta.Modules.Add<IPModule>();
+        Meta.Interceptors.Add<TimeInterceptor>();
+        Meta.Interceptors.Add<IPInterceptor>();
 
         var sc = Meta.SingleCache;
-        sc.FindSlaveKeyMethod = k => Find(_.SessionID == k);
-        sc.GetSlaveKeyMethod = e => e.SessionID;
+        sc.FindSlaveKeyMethod = k => Find(_.SessionId == k);
+        sc.GetSlaveKeyMethod = e => e.SessionId;
     }
 
     /// <summary>校验数据</summary>
@@ -77,12 +77,25 @@ public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
     public static NodeOnline FindByNodeId(Int32 deviceid) => Find(__.NodeId, deviceid);
 
     /// <summary>根据会话查找</summary>
+    /// <param name="sessionId">会话</param>
+    /// <param name="cache">是否走缓存</param>
+    /// <returns></returns>
+    public static NodeOnline FindBySessionIdWithCache(String sessionId, Boolean cache = true)
+    {
+        if (sessionId.IsNullOrEmpty()) return null;
+
+        if (!cache) return Find(_.SessionId == sessionId);
+
+        return Meta.SingleCache.GetItemWithSlaveKey(sessionId) as NodeOnline;
+    }
+
+    /// <summary>根据会话查找</summary>
     /// <param name="sessionid">会话</param>
     /// <param name="cache">是否走缓存</param>
     /// <returns></returns>
-    public static NodeOnline FindBySessionID(String sessionid, Boolean cache = true)
+    public static NodeOnline FindBySessionId(String sessionid, Boolean cache = true)
     {
-        if (!cache) return Find(_.SessionID == sessionid);
+        if (!cache) return Find(_.SessionId == sessionid);
 
         return Meta.SingleCache.GetItemWithSlaveKey(sessionid) as NodeOnline;
     }
@@ -157,7 +170,7 @@ public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
 
         exp &= _.CreateTime.Between(start, end);
 
-        if (!key.IsNullOrEmpty()) exp &= _.Name.Contains(key) | _.Data.Contains(key) | _.SessionID.Contains(key);
+        if (!key.IsNullOrEmpty()) exp &= _.Name.Contains(key) | _.Data.Contains(key) | _.SessionId.Contains(key);
 
         return FindAll(exp, page);
     }
@@ -175,7 +188,7 @@ public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
     /// <summary>根据编码查询或添加</summary>
     /// <param name="sessionid"></param>
     /// <returns></returns>
-    public static NodeOnline GetOrAdd(String sessionid) => GetOrAdd(sessionid, (k, c) => FindBySessionID(k, c), k => new NodeOnline { SessionID = k });
+    public static NodeOnline GetOrAdd(String sessionid) => GetOrAdd(sessionid, (k, c) => FindBySessionId(k, c), k => new NodeOnline { SessionId = k });
 
     /// <summary>删除过期，指定过期时间</summary>
     /// <param name="expire">超时时间，秒</param>
@@ -297,5 +310,30 @@ public partial class NodeOnline : Entity<NodeOnline>, IOnlineModel
 
     //    data.SaveAsync();
     //}
+
+    public Int32 Save(IPingRequest request, Object context)
+    {
+        if (context is DeviceContext ctx)
+        {
+            Token = ctx.Token;
+            UpdateIP = ctx.UserHost;
+
+            if (ctx.Device is Node node)
+            {
+                Name = node.Name;
+                Category = node.Category;
+                Version = node.Version;
+                CompileTime = node.CompileTime;
+                OSKind = node.OSKind;
+                //Save(null, inf, context.Token, ip);
+            }
+            if (request is PingInfo ping) Fill(ping);
+        }
+
+        PingCount++;
+
+        //SaveAsync();
+        return Update();
+    }
     #endregion
 }

@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyTitle>零代数据层</AssemblyTitle>
     <Description>Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2025 NewLife</Copyright>
+    <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -18,18 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Config\**" />
-    <Compile Remove="Log\**" />
-    <EmbeddedResource Remove="Config\**" />
-    <EmbeddedResource Remove="Log\**" />
-    <None Remove="Config\**" />
-    <None Remove="Log\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="11.6.2025.801" />
-    <PackageReference Include="NewLife.Stardust" Version="3.4.2025.801" />
-    <PackageReference Include="NewLife.XCode" Version="11.20.2025.801" />
+    <PackageReference Include="NewLife.Core" Version="11.11.2026.201" />
+    <PackageReference Include="NewLife.Stardust" Version="3.7.2026.201" />
+    <PackageReference Include="NewLife.XCode" Version="11.24.2026.201" />
   </ItemGroup>
 
 </Project>

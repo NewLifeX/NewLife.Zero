@@ -13,7 +13,7 @@ internal class UserController : IApi, IActionFilter
     public IApiSession Session { get; set; }
 
     [Api(nameof(FindByID))]
-    public User FindByID(Int32 id)
+    public async Task<User> FindByID(Int32 id)
     {
         // Session 用法同Web
         var times = Session["Times"].ToInt();
@@ -26,8 +26,11 @@ internal class UserController : IApi, IActionFilter
             // 取得当前上下文
             var ctx = ControllerContext.Current;
 
-            throw new ApiException(507, $"[{ctx.ActionName}]调用次数过多！Times={times}");
+            throw new ApiException(ApiCode.TooManyRequests, $"[{ctx.ActionName}]调用次数过多！Times={times}");
         }
+
+        // 模拟异步操作
+        await Task.Delay(100);
 
         return User.FindByID(id);
     }

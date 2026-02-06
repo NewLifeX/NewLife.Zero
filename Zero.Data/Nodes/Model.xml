@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityModel xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="https://newlifex.com https://newlifex.com/Model202407.xsd" Document="https://newlifex.com/xcode/model" xmlns="https://newlifex.com/Model202407.xsd">
+<EntityModel xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="https://newlifex.com https://newlifex.com/Model202509.xsd" Document="https://newlifex.com/xcode/model" ModelVersion="2.0.2026.130" xmlns="https://newlifex.com/Model202509.xsd">
   <Option>
     <!--类名模板。其中{name}替换为Table.Name，如{name}Model/I{name}Dto等-->
     <ClassNameTemplate />
@@ -9,10 +9,12 @@
     <BaseClass>Entity</BaseClass>
     <!--命名空间-->
     <Namespace>Zero.Data.Nodes</Namespace>
+    <!--引用命名空间-->
+    <ExtendNameSpace />
     <!--输出目录-->
     <Output>.\</Output>
     <!--是否使用中文文件名。默认false-->
-    <ChineseFileName>False</ChineseFileName>
+    <ChineseFileName>True</ChineseFileName>
     <!--用于生成Copy函数的参数类型。例如{name}或I{name}-->
     <ModelNameForCopy />
     <!--带有索引器。实现IModel接口-->
@@ -116,7 +118,7 @@
     <Table Name="NodeOnline" Description="节点在线" ConnName="StardustData">
       <Columns>
         <Column Name="Id" DataType="Int32" Identity="True" PrimaryKey="True" Description="编号" />
-        <Column Name="SessionID" DataType="String" Description="会话" />
+        <Column Name="SessionId" DataType="String" Description="会话" />
         <Column Name="NodeId" DataType="Int32" Description="节点" />
         <Column Name="Name" DataType="String" Master="True" Description="名称" />
         <Column Name="IP" DataType="String" Length="200" Description="本地IP" />

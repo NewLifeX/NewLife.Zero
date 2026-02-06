@@ -4,6 +4,7 @@ using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 using NewLife;
 using NewLife.Data;
+using NewLife.Log;
 using NewLife.Remoting.Models;
 using XCode;
 using XCode.Cache;
@@ -13,7 +14,7 @@ using Zero.Data.Models;
 namespace Zero.Data.Nodes;
 
 /// <summary>节点信息</summary>
-public partial class Node : Entity<Node>, IDeviceModel
+public partial class Node : Entity<Node>, IDeviceModel2, ILogProvider
 {
     #region 对象操作
     static Node()
@@ -23,9 +24,9 @@ public partial class Node : Entity<Node>, IDeviceModel
         //!!! OnlineTime是新加字段，允许空，导致累加操作失败，暂时关闭累加
         //df.Add(__.OnlineTime);
 
-        Meta.Modules.Add<UserModule>();
-        Meta.Modules.Add<TimeModule>();
-        Meta.Modules.Add<IPModule>();
+        Meta.Interceptors.Add<UserInterceptor>();
+        Meta.Interceptors.Add<TimeInterceptor>();
+        Meta.Interceptors.Add<IPInterceptor>();
 
         var sc = Meta.SingleCache;
         sc.Expire = 30 * 60;
@@ -443,6 +444,38 @@ public partial class Node : Entity<Node>, IDeviceModel
         var rs = Area.SearchIP(node.UpdateIP);
         if (rs.Count > 0) node.ProvinceID = rs[0].ID;
         if (rs.Count > 1) node.CityID = rs[^1].ID;
+    }
+
+    /// <summary>创建设备历史</summary>
+    /// <param name="action"></param>
+    /// <param name="success"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    public IExtend CreateHistory(String action, Boolean success, String content) => NodeHistory.Create(this, action, success, content, null, null);
+
+    /// <summary>写历史日志</summary>
+    /// <param name="action"></param>
+    /// <param name="success"></param>
+    /// <param name="content"></param>
+    public void WriteLog(String action, Boolean success, String content)
+    {
+        var history = NodeHistory.Create(this, action, success, content, null);
+        history.SaveAsync();
+    }
+
+    /// <summary>创建在线对象</summary>
+    /// <param name="sessionId"></param>
+    /// <returns></returns>
+    public IOnlineModel CreateOnline(String sessionId)
+    {
+        var online = NodeOnline.GetOrAdd(sessionId);
+        online.NodeId = Id;
+        online.Name = Name;
+        online.IP = IP;
+        //online.CreateIP = context.UserHost;
+        online.Creator = Environment.MachineName;
+
+        return online;
     }
     #endregion
 }

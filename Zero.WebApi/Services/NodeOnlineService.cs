@@ -8,21 +8,35 @@ using Zero.Data.Nodes;
 namespace Zero.WebApi.Services;
 
 /// <summary>节点在线服务</summary>
-/// <remarks>
-/// 实例化节点在线服务
-/// </remarks>
-/// <param name="nodeService"></param>
-/// <param name="setting"></param>
-/// <param name="tracer"></param>
-public class NodeOnlineService(IDeviceService nodeService, ITokenSetting setting, ITracer tracer) : IHostedService
+public class NodeOnlineService : IHostedService
 {
+    #region 属性
     private TimerX _timer;
+    private readonly IDeviceService _nodeService;
+    private readonly ITokenSetting _setting;
+    private readonly ITracer _tracer;
+    #endregion
+
+    #region 构造
+    /// <summary>
+    /// 实例化节点在线服务
+    /// </summary>
+    /// <param name="nodeService"></param>
+    /// <param name="setting"></param>
+    /// <param name="tracer"></param>
+    public NodeOnlineService(IDeviceService nodeService, ITokenSetting setting, ITracer tracer)
+    {
+        _nodeService = nodeService;
+        _setting = setting;
+        _tracer = tracer;
+    }
+    #endregion
 
     #region 方法
     /// <summary>
     /// 开始服务
     /// </summary>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -34,7 +48,7 @@ public class NodeOnlineService(IDeviceService nodeService, ITokenSetting setting
     /// <summary>
     /// 停止服务
     /// </summary>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
     public Task StopAsync(CancellationToken cancellationToken)
     {
@@ -46,33 +60,33 @@ public class NodeOnlineService(IDeviceService nodeService, ITokenSetting setting
     private void CheckOnline(Object state)
     {
         // 节点超时
-        if (setting.SessionTimeout > 0)
+        if (_setting.SessionTimeout <= 0) return;
+
+        using var span = _tracer?.NewSpan(nameof(CheckOnline));
+
+        var rs = NodeOnline.ClearExpire(TimeSpan.FromSeconds(_setting.SessionTimeout));
+        if (rs == null) return;
+
+        foreach (var olt in rs)
         {
-            using var span = tracer?.NewSpan(nameof(CheckOnline));
+            var node = olt?.Node;
+            var msg = $"[{node}/{olt?.SessionId}]登录于{olt.CreateTime.ToFullString()}，最后活跃于{olt.UpdateTime.ToFullString()}";
+            _nodeService.WriteHistory(node, "超时下线", true, msg, null, olt.CreateIP);
 
-            var rs = NodeOnline.ClearExpire(TimeSpan.FromSeconds(setting.SessionTimeout));
-            if (rs != null)
-                foreach (var olt in rs)
+            if (_nodeService is NodeService ds)
+                ds.RemoveOnline(new DeviceContext { Device = node, UserHost = olt.CreateIP });
+
+            if (node != null)
+            {
+                // 计算在线时长
+                if (olt.CreateTime.Year > 2000 && olt.UpdateTime.Year > 2000)
                 {
-                    var node = olt?.Node;
-                    var msg = $"[{node}]登录于{olt.CreateTime.ToFullString()}，最后活跃于{olt.UpdateTime.ToFullString()}";
-                    nodeService.WriteHistory(node, "超时下线", true, msg, olt.CreateIP);
-
-                    if (nodeService is NodeService ds)
-                        ds.RemoveOnline(olt.NodeId, olt.CreateIP);
-
-                    if (node != null)
-                    {
-                        // 计算在线时长
-                        if (olt.CreateTime.Year > 2000 && olt.UpdateTime.Year > 2000)
-                        {
-                            node.OnlineTime += (Int32)(olt.UpdateTime - olt.CreateTime).TotalSeconds;
-                            node.Update();
-                        }
-
-                        CheckOffline(node, "超时下线");
-                    }
+                    node.OnlineTime += (Int32)(olt.UpdateTime - olt.CreateTime).TotalSeconds;
+                    node.Update();
                 }
+
+                CheckOffline(node, "超时下线");
+            }
         }
     }
 

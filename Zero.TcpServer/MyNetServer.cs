@@ -39,12 +39,14 @@ class MyNetSession : NetSession<MyNetServer>
     /// <param name="e"></param>
     protected override void OnReceive(ReceivedEventArgs e)
     {
+        if (e.Packet.Length == 0) return;
+
         WriteLog("收到：{0}", e.Packet.ToStr());
 
         //todo 这里是业务处理核心，解开数据包e.Packet并进行业务处理
 
         // 把收到的数据发回去
-        Send(e.Packet);
+        Send(e.Packet.ToStr().Reverse().Join(null));
     }
 
     /// <summary>出错</summary>

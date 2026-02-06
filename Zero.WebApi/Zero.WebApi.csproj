@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyTitle>WebApi接口</AssemblyTitle>
     <Description>数据接口，带有Swagger的标准WebApi接口项目</Description>
     <Company>新生命开发团队</Company>
-    <Copyright>©2002-2025 NewLife</Copyright>
+    <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
     <VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
     <Version>$(VersionPrefix).$(VersionSuffix)</Version>
@@ -21,24 +21,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Common\**" />
-    <Content Remove="Common\**" />
-    <EmbeddedResource Remove="Common\**" />
-    <None Remove="Common\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Controllers\BaseController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NewLife.Core" Version="11.6.2025.801" />
-    <PackageReference Include="NewLife.Cube" Version="6.5.2025.801" />
-    <PackageReference Include="NewLife.Cube.Swagger" Version="6.5.2025.801" />
-    <PackageReference Include="NewLife.Redis" Version="6.3.2025.801" />
-    <PackageReference Include="NewLife.Redis.Extensions" Version="6.3.2025.801" />
-    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.4.2025.801" />
-    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.4.2025.801" />
+    <PackageReference Include="NewLife.Core" Version="11.11.2026.201" />
+    <PackageReference Include="NewLife.Cube" Version="6.9.2026.201" />
+    <PackageReference Include="NewLife.Cube.Swagger" Version="6.9.2026.201" />
+    <PackageReference Include="NewLife.Redis" Version="6.4.2026.201" />
+    <PackageReference Include="NewLife.Redis.Extensions" Version="6.4.2026.201" />
+    <PackageReference Include="NewLife.Remoting.Extensions" Version="3.7.2026.201" />
+    <PackageReference Include="NewLife.Stardust.Extensions" Version="3.7.2026.201" />
   </ItemGroup>
 
   <ItemGroup>

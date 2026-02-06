@@ -4,6 +4,7 @@ using NewLife.Log;
 using NewLife.Model;
 using NewLife.Remoting;
 using Stardust;
+using XCode;
 using Zero.RpcServer;
 
 // 启用控制台日志，拦截所有异常
@@ -20,6 +21,8 @@ services.AddSingleton<ICacheProvider, RedisCacheProvider>();
 
 // 引入Redis，用于消息队列和缓存，单例，带性能跟踪。一般使用上面的ICacheProvider替代
 //services.AddRedis("127.0.0.1:6379", "123456", 3, 5000);
+
+EntityFactory.InitAll();
 
 var port = 8080;
 
@@ -61,4 +64,5 @@ _ = Task.Run(() => ClientTest.HttpTest(port));
 
 // 阻塞，等待友好退出
 var host = services.BuildHost();
+(host as Host).MaxTime = 10_000;
 await host.RunAsync();

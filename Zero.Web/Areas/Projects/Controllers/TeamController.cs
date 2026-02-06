@@ -110,7 +110,7 @@ namespace Zero.Web.Areas.Projects.Controllers
                             var members = TeamMember.FindAllByTeamId(team.ID).Where(e => e.Enable).OrderBy(e => e.MemberName).ToList();
                             var versions = VersionPlan.FindAllNotCompleted(team.ID, -1).OrderBy(e => e.StartDate).ToList();
                             var uri = Request.GetRawUrl();
-                            uri = new Uri(uri, "/Projects/Product?teamId=" + team.ID);
+                            var uri2 = new Uri(uri.ToUri(), "/Projects/Product?teamId=" + team.ID);
 
                             var sb = new StringBuilder();
                             sb.AppendLine($"### [{team}]团队报告");
@@ -144,7 +144,7 @@ namespace Zero.Web.Areas.Projects.Controllers
                                 }
                             }
 
-                            sb.AppendLine($"[更多信息]({uri})");
+                            sb.AppendLine($"[更多信息]({uri2})");
 
                             robot.SendMarkDown(sb.ToString());
                         }

@@ -43,7 +43,7 @@ await client.SendAsync("Hello NewLife".GetBytes(), System.Net.WebSockets.WebSock
 
 var buf = new Byte[1024];
 var rs = await client.ReceiveAsync(buf, default);
-XTrace.WriteLine(new Packet(buf, 0, rs.Count).ToStr());
+XTrace.WriteLine(new ArrayPacket(buf, 0, rs.Count).ToStr());
 
 await client.CloseAsync(WebSocketCloseStatus.NormalClosure, "通信完成", default);
 XTrace.WriteLine("Close [{0}] {1}", client.CloseStatus, client.CloseStatusDescription);
@@ -51,4 +51,5 @@ XTrace.WriteLine("Close [{0}] {1}", client.CloseStatus, client.CloseStatusDescri
 
 // 异步阻塞，友好退出
 var host = services.BuildHost();
+(host as Host).MaxTime = 10_000;
 await host.RunAsync();

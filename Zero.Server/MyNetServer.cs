@@ -1,5 +1,6 @@
 ﻿using System;
 using NewLife;
+using NewLife.Data;
 using NewLife.Net;
 
 namespace Zero.Server;
