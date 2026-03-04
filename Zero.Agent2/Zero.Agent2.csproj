@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyTitle>系统后台任务</AssemblyTitle>
-    <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务，常安装为Windows服务，Linux上需要sudo才能安装为守护进程随系统启动</Description>
+    <AssemblyTitle>零代托管守护</AssemblyTitle>
+    <Description>可用于数据处理、定时任务、MQ消费、系统监控等长期运行场景，基于GenericHost统一管理生命周期</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

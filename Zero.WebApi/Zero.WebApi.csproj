@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyTitle>WebApi接口</AssemblyTitle>
-    <Description>数据接口，带有Swagger的标准WebApi接口项目</Description>
+    <AssemblyTitle>零代接口服务</AssemblyTitle>
+    <Description>可用于移动端对接、第三方集成、数据开放等标准WebApi接口场景，内置Swagger文档</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

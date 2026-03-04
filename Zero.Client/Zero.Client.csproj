@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyTitle>客户端控制台</AssemblyTitle>
-    <Description>CS架构的客户端应用，以后台服务工作，一般由StarAgent负责守护</Description>
+    <AssemblyTitle>零代终端客户端</AssemblyTitle>
+    <Description>可用于设备通信、数据采集、状态上报等CS架构客户端场景，一般由StarAgent负责守护</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

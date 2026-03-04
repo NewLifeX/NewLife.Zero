@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyTitle>应用后台任务</AssemblyTitle>
-    <Description>数据处理、定时任务、MQ生产消费、系统监控等超长独立工作的后台任务</Description>
+    <AssemblyTitle>零代控制台任务</AssemblyTitle>
+    <Description>可用于数据处理、定时任务、MQ消费、Redis操作、快速验证等控制台场景</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

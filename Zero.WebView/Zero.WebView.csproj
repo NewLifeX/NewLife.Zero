@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
-    <AssemblyTitle>Web桌面应用</AssemblyTitle>
-    <Description>嵌入Web的客户端桌面应用，给用户提供便捷操作，可对接硬件</Description>
+    <AssemblyTitle>零代嵌入式桌面</AssemblyTitle>
+    <Description>可用于管理面板、数据看板、报表展示等需要嵌入Web界面的桌面应用场景，可对接硬件</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>

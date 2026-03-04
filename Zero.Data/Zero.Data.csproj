@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyTitle>零代数据层</AssemblyTitle>
-    <Description>Web应用、微服务、应用服务、大数据计算等共用数据层，主要包括数据层实体类。一般只用于服务端</Description>
+    <AssemblyTitle>零代数据模型库</AssemblyTitle>
+    <Description>可用于Web应用、微服务、应用服务、大数据计算等场景的共用数据层，包含实体模型类</Description>
     <Company>新生命开发团队</Company>
     <Copyright>©2002-2026 NewLife</Copyright>
     <VersionPrefix>1.0</VersionPrefix>
